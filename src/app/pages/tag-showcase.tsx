@@ -1,0 +1,89 @@
+import React from "react";
+import { X, Star, Zap, Shield, Bell, Tag as TagIcon } from "lucide-react";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, btnStyle } from "./_showcase-factory";
+
+const colorMap: Record<string, string> = {
+  default: "bg-muted/50 text-foreground border-border",
+  primary: "bg-primary/10 text-primary border-primary/20",
+  success: "bg-chart-2/10 text-chart-2 border-chart-2/20",
+  warning: "bg-chart-5/10 text-chart-5 border-chart-5/20",
+  destructive: "bg-destructive/10 text-destructive border-destructive/20",
+  info: "bg-accent text-accent-foreground border-primary/20",
+};
+
+function Tag({ children, color = "default", closable, onClose, icon, size = "md" }: { children: React.ReactNode; color?: string; closable?: boolean; onClose?: () => void; icon?: React.ReactNode; size?: "sm" | "md" | "lg" }) {
+  const cls = colorMap[color] ?? colorMap.default;
+  const sz = size === "sm" ? "px-1.5 py-0.5" : size === "lg" ? "px-3 py-1.5" : "px-2 py-0.5";
+  const szStyle: React.CSSProperties = size === "sm"
+    ? { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)", fontWeight: "var(--weight-button)" }
+    : size === "lg"
+    ? { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }
+    : { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.92)", fontWeight: "var(--weight-button)" };
+  return (
+    <span className={`inline-flex items-center gap-1 rounded-full border ${cls} ${sz}`} style={szStyle}>
+      {icon && <span className="flex-shrink-0">{icon}</span>}
+      {children}
+      {closable && <button className="hover:opacity-70 cursor-pointer" onClick={onClose}><X size={size === "sm" ? 10 : 12} /></button>}
+    </span>
+  );
+}
+
+export function TagShowcase() {
+  const [tags, setTags] = React.useState(["React", "TypeScript", "Tailwind", "Lit", "Figma"]);
+
+  return (
+    <div className="space-y-14">
+      <PageHeader titleKey="page.tag.title" descKey="page.tag.desc" />
+
+      <Section title="Color Variants" description="Six semantic color variants for different categories." code={`<SskTag color="primary">Primary</SskTag>\n<SskTag color="success">Active</SskTag>`}>
+        <DemoBox>
+          <div className="flex flex-wrap gap-2">
+            {Object.keys(colorMap).map((c) => <Tag key={c} color={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</Tag>)}
+          </div>
+        </DemoBox>
+      </Section>
+
+      <Section title="Sizes" description="Three sizes for different contexts." code={`<SskTag size="sm">Small</SskTag>`}>
+        <DemoBox>
+          <div className="flex items-center gap-3">
+            <Tag size="sm">Small</Tag>
+            <Tag size="md">Medium</Tag>
+            <Tag size="lg">Large</Tag>
+          </div>
+        </DemoBox>
+      </Section>
+
+      <Section title="With Icons" description="Tags can include leading icons for visual context." code={`<SskTag icon={<Star />} color="warning">Featured</SskTag>`}>
+        <DemoBox>
+          <div className="flex flex-wrap gap-2">
+            <Tag color="warning" icon={<Star size={12} />}>Featured</Tag>
+            <Tag color="primary" icon={<Zap size={12} />}>Fast</Tag>
+            <Tag color="success" icon={<Shield size={12} />}>Secure</Tag>
+            <Tag color="info" icon={<Bell size={12} />}>New</Tag>
+            <Tag color="destructive" icon={<TagIcon size={12} />}>Deprecated</Tag>
+          </div>
+        </DemoBox>
+      </Section>
+
+      <Section title="Closable Tags" description="Removable tags with close button." code={`<SskTag closable onClose={() => remove(tag)}>React</SskTag>`}>
+        <DemoBox>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <Tag key={t} color="primary" closable onClose={() => setTags((prev) => prev.filter((x) => x !== t))}>{t}</Tag>
+            ))}
+            {!tags.length && <span className="text-muted-foreground" style={btnStyle}>All tags removed — refresh to reset</span>}
+          </div>
+        </DemoBox>
+      </Section>
+
+      <APITable rows={[
+        { prop: "children", type: "ReactNode", def: "—", desc: "Tag content" },
+        { prop: "color", type: '"default" | "primary" | "success" | "warning" | "destructive" | "info"', def: '"default"', desc: "Color variant" },
+        { prop: "size", type: '"sm" | "md" | "lg"', def: '"md"', desc: "Tag size" },
+        { prop: "icon", type: "ReactNode", def: "—", desc: "Leading icon element" },
+        { prop: "closable", type: "boolean", def: "false", desc: "Show close button" },
+        { prop: "onClose", type: "() => void", def: "—", desc: "Close callback" },
+      ]} />
+    </div>
+  );
+}
