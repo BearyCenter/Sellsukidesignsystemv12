@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "showcase",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js"],
+      "port": 5173
+    },
+    {
+      "name": "storybook",
+      "runtimeExecutable": "npx.cmd",
+      "runtimeArgs": ["storybook", "dev", "-p", "6006"],
+      "port": 6006
+    }
+  ]
+}
