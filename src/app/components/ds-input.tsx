@@ -335,7 +335,7 @@ export const DSTextarea = forwardRef<HTMLTextAreaElement, DSTextareaProps>(
           {showCharCount && (
             <div
               className="flex justify-end px-3 py-1.5 border-t border-border text-muted-foreground bg-muted/20"
-              style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" }}
+              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
             >
               {charCount}{maxLength ? ` / ${maxLength}` : ""} chars
             </div>

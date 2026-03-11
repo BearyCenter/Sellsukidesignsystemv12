@@ -15,10 +15,10 @@ function Tag({ children, color = "default", closable, onClose, icon, size = "md"
   const cls = colorMap[color] ?? colorMap.default;
   const sz = size === "sm" ? "px-1.5 py-0.5" : size === "lg" ? "px-3 py-1.5" : "px-2 py-0.5";
   const szStyle: React.CSSProperties = size === "sm"
-    ? { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)", fontWeight: "var(--weight-button)" }
-    : size === "lg"
     ? { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }
-    : { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.92)", fontWeight: "var(--weight-button)" };
+    : size === "lg"
+    ? { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" }
+    : { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
   return (
     <span className={`inline-flex items-center gap-1 rounded-full border ${cls} ${sz}`} style={szStyle}>
       {icon && <span className="flex-shrink-0">{icon}</span>}

@@ -72,8 +72,8 @@ const sizeConfig: Record<
     item: "gap-[var(--Spacing--Spacing-lg)] rounded-[var(--radius-sm)]",
     itemStyle: { padding: "var(--Spacing--Spacing-sm) var(--Spacing--Spacing-xl)" },
     textStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.8)", fontWeight: "var(--weight-label)" },
-    shortcutStyle: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)", fontWeight: "var(--weight-button)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
+    shortcutStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" },
     icon: 14,
     panelWidth: "min-w-[180px]",
   },
@@ -81,7 +81,7 @@ const sizeConfig: Record<
     item: "gap-[var(--Spacing--Spacing-lg)] rounded-[var(--radius-sm)]",
     itemStyle: { padding: "var(--Spacing--Spacing-md) var(--Spacing--Spacing-2xl)" },
     textStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
     shortcutStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" },
     icon: 16,
     panelWidth: "min-w-[220px]",
@@ -351,7 +351,7 @@ export const ActionDropdown = forwardRef<HTMLDivElement, ActionDropdownProps>(
           <div key={`grp-${index}`}>
             <div
               className="px-3 py-1.5 uppercase tracking-wider text-muted-foreground"
-              style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" }}
+              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
             >
               {entry.label}
             </div>

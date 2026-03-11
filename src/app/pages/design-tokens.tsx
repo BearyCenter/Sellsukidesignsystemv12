@@ -6,7 +6,7 @@ import { useI18n } from "../i18n";
 
 const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
 const btnStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-const smallLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" };
+const smallLabel: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
 
 // Copy helper
 function useCopy() {
@@ -40,7 +40,7 @@ function TokenSwatch({ name, variable, value, preview }: { name: string; variabl
         <span className="text-foreground block truncate" style={{ ...fontLabel, fontWeight: "var(--weight-button)" }}>{name}</span>
         <span className="text-muted-foreground block truncate" style={smallLabel}>{variable}</span>
       </div>
-      <span className="text-muted-foreground truncate max-w-[120px] hidden sm:block" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.78)" }}>{value}</span>
+      <span className="text-muted-foreground truncate max-w-[120px] hidden sm:block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{value}</span>
       <span className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
         {isCopied ? <Check size={14} className="text-chart-2" /> : <Copy size={14} />}
       </span>
@@ -450,10 +450,10 @@ export function DesignTokensPage() {
                         <tr key={t.prop} className={`border-b border-border last:border-b-0 ${i % 2 === 1 ? "bg-muted/5" : ""}`}>
                           <td className="px-5 py-2.5 text-foreground" style={fontLabel}>{t.prop}</td>
                           <td className="px-5 py-2.5">
-                            <code className="px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)" }}>{t.token}</code>
+                            <code className="px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{t.token}</code>
                           </td>
                           <td className="px-5 py-2.5">
-                            <code className="px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)" }}>{t.fallback}</code>
+                            <code className="px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{t.fallback}</code>
                           </td>
                         </tr>
                       ))}
@@ -493,11 +493,11 @@ export function DesignTokensPage() {
           ].map((tier, i) => (
             <div key={tier.level} className={`p-4 rounded-[var(--radius)] border ${tier.color}`}>
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-6 h-6 rounded-full bg-current/10 flex items-center justify-center flex-shrink-0" style={{ ...btnStyle, fontSize: "calc(var(--text-button) * 0.78)" }}>{i + 1}</span>
+                <span className="w-6 h-6 rounded-full bg-current/10 flex items-center justify-center flex-shrink-0" style={btnStyle}>{i + 1}</span>
                 <span style={{ ...fontLabel, fontWeight: "var(--weight-button)" }}>{tier.level}</span>
               </div>
               <span className="text-foreground block" style={smallLabel}>{tier.desc}</span>
-              <code className="block mt-2 px-2 py-1 rounded-[var(--radius-sm)] bg-card/80 text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.78)" }}>{tier.example}</code>
+              <code className="block mt-2 px-2 py-1 rounded-[var(--radius-sm)] bg-card/80 text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{tier.example}</code>
             </div>
           ))}
         </div>
@@ -532,7 +532,7 @@ export function DesignTokensPage() {
               >
                 {row.sample}
               </span>
-              <span className="text-muted-foreground flex-shrink-0 hidden md:block" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.78)" }}>
+              <span className="text-muted-foreground flex-shrink-0 hidden md:block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>
                 {row.size.replace("--", "")}
               </span>
             </div>
@@ -547,7 +547,7 @@ export function DesignTokensPage() {
       <div className="space-y-4">
         <h4 className="text-foreground">{t("tokens.usageGuide")}</h4>
         <p className="text-muted-foreground" style={fontLabel}>
-          {t("tokens.usageGuideDesc")} <code className="px-1 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary" style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)" }}>/src/styles/theme.css</code> {t("tokens.noCodeChanges")}
+          {t("tokens.usageGuideDesc")} <code className="px-1 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>/src/styles/theme.css</code> {t("tokens.noCodeChanges")}
         </p>
         <CodeBlock code={`/* Example: Change the primary color across all components */
 :root {

@@ -1,31 +1,22 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight, AlertTriangle, Trash2, Info, User } from "lucide-react";
 import { Modal, ConfirmDialog } from "../components/ds-modal";
-import { CodeBlock } from "../components/code-block";
+import { Section, DemoCard, fontLabel, btnStyle } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-const btnStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-
-function Section({ title, description, children, code }: { title: string; description?: string; children: React.ReactNode; code?: string }) {
+function TriggerBtn({ label, onClick, variant = "default" }: { label: string; onClick: () => void; variant?: string }) {
   return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-foreground">{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
-      </div>
-      {children}
-      {code && <CodeBlock code={code} />}
-    </div>
-  );
-}
-
-function DemoCard({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="space-y-2">
-      <span className="uppercase tracking-wider text-muted-foreground block" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" }}>{label}</span>
-      {children}
-    </div>
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${
+        variant === "destructive"
+          ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          : "bg-primary text-primary-foreground hover:bg-primary/90"
+      }`}
+      style={btnStyle}
+    >
+      {label}
+    </button>
   );
 }
 
@@ -39,20 +30,6 @@ export function ModalShowcase() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [destructiveOpen, setDestructiveOpen] = useState(false);
   const [scrollOpen, setScrollOpen] = useState(false);
-
-  const TriggerBtn = ({ label, onClick, variant = "default" }: { label: string; onClick: () => void; variant?: string }) => (
-    <button
-      onClick={onClick}
-      className={`px-4 py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${
-        variant === "destructive"
-          ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-          : "bg-primary text-primary-foreground hover:bg-primary/90"
-      }`}
-      style={btnStyle}
-    >
-      {label}
-    </button>
-  );
 
   return (
     <div className="space-y-14">

@@ -32,10 +32,10 @@ export function AccordionShowcase() {
         <DemoBox>
           <div className="rounded-[var(--radius)] border border-border overflow-hidden max-w-lg">
             <AccordionItem title="What is Sellsuki Design System?" open={single === "item-1"} onToggle={() => toggleSingle("item-1")}>
-              Sellsuki Design System (SSK DSS) is a comprehensive set of Web Components built with Lit, wrapped for React via @lit-labs/react. It provides consistent UI patterns across all Sellsuki products.
+              Sellsuki Design System (SSK DSS) is a comprehensive set of Web Components built with Lit, wrapped for React via @uxuissk/design-system. It provides consistent UI patterns across all Sellsuki products.
             </AccordionItem>
             <AccordionItem title="How do I install it?" open={single === "item-2"} onToggle={() => toggleSingle("item-2")}>
-              Run <code className="px-1 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary">npm install sellsuki-components @lit-labs/react</code> and wrap your app with SskThemeProvider.
+              Run <code className="px-1 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary">npm install @uxuissk/design-system</code> and wrap your app with SskThemeProvider.
             </AccordionItem>
             <AccordionItem title="Can I customize the theme?" open={single === "item-3"} onToggle={() => toggleSingle("item-3")}>
               Yes! All components use CSS custom properties. Update the variables in your theme.css to restyle the entire system without changing any component code.

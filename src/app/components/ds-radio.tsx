@@ -25,19 +25,19 @@ const sizeConfig: Record<RadioSize, { outer: string; inner: string; labelStyle: 
   sm: {
     outer: "w-4 h-4",
     inner: "w-1.5 h-1.5",
-    labelStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
   },
   md: {
     outer: "w-5 h-5",
     inner: "w-2 h-2",
     labelStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
   },
   lg: {
     outer: "w-6 h-6",
     inner: "w-2.5 h-2.5",
-    labelStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 1.1)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" },
     descStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
   },
 };
@@ -134,7 +134,7 @@ export function RadioGroup({
           {children}
         </div>
         {error && (
-          <span className="text-destructive block mt-1.5" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" }}>
+          <span className="text-destructive block mt-1.5" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}>
             {error}
           </span>
         )}

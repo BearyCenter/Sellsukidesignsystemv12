@@ -5,9 +5,9 @@ const colors = ["bg-primary", "bg-chart-2", "bg-chart-5", "bg-destructive", "bg-
 
 function Avatar({ src, name, size = "md", status }: { src?: string; name?: string; size?: "xs" | "sm" | "md" | "lg" | "xl"; status?: "online" | "offline" | "busy" | "away" }) {
   const sizeMap = {
-    xs: { box: "w-6 h-6", font: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.7)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
-    sm: { box: "w-8 h-8", font: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.78)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
-    md: { box: "w-10 h-10", font: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.92)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
+    xs: { box: "w-6 h-6", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
+    sm: { box: "w-8 h-8", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
+    md: { box: "w-10 h-10", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
     lg: { box: "w-14 h-14", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
     xl: { box: "w-20 h-20", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" } as React.CSSProperties },
   };

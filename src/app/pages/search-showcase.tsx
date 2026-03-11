@@ -1,32 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { Layers, ChevronRight, FileText, User, Settings, Package, Zap } from "lucide-react";
 import { SearchField, type SearchSize } from "../components/ds-search";
-import { CodeBlock } from "../components/code-block";
+import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
-
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-
-function Section({ title, description, children, code }: { title: string; description?: string; children: React.ReactNode; code?: string }) {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-foreground">{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
-      </div>
-      {children}
-      {code && <CodeBlock code={code} />}
-    </div>
-  );
-}
-
-function DemoCard({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="space-y-2">
-      <span className="uppercase tracking-wider text-muted-foreground block" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" }}>{label}</span>
-      {children}
-    </div>
-  );
-}
 
 const allSuggestions = [
   { id: "1", label: "Getting Started", description: "Quick start guide", icon: <FileText size={14} /> },

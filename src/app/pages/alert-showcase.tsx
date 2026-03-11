@@ -1,24 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
 import { Alert, toast, ToastContainer } from "../components/ds-alert";
-import { CodeBlock } from "../components/code-block";
+import { Section, DemoCard, fontLabel, btnStyle } from "./_showcase-factory";
 import { useI18n } from "../i18n";
-
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-const btnStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-
-function Section({ title, description, children, code }: { title: string; description?: string; children: React.ReactNode; code?: string }) {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-foreground">{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
-      </div>
-      {children}
-      {code && <CodeBlock code={code} />}
-    </div>
-  );
-}
 
 export function AlertShowcase() {
   const { t } = useI18n();

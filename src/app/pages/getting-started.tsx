@@ -43,8 +43,8 @@ const fontLabelBold: React.CSSProperties = {
   fontWeight: "var(--weight-button)",
 };
 const smallLabel: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "calc(var(--text-label) * 0.85)",
+  fontFamily: "var(--font-button)",
+  fontSize: "var(--text-button)",
   fontWeight: "var(--weight-label)",
 };
 const btnStyle: React.CSSProperties = {
@@ -54,7 +54,7 @@ const btnStyle: React.CSSProperties = {
 };
 const mono: React.CSSProperties = {
   fontFamily: "var(--font-button)",
-  fontSize: "calc(var(--text-button) * 0.92)",
+  fontSize: "var(--text-button)",
   fontWeight: "var(--weight-label)",
 };
 const captionStyle: React.CSSProperties = {
@@ -260,9 +260,9 @@ export function GettingStartedPage() {
   const [activeTab, setActiveTab] = useState<"npm" | "yarn" | "pnpm">("npm");
 
   const installCmds = {
-    npm: "npm install sellsuki-components @lit-labs/react",
-    yarn: "yarn add sellsuki-components @lit-labs/react",
-    pnpm: "pnpm add sellsuki-components @lit-labs/react",
+    npm: "npm install @uxuissk/design-system",
+    yarn: "yarn add @uxuissk/design-system",
+    pnpm: "pnpm add @uxuissk/design-system",
   };
 
   const iconInstallCmds = {
@@ -333,7 +333,7 @@ export function GettingStartedPage() {
 
         {/* Storybook link */}
         <a
-          href="https://main--64ee02a1751329900c6ec624.chromatic.com/?path=/docs/framework-react--docs"
+          href="https://sellsukidesignsystemv12.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius)] border border-primary/30 bg-accent/30 text-primary hover:bg-accent/60 transition-colors"
@@ -356,7 +356,7 @@ export function GettingStartedPage() {
               { label: "Node.js", detail: "v18.0 ขึ้นไป" },
               { label: "React", detail: "v18.3+" },
               { label: "Package Manager", detail: "npm, yarn, หรือ pnpm" },
-              { label: "@lit-labs/react", detail: "สำหรับ wrap Web Components ใน React" },
+              { label: "@uxuissk/design-system", detail: "Design System library (รวม React wrappers ในตัว)" },
             ].map((item) => (
               <li key={item.label} className="flex items-center gap-2" style={fontLabel}>
                 <CheckCircle2 size={16} className="text-chart-2 flex-shrink-0" />
@@ -373,9 +373,9 @@ export function GettingStartedPage() {
       {/* ═══ Installation ═══ */}
       <Section id="installation" title="Installation" icon={<Terminal size={20} />}>
         <div className="space-y-2">
-          <Step number={1} title="ติดตั้ง sellsuki-components">
+          <Step number={1} title="ติดตั้ง @uxuissk/design-system">
             <span className="text-muted-foreground block mb-3" style={fontLabel}>
-              ติดตั้ง Web Components library พร้อม React bridge:
+              ติดตั้ง Design System library:
             </span>
 
             {/* Package manager tabs */}
@@ -434,7 +434,7 @@ export function GettingStartedPage() {
             </span>
             <CodeBlock
               code={`// main.tsx หรือ App.tsx
-import "sellsuki-components/dist/style.css";`}
+import "@uxuissk/design-system/dist/style.css";`}
               title="Style Import"
             />
           </Step>
@@ -449,15 +449,7 @@ import "sellsuki-components/dist/style.css";`}
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ThemeProvider } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-
-const SskThemeProvider = createComponent({
-  tagName: ThemeProvider.registeredName,
-  elementClass: ThemeProvider,
-  react: React,
-  events: {},
-});
+import { SskThemeProvider } from "@uxuissk/design-system";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <SskThemeProvider lang="th">
@@ -477,9 +469,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* ═══ React Wrapper Pattern ═══ */}
       <Section id="react-wrapper" title="React Wrapper Pattern (Core)" icon={<Blocks size={20} />}>
         <span className="text-muted-foreground block mb-4" style={fontLabel}>
-          <InlineCode>sellsuki-components</InlineCode> เป็น <strong className="text-foreground">Web Components (Lit)</strong>{" "}
-          — ใน React ต้องใช้ <InlineCode>createComponent</InlineCode> จาก{" "}
-          <InlineCode>@lit-labs/react</InlineCode> เพื่อ wrap ก่อนใช้ทุกครั้ง
+          <InlineCode>@uxuissk/design-system</InlineCode> เป็น <strong className="text-foreground">Web Components (Lit)</strong>{" "}
+          พร้อม React wrappers ในตัว — import component ได้โดยตรงจาก package
         </span>
 
         <div className="space-y-6">
@@ -494,21 +485,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <div className="px-5 py-4">
               <CodeBlock
                 code={`// components/SskButton.tsx
-import { Button } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-import React from "react";
+import { SskButton } from "@uxuissk/design-system";
 
-const SskButton = createComponent({
-  tagName: Button.registeredName,
-  elementClass: Button,
-  react: React,
-  events: {
-    onClick: "change",  // map DOM event → React prop
-  },
-});
-
+// ใช้งานได้ทันที — ไม่ต้อง createComponent
 export default SskButton;`}
-                title="Button Wrapper"
+                title="Button Import"
               />
             </div>
           </div>
@@ -665,7 +646,7 @@ function MyPage() {
                 <div className={`w-10 h-10 rounded-[var(--radius-sm)] ${c.color} flex-shrink-0 border border-border/20`} />
                 <div className="min-w-0">
                   <span className="text-foreground block truncate" style={fontLabelBold}>{c.name}</span>
-                  <code className="text-muted-foreground block truncate" style={{ ...mono, fontSize: "calc(var(--text-button) * 0.78)" }}>
+                  <code className="text-muted-foreground block truncate" style={mono}>
                     {c.css}: {c.hex}
                   </code>
                 </div>
@@ -696,7 +677,7 @@ function MyPage() {
               ].map((g) => (
                 <div key={g.label} className="flex-1 flex flex-col items-center">
                   <div className="w-full h-10" style={{ backgroundColor: g.hex }} />
-                  <span className="py-1 text-muted-foreground" style={{ ...mono, fontSize: "calc(var(--text-button) * 0.72)" }}>{g.label}</span>
+                  <span className="py-1 text-muted-foreground" style={mono}>{g.label}</span>
                 </div>
               ))}
             </div>
@@ -796,7 +777,7 @@ function MyPage() {
                 className="w-28 h-20 rounded-[var(--radius-md)] bg-card border border-border flex items-center justify-center"
                 style={{ boxShadow: s.shadow }}
               >
-                <code className="text-muted-foreground" style={{ ...mono, fontSize: "calc(var(--text-button) * 0.78)" }}>{s.label}</code>
+                <code className="text-muted-foreground" style={mono}>{s.label}</code>
               </div>
             ))}
           </div>
@@ -858,7 +839,7 @@ function MyPage() {
       <Section id="components" title="Component Inventory" icon={<Package size={20} />}>
         <span className="text-muted-foreground block mb-4" style={fontLabel}>
           <strong className="text-foreground">{componentList.length}+ components</strong> ใน{" "}
-          <InlineCode>sellsuki-components</InlineCode> — ทุกตัวเป็น Web Components (Lit) พร้อม React wrapper pattern
+          <InlineCode>@uxuissk/design-system</InlineCode> — ทุกตัวเป็น Web Components (Lit) พร้อม React wrapper pattern
         </span>
 
         {/* Category pills */}
@@ -908,7 +889,7 @@ function MyPage() {
                     <td className="px-4 py-2.5 text-center">
                       <span
                         className={`inline-block px-2 py-0.5 rounded-full border ${categoryColors[c.category]}`}
-                        style={{ ...btnStyle, fontSize: "calc(var(--text-button) * 0.78)" }}
+                        style={btnStyle}
                       >
                         {c.category}
                       </span>
@@ -932,16 +913,7 @@ function MyPage() {
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ThemeProvider } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-import "sellsuki-components/dist/style.css";
-
-const SskThemeProvider = createComponent({
-  tagName: ThemeProvider.registeredName,
-  elementClass: ThemeProvider,
-  react: React,
-  events: {},
-});
+import { SskThemeProvider } from "@uxuissk/design-system";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <SskThemeProvider lang="th">
@@ -954,60 +926,47 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <div className="mt-4" />
 
         <CodeBlock
-          code={`// components/index.ts — Re-export all wrappers
-import { createComponent } from "@lit-labs/react";
-import React from "react";
+          code={`// components/index.ts — Re-export all components
 import {
-  Button,
-  Input,
-  Modal,
-  Table,
-  Pagination,
-  Badge,
-  Checkbox,
-  Radio,
-  Dropdown,
-  Alert,
-  Toast,
-  Tabs,
-  Sidebar,
-  TopNavbar,
-  Avatar,
-  Tooltip,
-  Spinner,
-} from "sellsuki-components";
+  SskButton,
+  SskInput,
+  SskModal,
+  SskTable,
+  SskPagination,
+  SskBadge,
+  SskCheckbox,
+  SskRadio,
+  SskDropdown,
+  SskAlert,
+  SskToast,
+  SskTabs,
+  SskSidebar,
+  SskTopNavbar,
+  SskAvatar,
+  SskTooltip,
+  SskSpinner,
+} from "@uxuissk/design-system";
 
-// ─── Factory helper ─────────────────────────────────
-function wrap<T extends new (...args: any[]) => any>(
-  ElementClass: T & { registeredName: string },
-  events: Record<string, string> = {},
-) {
-  return createComponent({
-    tagName: ElementClass.registeredName,
-    elementClass: ElementClass,
-    react: React,
-    events,
-  });
-}
-
-// ─── Exports ────────────────────────────────────────
-export const SskButton = wrap(Button, { onClick: "change" });
-export const SskInput = wrap(Input, { onChange: "change" });
-export const SskModal = wrap(Modal);
-export const SskTable = wrap(Table);
-export const SskPagination = wrap(Pagination, { onPageChange: "page-change" });
-export const SskBadge = wrap(Badge);
-export const SskCheckbox = wrap(Checkbox, { onChange: "change" });
-export const SskRadio = wrap(Radio, { onChange: "change" });
-export const SskDropdown = wrap(Dropdown, { onChange: "change" });
-export const SskAlert = wrap(Alert);
-export const SskToast = wrap(Toast);
-export const SskTabs = wrap(Tabs, { onTabChange: "tab-change" });
-export const SskSidebar = wrap(Sidebar);
-export const SskTopNavbar = wrap(TopNavbar);
-export const SskAvatar = wrap(Avatar);
-export const SskTooltip = wrap(Tooltip);
-export const SskSpinner = wrap(Spinner);`}
+// Re-export for convenience
+export {
+  SskButton,
+  SskInput,
+  SskModal,
+  SskTable,
+  SskPagination,
+  SskBadge,
+  SskCheckbox,
+  SskRadio,
+  SskDropdown,
+  SskAlert,
+  SskToast,
+  SskTabs,
+  SskSidebar,
+  SskTopNavbar,
+  SskAvatar,
+  SskTooltip,
+  SskSpinner,
+};`}
           title="Quick Start — components/index.ts"
         />
       </Section>
@@ -1018,8 +977,8 @@ export const SskSpinner = wrap(Spinner);`}
           {[
             {
               num: 1,
-              title: "ต้อง wrap ด้วย createComponent เสมอ",
-              desc: "ห้ามใช้ HTML tag ตรงๆ เช่น <ssk-button> ใน React — ต้อง wrap ด้วย createComponent จาก @lit-labs/react ทุกครั้ง",
+              title: "Import ได้โดยตรงจาก @uxuissk/design-system",
+              desc: "ไม่ต้อง createComponent แล้ว — import SskButton, SskInput ฯลฯ จาก @uxuissk/design-system ได้เลย",
             },
             {
               num: 2,
@@ -1073,7 +1032,7 @@ export const SskSpinner = wrap(Spinner);`}
             >
               <span
                 className="w-7 h-7 rounded-full bg-chart-5/15 text-chart-5 flex items-center justify-center flex-shrink-0"
-                style={{ ...btnStyle, fontSize: "calc(var(--text-button) * 0.85)" }}
+                style={btnStyle}
               >
                 {item.num}
               </span>
@@ -1139,7 +1098,7 @@ export const SskSpinner = wrap(Spinner);`}
             {
               title: "Storybook (Chromatic)",
               desc: "Interactive component demos, props reference, events API",
-              url: "https://main--64ee02a1751329900c6ec624.chromatic.com/?path=/docs/framework-react--docs",
+              url: "https://sellsukidesignsystemv12.vercel.app/",
             },
             {
               title: "Heroicons",
@@ -1148,13 +1107,13 @@ export const SskSpinner = wrap(Spinner);`}
             },
             {
               title: "Lit Documentation",
-              desc: "Web Components framework used by sellsuki-components",
+              desc: "Web Components framework used by @uxuissk/design-system",
               url: "https://lit.dev",
             },
             {
-              title: "@lit-labs/react",
-              desc: "React wrapper for Lit Web Components",
-              url: "https://www.npmjs.com/package/@lit-labs/react",
+              title: "@uxuissk/design-system",
+              desc: "Sellsuki Design System package on npm",
+              url: "https://www.npmjs.com/package/@uxuissk/design-system",
             },
           ].map((res) => (
             <a

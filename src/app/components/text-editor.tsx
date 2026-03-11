@@ -296,9 +296,9 @@ export const TextEditor = forwardRef<HTMLDivElement, TextEditorProps>(
     };
 
     const footerStyle: React.CSSProperties = {
-      fontFamily: "var(--font-label)",
-      fontSize: "calc(var(--text-label) * 0.85)",
-      fontWeight: "var(--weight-label)",
+      fontFamily: "var(--font-button)",
+      fontSize: "var(--text-button)",
+      fontWeight: "var(--weight-button)",
     };
 
     return (
@@ -431,7 +431,7 @@ export const TextEditor = forwardRef<HTMLDivElement, TextEditorProps>(
               {readOnly && (
                 <span
                   className="px-2 py-0.5 bg-muted rounded-[var(--radius-sm)] uppercase tracking-wider"
-                  style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.7)", fontWeight: "var(--weight-label)" }}
+                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
                 >
                   Read Only
                 </span>

@@ -53,6 +53,23 @@ const translations: Record<string, Record<Lang, string>> = {
   "sidebar.menu": { en: "Menu", th: "เมนู" },
   "sidebar.sidebarcomp": { en: "Sidebar", th: "แถบข้าง" },
   "sidebar.topnavbar": { en: "Top Navbar", th: "แถบนำทางด้านบน" },
+  "sidebar.select": { en: "Select", th: "เลือก" },
+  "sidebar.fileupload": { en: "File Upload", th: "อัปโหลดไฟล์" },
+  "sidebar.skeleton": { en: "Skeleton", th: "โครงร่างโหลด" },
+  "sidebar.emptystate": { en: "Empty State", th: "สถานะว่าง" },
+  "sidebar.breadcrumb": { en: "Breadcrumb", th: "เบรดครัมบ์" },
+  "sidebar.switch": { en: "Switch", th: "สวิตช์" },
+  "sidebar.popover": { en: "Popover", th: "ป็อปโอเวอร์" },
+  "sidebar.timeline": { en: "Timeline", th: "ไทม์ไลน์" },
+  "sidebar.notification": { en: "Notification", th: "การแจ้งเตือน" },
+  "sidebar.statistic": { en: "Statistic", th: "สถิติ" },
+  "sidebar.tree": { en: "Tree", th: "ทรี" },
+  "sidebar.transferlist": { en: "Transfer List", th: "รายการโอนย้าย" },
+  "sidebar.rating": { en: "Rating", th: "ให้คะแนน" },
+  "sidebar.colorpicker": { en: "Color Picker", th: "ตัวเลือกสี" },
+  "sidebar.imagepreview": { en: "Image Preview", th: "ดูตัวอย่างรูป" },
+
+  "sidebar.preview": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
 
   // ── Sidebar Groups (new) ──
   "sidebar.group.form": { en: "Form", th: "ฟอร์ม" },
@@ -60,6 +77,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "sidebar.group.feedback": { en: "Feedback", th: "แจ้งผลลัพธ์" },
   "sidebar.group.navigation": { en: "Navigation", th: "นำทาง" },
   "sidebar.group.layout": { en: "Layout", th: "เลย์เอาต์" },
+  "sidebar.group.advanced": { en: "Advanced", th: "ขั้นสูง" },
 
   // ─── App chrome ──
   "app.designSystem": { en: "Design System", th: "ระบบออกแบบ" },
@@ -67,6 +85,11 @@ const translations: Record<string, Record<Lang, string>> = {
   "app.lightMode": { en: "Switch to light mode", th: "เปลี่ยนเป็นโหมดสว่าง" },
   "app.darkMode": { en: "Switch to dark mode", th: "เปลี่ยนเป็นโหมดมืด" },
   "app.switchLang": { en: "ไทย", th: "EN" },
+
+  // ── Header Search ──
+  "header.search.placeholder": { en: "Search components…", th: "ค้นหาคอมโพเนนต์…" },
+  "header.search.shortcut": { en: "⌘K", th: "⌘K" },
+  "header.search.noResults": { en: "No results found", th: "ไม่พบผลลัพธ์" },
 
   // ── Breadcrumbs ──
   "breadcrumb.components": { en: "Components", th: "คอมโพเนนต์" },
@@ -192,6 +215,50 @@ const translations: Record<string, Record<Lang, string>> = {
   "page.topnavbar.title": { en: "Top Navbar", th: "แถบนำทางด้านบน" },
   "page.topnavbar.desc": { en: "72px top navigation bar with breadcrumbs, actions, user menu, and responsive mobile hamburger.", th: "แถบนำทางด้านบน 72px พร้อมเบรดครัมบ์, การกระทำ, เมนูผู้ใช้ และแฮมเบอร์เกอร์ตอบสนองบนมือถือ" },
 
+  // ── New Components (Batch 15) ──
+  "page.select.title": { en: "Select", th: "เลือก" },
+  "page.select.desc": { en: "Customizable select dropdown with single/multi-select, search, grouped options, clearable, and validation states.", th: "ดรอปดาวน์เลือกที่กำหนดเองได้ รองรับเลือกเดี่ยว/หลายรายการ, ค้นหา, ตัวเลือกจัดกลุ่ม, ล้างค่า และสถานะตรวจสอบ" },
+  "page.fileupload.title": { en: "File Upload", th: "อัปโหลดไฟล์" },
+  "page.fileupload.desc": { en: "Drag & drop file upload with dropzone, button, and avatar variants. Progress indicator, file list, and format validation.", th: "อัปโหลดไฟล์แบบลากและวาง พร้อมรูปแบบ dropzone, ปุ่ม และอวาตาร์ ตัวบ่งชี้ความคืบหน้า, รายการไฟล์ และตรวจสอบรูปแบบ" },
+  "page.skeleton.title": { en: "Skeleton", th: "โครงร่างโหลด" },
+  "page.skeleton.desc": { en: "Content placeholder with pulse animation for loading states. Supports text, rectangular, rounded, and circular variants.", th: "ตัวยึดเนื้อหาพร้อมแอนิเมชันพัลส์สำหรับสถานะโหลด รองรับรูปแบบข้อความ, สี่เหลี่ยม, มุมมน และวงกลม" },
+  "page.emptystate.title": { en: "Empty State", th: "สถานะว่าง" },
+  "page.emptystate.desc": { en: "Placeholder for empty views with icon, title, description, and CTA buttons. Common patterns for search, errors, and first-use.", th: "ตัวยึดสำหรับมุมมองว่างพร้อมไอคอน, หัวข้อ, คำอธิบาย และปุ่ม CTA รูปแบบทั่วไปสำหรับค้นหา, ข้อผิดพลาด และใช้ครั้งแรก" },
+  "page.breadcrumb.title": { en: "Breadcrumb", th: "เบรดครัมบ์" },
+  "page.breadcrumb.desc": { en: "Navigation trail with separator options, icons, collapsible long paths, and size variants.", th: "เส้นทางนำทางพร้อมตัวเลือกตัวคั่น, ไอคอน, เส้นทางยาวยุบได้ และตัวเลือกขนาด" },
+  "page.switch.title": { en: "Switch", th: "สวิตช์" },
+  "page.switch.desc": { en: "Unified on/off control (replaces Toggle). Semantic colors, three sizes, label/description, disabled state, and settings card pattern.", th: "คอมโพเนนต์เปิด/ปิดรวม (แทนที่ Toggle) สีเชิงความหมาย, สามขนาด, ป้ายชื่อ/คำอธิบาย, สถานะปิดใช้งาน และรูปแบบการ์ดการตั้งค่า" },
+  "page.popover.title": { en: "Popover", th: "ป็อปโอเวอร์" },
+  "page.popover.desc": { en: "Click-triggered floating panel with placement options, header, close button, and rich content support.", th: "แผงลอยเมื่อคลิกพร้อมตัวเลือกตำแหน่ง, ส่วนหัว, ปุ่มปิด และรองรับเนื้อหาแบบ Rich" },
+  "page.timeline.title": { en: "Timeline", th: "ไทม์ไลน์" },
+  "page.timeline.desc": { en: "Vertical timeline with status indicators, icons, alternate layout, compact variant, and rich content slots.", th: "ไทม์ไลน์แนวตั้งพร้อมตัวบ่งชี้สถานะ, ไอคอน, เลย์เอาต์สลับ, รูปแบบกะทัดรัด และช่องเนื้อหา Rich" },
+  "page.notification.title": { en: "Notification", th: "การแจ้งเตือน" },
+  "page.notification.desc": { en: "Inline notifications with severity types, closable, actions, avatars, timestamps, and notification center pattern.", th: "การแจ้งเตือนแบบอินไลน์พร้อมระดับความรุนแรง, ปิดได้, การกระทำ, อวาตาร์, เวลา และรูปแบบศูนย์การแจ้งเตือน" },
+  "page.statistic.title": { en: "Statistic", th: "สถิติ" },
+  "page.statistic.desc": { en: "Numeric display with trends, prefixes/suffixes, icon, stat cards for dashboards, and loading skeleton.", th: "แสดงตัวเลขพร้อมแนวโน้ม, คำนำหน้า/คำต่อท้าย, ไอคอน, การ์ดสถิติสำหรับแดชบอร์ด และโครงร่างโหลด" },
+  "page.tree.title": { en: "Tree", th: "ทรี" },
+  "page.tree.desc": { en: "Hierarchical tree view with expand/collapse, file/folder icons, connecting lines, and checkbox selection.", th: "มุมมองทรีแบบลำดับชั้นพร้อมขยาย/ยุบ, ไอคอนไฟล์/โฟลเดอร์, เส้นเชื่อม และเลือกด้วยเช็คบ็อกซ์" },
+  "page.transferlist.title": { en: "Transfer List", th: "รายการโอนย้าย" },
+  "page.transferlist.desc": { en: "Dual-list transfer with move controls, checkbox selection, search filter, and disabled items.", th: "โอนย้ายรายการคู่พร้อมปุ่มย้าย, เลือกด้วยเช็คบ็อกซ์, ค้นหาตัวกรอง และรายการปิดใช้งาน" },
+  "page.rating.title": { en: "Rating", th: "ให้คะแนน" },
+  "page.rating.desc": { en: "Interactive rating with star/heart/thumb icons, sizes, custom max, read-only, and inline label.", th: "ให้คะแนนแบบโต้ตอบพร้อมไอคอนดาว/หัวใจ/ไลค์, ขนาด, ค่าสูงสุดกำหนดเอง, อ่านอย่างเดียว และป้ายอินไลน์" },
+  "page.colorpicker.title": { en: "Color Picker", th: "ตัวเลือกสี" },
+  "page.colorpicker.desc": { en: "Color selection with native picker, preset swatches, hex input, HEX/RGB/HSL format display, and copy to clipboard.", th: "เลือกสีด้วยตัวเลือกเนทีฟ, สวอชพรีเซ็ต, อินพุตเลขฐาน 16, แสดงรูปแบบ HEX/RGB/HSL และคัดลอก" },
+  "page.imagepreview.title": { en: "Image Preview", th: "ดูตัวอย่างรูป" },
+  "page.imagepreview.desc": { en: "Thumbnail gallery with lightbox viewer, zoom in/out, rotate, navigation arrows, and bottom thumbnail strip.", th: "แกลเลอรีรูปย่อพร้อมตัวแสดงภาพขนาดเต็ม, ซูมเข้า/ออก, หมุน, ลูกศรนำทาง และแถบรูปย่อด้านล่าง" },
+
+  // ── Component Preview Page ──
+  "page.preview.title": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
+  "page.preview.desc": {
+    en: "Interactive playground — pick a component, tweak its props with auto-generated controls, see a live preview with viewport switching, and grab the generated JSX code.",
+    th: "พื้นที่ทดลองแบบโต้ตอบ — เลือกคอมโพเนนต์, ปรับ props ด้วยตัวควบคุมอัตโนมัติ, ดูตัวอย่างสดพร้อมสลับ viewport และคัดลอกโค้ด JSX ที่สร้างขึ้น",
+  },
+  "preview.component": { en: "Component:", th: "คอมโพเนนต์:" },
+  "preview.livePreview": { en: "Live Preview", th: "ตัวอย่างสด" },
+  "preview.props": { en: "Props", th: "คุณสมบัติ" },
+  "preview.reset": { en: "Reset", th: "รีเซ็ต" },
+  "preview.generatedCode": { en: "Generated Code", th: "โค้ดที่สร้าง" },
+
   // ── Changelog Page ──
   "page.changelog.title": { en: "Changelog", th: "บันทึกการเปลี่ยนแปลง" },
   "page.changelog.desc": {
@@ -201,6 +268,19 @@ const translations: Record<string, Record<Lang, string>> = {
   "changelog.expandAll": { en: "Expand All", th: "ขยายทั้งหมด" },
   "changelog.collapseAll": { en: "Collapse All", th: "ย่อทั้งหมด" },
   "changelog.features": { en: "features", th: "ฟีเจอร์" },
+  "changelog.latestRelease": { en: "Latest Release", th: "เวอร์ชันล่าสุด" },
+  "changelog.initialRelease": { en: "Initial Release", th: "เวอร์ชันเริ่มต้น" },
+  "changelog.version": { en: "Version", th: "เวอร์ชัน" },
+  "changelog.latest": { en: "Latest", th: "ล่าสุด" },
+  "changelog.change": { en: "change", th: "การเปลี่ยนแปลง" },
+  "changelog.changes": { en: "changes", th: "การเปลี่ยนแปลง" },
+  "changelog.releases": { en: "releases", th: "เวอร์ชัน" },
+  "changelog.startedAt": { en: "Started at", th: "เริ่มต้นที่" },
+  "changelog.on": { en: "on", th: "เมื่อ" },
+  "changelog.tagNew": { en: "New", th: "ใหม่" },
+  "changelog.tagImproved": { en: "Improved", th: "ปรับปรุง" },
+  "changelog.tagFixed": { en: "Fixed", th: "แก้ไข" },
+  "changelog.tagBreaking": { en: "Breaking", th: "เปลี่ยนแปลงสำคัญ" },
 
   // ── Design Tokens Page ──
   "page.tokens.title": { en: "Design Tokens", th: "โทเค็นการออกแบบ" },
@@ -238,8 +318,8 @@ const translations: Record<string, Record<Lang, string>> = {
   // ── Getting Started Page ──
   "page.gettingStarted.title": { en: "Getting Started", th: "เริ่มต้นใช้งาน" },
   "page.gettingStarted.desc": {
-    en: "Installation and usage guide for the Sellsuki Design System (sellsuki-components) — Web Components (Lit) with React wrappers, the foundation for every Sellsuki product.",
-    th: "คู่มือการติดตั้งและใช้งาน Sellsuki Design System (sellsuki-components) — Web Components (Lit) พร้อม React wrappers ที่ใช้เป็น foundation สำหรับทุก product ของ Sellsuki",
+    en: "Installation and usage guide for the Sellsuki Design System (@uxuissk/design-system) — Web Components (Lit) with React wrappers, the foundation for every Sellsuki product.",
+    th: "คู่มือการติดตั้งและใช้งาน Sellsuki Design System (@uxuissk/design-system) — Web Components (Lit) พร้อม React wrappers ที่ใช้เป็น foundation สำหรับทุก product ของ Sellsuki",
   },
 
   // ── Section Titles (common across showcase pages) ──
@@ -257,6 +337,76 @@ const translations: Record<string, Record<Lang, string>> = {
   "common.copied": { en: "Copied!", th: "คัดลอกแล้ว!" },
   "common.showCode": { en: "Show code", th: "แสดงโค้ด" },
   "common.hideCode": { en: "Hide code", th: "ซ่อนโค้ด" },
+
+  // ── Sidebar: MCP Server ──
+  "sidebar.mcpserver": { en: "MCP Server", th: "MCP Server" },
+
+  // ── MCP Server Page ──
+  "page.mcpServer.title": { en: "MCP Server", th: "MCP Server" },
+  "page.mcpServer.desc": {
+    en: "Build Model Context Protocol (MCP) servers to connect AI assistants with your data, tools, and APIs. Interactive builder with real-time code generation.",
+    th: "สร้าง MCP Server เพื่อเชื่อมต่อ AI assistants กับข้อมูล, เครื่องมือ และ API ของคุณ พร้อม interactive builder ที่สร้างโค้ดแบบ real-time",
+  },
+  "mcp.overview.title": { en: "What is MCP?", th: "MCP คืออะไร?" },
+  "mcp.overview.desc": {
+    en: "Model Context Protocol — the open standard for connecting AI models to external tools and data sources.",
+    th: "Model Context Protocol — มาตรฐานเปิดสำหรับเชื่อมต่อ AI models กับเครื่องมือและแหล่งข้อมูลภายนอก",
+  },
+  "mcp.whatIs.title": { en: "The \"USB-C\" for AI", th: "\"USB-C\" สำหรับ AI" },
+  "mcp.whatIs.body": {
+    en: "MCP provides a universal, open protocol for connecting AI assistants to data sources, business tools, and development environments. Instead of building custom integrations for each AI platform, build one MCP server and connect it to any compatible client.",
+    th: "MCP เป็นโปรโตคอลเปิดสำหรับเชื่อมต่อ AI assistants กับแหล่งข้อมูล, เครื่องมือทางธุรกิจ และสภาพแวดล้อมการพัฒนา แทนที่จะสร้าง integration เฉพาะสำหรับแต่ละแพลตฟอร์ม AI ให้สร้าง MCP server เดียวแล้วเชื่อมต่อกับ client ที่รองรับได้ทุกตัว",
+  },
+  "mcp.arch.title": { en: "Architecture", th: "สถาปัตยกรรม" },
+  "mcp.arch.host": { en: "Host", th: "Host" },
+  "mcp.arch.hostSub": { en: "Claude, Cursor, VS Code", th: "Claude, Cursor, VS Code" },
+  "mcp.arch.client": { en: "MCP Client", th: "MCP Client" },
+  "mcp.arch.clientSub": { en: "Protocol layer", th: "ชั้นโปรโตคอล" },
+  "mcp.arch.server": { en: "MCP Server", th: "MCP Server" },
+  "mcp.arch.serverSub": { en: "Your tools & data", th: "เครื่องมือและข้อมูลของคุณ" },
+
+  "mcp.capabilities.title": { en: "Server Capabilities", th: "ความสามารถของ Server" },
+  "mcp.capabilities.desc": {
+    en: "MCP servers expose three core primitives to AI clients.",
+    th: "MCP servers เปิดให้ AI clients เข้าถึง 3 primitives หลัก",
+  },
+  "mcp.cap.tools": { en: "Tools", th: "Tools" },
+  "mcp.cap.toolsDesc": { en: "Executable functions the AI model can invoke with validated inputs.", th: "ฟังก์ชันที่ AI model เรียกใช้ได้พร้อม input ที่ผ่านการตรวจสอบ" },
+  "mcp.cap.resources": { en: "Resources", th: "Resources" },
+  "mcp.cap.resourcesDesc": { en: "Data sources exposed via URI templates for the AI to read.", th: "แหล่งข้อมูลที่เปิดให้ AI อ่านผ่าน URI templates" },
+  "mcp.cap.prompts": { en: "Prompts", th: "Prompts" },
+  "mcp.cap.promptsDesc": { en: "Reusable prompt templates with arguments for common workflows.", th: "เทมเพลต prompt ที่ใช้ซ้ำได้พร้อม arguments สำหรับ workflow ทั่วไป" },
+
+  "mcp.builder.title": { en: "Interactive Server Builder", th: "ตัวสร้าง Server แบบ Interactive" },
+  "mcp.builder.desc": {
+    en: "Define your server, add tools and resources, then grab the generated TypeScript code.",
+    th: "กำหนดค่า server, เพิ่ม tools และ resources จากนั้นคัดลอกโค้ด TypeScript ที่สร้างขึ้น",
+  },
+  "mcp.builder.config": { en: "Server Configuration", th: "ตั้งค่า Server" },
+  "mcp.builder.name": { en: "Server Name", th: "ชื่อ Server" },
+  "mcp.builder.description": { en: "Description", th: "คำอธิบาย" },
+  "mcp.builder.transport": { en: "Transport", th: "Transport" },
+  "mcp.builder.addTool": { en: "Add Tool", th: "เพิ่ม Tool" },
+  "mcp.builder.addResource": { en: "Add Resource", th: "เพิ่ม Resource" },
+  "mcp.builder.validate": { en: "Validate Server", th: "ตรวจสอบ Server" },
+  "mcp.builder.validMsg": { en: "Server configuration is valid!", th: "การตั้งค่า Server ถูกต้อง!" },
+  "mcp.builder.errorMsg": { en: "At least one tool must have a name.", th: "ต้องมี tool อย่างน้อยหนึ่งตัวที่มีชื่อ" },
+
+  "mcp.quickstart.title": { en: "Quick Start", th: "เริ่มต้นอย่างรวดเร็ว" },
+  "mcp.quickstart.desc": { en: "Get your MCP server running in 4 steps.", th: "เริ่มใช้งาน MCP server ใน 4 ขั้นตอน" },
+  "mcp.step1.title": { en: "Install dependencies", th: "ติดตั้ง dependencies" },
+  "mcp.step1.desc": { en: "Install @modelcontextprotocol/sdk and zod for schema validation.", th: "ติดตั้ง @modelcontextprotocol/sdk และ zod สำหรับ schema validation" },
+  "mcp.step2.title": { en: "Define your server", th: "กำหนด server ของคุณ" },
+  "mcp.step2.desc": { en: "Create a new McpServer instance with name and version.", th: "สร้าง McpServer instance ใหม่พร้อมชื่อและเวอร์ชัน" },
+  "mcp.step3.title": { en: "Register tools & resources", th: "ลงทะเบียน tools และ resources" },
+  "mcp.step3.desc": { en: "Add tools with Zod schemas and async handlers for the AI to call.", th: "เพิ่ม tools พร้อม Zod schemas และ async handlers ให้ AI เรียกใช้" },
+  "mcp.step4.title": { en: "Connect transport & run", th: "เชื่อมต่อ transport และรัน" },
+  "mcp.step4.desc": { en: "Choose stdio (local) or SSE (HTTP) transport, then start the server.", th: "เลือก transport แบบ stdio (local) หรือ SSE (HTTP) จากนั้นเริ่ม server" },
+
+  "mcp.clientConfig.title": { en: "Client Configuration", th: "การตั้งค่า Client" },
+  "mcp.clientConfig.desc": { en: "Connect your MCP server to popular AI clients.", th: "เชื่อมต่อ MCP server ของคุณกับ AI clients ยอดนิยม" },
+  "mcp.clientConfig.claude": { en: "Claude Desktop", th: "Claude Desktop" },
+  "mcp.clientConfig.cursor": { en: "Cursor / VS Code", th: "Cursor / VS Code" },
 };
 
 // ─── Context ──────────────────────────────────────────────────────────────────

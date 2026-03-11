@@ -1,32 +1,8 @@
 import React from "react";
 import { Layers, ChevronRight, Home, Settings, User, Bell, Mail, Star } from "lucide-react";
 import { Tabs, type TabItem } from "../components/ds-tabs";
-import { CodeBlock } from "../components/code-block";
+import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
-
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-
-function Section({ title, description, children, code }: { title: string; description?: string; children: React.ReactNode; code?: string }) {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-foreground">{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
-      </div>
-      {children}
-      {code && <CodeBlock code={code} />}
-    </div>
-  );
-}
-
-function DemoCard({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="space-y-2">
-      <span className="uppercase tracking-wider text-muted-foreground block" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" }}>{label}</span>
-      {children}
-    </div>
-  );
-}
 
 const basicTabs: TabItem[] = [
   { id: "overview", label: "Overview", content: <div className="p-4 rounded-[var(--radius)] bg-muted/20 border border-border" style={fontLabel}><span className="text-foreground">Overview content goes here.</span></div> },
