@@ -1,7 +1,7 @@
 # Sellsuki DSS (Design System Specification) — Claude Context
 
 > **Purpose**: โครงสร้าง DSS นี้ใช้เป็น foundation สำหรับทุก product ของ Sellsuki  
-> ทั้ง sellsuki-components (Web Components / Lit), Static HTML prototypes, และ React wrappers
+> ทั้ง @uxuissk/design-system (Web Components / Lit), Static HTML prototypes, และ React wrappers
 
 ---
 
@@ -101,39 +101,29 @@ Example: `DB HeaventRounded-5x-large-bold-normal`
 
 ---
 
-## ⚙️ Installation (sellsuki-components)
+## ⚙️ Installation (@uxuissk/design-system)
 ```bash
-npm i sellsuki-components @lit-labs/react
+npm i @uxuissk/design-system
 ```
 
 ---
 
 ## 📦 Core Pattern — ต้องใช้ทุก component
 
-sellsuki-components เป็น Web Components (Lit) ดังนั้นต้องใช้ `createComponent` จาก `@lit-labs/react` เพื่อ wrap ก่อนใช้ใน React ทุกครั้ง
+@uxuissk/design-system เป็น Web Components (Lit) พร้อม React wrappers ในตัว — import component ได้โดยตรงจาก package
 
 ```tsx
 // components/SskButton.tsx
-import { Button } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-import React from "react";
+import { SskButton } from "@uxuissk/design-system";
 
-const SskButton = createComponent({
-  tagName: Button.registeredName,
-  elementClass: Button,
-  react: React,
-  events: {
-    onClick: "change", // map DOM event → React prop
-  },
-});
-
+// ใช้งานได้ทันที — ไม่ต้อง createComponent
 export default SskButton;
 ```
 
 ### Pattern สำคัญ
-- `tagName` ใช้ `ComponentClass.registeredName` เสมอ
+- import component ได้โดยตรงจาก `@uxuissk/design-system`
 - `events` ต้อง map event ที่ component ใช้จริง (ดูจาก EVENTS PROPS ในแต่ละ component)
-- import style ถ้า component มี: `import "sellsuki-components/dist/style.css"`
+- import style ถ้า component มี: `import "@uxuissk/design-system/dist/style.css"`
 - ใช้ `<ssk-theme-provider>` หรือ `SskThemeProvider` ครอบทุก component เสมอ
 
 ---
@@ -141,16 +131,7 @@ export default SskButton;
 ## 🎨 Theme Provider (ต้องมีเสมอ)
 
 ```tsx
-import { ThemeProvider } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-import React from "react";
-
-const SskThemeProvider = createComponent({
-  tagName: ThemeProvider.registeredName,
-  elementClass: ThemeProvider,
-  react: React,
-  events: {},
-});
+import { SskThemeProvider } from "@uxuissk/design-system";
 
 const App = () => (
   <SskThemeProvider lang="th">
@@ -187,7 +168,7 @@ const App = () => (
 
 ### Badge, Input, Modal, Table, Pagination
 
-_(Component props same as original CLAUDE.md — see sellsuki-components Storybook)_
+_(Component props same as original CLAUDE.md — see @uxuissk/design-system Storybook)_
 
 ---
 
@@ -290,15 +271,7 @@ ssk-sidebar (256px, white bg, border-right)
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ThemeProvider } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-
-const SskThemeProvider = createComponent({
-  tagName: ThemeProvider.registeredName,
-  elementClass: ThemeProvider,
-  react: React,
-  events: {},
-});
+import { SskThemeProvider } from "@uxuissk/design-system";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <SskThemeProvider lang="th">
@@ -328,7 +301,7 @@ WidgetTable, WidgetTitle, WidgetUserDetail
 
 ## ⚠️ สิ่งที่ต้องระวัง
 
-1. **ต้อง wrap ด้วย `createComponent` เสมอ** — ห้ามใช้ tag HTML ตรงๆ เช่น `<ssk-button>` ใน React
+1. **Import ได้โดยตรงจาก @uxuissk/design-system** — ไม่ต้อง createComponent แล้ว
 2. **events mapping** — event name ต้องตรงกับ DOM event ที่ component emit จริง
 3. **ThemeProvider ต้องครอบ** — หากไม่มี อาจแสดงผลผิดพลาด
 4. **slot สำหรับ content** — Modal ใช้ `slot="footer"` attribute

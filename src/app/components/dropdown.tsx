@@ -103,7 +103,7 @@ const sizeConfig: Record<
     option: "rounded-[var(--radius-sm)]",
     optionStyle: { padding: "var(--Spacing--Spacing-sm) var(--Spacing--Spacing-xl)" },
     textStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.8)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
     icon: 14,
     avatarSize: 20,
   },
@@ -685,7 +685,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                 </span>
                 <span
                   className="ml-auto text-muted-foreground"
-                  style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" }}
+                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
                 >
                   {Array.isArray(value) ? value.length : 0}/{filteredOptions.filter((o) => !o.disabled).length}
                 </span>
@@ -715,7 +715,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                   <div key={group}>
                     <div
                       className="px-3 py-1.5 uppercase tracking-wider text-muted-foreground"
-                      style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" }}
+                      style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
                     >
                       {group}
                     </div>

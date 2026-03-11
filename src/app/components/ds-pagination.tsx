@@ -62,7 +62,7 @@ const sizeConfig: Record<
     icon: 14,
     text: {
       fontFamily: "var(--font-button)",
-      fontSize: "calc(var(--text-button) * 0.9)",
+      fontSize: "var(--text-button)",
       fontWeight: "var(--weight-button)",
     },
     gap: "gap-1",
@@ -82,7 +82,7 @@ const sizeConfig: Record<
     icon: 18,
     text: {
       fontFamily: "var(--font-button)",
-      fontSize: "calc(var(--text-button) * 1.1)",
+      fontSize: "var(--text-label)",
       fontWeight: "var(--weight-button)",
     },
     gap: "gap-2",

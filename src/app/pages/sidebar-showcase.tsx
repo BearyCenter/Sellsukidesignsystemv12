@@ -39,7 +39,7 @@ export function SidebarShowcase() {
               <nav className="flex-1 overflow-y-auto py-3 px-2">
                 {groups.map((g) => (
                   <div key={g.label} className="mb-4">
-                    {!collapsed && <span className="px-2 mb-1.5 block text-muted-foreground uppercase tracking-wider" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.65)", fontWeight: "var(--weight-button)" }}>{g.label}</span>}
+                    {!collapsed && <span className="px-2 mb-1.5 block text-muted-foreground uppercase tracking-wider" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>{g.label}</span>}
                     <div className="space-y-0.5">
                       {g.items.map((item) => {
                         const active = activeItem === item.id;
@@ -47,7 +47,7 @@ export function SidebarShowcase() {
                           <button key={item.id} onClick={() => setActiveItem(item.id)} className={`w-full flex items-center gap-2 px-2 py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "text-sidebar-foreground hover:bg-sidebar-accent/50"}`} style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)" }}>
                             <span className={active ? "text-sidebar-primary" : "text-muted-foreground"}>{item.icon}</span>
                             {!collapsed && <span className="truncate flex-1 text-left">{item.label}</span>}
-                            {!collapsed && (item as any).badge && <span className="px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground" style={{ ...btnStyle, fontSize: "calc(var(--text-button) * 0.72)", lineHeight: "1" }}>{(item as any).badge}</span>}
+                            {!collapsed && (item as any).badge && <span className="px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground" style={{ ...btnStyle, lineHeight: "1" }}>{(item as any).badge}</span>}
                           </button>
                         );
                       })}
@@ -71,20 +71,11 @@ export function SidebarShowcase() {
         </DemoBox>
       </Section>
 
-      <Section title="Wrapper Code" description="Create the React wrapper for the Lit component.">
-        <CodeBlock code={`import { Sidebar } from "sellsuki-components";
-import { createComponent } from "@lit-labs/react";
-import React from "react";
-
-const SskSidebar = createComponent({
-  tagName: Sidebar.registeredName,
-  elementClass: Sidebar,
-  react: React,
-  events: { onNavigate: "navigate" },
-});
+      <Section title="Wrapper Code" description="Create the React wrapper using @uxuissk/design-system.">
+        <CodeBlock code={`import { Sidebar } from "@uxuissk/design-system";
 
 // Usage
-<SskSidebar
+<Sidebar
   brand={{ name: "Sellsuki", logo: "/logo.svg" }}
   groups={[
     { label: "Main", items: [

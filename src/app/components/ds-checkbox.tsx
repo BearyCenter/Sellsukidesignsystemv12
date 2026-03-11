@@ -21,19 +21,19 @@ const sizeConfig: Record<CheckboxSize, { box: string; icon: number; labelStyle: 
   sm: {
     box: "w-4 h-4",
     icon: 10,
-    labelStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
   },
   md: {
     box: "w-5 h-5",
     icon: 12,
     labelStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
-    descStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" },
+    descStyle: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" },
   },
   lg: {
     box: "w-6 h-6",
     icon: 14,
-    labelStyle: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 1.1)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" },
     descStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
   },
 };

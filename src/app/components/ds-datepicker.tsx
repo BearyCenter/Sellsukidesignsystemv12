@@ -137,7 +137,7 @@ const sizeConfig: Record<
     trigger: "h-8 px-2.5",
     text: {
       fontFamily: "var(--font-label)",
-      fontSize: "calc(var(--text-label) * 0.9)",
+      fontSize: "var(--text-label)",
       fontWeight: "var(--weight-label)",
     },
     icon: 14,
@@ -156,9 +156,9 @@ const sizeConfig: Record<
   lg: {
     trigger: "h-12 px-4",
     text: {
-      fontFamily: "var(--font-label)",
-      fontSize: "calc(var(--text-label) * 1.1)",
-      fontWeight: "var(--weight-label)",
+      fontFamily: "var(--font-caption)",
+      fontSize: "var(--text-caption)",
+      fontWeight: "var(--weight-caption)",
     },
     icon: 18,
     cell: "w-10 h-10",
@@ -340,9 +340,9 @@ export function DatePicker({
   };
 
   const captionStyle: React.CSSProperties = {
-    fontFamily: "var(--font-caption)",
-    fontSize: "calc(var(--text-caption) * 0.7)",
-    fontWeight: "var(--weight-caption)",
+    fontFamily: "var(--font-button)",
+    fontSize: "var(--text-button)",
+    fontWeight: "var(--weight-button)",
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -395,7 +395,7 @@ export function DatePicker({
 
       {/* Helper text */}
       {helperMsg && (
-        <p className={`mt-1.5 ${helperColor}`} style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" }}>
+        <p className={`mt-1.5 ${helperColor}`} style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}>
           {helperMsg}
         </p>
       )}

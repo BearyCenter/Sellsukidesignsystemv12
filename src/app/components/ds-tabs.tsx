@@ -24,9 +24,9 @@ interface TabsProps {
 }
 
 const sizeStyles: Record<TabSize, React.CSSProperties> = {
-  sm: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)", fontWeight: "var(--weight-button)", padding: "6px 12px" },
+  sm: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", padding: "6px 12px" },
   md: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", padding: "8px 16px" },
-  lg: { fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 1.14)", fontWeight: "var(--weight-button)", padding: "10px 20px" },
+  lg: { fontFamily: "var(--font-button)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "10px 20px" },
 };
 
 export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activeTab: controlled, onChange, fullWidth = false, className = "" }: TabsProps) {
@@ -105,7 +105,7 @@ export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activ
                   className={`ml-1 px-1.5 py-0.5 rounded-full min-w-[18px] text-center ${
                     isActive && variant === "pills" ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
                   }`}
-                  style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.72)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
+                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
                 >
                   {tab.badge}
                 </span>

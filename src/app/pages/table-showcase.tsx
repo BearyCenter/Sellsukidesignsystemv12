@@ -2,23 +2,8 @@ import React, { useState } from "react";
 import { Layers, ChevronRight, Circle } from "lucide-react";
 import { DSTable, type TableColumn } from "../components/ds-table";
 import { Badge } from "../components/ds-badge";
-import { CodeBlock } from "../components/code-block";
+import { Section, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
-
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-
-function Section({ title, description, children, code }: { title: string; description?: string; children: React.ReactNode; code?: string }) {
-  return (
-    <div className="space-y-4">
-      <div>
-        <h4 className="text-foreground">{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
-      </div>
-      {children}
-      {code && <CodeBlock code={code} />}
-    </div>
-  );
-}
 
 const sampleData = [
   { id: 1, name: "Somsak Jaidee", email: "somsak@sellsuki.co.th", role: "Admin", status: "Active", joined: "Jan 15, 2026" },
@@ -90,11 +75,11 @@ export function TableShowcase() {
       <Section title="Sizes" description="Three density options." code={`<DSTable columns={columns} data={data} size="sm" />`}>
         <div className="space-y-6">
           <div>
-            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)" }}>Small</span>
+            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Small</span>
             <DSTable columns={columns} data={sampleData.slice(0, 3)} size="sm" />
           </div>
           <div>
-            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.75)" }}>Large</span>
+            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Large</span>
             <DSTable columns={columns} data={sampleData.slice(0, 3)} size="lg" />
           </div>
         </div>

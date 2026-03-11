@@ -64,7 +64,7 @@ function MenuItemRow({ item }: { item: MenuItem }) {
     return (
       <div
         className="px-3 py-1.5 text-muted-foreground uppercase tracking-wider"
-        style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.7)", fontWeight: "var(--weight-button)" }}
+        style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
       >
         {item.label}
       </div>
@@ -100,7 +100,7 @@ function MenuItemRow({ item }: { item: MenuItem }) {
         {item.shortcut && (
           <span
             className="text-muted-foreground ml-4"
-            style={{ fontFamily: "var(--font-button)", fontSize: "calc(var(--text-button) * 0.85)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
           >
             {item.shortcut}
           </span>
