@@ -43,7 +43,7 @@ const sizeStyles: Record<
     className: "px-1.5 py-0.5 gap-1",
     style: {
       fontFamily: "var(--font-button)",
-      fontSize: "calc(var(--text-button) * 0.72)",
+      fontSize: "var(--text-button)",
       fontWeight: "var(--weight-button)",
     },
     iconSize: 10,
@@ -52,7 +52,7 @@ const sizeStyles: Record<
     className: "px-2.5 py-0.5 gap-1.5",
     style: {
       fontFamily: "var(--font-button)",
-      fontSize: "calc(var(--text-button) * 0.85)",
+      fontSize: "var(--text-button)",
       fontWeight: "var(--weight-button)",
     },
     iconSize: 12,

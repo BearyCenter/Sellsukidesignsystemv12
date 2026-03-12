@@ -29,9 +29,9 @@ interface SearchFieldProps {
 }
 
 const sizeMap: Record<SearchSize, { input: string; icon: number; style: React.CSSProperties }> = {
-  sm: { input: "h-8 px-8 text-sm", icon: 14, style: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.85)", fontWeight: "var(--weight-label)" } },
+  sm: { input: "h-8 px-8", icon: 14, style: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" } },
   md: { input: "h-10 px-9", icon: 16, style: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" } },
-  lg: { input: "h-12 px-10", icon: 18, style: { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 1.1)", fontWeight: "var(--weight-label)" } },
+  lg: { input: "h-12 px-10", icon: 18, style: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" } },
 };
 
 const variantMap: Record<SearchVariant, string> = {
@@ -62,7 +62,7 @@ export function SearchField({
   const val = controlled ?? internal;
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const s = sizeMap[size];
 
@@ -110,7 +110,7 @@ export function SearchField({
   }, [suggestions, val]);
 
   const labelStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-  const smallLabelStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.8)", fontWeight: "var(--weight-label)" };
+  const smallLabelStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>

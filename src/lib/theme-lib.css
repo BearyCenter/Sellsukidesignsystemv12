@@ -120,7 +120,7 @@
   --Space--space-9999: 9999px;
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS
+     SEMANTIC TOKENS — Sellsuki Brand (Spacing)
      ═══════════════════════════════════════════════════════════════════════════ */
   --Spacing--Spacing-none: var(--Space--space-0);
   --Spacing--Spacing-xxs: var(--Space--space-1);
@@ -144,7 +144,9 @@
   --Spacing--Spacing-14xl: var(--Space--space-96);
   --Spacing--Spacing-15xl: var(--Space--space-128);
 
-  /* Border Radius */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Border Radius
+     ═══════════════════════════════════════════════════════════════════════════ */
   --Border-radius--radius-none: var(--Space--space-0);
   --Border-radius--radius-xxs: var(--Space--space-2);
   --Border-radius--radius-xs: var(--Space--space-4);
@@ -157,17 +159,17 @@
   --Border-radius--radius-4xl: var(--Space--space-32);
   --Border-radius--radius-full: var(--Space--space-9999);
 
-  /* Border Width */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Border Width
+     ═══════════════════════════════════════════════════════════════════════════ */
   --Border_Width--border-none: var(--Space--space-0);
   --Border_Width--border-xxs: var(--Space--space-1);
   --Border_Width--border-xs: var(--Space--space-2);
   --Border_Width--border-sm: var(--Space--space-4);
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     SEMANTIC TOKENS — Colors
+     SEMANTIC TOKENS — Sellsuki Colors (Text)
      ═══════════════════════════════════════════════════════════════════════════ */
-
-  /* Text */
   --Colors--Text--text-primary: var(--Base_Color--Gray--800);
   --Colors--Text--text-primary-hover: var(--Base_Color--Gray--900);
   --Colors--Text--text-secondary: var(--Base_Color--Gray--500);
@@ -183,7 +185,9 @@
   --Colors--Text--text-info: var(--Base_Color--Sky--500);
   --Colors--Text--Link: var(--Base_Color--Sky--600);
 
-  /* Foreground / Icon */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Foreground / Icon)
+     ═══════════════════════════════════════════════════════════════════════════ */
   --Colors--Foreground--fg-primary: var(--Base_Color--Gray--800);
   --Colors--Foreground--fg-secondary: var(--Base_Color--Gray--500);
   --Colors--Foreground--fg-secondary_hover: var(--Base_Color--Gray--600);
@@ -211,7 +215,9 @@
   --Colors--Icon--icon-brand-hover: var(--Base_Color--Sky--600);
   --Colors--Icon--icon-link: var(--Base_Color--Sky--600);
 
-  /* Background */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Background)
+     ═══════════════════════════════════════════════════════════════════════════ */
   --Colors--Background--bg-primary: var(--Colors--White--50);
   --Colors--Background--bg-primary_hover: var(--Base_Color--Gray--50);
   --Colors--Background--bg-secondary: var(--Base_Color--Gray--100);
@@ -234,7 +240,9 @@
   --Colors--Background--bg-info-primary: var(--Base_Color--Sky--50);
   --Colors--Background--bg-info-solid: var(--Base_Color--Sky--500);
 
-  /* Stroke / Border */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Stroke / Border)
+     ═══════════════════════════════════════════════════════════════════════════ */
   --Colors--Stroke--stroke-primary: var(--Base_Color--Gray--200);
   --Colors--Stroke--stroke-primary-solid: var(--Base_Color--Gray--900);
   --Colors--Stroke--stroke-secondary: var(--Base_Color--Gray--300);
@@ -256,7 +264,10 @@
   --Colors--Stroke--stroke-info-lighter: var(--Base_Color--Sky--100);
   --Colors--Stroke--stroke-gray-lighter: var(--Base_Color--Gray--100);
 
-  /* Button Variants */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Button Variants)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  /* Solid (Primary) */
   --Colors--Button--Solid--button-solid-fg: var(--Colors--White--50);
   --Colors--Button--Solid--button-solid-fg_hover: var(--Colors--White--50);
   --Colors--Button--Solid--button-solid-bg: var(--Base_Color--Sky--500);
@@ -264,18 +275,26 @@
   --Colors--Button--Solid--button-solid-border: var(--Base_Color--Sky--500);
   --Colors--Button--Solid--button-solid-border_hover: var(--Base_Color--Sky--600);
   --Colors--Button--Solid--Button-solid-bg_disable: var(--Base_Color--Sky--300);
+
+  /* Outline (Primary) */
   --Colors--Button--Outline--button-outline-fg: var(--Base_Color--Sky--500);
   --Colors--Button--Outline--button-outline-fg_hover: var(--Base_Color--Sky--600);
   --Colors--Button--Outline--button-outline-border: var(--Base_Color--Sky--500);
   --Colors--Button--Outline--button-outline-border_hover: var(--Base_Color--Sky--600);
+
+  /* Ghost (Primary) */
   --Colors--Button--Ghost--button-Ghost-fg: var(--Base_Color--Sky--500);
   --Colors--Button--Ghost--button-Ghost-fg_hover: var(--Base_Color--Sky--600);
+
+  /* Solid Light */
   --Colors--Button--Solid_Light--button-solid_light-fg: var(--Base_Color--Gray--800);
   --Colors--Button--Solid_Light--button-solid_light-fg_hover: var(--Base_Color--Gray--900);
   --Colors--Button--Solid_Light--button-solid_light-bg: var(--Colors--White--50);
   --Colors--Button--Solid_Light--button-solid_light-bg_hover: var(--Colors--White--50);
   --Colors--Button--Solid_Light--button-solid_light-border: var(--Base_Color--Gray--200);
   --Colors--Button--Solid_Light--button-solid_light-border_hover: var(--Base_Color--Gray--300);
+
+  /* Solid Danger */
   --Colors--Button--Solid_Danger--button-solid_danger-fg: var(--Colors--White--50);
   --Colors--Button--Solid_Danger--button-solid_danger-fg_hover: var(--Colors--White--50);
   --Colors--Button--Solid_Danger--button-solid_danger-bg: var(--Base_Color--Rose--600);
@@ -283,12 +302,18 @@
   --Colors--Button--Solid_Danger--button-solid_danger-border: var(--Base_Color--Rose--600);
   --Colors--Button--Solid_Danger--button-solid_danger-border_hover: var(--Base_Color--Rose--700);
   --Colors--Button--Solid_Danger--button-solid_danger_bg_disable: var(--Base_Color--Rose--300);
+
+  /* Outline Danger */
   --Colors--Button--Outline_Danger--button-outline_danger-fg: var(--Base_Color--Rose--600);
   --Colors--Button--Outline_Danger--button-outline_danger-fg_hover: var(--Base_Color--Rose--700);
   --Colors--Button--Outline_Danger--button-outline_danger-border: var(--Base_Color--Rose--600);
   --Colors--Button--Outline_Danger--button-outline_danger-border_hover: var(--Base_Color--Rose--700);
+
+  /* Ghost Danger */
   --Colors--Button--Ghost_Danger--button-ghost_danger-fg: var(--Base_Color--Rose--600);
   --Colors--Button--Ghost_Danger--button-ghost_danger-fg_hover: var(--Base_Color--Rose--700);
+
+  /* Utility button colors */
   --Colors--Button--light: var(--Base_Color--Sky--100);
   --Colors--Button--hover_light: var(--Base_Color--Sky--200);
   --Colors--Button--disable: var(--Base_Color--Sky--500);
@@ -303,14 +328,19 @@
   --Colors--Button--brand-secondary: var(--Base_Color--Orange--500);
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     BRIDGE — Tailwind-compatible variables
+     BRIDGE — Maps DS semantic tokens → Tailwind-compatible variables
+     These are the tokens ALL UI components and Tailwind classes reference.
      ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Surface / Background */
   --background: var(--Colors--Background--bg-quaternary);
   --foreground: var(--Colors--Text--text-primary);
   --card: var(--Colors--Background--bg-primary);
   --card-foreground: var(--Colors--Text--text-primary);
   --popover: var(--Colors--Background--bg-primary);
   --popover-foreground: var(--Colors--Text--text-primary);
+
+  /* Interactive */
   --primary: var(--Colors--Button--Solid--button-solid-bg);
   --primary-foreground: var(--Colors--Button--Solid--button-solid-fg);
   --secondary: var(--Colors--Foreground--fg-secondary);
@@ -319,22 +349,49 @@
   --accent-foreground: var(--Colors--Text--text-brand-primary);
   --destructive: var(--Colors--Button--Solid_Danger--button-solid_danger-bg);
   --destructive-foreground: var(--Colors--Button--Solid_Danger--button-solid_danger-fg);
+
+  /* Muted / Disabled */
   --muted: var(--Colors--Background--bg-disabled);
   --muted-foreground: var(--Colors--Text--text-secondary);
+
+  /* Border / Input / Ring */
   --border: var(--Colors--Stroke--stroke-primary);
   --input: var(--Colors--Background--bg-primary);
   --input-background: var(--Colors--Background--bg-primary);
   --ring: var(--Base_Color--Sky--600);
+
+  /* Elevation */
   --elevation-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  /* Code Block — Light mode: soft gray surface from DS primitives */
+  --code-bg: var(--Base_Color--Gray--50);
+  --code-surface: var(--Colors--Background--bg-primary);
+  --code-border: var(--Base_Color--Gray--200);
+  --code-line-number: var(--Base_Color--Gray--400);
+  --code-text: var(--Base_Color--Gray--800);
+  --code-keyword: rgba(168, 70, 185, 1);
+  --code-string: rgba(22, 130, 70, 1);
+  --code-comment: var(--Base_Color--Gray--400);
+  --code-tag: rgba(190, 50, 60, 1);
+  --code-attr: rgba(170, 110, 20, 1);
+  --code-func: var(--Base_Color--Sky--700);
+  --code-punct: var(--Base_Color--Gray--500);
+
+  /* Chart / Data Viz */
   --chart-1: var(--Base_Color--Sky--500);
   --chart-2: var(--Base_Color--Emerald--600);
   --chart-3: var(--Base_Color--Rose--600);
   --chart-4: var(--Base_Color--Gray--400);
   --chart-5: var(--Base_Color--Amber--500);
+
+  /* Border Radius (bridge) */
   --radius: var(--Border-radius--radius-md);
   --radius-sm: var(--Border-radius--radius-xs);
   --radius-md: var(--Border-radius--radius-sm);
   --radius-lg: var(--Border-radius--radius-xl);
+  --radius-full: var(--Border-radius--radius-full);
+
+  /* Sidebar */
   --sidebar: var(--Colors--Background--bg-primary);
   --sidebar-foreground: var(--Colors--Text--text-primary);
   --sidebar-primary: var(--Base_Color--Sky--500);
@@ -344,31 +401,51 @@
   --sidebar-border: var(--Base_Color--Gray--200);
   --sidebar-ring: var(--Base_Color--Sky--600);
 
-  /* Typography */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     Typography Variables
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* H1 - Main page titles, hero sections, and primary page headers */
   --text-h1: 60px;
   --font-h1: 'DB HeaventRounded', sans-serif;
   --weight-h1: 400;
+
+  /* H2 - Major section headings within a page */
   --text-h2: 52px;
   --font-h2: 'DB HeaventRounded', sans-serif;
   --weight-h2: 400;
+
+  /* H3 - Sub-section headings, modal titles, card headers */
   --text-h3: 28px;
   --font-h3: 'DB HeaventRounded', sans-serif;
   --weight-h3: 700;
+
+  /* H4 - Smaller headings, form section titles, card subtitles */
   --text-h4: 24px;
   --font-h4: 'DB HeaventRounded', sans-serif;
   --weight-h4: 500;
+
+  /* P - Default body text for all content */
   --text-p: 24px;
   --font-p: 'DB HeaventRounded', sans-serif;
   --weight-p: 400;
+
+  /* Label - Form labels, helper text, captions */
   --text-label: 18px;
   --font-label: 'DB HeaventRounded', sans-serif;
   --weight-label: 400;
+
+  /* Caption - Navigation breadcrumb text, pagination text */
   --text-caption: 20px;
   --font-caption: 'DB HeaventRounded', sans-serif;
   --weight-caption: 400;
+
+  /* Button - Button text across all button types */
   --text-button: 14px;
   --font-button: 'Inter', sans-serif;
   --weight-button: 600;
+
+  /* Base text sizes for Tailwind compatibility */
   --text-2xl: var(--text-h1);
   --text-xl: var(--text-h2);
   --text-lg: var(--text-h3);
@@ -376,6 +453,8 @@
   --text-sm: var(--text-caption);
   --text-xs: var(--text-label);
   --text-button-size: var(--text-button);
+
+  /* Font weight variables */
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
@@ -383,39 +462,57 @@
 }
 
 .dark {
-  --background: rgba(17, 24, 39, 1);
-  --foreground: rgba(243, 244, 246, 1);
-  --card: rgba(31, 41, 55, 1);
-  --card-foreground: rgba(243, 244, 246, 1);
-  --popover: rgba(31, 41, 55, 1);
-  --popover-foreground: rgba(243, 244, 246, 1);
+  /* Override bridge tokens for dark mode — neutral charcoal palette (no blue tint) */
+  --background: rgba(30, 30, 30, 1);
+  --foreground: rgba(237, 237, 237, 1);
+  --card: rgba(43, 43, 43, 1);
+  --card-foreground: rgba(237, 237, 237, 1);
+  --popover: rgba(43, 43, 43, 1);
+  --popover-foreground: rgba(237, 237, 237, 1);
   --primary: rgba(50, 169, 255, 1);
   --primary-foreground: rgba(255, 255, 255, 1);
-  --secondary: rgba(107, 114, 128, 1);
-  --secondary-foreground: rgba(243, 244, 246, 1);
-  --muted: rgba(55, 65, 81, 1);
-  --muted-foreground: rgba(156, 163, 175, 1);
-  --accent: rgba(23, 92, 182, 1);
+  --secondary: rgba(130, 130, 130, 1);
+  --secondary-foreground: rgba(237, 237, 237, 1);
+  --muted: rgba(58, 58, 58, 1);
+  --muted-foreground: rgba(160, 160, 160, 1);
+  --accent: rgba(50, 50, 50, 1);
   --accent-foreground: rgba(88, 198, 255, 1);
   --destructive: rgba(225, 29, 72, 1);
   --destructive-foreground: rgba(255, 255, 255, 1);
-  --border: rgba(55, 65, 81, 1);
-  --input: rgba(31, 41, 55, 1);
-  --input-background: rgba(31, 41, 55, 1);
+  --border: rgba(58, 58, 58, 1);
+  --input: rgba(43, 43, 43, 1);
+  --input-background: rgba(43, 43, 43, 1);
   --ring: rgba(50, 169, 255, 1);
   --chart-1: rgba(88, 198, 255, 1);
   --chart-2: rgba(52, 211, 153, 1);
   --chart-3: rgba(251, 113, 133, 1);
-  --chart-4: rgba(156, 163, 175, 1);
+  --chart-4: rgba(160, 160, 160, 1);
   --chart-5: rgba(251, 191, 36, 1);
-  --sidebar: rgba(17, 24, 39, 1);
-  --sidebar-foreground: rgba(243, 244, 246, 1);
+  --sidebar: rgba(30, 30, 30, 1);
+  --sidebar-foreground: rgba(237, 237, 237, 1);
   --sidebar-primary: rgba(88, 198, 255, 1);
   --sidebar-primary-foreground: rgba(88, 198, 255, 1);
-  --sidebar-accent: rgba(23, 92, 182, 1);
+  --sidebar-accent: rgba(50, 50, 50, 1);
   --sidebar-accent-foreground: rgba(88, 198, 255, 1);
-  --sidebar-border: rgba(55, 65, 81, 1);
+  --sidebar-border: rgba(58, 58, 58, 1);
   --sidebar-ring: rgba(50, 169, 255, 1);
+
+  /* Code Block — Dark mode: deeper surface, lighter syntax */
+  --code-bg: rgba(24, 24, 28, 1);
+  --code-surface: rgba(30, 30, 34, 1);
+  --code-border: rgba(55, 55, 60, 1);
+  --code-line-number: rgba(100, 100, 110, 1);
+  --code-text: rgba(212, 212, 220, 1);
+  --code-keyword: rgba(198, 120, 221, 1);
+  --code-string: rgba(152, 195, 121, 1);
+  --code-comment: rgba(92, 99, 112, 1);
+  --code-tag: rgba(224, 108, 117, 1);
+  --code-attr: rgba(209, 154, 102, 1);
+  --code-func: rgba(97, 175, 239, 1);
+  --code-punct: rgba(150, 150, 160, 1);
+
+  /* Elevation — stronger shadow on dark surfaces */
+  --elevation-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
 @theme inline {

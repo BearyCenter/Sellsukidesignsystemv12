@@ -1,0 +1,159 @@
+import React, { useState } from "react";
+import { ChevronRight, ChevronDown, Folder, FolderOpen, File } from "lucide-react";
+
+/* ─── Types ──────────────────────────────────────────────────────────────────── */
+
+export interface TreeNode {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  children?: TreeNode[];
+  disabled?: boolean;
+}
+
+export interface TreeProps {
+  data: TreeNode[];
+  selectable?: boolean;
+  showLines?: boolean;
+  defaultExpanded?: string[];
+}
+
+/* ─── Style helpers ──────────────────────────────────────────────────────────── */
+
+const fontLabel: React.CSSProperties = {
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-label)",
+  fontWeight: "var(--weight-label)",
+};
+
+/* ─── Sub-component: TreeItem ────────────────────────────────────────────────── */
+
+function TreeItem({
+  node,
+  level,
+  expanded,
+  selected,
+  onToggle,
+  onSelect,
+  selectable,
+  showLines,
+}: {
+  node: TreeNode;
+  level: number;
+  expanded: Set<string>;
+  selected: Set<string>;
+  onToggle: (id: string) => void;
+  onSelect: (id: string) => void;
+  selectable?: boolean;
+  showLines?: boolean;
+}) {
+  const hasChildren = node.children && node.children.length > 0;
+  const isExpanded = expanded.has(node.id);
+  const isSelected = selected.has(node.id);
+
+  const defaultIcon = hasChildren
+    ? isExpanded
+      ? <FolderOpen size={14} className="text-chart-5" />
+      : <Folder size={14} className="text-chart-5" />
+    : <File size={14} className="text-muted-foreground" />;
+
+  return (
+    <div>
+      <div
+        className={`flex items-center gap-1.5 py-1 px-2 rounded-[var(--radius-sm)] transition-colors
+          ${node.disabled ? "opacity-40 pointer-events-none" : "cursor-pointer hover:bg-accent"}
+          ${isSelected ? "bg-primary/10 text-primary" : "text-foreground"}`}
+        style={{ paddingLeft: `${level * 20 + 8}px`, ...fontLabel }}
+        onClick={() => {
+          if (hasChildren) onToggle(node.id);
+          if (selectable) onSelect(node.id);
+        }}
+      >
+        {hasChildren ? (
+          <span className="w-4 h-4 flex items-center justify-center flex-shrink-0">
+            {isExpanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+          </span>
+        ) : (
+          <span className="w-4" />
+        )}
+        {selectable && (
+          <span
+            className={`w-4 h-4 rounded-[var(--radius-sm)] border flex items-center justify-center flex-shrink-0 ${
+              isSelected ? "bg-primary border-primary" : "border-border"
+            }`}
+          >
+            {isSelected && (
+              <span className="w-2 h-2 rounded-[1px] bg-primary-foreground" />
+            )}
+          </span>
+        )}
+        <span className="flex-shrink-0">{node.icon || defaultIcon}</span>
+        <span className="truncate">{node.label}</span>
+      </div>
+      {hasChildren && isExpanded && (
+        <div className={showLines ? "border-l border-border ml-[22px]" : ""}>
+          {node.children!.map((child) => (
+            <TreeItem
+              key={child.id}
+              node={child}
+              level={level + 1}
+              expanded={expanded}
+              selected={selected}
+              onToggle={onToggle}
+              onSelect={onSelect}
+              selectable={selectable}
+              showLines={showLines}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── Component ──────────────────────────────────────────────────────────────── */
+
+export function Tree({
+  data,
+  selectable,
+  showLines,
+  defaultExpanded,
+}: TreeProps) {
+  const [expanded, setExpanded] = useState<Set<string>>(
+    new Set(defaultExpanded || [])
+  );
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  const toggle = (id: string) =>
+    setExpanded((prev) => {
+      const n = new Set(prev);
+      if (n.has(id)) n.delete(id);
+      else n.add(id);
+      return n;
+    });
+  const select = (id: string) =>
+    setSelected((prev) => {
+      const n = new Set(prev);
+      if (n.has(id)) n.delete(id);
+      else n.add(id);
+      return n;
+    });
+
+  return (
+    <div className="rounded-[var(--radius-md)] border border-border bg-card py-1">
+      {data.map((node) => (
+        <TreeItem
+          key={node.id}
+          node={node}
+          level={0}
+          expanded={expanded}
+          selected={selected}
+          onToggle={toggle}
+          onSelect={select}
+          selectable={selectable}
+          showLines={showLines}
+        />
+      ))}
+    </div>
+  );
+}

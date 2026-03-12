@@ -41,7 +41,7 @@ export function Alert({ variant = "info", title, children, dismissible = false, 
             {title}
           </span>
         )}
-        <span className="text-foreground block" style={{ fontFamily: "var(--font-label)", fontSize: "calc(var(--text-label) * 0.9)", fontWeight: "var(--weight-label)" }}>
+        <span className="text-foreground block" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" }}>
           {children}
         </span>
         {action && <div className="mt-2">{action}</div>}
