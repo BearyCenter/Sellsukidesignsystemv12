@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "npm ci && npm run build",
+  "outputDirectory": ".",
+  "functions": {
+    "api/mcp.ts": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/mcp", "destination": "/api/mcp" },
+    { "source": "/health", "destination": "/api/mcp" }
+  ]
+}
