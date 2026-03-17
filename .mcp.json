@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sellsuki-design-system": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"]
+    }
+  }
+}

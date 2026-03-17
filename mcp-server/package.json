@@ -1,0 +1,23 @@
+{
+  "name": "@uxuissk/ds-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Sellsuki Design System v1.2 — provides component info, design tokens, and code generation",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "sellsuki-ds-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

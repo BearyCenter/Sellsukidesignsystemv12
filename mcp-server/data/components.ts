@@ -1,0 +1,979 @@
+export interface ComponentProp {
+  name: string;
+  type: string;
+  default?: string;
+  description: string;
+}
+
+export interface ComponentInfo {
+  name: string;
+  displayName: string;
+  category: "form" | "display" | "navigation" | "feedback" | "layout";
+  description: string;
+  imports: string[];
+  props: ComponentProp[];
+  example: string;
+}
+
+export const components: Record<string, ComponentInfo> = {
+  DSButton: {
+    name: "DSButton",
+    displayName: "Button",
+    category: "form",
+    description: "Primary action button with 6 variants, 4 sizes, loading state, icons",
+    imports: ["DSButton", "IconButton", "ButtonGroup"],
+    props: [
+      { name: "variant", type: '"primary" | "secondary" | "outline" | "ghost" | "destructive" | "link"', default: '"primary"', description: "Visual style variant" },
+      { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"', description: "Button size" },
+      { name: "loading", type: "boolean", default: "false", description: "Show loading spinner" },
+      { name: "loadingText", type: "string", description: "Text shown during loading" },
+      { name: "leftIcon", type: "ReactNode", description: "Icon before text" },
+      { name: "rightIcon", type: "ReactNode", description: "Icon after text" },
+      { name: "fullWidth", type: "boolean", default: "false", description: "Full width button" },
+      { name: "active", type: "boolean", default: "false", description: "Active/pressed state" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<DSButton variant="primary" size="md" leftIcon={<Plus size={16} />}>
+  Create Order
+</DSButton>
+
+<DSButton variant="outline" loading loadingText="Saving...">
+  Save
+</DSButton>
+
+<ButtonGroup>
+  <DSButton variant="outline">Cancel</DSButton>
+  <DSButton variant="primary">Confirm</DSButton>
+</ButtonGroup>`,
+  },
+
+  DSInput: {
+    name: "DSInput",
+    displayName: "Input",
+    category: "form",
+    description: "Text input with 4 variants, 3 sizes, validation states, prefix/suffix, clearable, password toggle",
+    imports: ["DSInput", "DSTextarea"],
+    props: [
+      { name: "label", type: "string", description: "Input label" },
+      { name: "inputSize", type: '"sm" | "md" | "lg"', default: '"md"', description: "Input size" },
+      { name: "variant", type: '"default" | "outlined" | "filled" | "ghost"', default: '"default"', description: "Visual variant" },
+      { name: "state", type: '"default" | "error" | "success" | "warning"', default: '"default"', description: "Validation state" },
+      { name: "errorMessage", type: "string", description: "Error message text" },
+      { name: "successMessage", type: "string", description: "Success message text" },
+      { name: "helperText", type: "string", description: "Helper text below input" },
+      { name: "leftIcon", type: "ReactNode", description: "Icon inside left" },
+      { name: "rightIcon", type: "ReactNode", description: "Icon inside right" },
+      { name: "prefix", type: "string", description: "Text prefix (e.g. https://)" },
+      { name: "suffix", type: "string", description: "Text suffix (e.g. .com)" },
+      { name: "clearable", type: "boolean", default: "false", description: "Show clear button" },
+      { name: "showPasswordToggle", type: "boolean", default: "false", description: "Password visibility toggle" },
+      { name: "fullWidth", type: "boolean", default: "false", description: "Full width" },
+      { name: "required", type: "boolean", default: "false", description: "Required field" },
+    ],
+    example: `<DSInput
+  label="Email"
+  helperText="We'll never share your email"
+  inputSize="md"
+  leftIcon={<Mail size={16} />}
+  clearable
+  required
+/>
+
+<DSInput
+  label="Password"
+  type="password"
+  showPasswordToggle
+  state="error"
+  errorMessage="Password must be at least 8 characters"
+/>
+
+<DSTextarea
+  label="Description"
+  maxLength={500}
+  rows={4}
+/>`,
+  },
+
+  DSCheckbox: {
+    name: "DSCheckbox",
+    displayName: "Checkbox",
+    category: "form",
+    description: "Checkbox with 3 sizes, indeterminate state, disabled, error display, and CheckboxGroup",
+    imports: ["DSCheckbox", "CheckboxGroup"],
+    props: [
+      { name: "label", type: "string", description: "Checkbox label" },
+      { name: "checked", type: "boolean", description: "Controlled checked state" },
+      { name: "indeterminate", type: "boolean", default: "false", description: "Indeterminate state" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Checkbox size" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+      { name: "error", type: "string", description: "Error message" },
+      { name: "onChange", type: "(checked: boolean) => void", description: "Change handler" },
+    ],
+    example: `<DSCheckbox label="Accept terms" size="md" />
+
+<CheckboxGroup label="Permissions" layout="vertical">
+  <DSCheckbox label="Read" />
+  <DSCheckbox label="Write" />
+  <DSCheckbox label="Admin" />
+</CheckboxGroup>`,
+  },
+
+  DSRadio: {
+    name: "DSRadio",
+    displayName: "Radio",
+    category: "form",
+    description: "Radio button with 3 sizes, RadioGroup with horizontal/vertical layout",
+    imports: ["DSRadio", "RadioGroup"],
+    props: [
+      { name: "label", type: "string", description: "Radio label" },
+      { name: "value", type: "string", description: "Radio value" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Radio size" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<RadioGroup value={selected} onChange={setSelected} label="Payment Method">
+  <DSRadio value="credit" label="Credit Card" />
+  <DSRadio value="bank" label="Bank Transfer" />
+  <DSRadio value="cod" label="Cash on Delivery" />
+</RadioGroup>`,
+  },
+
+  Switch: {
+    name: "Switch",
+    displayName: "Switch",
+    category: "form",
+    description: "Toggle switch with 3 sizes, 4 colors, description text",
+    imports: ["Switch"],
+    props: [
+      { name: "checked", type: "boolean", description: "Controlled checked state" },
+      { name: "onChange", type: "(checked: boolean) => void", description: "Change handler" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Switch size" },
+      { name: "color", type: '"primary" | "success" | "warning" | "danger"', default: '"primary"', description: "Track color when on" },
+      { name: "label", type: "string", description: "Label text" },
+      { name: "description", type: "string", description: "Helper description" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<Switch
+  label="Dark Mode"
+  description="Toggle dark theme"
+  checked={darkMode}
+  onChange={setDarkMode}
+  color="primary"
+/>`,
+  },
+
+  DatePicker: {
+    name: "DatePicker",
+    displayName: "DatePicker",
+    category: "form",
+    description: "Full-featured date picker with single/range modes, time picker, month/year selection",
+    imports: ["DatePicker"],
+    props: [
+      { name: "value", type: "Date | null", description: "Selected date" },
+      { name: "onChange", type: "(date: Date | null) => void", description: "Date change handler" },
+      { name: "mode", type: '"single" | "range"', default: '"single"', description: "Selection mode" },
+      { name: "showTime", type: "boolean", default: "false", description: "Include time picker" },
+      { name: "minDate", type: "Date", description: "Minimum selectable date" },
+      { name: "maxDate", type: "Date", description: "Maximum selectable date" },
+      { name: "placeholder", type: "string", description: "Placeholder text" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<DatePicker
+  value={date}
+  onChange={setDate}
+  placeholder="Select date"
+/>
+
+<DatePicker
+  mode="range"
+  showTime
+  value={dateRange}
+  onChange={setDateRange}
+/>`,
+  },
+
+  SearchField: {
+    name: "SearchField",
+    displayName: "Search",
+    category: "form",
+    description: "Search input with suggestions dropdown, keyboard navigation, debounce",
+    imports: ["SearchField"],
+    props: [
+      { name: "value", type: "string", description: "Search value" },
+      { name: "onChange", type: "(value: string) => void", description: "Value change handler" },
+      { name: "suggestions", type: "string[]", description: "Suggestion list" },
+      { name: "onSelect", type: "(suggestion: string) => void", description: "Suggestion select handler" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Input size" },
+      { name: "variant", type: '"default" | "filled" | "ghost"', default: '"default"', description: "Visual variant" },
+      { name: "loading", type: "boolean", default: "false", description: "Loading state" },
+      { name: "clearable", type: "boolean", default: "true", description: "Show clear button" },
+    ],
+    example: `<SearchField
+  value={query}
+  onChange={setQuery}
+  suggestions={filteredItems}
+  onSelect={handleSelect}
+  placeholder="Search products..."
+/>`,
+  },
+
+  Dropdown: {
+    name: "Dropdown",
+    displayName: "Dropdown / Select",
+    category: "form",
+    description: "Select/multi-select dropdown with search, create new, option groups",
+    imports: ["Dropdown"],
+    props: [
+      { name: "options", type: "DropdownOption[]", description: "Options list" },
+      { name: "value", type: "string | string[]", description: "Selected value(s)" },
+      { name: "onChange", type: "(value: string | string[]) => void", description: "Change handler" },
+      { name: "multiple", type: "boolean", default: "false", description: "Multi-select mode" },
+      { name: "searchable", type: "boolean", default: "false", description: "Enable search" },
+      { name: "creatable", type: "boolean", default: "false", description: "Allow creating new options" },
+      { name: "label", type: "string", description: "Label text" },
+      { name: "placeholder", type: "string", description: "Placeholder text" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<Dropdown
+  label="Category"
+  options={[
+    { value: "electronics", label: "Electronics" },
+    { value: "clothing", label: "Clothing" },
+    { value: "food", label: "Food & Beverage" },
+  ]}
+  value={category}
+  onChange={setCategory}
+  searchable
+  placeholder="Select category"
+/>`,
+  },
+
+  TagInput: {
+    name: "TagInput",
+    displayName: "Tag Input",
+    category: "form",
+    description: "Tag entry field with Enter to add, Backspace to remove, max tags",
+    imports: ["TagInput"],
+    props: [
+      { name: "tags", type: "string[]", description: "Current tags" },
+      { name: "onChange", type: "(tags: string[]) => void", description: "Tags change handler" },
+      { name: "placeholder", type: "string", description: "Placeholder text" },
+      { name: "maxTags", type: "number", description: "Maximum number of tags" },
+      { name: "variant", type: '"default" | "outline" | "filled"', default: '"default"', description: "Visual variant" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<TagInput
+  tags={tags}
+  onChange={setTags}
+  placeholder="Add tag and press Enter"
+  maxTags={5}
+/>`,
+  },
+
+  ColorPicker: {
+    name: "ColorPicker",
+    displayName: "Color Picker",
+    category: "form",
+    description: "Color selection with presets, custom input, format switching",
+    imports: ["ColorPicker"],
+    props: [
+      { name: "value", type: "string", description: "Selected color (hex)" },
+      { name: "onChange", type: "(color: string) => void", description: "Color change handler" },
+      { name: "presets", type: "string[]", description: "Preset color swatches" },
+      { name: "showInput", type: "boolean", default: "true", description: "Show hex input" },
+    ],
+    example: `<ColorPicker
+  value={color}
+  onChange={setColor}
+  presets={["#32a9ff", "#059669", "#e11d48", "#d97706", "#f97316"]}
+/>`,
+  },
+
+  Rating: {
+    name: "Rating",
+    displayName: "Rating",
+    category: "form",
+    description: "Star/heart/thumb rating with 3 sizes, read-only mode",
+    imports: ["Rating"],
+    props: [
+      { name: "value", type: "number", description: "Current rating" },
+      { name: "onChange", type: "(value: number) => void", description: "Rating change handler" },
+      { name: "max", type: "number", default: "5", description: "Maximum rating value" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Icon size" },
+      { name: "icon", type: '"star" | "heart" | "thumb"', default: '"star"', description: "Rating icon type" },
+      { name: "readOnly", type: "boolean", default: "false", description: "Read-only mode" },
+    ],
+    example: `<Rating value={4} onChange={setRating} max={5} icon="star" />`,
+  },
+
+  FileUpload: {
+    name: "FileUpload",
+    displayName: "File Upload",
+    category: "form",
+    description: "Dropzone, button, and avatar upload variants with preview",
+    imports: ["FileUpload"],
+    props: [
+      { name: "variant", type: '"dropzone" | "button" | "avatar"', default: '"dropzone"', description: "Upload UI variant" },
+      { name: "accept", type: "string", description: "Accepted file types (e.g. image/*)" },
+      { name: "maxSize", type: "number", description: "Max file size in bytes" },
+      { name: "multiple", type: "boolean", default: "false", description: "Allow multiple files" },
+      { name: "onUpload", type: "(files: File[]) => void", description: "Upload handler" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disabled state" },
+    ],
+    example: `<FileUpload
+  variant="dropzone"
+  accept="image/*"
+  maxSize={5 * 1024 * 1024}
+  multiple
+  onUpload={handleUpload}
+/>`,
+  },
+
+  TransferList: {
+    name: "TransferList",
+    displayName: "Transfer List",
+    category: "layout",
+    description: "Dual-list transfer with search, select, move items between lists",
+    imports: ["TransferList"],
+    props: [
+      { name: "sourceItems", type: "TransferItem[]", description: "Left list items" },
+      { name: "targetItems", type: "TransferItem[]", description: "Right list items" },
+      { name: "onChange", type: "(source: TransferItem[], target: TransferItem[]) => void", description: "Change handler" },
+      { name: "sourceTitle", type: "string", default: '"Available"', description: "Left list title" },
+      { name: "targetTitle", type: "string", default: '"Selected"', description: "Right list title" },
+      { name: "searchable", type: "boolean", default: "false", description: "Enable search in lists" },
+    ],
+    example: `<TransferList
+  sourceItems={available}
+  targetItems={selected}
+  onChange={(src, tgt) => { setAvailable(src); setSelected(tgt); }}
+  sourceTitle="Available Roles"
+  targetTitle="Assigned Roles"
+  searchable
+/>`,
+  },
+
+  DSTable: {
+    name: "DSTable",
+    displayName: "Table",
+    category: "display",
+    description: "Data table with column definitions, sorting, row selection, striped/bordered/hoverable",
+    imports: ["DSTable"],
+    props: [
+      { name: "columns", type: "ColumnDef[]", description: "Column definitions" },
+      { name: "data", type: "T[]", description: "Data rows" },
+      { name: "sortable", type: "boolean", default: "false", description: "Enable column sorting" },
+      { name: "selectable", type: "boolean", default: "false", description: "Enable row selection" },
+      { name: "selectionMode", type: '"single" | "multi"', default: '"multi"', description: "Selection mode" },
+      { name: "striped", type: "boolean", default: "false", description: "Striped rows" },
+      { name: "bordered", type: "boolean", default: "false", description: "Bordered cells" },
+      { name: "hoverable", type: "boolean", default: "true", description: "Hover effect on rows" },
+      { name: "stickyHeader", type: "boolean", default: "false", description: "Sticky header" },
+    ],
+    example: `<DSTable
+  columns={[
+    { key: "name", label: "Name", sortable: true },
+    { key: "price", label: "Price", sortable: true, render: (v) => \`฿\${v}\` },
+    { key: "status", label: "Status", render: (v) => <Badge variant={v}>{v}</Badge> },
+  ]}
+  data={products}
+  sortable
+  selectable
+  hoverable
+  striped
+/>`,
+  },
+
+  Badge: {
+    name: "Badge",
+    displayName: "Badge",
+    category: "display",
+    description: "Status badge with 6 variants, 3 sizes, dot indicator, removable",
+    imports: ["Badge"],
+    props: [
+      { name: "variant", type: '"default" | "secondary" | "outline" | "destructive" | "success" | "warning"', default: '"default"', description: "Badge variant" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Badge size" },
+      { name: "dot", type: "boolean", default: "false", description: "Show dot indicator" },
+      { name: "removable", type: "boolean", default: "false", description: "Show remove button" },
+      { name: "onRemove", type: "() => void", description: "Remove handler" },
+    ],
+    example: `<Badge variant="success">Active</Badge>
+<Badge variant="warning" dot>Pending</Badge>
+<Badge variant="destructive" removable onRemove={handleRemove}>Error</Badge>`,
+  },
+
+  Tag: {
+    name: "Tag",
+    displayName: "Tag",
+    category: "display",
+    description: "Categorization tag with 6 colors, 3 sizes, optional icon and close button",
+    imports: ["Tag"],
+    props: [
+      { name: "color", type: '"default" | "primary" | "success" | "warning" | "destructive" | "info"', default: '"default"', description: "Tag color" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Tag size" },
+      { name: "icon", type: "ReactNode", description: "Leading icon" },
+      { name: "closable", type: "boolean", default: "false", description: "Show close button" },
+      { name: "onClose", type: "() => void", description: "Close handler" },
+    ],
+    example: `<Tag color="primary">Electronics</Tag>
+<Tag color="success" closable onClose={handleClose}>In Stock</Tag>`,
+  },
+
+  Avatar: {
+    name: "Avatar",
+    displayName: "Avatar",
+    category: "display",
+    description: "User avatar with image, initials fallback, status indicator, and AvatarGroup",
+    imports: ["Avatar", "AvatarGroup"],
+    props: [
+      { name: "src", type: "string", description: "Image URL" },
+      { name: "name", type: "string", description: "Name for initials fallback" },
+      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "Avatar size" },
+      { name: "status", type: '"online" | "offline" | "busy" | "away"', description: "Status indicator" },
+    ],
+    example: `<Avatar src="/user.jpg" name="John Doe" size="md" status="online" />
+
+<AvatarGroup max={3}>
+  <Avatar name="Alice" />
+  <Avatar name="Bob" />
+  <Avatar name="Charlie" />
+  <Avatar name="Dave" />
+</AvatarGroup>`,
+  },
+
+  Statistic: {
+    name: "Statistic",
+    displayName: "Statistic",
+    category: "display",
+    description: "Metric display with trend indicator, and StatCard wrapper",
+    imports: ["Statistic", "StatCard"],
+    props: [
+      { name: "label", type: "string", description: "Metric label" },
+      { name: "value", type: "string | number", description: "Metric value" },
+      { name: "trend", type: '"up" | "down" | "neutral"', description: "Trend direction" },
+      { name: "trendValue", type: "string", description: "Trend percentage (e.g. +12%)" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Display size" },
+      { name: "icon", type: "ReactNode", description: "Leading icon" },
+    ],
+    example: `<StatCard>
+  <Statistic label="Revenue" value="฿125,400" trend="up" trendValue="+12.5%" />
+</StatCard>`,
+  },
+
+  Timeline: {
+    name: "Timeline",
+    displayName: "Timeline",
+    category: "display",
+    description: "Event timeline with left/right/alternate layout, custom icons, status colors",
+    imports: ["Timeline"],
+    props: [
+      { name: "items", type: "TimelineItem[]", description: "Timeline events" },
+      { name: "layout", type: '"left" | "right" | "alternate"', default: '"left"', description: "Layout direction" },
+      { name: "compact", type: "boolean", default: "false", description: "Compact mode" },
+    ],
+    example: `<Timeline
+  items={[
+    { title: "Order Placed", description: "Order #1234", time: "10:00 AM", status: "completed" },
+    { title: "Payment Confirmed", description: "Via credit card", time: "10:05 AM", status: "completed" },
+    { title: "Shipping", description: "In transit", time: "2:00 PM", status: "active" },
+    { title: "Delivered", time: "", status: "pending" },
+  ]}
+/>`,
+  },
+
+  Tree: {
+    name: "Tree",
+    displayName: "Tree",
+    category: "display",
+    description: "Hierarchical tree view with expand/collapse, selection, connector lines",
+    imports: ["Tree"],
+    props: [
+      { name: "data", type: "TreeNode[]", description: "Tree data" },
+      { name: "selectable", type: "boolean", default: "false", description: "Enable selection" },
+      { name: "showLines", type: "boolean", default: "false", description: "Show connector lines" },
+      { name: "defaultExpanded", type: "string[]", description: "Initially expanded node IDs" },
+      { name: "onSelect", type: "(node: TreeNode) => void", description: "Selection handler" },
+    ],
+    example: `<Tree
+  data={[
+    { id: "1", label: "Electronics", children: [
+      { id: "1-1", label: "Phones" },
+      { id: "1-2", label: "Laptops" },
+    ]},
+    { id: "2", label: "Clothing" },
+  ]}
+  selectable
+  showLines
+/>`,
+  },
+
+  Skeleton: {
+    name: "Skeleton",
+    displayName: "Skeleton",
+    category: "display",
+    description: "Loading placeholder with text, circular, rectangular variants, and preset composites",
+    imports: ["Skeleton", "SkeletonCard", "SkeletonTable", "SkeletonList"],
+    props: [
+      { name: "variant", type: '"text" | "circular" | "rectangular"', default: '"text"', description: "Shape variant" },
+      { name: "width", type: "string | number", description: "Width" },
+      { name: "height", type: "string | number", description: "Height" },
+      { name: "lines", type: "number", default: "1", description: "Number of text lines" },
+      { name: "animate", type: "boolean", default: "true", description: "Enable pulse animation" },
+    ],
+    example: `{loading ? <SkeletonCard /> : <Card>...</Card>}
+{loading ? <SkeletonTable rows={5} /> : <DSTable ... />}`,
+  },
+
+  Card: {
+    name: "Card",
+    displayName: "Card",
+    category: "display",
+    description: "Content card with header, body, footer sections, elevation levels",
+    imports: ["Card", "CardHeader", "CardBody", "CardFooter"],
+    props: [
+      { name: "elevation", type: '"none" | "sm" | "md"', default: '"sm"', description: "Shadow elevation" },
+      { name: "hoverable", type: "boolean", default: "false", description: "Hover lift effect" },
+      { name: "bordered", type: "boolean", default: "true", description: "Show border" },
+    ],
+    example: `<Card hoverable>
+  <CardHeader>
+    <h3>Order #1234</h3>
+    <Badge variant="success">Completed</Badge>
+  </CardHeader>
+  <CardBody>
+    <p>Order details here...</p>
+  </CardBody>
+  <CardFooter>
+    <DSButton variant="outline" size="sm">View Details</DSButton>
+  </CardFooter>
+</Card>`,
+  },
+
+  ImagePreview: {
+    name: "ImagePreview",
+    displayName: "Image Preview",
+    category: "display",
+    description: "Image gallery lightbox with zoom, navigation, thumbnail strip",
+    imports: ["ImagePreview"],
+    props: [
+      { name: "images", type: "string[]", description: "Image URLs" },
+      { name: "initialIndex", type: "number", default: "0", description: "Starting image index" },
+    ],
+    example: `<ImagePreview images={["/product1.jpg", "/product2.jpg", "/product3.jpg"]} />`,
+  },
+
+  EmptyState: {
+    name: "EmptyState",
+    displayName: "Empty State",
+    category: "feedback",
+    description: "Empty data placeholder with icon, title, description, action button",
+    imports: ["EmptyState"],
+    props: [
+      { name: "icon", type: "ReactNode", description: "Illustration or icon" },
+      { name: "title", type: "string", description: "Title text" },
+      { name: "description", type: "string", description: "Description text" },
+      { name: "action", type: "ReactNode", description: "Action button or link" },
+    ],
+    example: `<EmptyState
+  icon={<Package size={48} />}
+  title="No products yet"
+  description="Start by adding your first product"
+  action={<DSButton variant="primary">Add Product</DSButton>}
+/>`,
+  },
+
+  Tabs: {
+    name: "Tabs",
+    displayName: "Tabs",
+    category: "navigation",
+    description: "Tab navigation with 4 variants, 3 sizes, badges, animated indicator",
+    imports: ["Tabs"],
+    props: [
+      { name: "items", type: "TabItem[]", description: "Tab items" },
+      { name: "value", type: "string", description: "Active tab value" },
+      { name: "onChange", type: "(value: string) => void", description: "Tab change handler" },
+      { name: "variant", type: '"default" | "bordered" | "pills" | "underline"', default: '"default"', description: "Tab style" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Tab size" },
+      { name: "fullWidth", type: "boolean", default: "false", description: "Full width tabs" },
+    ],
+    example: `<Tabs
+  items={[
+    { value: "all", label: "All Orders", badge: "128" },
+    { value: "pending", label: "Pending", badge: "24" },
+    { value: "completed", label: "Completed" },
+  ]}
+  value={activeTab}
+  onChange={setActiveTab}
+  variant="underline"
+/>`,
+  },
+
+  Pagination: {
+    name: "Pagination",
+    displayName: "Pagination",
+    category: "navigation",
+    description: "Page navigation with customizable sibling count, page size selector, info display",
+    imports: ["Pagination"],
+    props: [
+      { name: "currentPage", type: "number", description: "Current page" },
+      { name: "totalPages", type: "number", description: "Total pages" },
+      { name: "onPageChange", type: "(page: number) => void", description: "Page change handler" },
+      { name: "siblingCount", type: "number", default: "1", description: "Pages shown around current" },
+      { name: "showFirst", type: "boolean", default: "true", description: "Show first page button" },
+      { name: "showLast", type: "boolean", default: "true", description: "Show last page button" },
+      { name: "pageSize", type: "number", description: "Items per page" },
+      { name: "onPageSizeChange", type: "(size: number) => void", description: "Page size change handler" },
+      { name: "variant", type: '"default" | "outlined" | "filled" | "minimal"', default: '"default"', description: "Pagination style" },
+    ],
+    example: `<Pagination
+  currentPage={page}
+  totalPages={20}
+  onPageChange={setPage}
+  pageSize={10}
+  onPageSizeChange={setPageSize}
+/>`,
+  },
+
+  Breadcrumb: {
+    name: "Breadcrumb",
+    displayName: "Breadcrumb",
+    category: "navigation",
+    description: "Breadcrumb trail with custom separator, max items with collapse",
+    imports: ["Breadcrumb"],
+    props: [
+      { name: "items", type: "BreadcrumbItem[]", description: "Breadcrumb items" },
+      { name: "separator", type: '"chevron" | "slash" | "dot" | "arrow"', default: '"chevron"', description: "Separator style" },
+      { name: "maxItems", type: "number", description: "Max visible items before collapse" },
+      { name: "onItemClick", type: "(item: BreadcrumbItem, index: number) => void", description: "Item click handler" },
+    ],
+    example: `<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: "Electronics", href: "/products/electronics" },
+    { label: "iPhone 15" },
+  ]}
+  separator="chevron"
+/>`,
+  },
+
+  Sidebar: {
+    name: "Sidebar",
+    displayName: "Sidebar",
+    category: "navigation",
+    description: "Side navigation with groups, active states, badges, collapse mode",
+    imports: ["Sidebar"],
+    props: [
+      { name: "brand", type: "SidebarBrand", description: "Brand logo and name" },
+      { name: "groups", type: "SidebarGroup[]", description: "Navigation groups" },
+      { name: "activeItem", type: "string", description: "Active item ID" },
+      { name: "onNavigate", type: "(item: SidebarItem) => void", description: "Navigation handler" },
+      { name: "collapsed", type: "boolean", default: "false", description: "Collapsed mode (icon only)" },
+      { name: "onCollapsedChange", type: "(collapsed: boolean) => void", description: "Collapse toggle handler" },
+    ],
+    example: `<Sidebar
+  brand={{ name: "Sellsuki", logo: "/logo.svg" }}
+  groups={[
+    { label: "Main", items: [
+      { id: "dashboard", label: "Dashboard", icon: <BarChart3 size={18} /> },
+      { id: "orders", label: "Orders", icon: <ShoppingCart size={18} />, badge: "12" },
+      { id: "products", label: "Products", icon: <Package size={18} /> },
+    ]},
+  ]}
+  activeItem="orders"
+  onNavigate={(item) => navigate(item.id)}
+/>`,
+  },
+
+  TopNavbar: {
+    name: "TopNavbar",
+    displayName: "Top Navbar",
+    category: "navigation",
+    description: "Top navigation bar with brand, breadcrumbs, search, notifications, user avatar",
+    imports: ["TopNavbar"],
+    props: [
+      { name: "brand", type: "TopNavbarBrand", description: "Brand logo and name" },
+      { name: "breadcrumbs", type: "BreadcrumbItem[]", description: "Breadcrumb trail" },
+      { name: "showSearch", type: "boolean", default: "false", description: "Show search bar" },
+      { name: "user", type: "TopNavbarUser", description: "User avatar and name" },
+      { name: "notificationCount", type: "number", description: "Notification badge count" },
+      { name: "onNotificationClick", type: "() => void", description: "Notification click handler" },
+      { name: "onMobileMenuClick", type: "() => void", description: "Mobile menu toggle" },
+    ],
+    example: `<TopNavbar
+  brand={{ name: "Sellsuki", logo: "/logo.svg" }}
+  breadcrumbs={[{ label: "Home" }, { label: "Orders" }]}
+  showSearch
+  user={{ name: "John Doe", avatar: "/john.jpg" }}
+  notificationCount={3}
+  onNotificationClick={() => setShowNotif(true)}
+/>`,
+  },
+
+  Menu: {
+    name: "Menu",
+    displayName: "Menu",
+    category: "navigation",
+    description: "Context menu / dropdown menu with sub-menus, dividers, shortcuts, portal-based",
+    imports: ["Menu"],
+    props: [
+      { name: "items", type: "MenuItem[]", description: "Menu items" },
+      { name: "trigger", type: "ReactNode", description: "Trigger element" },
+      { name: "onSelect", type: "(item: MenuItem) => void", description: "Item select handler" },
+    ],
+    example: `<Menu
+  trigger={<DSButton variant="outline">Actions</DSButton>}
+  items={[
+    { label: "Edit", icon: <Edit size={14} /> },
+    { label: "Duplicate", icon: <Copy size={14} /> },
+    { type: "divider" },
+    { label: "Delete", icon: <Trash size={14} />, destructive: true },
+  ]}
+  onSelect={handleAction}
+/>`,
+  },
+
+  Stepper: {
+    name: "Stepper",
+    displayName: "Stepper",
+    category: "navigation",
+    description: "Step progress indicator with horizontal/vertical, clickable steps",
+    imports: ["Stepper"],
+    props: [
+      { name: "steps", type: "StepDefinition[]", description: "Step definitions" },
+      { name: "current", type: "number", description: "Current step index (0-based)" },
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout direction" },
+      { name: "onStepClick", type: "(index: number) => void", description: "Step click handler" },
+    ],
+    example: `<Stepper
+  steps={[
+    { title: "Cart", description: "Review items" },
+    { title: "Shipping", description: "Select address" },
+    { title: "Payment", description: "Enter payment" },
+    { title: "Confirm", description: "Place order" },
+  ]}
+  current={1}
+  onStepClick={setStep}
+/>`,
+  },
+
+  Alert: {
+    name: "Alert",
+    displayName: "Alert / Toast",
+    category: "feedback",
+    description: "Inline alert with 4 variants, dismissible, plus toast system for notifications",
+    imports: ["Alert", "ToastContainer", "toast"],
+    props: [
+      { name: "variant", type: '"info" | "success" | "warning" | "error"', default: '"info"', description: "Alert type" },
+      { name: "title", type: "string", description: "Alert title" },
+      { name: "dismissible", type: "boolean", default: "false", description: "Show dismiss button" },
+      { name: "onDismiss", type: "() => void", description: "Dismiss handler" },
+    ],
+    example: `<Alert variant="success" title="Order saved!" dismissible>
+  Your order has been saved successfully.
+</Alert>
+
+{/* Toast system */}
+<ToastContainer />
+toast.success("Product added!")
+toast.error("Failed to save")
+toast.info("Processing...")`,
+  },
+
+  Modal: {
+    name: "Modal",
+    displayName: "Modal",
+    category: "feedback",
+    description: "Dialog modal with 5 sizes, header/footer, close on overlay, and ConfirmDialog",
+    imports: ["Modal", "ConfirmDialog"],
+    props: [
+      { name: "open", type: "boolean", description: "Open state" },
+      { name: "onClose", type: "() => void", description: "Close handler" },
+      { name: "title", type: "string", description: "Modal title" },
+      { name: "size", type: '"sm" | "md" | "lg" | "xl" | "full"', default: '"md"', description: "Modal size" },
+      { name: "closeOnOverlay", type: "boolean", default: "true", description: "Close on overlay click" },
+      { name: "footer", type: "ReactNode", description: "Footer content" },
+    ],
+    example: `<Modal open={isOpen} onClose={() => setOpen(false)} title="Edit Product" size="lg">
+  <DSInput label="Name" value={name} onChange={setName} />
+  <DSTextarea label="Description" value={desc} onChange={setDesc} />
+</Modal>
+
+<ConfirmDialog
+  open={showConfirm}
+  title="Delete Product"
+  message="Are you sure? This cannot be undone."
+  confirmText="Delete"
+  variant="destructive"
+  onConfirm={handleDelete}
+  onCancel={() => setShowConfirm(false)}
+/>`,
+  },
+
+  Notification: {
+    name: "Notification",
+    displayName: "Notification",
+    category: "feedback",
+    description: "Notification with types, actions, and NotificationCenter panel",
+    imports: ["Notification", "NotificationCenter"],
+    props: [
+      { name: "type", type: '"info" | "success" | "warning" | "error"', default: '"info"', description: "Notification type" },
+      { name: "title", type: "string", description: "Title text" },
+      { name: "message", type: "string", description: "Message text" },
+      { name: "action", type: "ReactNode", description: "Action button" },
+      { name: "dismissible", type: "boolean", default: "true", description: "Can be dismissed" },
+    ],
+    example: `<Notification
+  type="info"
+  title="New Order"
+  message="Order #1234 has been placed"
+  action={<DSButton size="sm" variant="outline">View</DSButton>}
+/>`,
+  },
+
+  Spinner: {
+    name: "Spinner",
+    displayName: "Spinner",
+    category: "feedback",
+    description: "Loading spinner with 4 sizes, customizable color",
+    imports: ["Spinner"],
+    props: [
+      { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"', description: "Spinner size" },
+      { name: "color", type: "string", default: '"var(--primary)"', description: "Spinner color" },
+    ],
+    example: `<Spinner size="md" />
+{loading && <Spinner size="lg" />}`,
+  },
+
+  ProgressBar: {
+    name: "ProgressBar",
+    displayName: "Progress Bar",
+    category: "feedback",
+    description: "Progress indicator with sizes, indeterminate mode, custom color",
+    imports: ["ProgressBar"],
+    props: [
+      { name: "value", type: "number", description: "Progress value (0-100)" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Bar height" },
+      { name: "color", type: "string", default: '"var(--primary)"', description: "Bar color" },
+      { name: "indeterminate", type: "boolean", default: "false", description: "Indeterminate animation" },
+      { name: "showLabel", type: "boolean", default: "false", description: "Show percentage label" },
+    ],
+    example: `<ProgressBar value={75} showLabel />
+<ProgressBar indeterminate />`,
+  },
+
+  Tooltip: {
+    name: "Tooltip",
+    displayName: "Tooltip",
+    category: "feedback",
+    description: "Hover/focus tooltip with 4 placements",
+    imports: ["Tooltip"],
+    props: [
+      { name: "content", type: "string", description: "Tooltip text" },
+      { name: "placement", type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: "Tooltip position" },
+      { name: "children", type: "ReactNode", description: "Trigger element" },
+    ],
+    example: `<Tooltip content="Edit this item" placement="top">
+  <IconButton><Edit size={16} /></IconButton>
+</Tooltip>`,
+  },
+
+  Popover: {
+    name: "Popover",
+    displayName: "Popover",
+    category: "feedback",
+    description: "Click-triggered popup with title and content",
+    imports: ["Popover"],
+    props: [
+      { name: "trigger", type: "ReactNode", description: "Trigger element" },
+      { name: "title", type: "string", description: "Popover title" },
+      { name: "content", type: "ReactNode", description: "Popover content" },
+      { name: "placement", type: '"top" | "bottom" | "left" | "right"', default: '"bottom"', description: "Position" },
+    ],
+    example: `<Popover
+  trigger={<DSButton variant="outline" size="sm">Filter</DSButton>}
+  title="Filter Options"
+  content={
+    <div>
+      <DSCheckbox label="In Stock" />
+      <DSCheckbox label="On Sale" />
+    </div>
+  }
+/>`,
+  },
+
+  Drawer: {
+    name: "Drawer",
+    displayName: "Drawer",
+    category: "feedback",
+    description: "Side panel drawer with 4 sides, 3 sizes, header/footer",
+    imports: ["Drawer"],
+    props: [
+      { name: "open", type: "boolean", description: "Open state" },
+      { name: "onClose", type: "() => void", description: "Close handler" },
+      { name: "title", type: "string", description: "Drawer title" },
+      { name: "side", type: '"left" | "right" | "top" | "bottom"', default: '"right"', description: "Slide direction" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Drawer width/height" },
+      { name: "footer", type: "ReactNode", description: "Footer content" },
+    ],
+    example: `<Drawer
+  open={isOpen}
+  onClose={() => setOpen(false)}
+  title="Order Details"
+  side="right"
+  size="md"
+  footer={
+    <div className="flex gap-2">
+      <DSButton variant="outline" onClick={() => setOpen(false)}>Cancel</DSButton>
+      <DSButton variant="primary">Save</DSButton>
+    </div>
+  }
+>
+  {/* Drawer content */}
+</Drawer>`,
+  },
+
+  Divider: {
+    name: "Divider",
+    displayName: "Divider",
+    category: "layout",
+    description: "Content divider with label, orientation, style variants",
+    imports: ["Divider"],
+    props: [
+      { name: "label", type: "string", description: "Center label text" },
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Direction" },
+      { name: "variant", type: '"solid" | "dashed" | "dotted"', default: '"solid"', description: "Line style" },
+    ],
+    example: `<Divider />
+<Divider label="OR" />
+<Divider variant="dashed" />`,
+  },
+
+  Accordion: {
+    name: "Accordion",
+    displayName: "Accordion",
+    category: "layout",
+    description: "Collapsible content with single/multiple expand mode",
+    imports: ["Accordion", "AccordionItem"],
+    props: [
+      { name: "type", type: '"single" | "multiple"', default: '"single"', description: "Expand mode" },
+      { name: "value", type: "string | string[]", description: "Controlled expanded item(s)" },
+      { name: "onChange", type: "(value: string | string[]) => void", description: "Change handler" },
+    ],
+    example: `<Accordion type="single">
+  <AccordionItem title="Shipping Info" value="shipping">
+    Free shipping on orders over ฿500
+  </AccordionItem>
+  <AccordionItem title="Return Policy" value="returns">
+    30-day return policy
+  </AccordionItem>
+</Accordion>`,
+  },
+};
+
+export const componentCategories = {
+  form: "Form Controls",
+  display: "Data Display",
+  navigation: "Navigation",
+  feedback: "Feedback",
+  layout: "Layout",
+};
