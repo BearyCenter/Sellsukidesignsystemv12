@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sellsuki-ds-mcp
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/http.js
+    envVars:
+      - key: PORT
+        value: 3100
+      - key: NODE_ENV
+        value: production
+    rootDir: mcp-server
+    healthCheckPath: /health

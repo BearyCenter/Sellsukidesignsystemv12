@@ -11,5 +11,5 @@
     "resolveJsonModule": true,
     "declaration": true
   },
-  "include": ["index.ts", "data/**/*.ts"]
+  "include": ["index.ts", "http.ts", "server.ts", "data/**/*.ts"]
 }
