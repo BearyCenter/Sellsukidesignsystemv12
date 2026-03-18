@@ -4,14 +4,15 @@ import "./styles.css";
 // ── Button ───────────────────────────────────────────────────────────────────
 export {
   DSButton,
+  DSButton as Button,
   IconButton,
   ButtonGroup,
 } from "./components/ds-button";
-export type { DSButtonProps, IconButtonProps, ButtonSize, ButtonVariant } from "./components/ds-button";
+export type { DSButtonProps, DSButtonProps as ButtonProps, IconButtonProps, ButtonSize, ButtonVariant } from "./components/ds-button";
 
 // ── Input ────────────────────────────────────────────────────────────────────
-export { DSInput, DSTextarea } from "./components/ds-input";
-export type { DSInputProps, DSTextareaProps, InputSize, InputVariant, InputState } from "./components/ds-input";
+export { DSInput, DSInput as Input, DSTextarea, DSTextarea as Textarea } from "./components/ds-input";
+export type { DSInputProps, DSInputProps as InputProps, DSTextareaProps, DSTextareaProps as TextareaProps, InputSize, InputVariant, InputState } from "./components/ds-input";
 
 // ── Alert & Toast ────────────────────────────────────────────────────────────
 export { Alert, ToastContainer, toast } from "./components/ds-alert";
@@ -22,11 +23,11 @@ export { Badge } from "./components/ds-badge";
 export type { BadgeVariant, BadgeSize } from "./components/ds-badge";
 
 // ── Checkbox ─────────────────────────────────────────────────────────────────
-export { DSCheckbox, CheckboxGroup } from "./components/ds-checkbox";
+export { DSCheckbox, DSCheckbox as Checkbox, CheckboxGroup } from "./components/ds-checkbox";
 export type { CheckboxSize } from "./components/ds-checkbox";
 
 // ── Radio ────────────────────────────────────────────────────────────────────
-export { DSRadio, RadioGroup } from "./components/ds-radio";
+export { DSRadio, DSRadio as Radio, RadioGroup } from "./components/ds-radio";
 export type { RadioSize } from "./components/ds-radio";
 
 // ── DatePicker ───────────────────────────────────────────────────────────────
@@ -46,7 +47,7 @@ export { SearchField } from "./components/ds-search";
 export type { SearchSize, SearchVariant } from "./components/ds-search";
 
 // ── Table ────────────────────────────────────────────────────────────────────
-export { DSTable } from "./components/ds-table";
+export { DSTable, DSTable as Table } from "./components/ds-table";
 export type { TableColumn, TableSize } from "./components/ds-table";
 
 // ── Tabs ─────────────────────────────────────────────────────────────────────
@@ -168,3 +169,15 @@ export type { TransferListProps, TransferItem } from "./components/ds-transferli
 // ── Tree ─────────────────────────────────────────────────────────────────────
 export { Tree } from "./components/ds-tree";
 export type { TreeProps, TreeNode } from "./components/ds-tree";
+
+// ── FormField ───────────────────────────────────────────────────────────────
+export { FormField, FormLabel, FormError, FormHelperText, useFormField } from "./components/ds-form";
+export type { FormFieldProps, FormLabelProps, FormErrorProps, FormHelperTextProps } from "./components/ds-form";
+
+// ── NumberInput ─────────────────────────────────────────────────────────────
+export { NumberInput } from "./components/ds-numberinput";
+export type { NumberInputProps, NumberInputSize } from "./components/ds-numberinput";
+
+// ── OTPInput ────────────────────────────────────────────────────────────────
+export { OTPInput } from "./components/ds-otpinput";
+export type { OTPInputProps, OTPInputSize } from "./components/ds-otpinput";

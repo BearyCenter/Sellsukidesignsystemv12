@@ -29,12 +29,13 @@ export default defineConfig({
       fileName: "sellsuki-ds",
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react-dom", "react/jsx-runtime", "lucide-react"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "jsxRuntime",
+          "lucide-react": "LucideReact",
         },
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === "style.css") return "styles.css";
