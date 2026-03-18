@@ -28,6 +28,14 @@ export interface NotificationCenterItem {
 
 export interface NotificationCenterProps {
   items: NotificationCenterItem[];
+  /** Called when a single notification is marked as read */
+  onMarkRead?: (id: string) => void;
+  /** Called when "Mark all read" is clicked */
+  onMarkAllRead?: () => void;
+  /** Called when a notification is dismissed/removed */
+  onDismiss?: (id: string) => void;
+  /** Called when all notifications are cleared */
+  onClearAll?: () => void;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -145,9 +153,48 @@ export function Notification({
 
 /* ─── NotificationCenter Component ───────────────────────────────────────────── */
 
-export function NotificationCenter({ items }: NotificationCenterProps) {
-  const [notifications, setNotifications] = useState(items);
+export function NotificationCenter({
+  items,
+  onMarkRead,
+  onMarkAllRead,
+  onDismiss,
+  onClearAll,
+}: NotificationCenterProps) {
+  const [internalItems, setInternalItems] = useState(items);
+
+  // Use items prop directly when callbacks are provided (controlled), otherwise internal state
+  const isControlled = onMarkRead !== undefined || onMarkAllRead !== undefined;
+  const notifications = isControlled ? items : internalItems;
   const unread = notifications.filter((n) => !n.read).length;
+
+  const handleMarkAllRead = () => {
+    if (onMarkAllRead) {
+      onMarkAllRead();
+    }
+    if (!isControlled) {
+      setInternalItems((n) => n.map((i) => ({ ...i, read: true })));
+    }
+  };
+
+  const handleDismiss = (id: string) => {
+    if (onDismiss) {
+      onDismiss(id);
+    }
+    if (!isControlled) {
+      setInternalItems((n) => n.filter((i) => i.id !== id));
+    }
+  };
+
+  const handleMarkRead = (id: string) => {
+    if (onMarkRead) {
+      onMarkRead(id);
+    }
+    if (!isControlled) {
+      setInternalItems((n) =>
+        n.map((i) => (i.id === id ? { ...i, read: true } : i))
+      );
+    }
+  };
 
   return (
     <div className="max-w-md rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
@@ -166,25 +213,33 @@ export function NotificationCenter({ items }: NotificationCenterProps) {
             </span>
           )}
         </div>
-        {unread > 0 && (
-          <button
-            onClick={() =>
-              setNotifications((n) =>
-                n.map((i) => ({ ...i, read: true }))
-              )
-            }
-            className="text-primary cursor-pointer"
-            style={btnStyle}
-          >
-            Mark all read
-          </button>
-        )}
+        <div className="flex items-center gap-2">
+          {unread > 0 && (
+            <button
+              onClick={handleMarkAllRead}
+              className="text-primary cursor-pointer"
+              style={btnStyle}
+            >
+              Mark all read
+            </button>
+          )}
+          {notifications.length > 0 && onClearAll && (
+            <button
+              onClick={onClearAll}
+              className="text-muted-foreground hover:text-destructive cursor-pointer"
+              style={btnStyle}
+            >
+              Clear all
+            </button>
+          )}
+        </div>
       </div>
       <div className="divide-y divide-border max-h-[360px] overflow-y-auto">
         {notifications.map((n) => (
           <div
             key={n.id}
             className={`px-3 py-2 ${!n.read ? "bg-primary/5" : ""}`}
+            onClick={() => !n.read && handleMarkRead(n.id)}
           >
             <Notification
               type={n.type}
@@ -192,7 +247,8 @@ export function NotificationCenter({ items }: NotificationCenterProps) {
               message={n.message}
               time={n.time}
               read={n.read}
-              closable={false}
+              closable={!!onDismiss}
+              onClose={() => handleDismiss(n.id)}
             />
           </div>
         ))}

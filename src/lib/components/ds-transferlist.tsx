@@ -15,6 +15,10 @@ export interface TransferListProps {
   items: TransferItem[];
   defaultTarget?: string[];
   searchable?: boolean;
+  /** Controlled: IDs of items in the target list */
+  value?: string[];
+  /** Called when target list changes */
+  onChange?: (targetIds: string[]) => void;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -120,10 +124,23 @@ export function TransferList({
   items,
   defaultTarget = [],
   searchable,
+  value,
+  onChange,
 }: TransferListProps) {
-  const [target, setTarget] = useState<Set<string>>(
+  const [internalTarget, setInternalTarget] = useState<Set<string>>(
     new Set(defaultTarget)
   );
+
+  // Support controlled (value) and uncontrolled modes
+  const target = value !== undefined ? new Set(value) : internalTarget;
+  const updateTarget = (next: Set<string>) => {
+    if (onChange) {
+      onChange(Array.from(next));
+    }
+    if (value === undefined) {
+      setInternalTarget(next);
+    }
+  };
   const [sourceSelected, setSourceSelected] = useState<Set<string>>(
     new Set()
   );
@@ -148,27 +165,23 @@ export function TransferList({
     : targetItems;
 
   const moveRight = () => {
-    setTarget((prev) => {
-      const n = new Set(prev);
-      sourceSelected.forEach((id) => n.add(id));
-      return n;
-    });
+    const n = new Set(target);
+    sourceSelected.forEach((id) => n.add(id));
+    updateTarget(n);
     setSourceSelected(new Set());
   };
   const moveLeft = () => {
-    setTarget((prev) => {
-      const n = new Set(prev);
-      targetSelected.forEach((id) => n.delete(id));
-      return n;
-    });
+    const n = new Set(target);
+    targetSelected.forEach((id) => n.delete(id));
+    updateTarget(n);
     setTargetSelected(new Set());
   };
   const moveAllRight = () => {
-    setTarget(new Set(items.filter((i) => !i.disabled).map((i) => i.id)));
+    updateTarget(new Set(items.filter((i) => !i.disabled).map((i) => i.id)));
     setSourceSelected(new Set());
   };
   const moveAllLeft = () => {
-    setTarget(new Set());
+    updateTarget(new Set());
     setTargetSelected(new Set());
   };
 

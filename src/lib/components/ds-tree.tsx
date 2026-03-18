@@ -16,6 +16,14 @@ export interface TreeProps {
   selectable?: boolean;
   showLines?: boolean;
   defaultExpanded?: string[];
+  /** Controlled: expanded node IDs */
+  expandedItems?: string[];
+  /** Called when expanded state changes */
+  onExpandChange?: (expandedIds: string[]) => void;
+  /** Controlled: selected node IDs */
+  selectedItems?: string[];
+  /** Called when selection changes */
+  onSelect?: (selectedIds: string[]) => void;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -118,26 +126,42 @@ export function Tree({
   selectable,
   showLines,
   defaultExpanded,
+  expandedItems,
+  onExpandChange,
+  selectedItems,
+  onSelect,
 }: TreeProps) {
-  const [expanded, setExpanded] = useState<Set<string>>(
+  const [internalExpanded, setInternalExpanded] = useState<Set<string>>(
     new Set(defaultExpanded || [])
   );
-  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [internalSelected, setInternalSelected] = useState<Set<string>>(new Set());
 
-  const toggle = (id: string) =>
-    setExpanded((prev) => {
-      const n = new Set(prev);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
-      return n;
-    });
-  const select = (id: string) =>
-    setSelected((prev) => {
-      const n = new Set(prev);
-      if (n.has(id)) n.delete(id);
-      else n.add(id);
-      return n;
-    });
+  // Support controlled and uncontrolled modes
+  const expanded = expandedItems !== undefined ? new Set(expandedItems) : internalExpanded;
+  const selected = selectedItems !== undefined ? new Set(selectedItems) : internalSelected;
+
+  const toggle = (id: string) => {
+    const n = new Set(expanded);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
+    if (onExpandChange) {
+      onExpandChange(Array.from(n));
+    }
+    if (expandedItems === undefined) {
+      setInternalExpanded(n);
+    }
+  };
+  const select = (id: string) => {
+    const n = new Set(selected);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
+    if (onSelect) {
+      onSelect(Array.from(n));
+    }
+    if (selectedItems === undefined) {
+      setInternalSelected(n);
+    }
+  };
 
   return (
     <div className="rounded-[var(--radius-md)] border border-border bg-card py-1">

@@ -22,6 +22,14 @@ export interface FileUploadProps {
   variant?: FileUploadVariant;
   label?: string;
   description?: string;
+  /** Controlled file list */
+  value?: UploadedFile[];
+  /** Called when files are added (from drop or file picker) */
+  onChange?: (files: File[]) => void;
+  /** Called when a file finishes uploading (internal simulation completes) */
+  onUpload?: (file: UploadedFile) => void;
+  /** Called when a file is removed from the list */
+  onRemove?: (fileId: string) => void;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -126,47 +134,74 @@ export function FileUpload({
   variant = "dropzone",
   label,
   description,
+  value,
+  onChange,
+  onUpload,
+  onRemove,
 }: FileUploadProps) {
-  const [files, setFiles] = useState<UploadedFile[]>([]);
+  const [internalFiles, setInternalFiles] = useState<UploadedFile[]>([]);
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Support controlled (value) and uncontrolled modes
+  const files = value ?? internalFiles;
+  const setFiles = value !== undefined ? () => {} : setInternalFiles;
+
   const addFiles = (fileList: FileList | null) => {
     if (!fileList) return;
-    const newFiles: UploadedFile[] = Array.from(fileList).map((f) => ({
-      id: Math.random().toString(36).slice(2),
-      name: f.name,
-      size: f.size,
-      type: f.type,
-      progress: 0,
-      status: "uploading" as const,
-    }));
-    setFiles((prev) => [...prev, ...newFiles]);
-    newFiles.forEach((f) => {
-      let prog = 0;
-      const iv = setInterval(() => {
-        prog += Math.random() * 30 + 10;
-        if (prog >= 100) {
-          prog = 100;
-          clearInterval(iv);
-        }
-        setFiles((prev) =>
-          prev.map((p) =>
-            p.id === f.id
-              ? {
-                  ...p,
-                  progress: Math.min(prog, 100),
-                  status: prog >= 100 ? "done" : "uploading",
-                }
-              : p
-          )
-        );
-      }, 300);
-    });
+    const rawFiles = Array.from(fileList);
+
+    // Call onChange with raw File objects for controlled usage
+    if (onChange) {
+      onChange(rawFiles);
+    }
+
+    // Internal simulation (uncontrolled mode)
+    if (value === undefined) {
+      const newFiles: UploadedFile[] = rawFiles.map((f) => ({
+        id: Math.random().toString(36).slice(2),
+        name: f.name,
+        size: f.size,
+        type: f.type,
+        progress: 0,
+        status: "uploading" as const,
+      }));
+      setInternalFiles((prev) => [...prev, ...newFiles]);
+      newFiles.forEach((f) => {
+        let prog = 0;
+        const iv = setInterval(() => {
+          prog += Math.random() * 30 + 10;
+          if (prog >= 100) {
+            prog = 100;
+            clearInterval(iv);
+          }
+          setInternalFiles((prev) =>
+            prev.map((p) =>
+              p.id === f.id
+                ? {
+                    ...p,
+                    progress: Math.min(prog, 100),
+                    status: prog >= 100 ? "done" : "uploading",
+                  }
+                : p
+            )
+          );
+          if (prog >= 100 && onUpload) {
+            onUpload({ ...f, progress: 100, status: "done" });
+          }
+        }, 300);
+      });
+    }
   };
 
-  const remove = (id: string) =>
-    setFiles((prev) => prev.filter((f) => f.id !== id));
+  const remove = (id: string) => {
+    if (onRemove) {
+      onRemove(id);
+    }
+    if (value === undefined) {
+      setInternalFiles((prev) => prev.filter((f) => f.id !== id));
+    }
+  };
 
   if (variant === "button") {
     return (
