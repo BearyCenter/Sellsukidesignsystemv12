@@ -107,6 +107,7 @@ import { RatingShowcase } from "./pages/rating-showcase";
 import { ColorPickerShowcase } from "./pages/colorpicker-showcase";
 import { ImagePreviewShowcase } from "./pages/imagepreview-showcase";
 import { MCPServerShowcase } from "./pages/mcp-server-showcase";
+import { VibeCodeDemo } from "./pages/vibecode-demo";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -158,7 +159,8 @@ type PageId =
   | "rating"
   | "colorpicker"
   | "imagepreview"
-  | "mcpserver";
+  | "mcpserver"
+  | "vibecode";
 
 interface SidebarItem {
   id: PageId;
@@ -187,6 +189,7 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "tokens", label: t("sidebar.tokens"), icon: <SwatchBook size={16} /> },
         { id: "changelog", label: t("sidebar.changelog"), icon: <History size={16} />, badge: `v${latestChangelog.version}` },
         { id: "mcpserver", label: t("sidebar.mcpserver"), icon: <Server size={16} />, badge: "New" },
+        { id: "vibecode", label: "Vibe Code Demo", icon: <MousePointerClick size={16} />, badge: "Demo" },
       ],
     },
     {
@@ -316,6 +319,7 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   colorpicker: ColorPickerShowcase,
   imagepreview: ImagePreviewShowcase,
   mcpserver: MCPServerShowcase,
+  vibecode: VibeCodeDemo,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
