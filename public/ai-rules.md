@@ -4,6 +4,19 @@
 > URL: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
 > Last updated: 2026-03-20
 
+## Important: Sandbox vs Full Mode
+
+**Sandbox mode** (Claude.ai Artifacts, v0, Google AI Studio):
+- Use ONLY React + Tailwind CSS + lucide-react + recharts
+- DO NOT import from @uxuissk/design-system or any external npm package
+- Recreate components inline using Tailwind classes matching tokens below
+- For font: use `font-['Inter']` for buttons, system font for body
+
+**Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
+- Install: `npm install @uxuissk/design-system`
+- CSS: `import "@uxuissk/design-system/styles.css"` (always first)
+- Import: `import { DSButton, DSInput, Card, ... } from "@uxuissk/design-system"`
+
 ## Brand
 
 - Product: **Sellsuki** — E-commerce management platform for Thai merchants

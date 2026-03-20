@@ -16,6 +16,17 @@ import {
   ArrowRight,
   Info,
   Box,
+  Package,
+  ExternalLink,
+  BookOpen,
+  Eye,
+  Github,
+  Cpu,
+  Sparkles,
+  Monitor,
+  Code2,
+  Palette,
+  Layout,
 } from "lucide-react";
 import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
 import { useI18n } from "../i18n";
@@ -65,6 +76,26 @@ function copyText(text: string) {
   } catch {
     navigator.clipboard?.writeText(text);
   }
+}
+
+// ─── Copy Button (Inline) ────────────────────────────────────────────────────
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      onClick={() => {
+        copyText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[var(--radius-sm)] text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors cursor-pointer flex-shrink-0"
+      style={smallLabel}
+      title="Copy to clipboard"
+    >
+      {copied ? <Check size={12} className="text-chart-2" /> : <Copy size={12} />}
+    </button>
+  );
 }
 
 // ─── Architecture Diagram ─────────────────────────────────────────────────────
@@ -645,9 +676,285 @@ export function MCPServerShowcase() {
     }, 1200);
   };
 
+  // ─── Sellsuki DS Deployment Info ───────────────────────────────────────────
+  const DS_VERSION = "0.5.0";
+  const DS_LINKS = [
+    { icon: <Package size={16} />, label: "npm package", url: "https://www.npmjs.com/package/@uxuissk/design-system", code: "npm install @uxuissk/design-system" },
+    { icon: <Cpu size={16} />, label: "MCP Server URL", url: "https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp", code: "https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp" },
+    { icon: <BookOpen size={16} />, label: "Storybook", url: "https://sellsukidesignsystemv12.vercel.app", code: null },
+    { icon: <Eye size={16} />, label: "Preview", url: "https://sellsukidesignsystemv12-2bee.vercel.app", code: null },
+    { icon: <Github size={16} />, label: "GitHub", url: "https://github.com/BearyCenter/Sellsukidesignsystemv12", code: "branch: main" },
+  ];
+
+  const AI_RULES_LINKS = [
+    { label: "AI Rules (Markdown)", url: "https://sellsukidesignsystemv12.vercel.app/ai-rules.md", desc: "สำหรับ Claude.ai, v0, Google AI Studio" },
+    { label: "AI Rules (JSON)", url: "https://sellsukidesignsystemv12.vercel.app/ai-rules.json", desc: "สำหรับ programmatic access, MCP" },
+  ];
+
+  const AI_TOOLS = [
+    { name: "Claude Code", mode: "Full", setup: "CLAUDE.md (auto-read)", icon: <Terminal size={14} /> },
+    { name: "Cursor / Windsurf", mode: "Full", setup: ".cursorrules (auto-read)", icon: <Code2 size={14} /> },
+    { name: "Figma Make", mode: "Full", setup: "MCP Connector", icon: <Palette size={14} /> },
+    { name: "Claude.ai", mode: "Sandbox", setup: "Project Instructions", icon: <Sparkles size={14} /> },
+    { name: "v0 (Vercel)", mode: "Sandbox", setup: "Prefix prompt / URL", icon: <Layout size={14} /> },
+    { name: "Google AI Studio", mode: "Sandbox", setup: "System Instructions", icon: <Monitor size={14} /> },
+    { name: "Firebase Studio", mode: "Full", setup: ".idx/airules.md", icon: <Code2 size={14} /> },
+    { name: "Bolt.new", mode: "Full", setup: "Prefix prompt + npm install", icon: <Globe size={14} /> },
+    { name: "Lovable", mode: "Full", setup: "Knowledge files", icon: <Globe size={14} /> },
+  ];
+
   return (
     <div className="space-y-10">
       <PageHeader titleKey="page.mcpServer.title" descKey="page.mcpServer.desc" />
+
+      {/* ─── Sellsuki DS Package Info ──────────────────────────── */}
+      <Section
+        title={`@uxuissk/design-system@${DS_VERSION}`}
+        description="Package, MCP Server, and deployment URLs — copy and use directly"
+      >
+        <DemoBox>
+          <div className="space-y-5">
+            {/* Version badge */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <span
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[var(--radius-full)] bg-chart-2/10 text-chart-2"
+                style={fontLabelBold}
+              >
+                <Package size={14} /> v{DS_VERSION}
+              </span>
+              <a
+                href="https://www.npmjs.com/package/@uxuissk/design-system"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-primary hover:underline"
+                style={smallLabel}
+              >
+                npmjs.com/package/@uxuissk/design-system <ExternalLink size={12} />
+              </a>
+            </div>
+
+            {/* Install & Import */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>Install & Import</span>
+              <CodePreview
+                code={`npm install @uxuissk/design-system@${DS_VERSION}`}
+                title="terminal"
+              />
+              <CodePreview
+                code={`import "@uxuissk/design-system/styles.css";
+import {
+  DSButton, IconButton, ButtonGroup,
+  DSInput, DSTextarea, DSCheckbox, DSRadio,
+  Dropdown, DatePicker, SearchField, Switch,
+  DSTable, Card, CardHeader, CardBody, CardFooter,
+  StatCard, Badge, Tag, Avatar, AvatarGroup,
+  TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination,
+  Modal, Drawer, Alert, ConfirmDialog, Tooltip, Popover,
+  toast, ToastContainer, Spinner, Skeleton, EmptyState,
+  FormField, FormLabel, FormError,
+  NumberInput, OTPInput, ColorPicker, FileUpload,
+  TagInput, Rating, TransferList, Timeline, Tree,
+} from "@uxuissk/design-system";`}
+                title="app.tsx"
+              />
+            </div>
+
+            {/* Links table */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>Deployment URLs</span>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left" style={smallLabel}>
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="px-3 py-2 text-muted-foreground" style={smallLabel}>Service</th>
+                      <th className="px-3 py-2 text-muted-foreground" style={smallLabel}>URL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {DS_LINKS.map((link) => (
+                      <tr key={link.label} className="border-b border-border/50">
+                        <td className="px-3 py-2.5">
+                          <div className="flex items-center gap-2 text-foreground" style={fontLabel}>
+                            {link.icon} {link.label}
+                          </div>
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <div className="flex items-center gap-2">
+                            <a
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary hover:underline break-all"
+                              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}
+                            >
+                              {link.url}
+                            </a>
+                            {link.code && (
+                              <CopyButton text={link.code} />
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* MCP Server highlight */}
+            <div className="flex items-start gap-3 p-4 rounded-[var(--radius)] bg-chart-5/5 border border-chart-5/20">
+              <Cpu size={18} className="text-chart-5 flex-shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="text-foreground block" style={fontLabelBold}>MCP Server (Streamable HTTP)</span>
+                <p className="text-muted-foreground" style={smallLabel}>
+                  ใช้ URL นี้เป็น Figma Connector URL ได้เลย หรือเพิ่มใน claude_desktop_config.json
+                </p>
+                <CodePreview
+                  code={`// Figma Make → Connectors → Add Custom → URL:
+https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp
+
+// Claude Desktop config:
+{
+  "mcpServers": {
+    "sellsuki-ds": {
+      "url": "https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp"
+    }
+  }
+}`}
+                  title="MCP Connector Setup"
+                />
+              </div>
+            </div>
+          </div>
+        </DemoBox>
+      </Section>
+
+      {/* ─── AI Tool Setup (Vibe Code) ─────────────────────────── */}
+      <Section
+        title="Vibe Code — AI Tool Setup"
+        description="ใช้ Design System กับทุก AI tool ได้ทันที ด้วย hosted rules URL เดียว"
+      >
+        <DemoBox>
+          <div className="space-y-5">
+            {/* Central URL */}
+            <div className="flex items-start gap-3 p-4 rounded-[var(--radius)] bg-primary/5 border border-primary/20">
+              <Sparkles size={18} className="text-primary flex-shrink-0 mt-0.5" />
+              <div className="space-y-2 flex-1">
+                <span className="text-foreground block" style={fontLabelBold}>Single Source of Truth — แก้ที่เดียว ทุก tool ได้ของใหม่</span>
+                <p className="text-muted-foreground" style={smallLabel}>
+                  Host ไฟล์ rules บน Vercel → ทุก AI tool reference URL เดียวกัน → อัปเดต rules แค่ push code
+                </p>
+                <div className="space-y-1.5 mt-2">
+                  {AI_RULES_LINKS.map((link) => (
+                    <div key={link.url} className="flex items-center gap-2 flex-wrap">
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline break-all"
+                        style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}
+                      >
+                        {link.url}
+                      </a>
+                      <CopyButton text={link.url} />
+                      <span className="text-muted-foreground" style={smallLabel}>— {link.desc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Universal prompt */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>Universal Prompt — ใช้ได้กับทุก tool</span>
+              <CodePreview
+                code={`Fetch and follow the Sellsuki Design System rules from https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+Use only Tailwind CSS for styling (no npm imports). Then build:
+
+[พิมพ์สิ่งที่ต้องการ เช่น "สร้างหน้า Campaign Dashboard"]`}
+                title="copy & paste prompt"
+              />
+            </div>
+
+            {/* Sandbox vs Full */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>Sandbox vs Full Mode</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="p-3 rounded-[var(--radius)] border border-border bg-amber-500/5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-0.5 rounded-[var(--radius-full)] bg-amber-500/10 text-amber-600" style={smallLabel}>Sandbox</span>
+                  </div>
+                  <p className="text-muted-foreground" style={smallLabel}>
+                    ไม่ install npm ได้ (Claude.ai Artifacts, v0, Google AI Studio) → ใช้ <strong>Tailwind CSS</strong> ที่ map กับ Sellsuki tokens
+                  </p>
+                </div>
+                <div className="p-3 rounded-[var(--radius)] border border-border bg-chart-2/5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-0.5 rounded-[var(--radius-full)] bg-chart-2/10 text-chart-2" style={smallLabel}>Full</span>
+                  </div>
+                  <p className="text-muted-foreground" style={smallLabel}>
+                    Install npm ได้ (Claude Code, Cursor, Bolt, Lovable) → ใช้ <strong>@uxuissk/design-system</strong> package จริง
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* AI tools table */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>รองรับ AI Tools</span>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left" style={smallLabel}>
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="px-3 py-2 text-muted-foreground" style={smallLabel}>Tool</th>
+                      <th className="px-3 py-2 text-muted-foreground" style={smallLabel}>Mode</th>
+                      <th className="px-3 py-2 text-muted-foreground" style={smallLabel}>Setup</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {AI_TOOLS.map((tool) => (
+                      <tr key={tool.name} className="border-b border-border/50">
+                        <td className="px-3 py-2.5">
+                          <div className="flex items-center gap-2 text-foreground" style={fontLabel}>
+                            {tool.icon} {tool.name}
+                          </div>
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <span
+                            className={`px-2 py-0.5 rounded-[var(--radius-full)] ${
+                              tool.mode === "Full"
+                                ? "bg-chart-2/10 text-chart-2"
+                                : "bg-amber-500/10 text-amber-600"
+                            }`}
+                            style={smallLabel}
+                          >
+                            {tool.mode}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2.5 text-muted-foreground" style={smallLabel}>
+                          {tool.setup}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Guidelines folder */}
+            <div className="flex items-start gap-3 p-4 rounded-[var(--radius)] bg-muted/30 border border-border">
+              <FileText size={18} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <span className="text-foreground block" style={fontLabelBold}>guidelines/ folder</span>
+                <p className="text-muted-foreground" style={smallLabel}>
+                  Setup guide เฉพาะแต่ละ tool อยู่ใน <code className="px-1 py-0.5 bg-muted rounded text-foreground">guidelines/</code> บน GitHub:
+                  v0-system-prompt.md, google-ai-studio-prompt.md, bolt-lovable-prompt.md, relume-prompt.md, firebase-studio-airules.md
+                </p>
+              </div>
+            </div>
+          </div>
+        </DemoBox>
+      </Section>
 
       {/* ─── Overview ──────────────────────────────────────────── */}
       <Section title={t("mcp.overview.title")} description={t("mcp.overview.desc")}>
