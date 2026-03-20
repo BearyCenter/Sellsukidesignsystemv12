@@ -7,11 +7,19 @@
 
 ## วิธี Setup
 
-### Option A: Prefix ทุก Prompt (ง่ายสุด)
+### Option A: URL Reference (แนะนำ — แก้ที่เดียว ทุกคนได้ของใหม่)
+
+ใส่ prompt แรกใน v0:
+```
+Fetch and follow the design rules from https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+Use only Tailwind CSS (no npm imports). Then build: [คำอธิบาย UI]
+```
+
+### Option B: Prefix ทุก Prompt
 
 Copy ข้อความในส่วน **System Prompt** ด้านล่าง แล้ววางเป็นบรรทัดแรกของทุก prompt ที่พิมพ์ใน v0
 
-### Option B: ใช้ v0 Project Mode
+### Option C: ใช้ v0 Project Mode
 
 1. สร้าง Project ใหม่ใน v0
 2. วาง System Prompt ใน Project Instructions

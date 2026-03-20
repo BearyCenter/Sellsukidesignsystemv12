@@ -115,11 +115,16 @@ Then generate code using the real package:
 2. กด **Create Project**
 3. ตั้งชื่อ: `Sellsuki Vibe Code`
 4. วาง System Prompt ด้านบนใน **Instructions**
-5. (Optional) Upload ไฟล์เหล่านี้เป็น **Knowledge**:
-   - `sellsuki-design-tokens.json` — design token reference
-   - `starter-template.tsx` — ตัวอย่าง page structure
-   - `vibe-code-prompts.md` — prompt library สำเร็จรูป
+5. เพิ่ม **Knowledge** (เลือกวิธีใดวิธีหนึ่ง):
+   - **วิธี A (แนะนำ)**: เพิ่ม URL `https://sellsukidesignsystemv12.vercel.app/ai-rules.md` เป็น remote knowledge → แก้ที่เดียว ทุกคนได้ของใหม่
+   - **วิธี B**: Upload ไฟล์ `sellsuki-design-tokens.json` + `starter-template.tsx` + `vibe-code-prompts.md`
 6. แชร์ให้ทีม → ทุกคนเข้า Project เดียวกัน
+
+## Hosted Rules (Central Source of Truth)
+
+แก้ไขที่ไฟล์เดียว → ทุก tool ได้ของใหม่:
+- **Markdown**: `https://sellsukidesignsystemv12.vercel.app/ai-rules.md`
+- **JSON**: `https://sellsukidesignsystemv12.vercel.app/ai-rules.json`
 
 ---
 

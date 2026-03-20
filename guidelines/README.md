@@ -45,12 +45,27 @@ guidelines/
   relume-prompt.md                 ← Relume wireframe tool setup
 ```
 
-## Universal Approach (ใช้ได้กับทุก tool)
+## Hosted Rules — Single Source of Truth
 
-ถ้า tool ไหนไม่มี guide เฉพาะ ให้:
+แก้ไฟล์ใน `public/` → deploy → **ทุก tool ได้ rules ใหม่ทันที** ไม่ต้องแจ้งทีม
 
-1. **Upload** `sellsuki-design-tokens.json` เป็น reference file
-2. **Copy** prefix prompt ด้านล่างวางก่อน prompt จริง:
+| Format | URL | ใช้กับ |
+|--------|-----|--------|
+| **Markdown** | `https://sellsukidesignsystemv12.vercel.app/ai-rules.md` | Claude.ai, v0, Google AI Studio |
+| **JSON** | `https://sellsukidesignsystemv12.vercel.app/ai-rules.json` | Programmatic access, MCP |
+
+### วิธีใช้ (ง่ายที่สุด — ใช้ได้กับทุก tool)
+
+วาง 1 บรรทัดนี้เป็น prompt แรก:
+
+```
+Fetch and follow the Sellsuki Design System rules from https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+Use only Tailwind CSS for styling. Then build: [คำอธิบาย UI ที่ต้องการ]
+```
+
+### Manual Fallback (ถ้า tool ไม่ fetch URL ได้)
+
+Upload `sellsuki-design-tokens.json` เป็น reference file หรือ copy prefix:
 
 ```
 [SELLSUKI DESIGN SYSTEM]
