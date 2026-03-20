@@ -2,21 +2,32 @@
 
 > ไฟล์ในโฟลเดอร์นี้ช่วยให้ทุก AI tool สร้าง UI ที่มี mood & tone เดียวกับ Sellsuki
 
+## ⚠️ Sandbox vs Production Mode
+
+AI tools แบ่งเป็น 2 กลุ่ม ตามความสามารถในการใช้ npm package:
+
+| Mode | เครื่องมือ | วิธีสร้าง UI |
+|------|-----------|-------------|
+| **Sandbox** (ไม่ install npm ได้) | Claude.ai Artifacts, v0, Google AI Studio | ใช้ **Tailwind CSS** ที่ map กับ Sellsuki tokens |
+| **Full** (install npm ได้) | Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio | ใช้ **@uxuissk/design-system** package จริง |
+
+> **PO / UX ส่วนใหญ่ใช้ Sandbox mode** — prompt ต้องบอกให้สร้าง UI ด้วย Tailwind ไม่ใช่ import package
+
 ## Quick Start — เลือก tool ที่ใช้
 
-| AI Tool | ไฟล์ที่ต้องใช้ | วิธี setup |
-|---------|---------------|-----------|
-| **Claude Code** | `../CLAUDE.md` | อัตโนมัติ (auto-read) |
-| **Cursor / Windsurf** | `../.cursorrules` | อัตโนมัติ (auto-read) |
-| **Claude.ai (Projects)** | `claude-project-system-prompt.md` | Copy → Project Instructions |
-| **Figma Make** | MCP Connector | Connectors → Sellsuki DS |
-| **v0 (Vercel)** | `v0-system-prompt.md` | Copy → prefix prompt |
-| **Google AI Studio** | `google-ai-studio-prompt.md` | Copy → System Instructions |
-| **Firebase Studio (IDX)** | `firebase-studio-airules.md` | Copy → `.idx/airules.md` |
-| **Bolt.new** | `bolt-lovable-prompt.md` | Copy → prefix prompt |
-| **Lovable** | `bolt-lovable-prompt.md` | Copy → Knowledge / initial prompt |
-| **Relume** | `relume-prompt.md` | Style Guide + prompt prefix |
-| **Any tool** | `sellsuki-design-tokens.json` | Upload as reference file |
+| AI Tool | ไฟล์ที่ต้องใช้ | วิธี setup | Mode |
+|---------|---------------|-----------|------|
+| **Claude.ai (Projects)** | `claude-project-system-prompt.md` | Copy → Project Instructions | Sandbox + Full |
+| **Claude Code** | `../CLAUDE.md` | อัตโนมัติ (auto-read) | Full |
+| **Cursor / Windsurf** | `../.cursorrules` | อัตโนมัติ (auto-read) | Full |
+| **Figma Make** | MCP Connector | Connectors → Sellsuki DS | Full |
+| **v0 (Vercel)** | `v0-system-prompt.md` | Copy → prefix prompt | Sandbox |
+| **Google AI Studio** | `google-ai-studio-prompt.md` | Copy → System Instructions | Sandbox |
+| **Firebase Studio (IDX)** | `firebase-studio-airules.md` | Copy → `.idx/airules.md` | Full |
+| **Bolt.new** | `bolt-lovable-prompt.md` | Copy → prefix prompt | Full |
+| **Lovable** | `bolt-lovable-prompt.md` | Copy → Knowledge / initial prompt | Full |
+| **Relume** | `relume-prompt.md` | Style Guide + prompt prefix | Sandbox |
+| **Any tool** | `sellsuki-design-tokens.json` | Upload as reference file | Both |
 
 ## Files in this folder
 
