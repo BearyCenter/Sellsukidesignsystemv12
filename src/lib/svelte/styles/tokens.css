@@ -1,0 +1,68 @@
+/* Design System Tokens Bridge
+ * Maps DSS (@uxuissk/design-system) variables to backward-compatible --ssk-colors-* aliases
+ * and provides semantic design tokens for the app.
+ */
+
+/* DSS tokens are imported via main.ts: import '@uxuissk/design-system/styles.css' */
+
+:root {
+	/* ─── Backward-compatible aliases (ssk → DSS) ────────────────────────── */
+
+	/* Primary (Sky Blue — DSS brand) */
+	--ssk-colors-primary-50: var(--Base_Color--Sky--50, #f0f9ff);
+	--ssk-colors-primary-100: var(--Base_Color--Sky--100, #d9f2ff);
+	--ssk-colors-primary-200: var(--Base_Color--Sky--200, #bce8ff);
+	--ssk-colors-primary-300: var(--Base_Color--Sky--300, #8edcff);
+	--ssk-colors-primary-400: var(--Base_Color--Sky--400, #58c6ff);
+	--ssk-colors-primary-500: var(--Base_Color--Sky--500, #32a9ff);
+	--ssk-colors-primary-600: var(--Base_Color--Sky--600, #1b8bf5);
+	--ssk-colors-primary-700: var(--Base_Color--Sky--700, #1473e1);
+	--ssk-colors-primary-800: var(--Base_Color--Sky--800, #175cb6);
+	--ssk-colors-primary-900: var(--Base_Color--Sky--900, #194f8f);
+
+	/* Secondary (Orange) */
+	--ssk-colors-secondary-50: var(--Base_Color--Orange--50, #fff7ed);
+	--ssk-colors-secondary-100: var(--Base_Color--Orange--100, #ffedd5);
+	--ssk-colors-secondary-200: var(--Base_Color--Orange--200, #fed7aa);
+	--ssk-colors-secondary-300: var(--Base_Color--Orange--300, #fdba74);
+	--ssk-colors-secondary-400: var(--Base_Color--Orange--400, #fb923c);
+	--ssk-colors-secondary-500: var(--Base_Color--Orange--500, #f97316);
+	--ssk-colors-secondary-600: var(--Base_Color--Orange--600, #ea580c);
+	--ssk-colors-secondary-700: var(--Base_Color--Orange--700, #c2410c);
+	--ssk-colors-secondary-800: var(--Base_Color--Orange--800, #9a3412);
+	--ssk-colors-secondary-900: var(--Base_Color--Orange--900, #7c2d12);
+
+	/* Neutral (Gray) */
+	--ssk-colors-neutral-50: var(--Base_Color--Gray--50, #f9fafb);
+	--ssk-colors-neutral-100: var(--Base_Color--Gray--100, #f3f4f6);
+	--ssk-colors-neutral-200: var(--Base_Color--Gray--200, #e5e7eb);
+	--ssk-colors-neutral-300: var(--Base_Color--Gray--300, #d1d5db);
+	--ssk-colors-neutral-400: var(--Base_Color--Gray--400, #9ca3af);
+	--ssk-colors-neutral-500: var(--Base_Color--Gray--500, #6b7280);
+	--ssk-colors-neutral-600: var(--Base_Color--Gray--600, #4b5563);
+	--ssk-colors-neutral-700: var(--Base_Color--Gray--700, #374151);
+	--ssk-colors-neutral-800: var(--Base_Color--Gray--800, #1f2937);
+	--ssk-colors-neutral-900: var(--Base_Color--Gray--900, #111827);
+
+	/* Text */
+	--ssk-colors-text-900: var(--Colors--Text--text-primary, #111827);
+	--ssk-colors-text-700: var(--Colors--Text--text-secondary, #374151);
+	--ssk-colors-text-500: var(--Colors--Text--text-tertiary, #6b7280);
+	--ssk-colors-text-400: var(--Colors--Text--text-placeholder, #9ca3af);
+
+	/* ─── Semantic tokens ────────────────────────────────────────────────── */
+	--dss-bg-primary: var(--Colors--Background--bg-primary, #ffffff);
+	--dss-bg-secondary: var(--Colors--Background--bg-secondary, #f9fafb);
+	--dss-bg-tertiary: var(--Colors--Background--bg-tertiary, #f3f4f6);
+	--dss-bg-active: var(--Colors--Background--bg-active, #f3f4f6);
+	--dss-bg-brand-solid: var(--Colors--Background--bg-brand-solid, #FF8D00);
+	--dss-bg-disabled: var(--Colors--Background--bg-disabled, #f3f4f6);
+
+	/* Border radius */
+	--dss-radius-xs: var(--Border-radius--radius-xs, 4px);
+	--dss-radius-sm: var(--Border-radius--radius-sm, 6px);
+	--dss-radius-md: var(--Border-radius--radius-md, 8px);
+	--dss-radius-lg: var(--Border-radius--radius-lg, 12px);
+	--dss-radius-xl: var(--Border-radius--radius-xl, 16px);
+	--dss-radius-full: var(--Border-radius--radius-full, 9999px);
+}
