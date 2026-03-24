@@ -14,8 +14,8 @@
  * Shared tokens: import { colors, typography } from "@uxuissk/design-tokens"
  */
 
-// Re-export tokens for convenience
-export { colors, typography, spacing, border, shadow, layout, button } from "@uxuissk/design-tokens";
+// Re-export tokens for convenience (uncomment when @uxuissk/design-tokens is installed)
+// export { colors, typography, spacing, border, shadow, layout, button } from "@uxuissk/design-tokens";
 
 // ── UI Components ──
 // export { default as Button } from "./ui/Button.svelte";
