@@ -3,6 +3,9 @@
   "version": "0.7.0",
   "private": false,
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "main": "./dist/sellsuki-ds.umd.cjs",
   "module": "./dist/sellsuki-ds.js",
   "types": "./dist/types/index.d.ts",

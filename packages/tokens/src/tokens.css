@@ -1,0 +1,583 @@
+/*
+ * Sellsuki Design System — Library Theme Tokens
+ * This is a library-safe subset of theme.css that excludes global @layer base
+ * typography rules to avoid conflicts with consumer applications.
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRIMITIVE TOKENS — Base Color Palette (from Figma Design System export)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Sky (Brand Primary) ── */
+  --Base_Color--Sky--50: rgba(240, 249, 255, 1);
+  --Base_Color--Sky--100: rgba(217, 242, 255, 1);
+  --Base_Color--Sky--200: rgba(188, 232, 255, 1);
+  --Base_Color--Sky--300: rgba(142, 220, 255, 1);
+  --Base_Color--Sky--400: rgba(88, 198, 255, 1);
+  --Base_Color--Sky--500: rgba(50, 169, 255, 1);
+  --Base_Color--Sky--600: rgba(27, 139, 245, 1);
+  --Base_Color--Sky--700: rgba(20, 115, 225, 1);
+  --Base_Color--Sky--800: rgba(23, 92, 182, 1);
+  --Base_Color--Sky--900: rgba(25, 79, 143, 1);
+
+  /* ── Gray (Neutral) ── */
+  --Base_Color--Gray--50: rgba(249, 250, 251, 1);
+  --Base_Color--Gray--100: rgba(243, 244, 246, 1);
+  --Base_Color--Gray--200: rgba(229, 231, 235, 1);
+  --Base_Color--Gray--300: rgba(209, 213, 219, 1);
+  --Base_Color--Gray--400: rgba(156, 163, 175, 1);
+  --Base_Color--Gray--500: rgba(107, 114, 128, 1);
+  --Base_Color--Gray--600: rgba(75, 85, 99, 1);
+  --Base_Color--Gray--700: rgba(55, 65, 81, 1);
+  --Base_Color--Gray--800: rgba(31, 41, 55, 1);
+  --Base_Color--Gray--900: rgba(17, 24, 39, 1);
+
+  /* ── Rose (Danger/Destructive) ── */
+  --Base_Color--Rose--50: rgba(255, 241, 242, 1);
+  --Base_Color--Rose--100: rgba(255, 228, 230, 1);
+  --Base_Color--Rose--200: rgba(254, 205, 211, 1);
+  --Base_Color--Rose--300: rgba(253, 164, 175, 1);
+  --Base_Color--Rose--400: rgba(251, 113, 133, 1);
+  --Base_Color--Rose--500: rgba(244, 63, 94, 1);
+  --Base_Color--Rose--600: rgba(225, 29, 72, 1);
+  --Base_Color--Rose--700: rgba(190, 18, 60, 1);
+  --Base_Color--Rose--800: rgba(159, 18, 57, 1);
+  --Base_Color--Rose--900: rgba(136, 19, 55, 1);
+
+  /* ── Emerald (Success) ── */
+  --Base_Color--Emerald--50: rgba(236, 253, 245, 1);
+  --Base_Color--Emerald--100: rgba(209, 250, 229, 1);
+  --Base_Color--Emerald--200: rgba(167, 243, 208, 1);
+  --Base_Color--Emerald--300: rgba(110, 231, 183, 1);
+  --Base_Color--Emerald--400: rgba(52, 211, 153, 1);
+  --Base_Color--Emerald--500: rgba(16, 185, 129, 1);
+  --Base_Color--Emerald--600: rgba(5, 150, 105, 1);
+  --Base_Color--Emerald--700: rgba(4, 120, 87, 1);
+  --Base_Color--Emerald--800: rgba(6, 95, 70, 1);
+  --Base_Color--Emerald--900: rgba(6, 78, 59, 1);
+
+  /* ── Amber (Warning) ── */
+  --Base_Color--Amber--50: rgba(255, 251, 235, 1);
+  --Base_Color--Amber--100: rgba(254, 243, 199, 1);
+  --Base_Color--Amber--200: rgba(253, 230, 138, 1);
+  --Base_Color--Amber--300: rgba(252, 211, 77, 1);
+  --Base_Color--Amber--400: rgba(251, 191, 36, 1);
+  --Base_Color--Amber--500: rgba(245, 158, 11, 1);
+  --Base_Color--Amber--600: rgba(217, 119, 6, 1);
+  --Base_Color--Amber--700: rgba(180, 83, 9, 1);
+  --Base_Color--Amber--800: rgba(146, 64, 14, 1);
+  --Base_Color--Amber--900: rgba(120, 53, 15, 1);
+
+  /* ── Orange (Secondary Brand) ── */
+  --Base_Color--Orange--50: rgba(255, 247, 237, 1);
+  --Base_Color--Orange--100: rgba(255, 237, 213, 1);
+  --Base_Color--Orange--200: rgba(254, 215, 170, 1);
+  --Base_Color--Orange--300: rgba(253, 186, 116, 1);
+  --Base_Color--Orange--400: rgba(251, 146, 60, 1);
+  --Base_Color--Orange--500: rgba(249, 115, 22, 1);
+  --Base_Color--Orange--600: rgba(234, 88, 12, 1);
+  --Base_Color--Orange--700: rgba(194, 65, 12, 1);
+  --Base_Color--Orange--800: rgba(154, 52, 18, 1);
+  --Base_Color--Orange--900: rgba(124, 45, 18, 1);
+
+  /* ── White ── */
+  --Colors--White--50: rgba(255, 255, 255, 1);
+  --Colors--White--100: rgba(250, 250, 250, 1);
+  --Colors--White--200: rgba(245, 245, 245, 1);
+  --Colors--White--300: rgba(240, 240, 240, 1);
+  --Colors--White--400: rgba(235, 235, 235, 1);
+  --Colors--White--500: rgba(230, 230, 230, 1);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRIMITIVE TOKENS — Spacing Scale
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Space--space-0: 0px;
+  --Space--space-1: 1px;
+  --Space--space-2: 2px;
+  --Space--space-4: 4px;
+  --Space--space-6: 6px;
+  --Space--space-8: 8px;
+  --Space--space-10: 10px;
+  --Space--space-12: 12px;
+  --Space--space-16: 16px;
+  --Space--space-20: 20px;
+  --Space--space-24: 24px;
+  --Space--space-32: 32px;
+  --Space--space-40: 40px;
+  --Space--space-44: 44px;
+  --Space--space-48: 48px;
+  --Space--space-56: 56px;
+  --Space--space-64: 64px;
+  --Space--space-72: 72px;
+  --Space--space-80: 80px;
+  --Space--space-96: 96px;
+  --Space--space-128: 128px;
+  --Space--space-9999: 9999px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Brand (Spacing)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Spacing--Spacing-none: var(--Space--space-0);
+  --Spacing--Spacing-xxs: var(--Space--space-1);
+  --Spacing--Spacing-xs: var(--Space--space-2);
+  --Spacing--Spacing-sm: var(--Space--space-4);
+  --Spacing--Spacing-md: var(--Space--space-6);
+  --Spacing--Spacing-lg: var(--Space--space-8);
+  --Spacing--Spacing-xl: var(--Space--space-10);
+  --Spacing--Spacing-2xl: var(--Space--space-12);
+  --Spacing--Spacing-3xl: var(--Space--space-16);
+  --Spacing--Spacing-4xl: var(--Space--space-20);
+  --Spacing--Spacing-5xl: var(--Space--space-24);
+  --Spacing--Spacing-6xl: var(--Space--space-32);
+  --Spacing--Spacing-7xl: var(--Space--space-40);
+  --Spacing--Spacing-8xl: var(--Space--space-44);
+  --Spacing--Spacing-9xl: var(--Space--space-48);
+  --Spacing--Spacing-10xl: var(--Space--space-56);
+  --Spacing--Spacing-11xl: var(--Space--space-64);
+  --Spacing--Spacing-12xl: var(--Space--space-72);
+  --Spacing--Spacing-13xl: var(--Space--space-80);
+  --Spacing--Spacing-14xl: var(--Space--space-96);
+  --Spacing--Spacing-15xl: var(--Space--space-128);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Border Radius
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Border-radius--radius-none: var(--Space--space-0);
+  --Border-radius--radius-xxs: var(--Space--space-2);
+  --Border-radius--radius-xs: var(--Space--space-4);
+  --Border-radius--radius-sm: var(--Space--space-6);
+  --Border-radius--radius-md: var(--Space--space-8);
+  --Border-radius--radius-lg: var(--Space--space-12);
+  --Border-radius--radius-xl: var(--Space--space-16);
+  --Border-radius--radius-2xl: var(--Space--space-20);
+  --Border-radius--radius-3xl: var(--Space--space-24);
+  --Border-radius--radius-4xl: var(--Space--space-32);
+  --Border-radius--radius-full: var(--Space--space-9999);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Border Width
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Border_Width--border-none: var(--Space--space-0);
+  --Border_Width--border-xxs: var(--Space--space-1);
+  --Border_Width--border-xs: var(--Space--space-2);
+  --Border_Width--border-sm: var(--Space--space-4);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Text)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Colors--Text--text-primary: var(--Base_Color--Gray--800);
+  --Colors--Text--text-primary-hover: var(--Base_Color--Gray--900);
+  --Colors--Text--text-secondary: var(--Base_Color--Gray--500);
+  --Colors--Text--text-secondary-hover: var(--Base_Color--Gray--600);
+  --Colors--Text--text-white: var(--Colors--White--50);
+  --Colors--Text--text-disabled: var(--Base_Color--Gray--400);
+  --Colors--Text--text-placeholder: var(--Base_Color--Gray--400);
+  --Colors--Text--text-brand-primary: var(--Base_Color--Sky--500);
+  --Colors--Text--text-brand-hover: var(--Base_Color--Sky--600);
+  --Colors--Text--text-danger-primary: var(--Base_Color--Rose--600);
+  --Colors--Text--text-warning-primary: var(--Base_Color--Amber--600);
+  --Colors--Text--text-success-primary: var(--Base_Color--Emerald--600);
+  --Colors--Text--text-info: var(--Base_Color--Sky--500);
+  --Colors--Text--Link: var(--Base_Color--Sky--600);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Foreground / Icon)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Colors--Foreground--fg-primary: var(--Base_Color--Gray--800);
+  --Colors--Foreground--fg-secondary: var(--Base_Color--Gray--500);
+  --Colors--Foreground--fg-secondary_hover: var(--Base_Color--Gray--600);
+  --Colors--Foreground--fg-white: var(--Colors--White--50);
+  --Colors--Foreground--fg-placeholder: var(--Base_Color--Gray--400);
+  --Colors--Foreground--fg-disabled: var(--Base_Color--Gray--400);
+  --Colors--Foreground--fg-brand-primary: var(--Base_Color--Sky--500);
+  --Colors--Foreground--fg-brand-secondary: var(--Base_Color--Sky--400);
+  --Colors--Foreground--fg-danger-primary: var(--Base_Color--Rose--600);
+  --Colors--Foreground--fg-danger-secondary: var(--Base_Color--Rose--500);
+  --Colors--Foreground--fg-warning-primary: var(--Base_Color--Amber--600);
+  --Colors--Foreground--fg-warning-secondary: var(--Base_Color--Amber--500);
+  --Colors--Foreground--fg-success-primary: var(--Base_Color--Emerald--600);
+  --Colors--Foreground--fg-success-secondary: var(--Base_Color--Emerald--500);
+
+  --Colors--Icon--icon-primary: var(--Base_Color--Gray--500);
+  --Colors--Icon--icon-disabled: var(--Base_Color--Gray--400);
+  --Colors--Icon--icon-info: var(--Base_Color--Sky--500);
+  --Colors--Icon--icon-error: var(--Base_Color--Rose--600);
+  --Colors--Icon--icon-success: var(--Base_Color--Emerald--600);
+  --Colors--Icon--icon-warning: var(--Base_Color--Amber--600);
+  --Colors--Icon--icon-white: var(--Colors--White--50);
+  --Colors--Icon--icon-dark: var(--Base_Color--Gray--900);
+  --Colors--Icon--icon-brand: var(--Base_Color--Sky--500);
+  --Colors--Icon--icon-brand-hover: var(--Base_Color--Sky--600);
+  --Colors--Icon--icon-link: var(--Base_Color--Sky--600);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Background)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Colors--Background--bg-primary: var(--Colors--White--50);
+  --Colors--Background--bg-primary_hover: var(--Base_Color--Gray--50);
+  --Colors--Background--bg-secondary: var(--Base_Color--Gray--100);
+  --Colors--Background--bg-tertiary: var(--Base_Color--Gray--500);
+  --Colors--Background--bg-quaternary: var(--Base_Color--Gray--50);
+  --Colors--Background--bg-primary-solid: var(--Base_Color--Gray--900);
+  --Colors--Background--bg-active: var(--Base_Color--Gray--100);
+  --Colors--Background--bg-disabled: var(--Base_Color--Gray--200);
+  --Colors--Background--bg-disabled-soft: var(--Base_Color--Gray--50);
+  --Colors--Background--bg-brand-primary: var(--Base_Color--Sky--50);
+  --Colors--Background--bg-brand-secondary: var(--Base_Color--Sky--100);
+  --Colors--Background--bg-brand-solid: var(--Base_Color--Sky--500);
+  --Colors--Background--bg-brand-solid-hover: var(--Base_Color--Sky--600);
+  --Colors--Background--bg-error-primary: var(--Base_Color--Rose--50);
+  --Colors--Background--bg-danger-solid: var(--Base_Color--Rose--600);
+  --Colors--Background--bg-warning-primary: var(--Base_Color--Amber--50);
+  --Colors--Background--bg-warning-solid: var(--Base_Color--Amber--600);
+  --Colors--Background--bg-success-primary: var(--Base_Color--Emerald--50);
+  --Colors--Background--bg-success-solid: var(--Base_Color--Emerald--600);
+  --Colors--Background--bg-info-primary: var(--Base_Color--Sky--50);
+  --Colors--Background--bg-info-solid: var(--Base_Color--Sky--500);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Stroke / Border)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --Colors--Stroke--stroke-primary: var(--Base_Color--Gray--200);
+  --Colors--Stroke--stroke-primary-solid: var(--Base_Color--Gray--900);
+  --Colors--Stroke--stroke-secondary: var(--Base_Color--Gray--300);
+  --Colors--Stroke--stroke-disabled: var(--Base_Color--Gray--300);
+  --Colors--Stroke--stroke-brand: var(--Base_Color--Sky--300);
+  --Colors--Stroke--stroke-brand-solid: var(--Base_Color--Sky--500);
+  --Colors--Stroke--stroke-brand-lighter: var(--Base_Color--Sky--100);
+  --Colors--Stroke--stroke-danger: var(--Base_Color--Rose--400);
+  --Colors--Stroke--stroke-danger-solid: var(--Base_Color--Rose--600);
+  --Colors--Stroke--stroke-danger-lighter: var(--Base_Color--Rose--100);
+  --Colors--Stroke--stroke-warning: var(--Base_Color--Amber--400);
+  --Colors--Stroke--stroke-warning-solid: var(--Base_Color--Amber--600);
+  --Colors--Stroke--stroke-warning-lighter: var(--Base_Color--Amber--100);
+  --Colors--Stroke--stroke-success: var(--Base_Color--Emerald--400);
+  --Colors--Stroke--stroke-success-solid: var(--Base_Color--Emerald--600);
+  --Colors--Stroke--stroke-success-lighter: var(--Base_Color--Emerald--100);
+  --Colors--Stroke--stroke-info: var(--Base_Color--Sky--300);
+  --Colors--Stroke--stroke-info-solid: var(--Base_Color--Sky--500);
+  --Colors--Stroke--stroke-info-lighter: var(--Base_Color--Sky--100);
+  --Colors--Stroke--stroke-gray-lighter: var(--Base_Color--Gray--100);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SEMANTIC TOKENS — Sellsuki Colors (Button Variants)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  /* Solid (Primary) */
+  --Colors--Button--Solid--button-solid-fg: var(--Colors--White--50);
+  --Colors--Button--Solid--button-solid-fg_hover: var(--Colors--White--50);
+  --Colors--Button--Solid--button-solid-bg: var(--Base_Color--Sky--500);
+  --Colors--Button--Solid--button-solid-bg_hover: var(--Base_Color--Sky--600);
+  --Colors--Button--Solid--button-solid-border: var(--Base_Color--Sky--500);
+  --Colors--Button--Solid--button-solid-border_hover: var(--Base_Color--Sky--600);
+  --Colors--Button--Solid--Button-solid-bg_disable: var(--Base_Color--Sky--300);
+
+  /* Outline (Primary) */
+  --Colors--Button--Outline--button-outline-fg: var(--Base_Color--Sky--500);
+  --Colors--Button--Outline--button-outline-fg_hover: var(--Base_Color--Sky--600);
+  --Colors--Button--Outline--button-outline-border: var(--Base_Color--Sky--500);
+  --Colors--Button--Outline--button-outline-border_hover: var(--Base_Color--Sky--600);
+
+  /* Ghost (Primary) */
+  --Colors--Button--Ghost--button-Ghost-fg: var(--Base_Color--Sky--500);
+  --Colors--Button--Ghost--button-Ghost-fg_hover: var(--Base_Color--Sky--600);
+
+  /* Solid Light */
+  --Colors--Button--Solid_Light--button-solid_light-fg: var(--Base_Color--Gray--800);
+  --Colors--Button--Solid_Light--button-solid_light-fg_hover: var(--Base_Color--Gray--900);
+  --Colors--Button--Solid_Light--button-solid_light-bg: var(--Colors--White--50);
+  --Colors--Button--Solid_Light--button-solid_light-bg_hover: var(--Colors--White--50);
+  --Colors--Button--Solid_Light--button-solid_light-border: var(--Base_Color--Gray--200);
+  --Colors--Button--Solid_Light--button-solid_light-border_hover: var(--Base_Color--Gray--300);
+
+  /* Solid Danger */
+  --Colors--Button--Solid_Danger--button-solid_danger-fg: var(--Colors--White--50);
+  --Colors--Button--Solid_Danger--button-solid_danger-fg_hover: var(--Colors--White--50);
+  --Colors--Button--Solid_Danger--button-solid_danger-bg: var(--Base_Color--Rose--600);
+  --Colors--Button--Solid_Danger--button-solid_danger-bg_hover: var(--Base_Color--Rose--700);
+  --Colors--Button--Solid_Danger--button-solid_danger-border: var(--Base_Color--Rose--600);
+  --Colors--Button--Solid_Danger--button-solid_danger-border_hover: var(--Base_Color--Rose--700);
+  --Colors--Button--Solid_Danger--button-solid_danger_bg_disable: var(--Base_Color--Rose--300);
+
+  /* Outline Danger */
+  --Colors--Button--Outline_Danger--button-outline_danger-fg: var(--Base_Color--Rose--600);
+  --Colors--Button--Outline_Danger--button-outline_danger-fg_hover: var(--Base_Color--Rose--700);
+  --Colors--Button--Outline_Danger--button-outline_danger-border: var(--Base_Color--Rose--600);
+  --Colors--Button--Outline_Danger--button-outline_danger-border_hover: var(--Base_Color--Rose--700);
+
+  /* Ghost Danger */
+  --Colors--Button--Ghost_Danger--button-ghost_danger-fg: var(--Base_Color--Rose--600);
+  --Colors--Button--Ghost_Danger--button-ghost_danger-fg_hover: var(--Base_Color--Rose--700);
+
+  /* Utility button colors */
+  --Colors--Button--light: var(--Base_Color--Sky--100);
+  --Colors--Button--hover_light: var(--Base_Color--Sky--200);
+  --Colors--Button--disable: var(--Base_Color--Sky--500);
+  --Colors--Button--info: var(--Base_Color--Sky--500);
+  --Colors--Button--error: var(--Base_Color--Rose--600);
+  --Colors--Button--error-hover: var(--Base_Color--Rose--700);
+  --Colors--Button--success: var(--Base_Color--Emerald--600);
+  --Colors--Button--warning: var(--Base_Color--Amber--400);
+  --Colors--Button--inverse: var(--Colors--White--50);
+  --Colors--Button--undo: var(--Base_Color--Sky--200);
+  --Colors--Button--gray-disable: var(--Base_Color--Gray--200);
+  --Colors--Button--brand-secondary: var(--Base_Color--Orange--500);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BRIDGE — Maps DS semantic tokens → Tailwind-compatible variables
+     These are the tokens ALL UI components and Tailwind classes reference.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Surface / Background */
+  --background: var(--Colors--Background--bg-quaternary);
+  --foreground: var(--Colors--Text--text-primary);
+  --card: var(--Colors--Background--bg-primary);
+  --card-foreground: var(--Colors--Text--text-primary);
+  --popover: var(--Colors--Background--bg-primary);
+  --popover-foreground: var(--Colors--Text--text-primary);
+
+  /* Interactive */
+  --primary: var(--Colors--Button--Solid--button-solid-bg);
+  --primary-foreground: var(--Colors--Button--Solid--button-solid-fg);
+  --secondary: var(--Colors--Foreground--fg-secondary);
+  --secondary-foreground: var(--Colors--Text--text-white);
+  --accent: var(--Colors--Background--bg-brand-primary);
+  --accent-foreground: var(--Colors--Text--text-brand-primary);
+  --destructive: var(--Colors--Button--Solid_Danger--button-solid_danger-bg);
+  --destructive-foreground: var(--Colors--Button--Solid_Danger--button-solid_danger-fg);
+
+  /* Muted / Disabled */
+  --muted: var(--Colors--Background--bg-disabled);
+  --muted-foreground: var(--Colors--Text--text-secondary);
+
+  /* Border / Input / Ring */
+  --border: var(--Colors--Stroke--stroke-primary);
+  --input: var(--Colors--Background--bg-primary);
+  --input-background: var(--Colors--Background--bg-primary);
+  --ring: var(--Base_Color--Sky--600);
+
+  /* Elevation */
+  --elevation-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  /* Code Block — Light mode: soft gray surface from DS primitives */
+  --code-bg: var(--Base_Color--Gray--50);
+  --code-surface: var(--Colors--Background--bg-primary);
+  --code-border: var(--Base_Color--Gray--200);
+  --code-line-number: var(--Base_Color--Gray--400);
+  --code-text: var(--Base_Color--Gray--800);
+  --code-keyword: rgba(168, 70, 185, 1);
+  --code-string: rgba(22, 130, 70, 1);
+  --code-comment: var(--Base_Color--Gray--400);
+  --code-tag: rgba(190, 50, 60, 1);
+  --code-attr: rgba(170, 110, 20, 1);
+  --code-func: var(--Base_Color--Sky--700);
+  --code-punct: var(--Base_Color--Gray--500);
+
+  /* Chart / Data Viz */
+  --chart-1: var(--Base_Color--Sky--500);
+  --chart-2: var(--Base_Color--Emerald--600);
+  --chart-3: var(--Base_Color--Rose--600);
+  --chart-4: var(--Base_Color--Gray--400);
+  --chart-5: var(--Base_Color--Amber--500);
+
+  /* Border Radius (bridge) */
+  --radius: var(--Border-radius--radius-md);
+  --radius-sm: var(--Border-radius--radius-xs);
+  --radius-md: var(--Border-radius--radius-sm);
+  --radius-lg: var(--Border-radius--radius-xl);
+  --radius-full: var(--Border-radius--radius-full);
+
+  /* Sidebar */
+  --sidebar: var(--Colors--Background--bg-primary);
+  --sidebar-foreground: var(--Colors--Text--text-primary);
+  --sidebar-primary: var(--Base_Color--Sky--500);
+  --sidebar-primary-foreground: var(--Base_Color--Sky--500);
+  --sidebar-accent: var(--Colors--Background--bg-brand-primary);
+  --sidebar-accent-foreground: var(--Colors--Text--text-brand-primary);
+  --sidebar-border: var(--Base_Color--Gray--200);
+  --sidebar-ring: var(--Base_Color--Sky--600);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     Typography Variables
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* H1 - Main page titles, hero sections, and primary page headers */
+  --text-h1: 60px;
+  --font-h1: 'DB HeaventRounded', sans-serif;
+  --weight-h1: 400;
+
+  /* H2 - Major section headings within a page */
+  --text-h2: 52px;
+  --font-h2: 'DB HeaventRounded', sans-serif;
+  --weight-h2: 400;
+
+  /* H3 - Sub-section headings, modal titles, card headers */
+  --text-h3: 28px;
+  --font-h3: 'DB HeaventRounded', sans-serif;
+  --weight-h3: 700;
+
+  /* H4 - Smaller headings, form section titles, card subtitles */
+  --text-h4: 24px;
+  --font-h4: 'DB HeaventRounded', sans-serif;
+  --weight-h4: 500;
+
+  /* P - Default body text for all content */
+  --text-p: 24px;
+  --font-p: 'DB HeaventRounded', sans-serif;
+  --weight-p: 400;
+
+  /* Label - Form labels, helper text, captions */
+  --text-label: 18px;
+  --font-label: 'DB HeaventRounded', sans-serif;
+  --weight-label: 400;
+
+  /* Caption - Navigation breadcrumb text, pagination text */
+  --text-caption: 20px;
+  --font-caption: 'DB HeaventRounded', sans-serif;
+  --weight-caption: 400;
+
+  /* Button - Button text across all button types */
+  --text-button: 14px;
+  --font-button: 'Inter', sans-serif;
+  --weight-button: 600;
+
+  /* Base text sizes for Tailwind compatibility */
+  --text-2xl: var(--text-h1);
+  --text-xl: var(--text-h2);
+  --text-lg: var(--text-h3);
+  --text-base: var(--text-p);
+  --text-sm: var(--text-caption);
+  --text-xs: var(--text-label);
+  --text-button-size: var(--text-button);
+
+  /* Font weight variables */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+}
+
+.dark {
+  /* Override bridge tokens for dark mode — neutral charcoal palette (no blue tint) */
+  --background: rgba(30, 30, 30, 1);
+  --foreground: rgba(237, 237, 237, 1);
+  --card: rgba(43, 43, 43, 1);
+  --card-foreground: rgba(237, 237, 237, 1);
+  --popover: rgba(43, 43, 43, 1);
+  --popover-foreground: rgba(237, 237, 237, 1);
+  --primary: rgba(50, 169, 255, 1);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --secondary: rgba(130, 130, 130, 1);
+  --secondary-foreground: rgba(237, 237, 237, 1);
+  --muted: rgba(58, 58, 58, 1);
+  --muted-foreground: rgba(160, 160, 160, 1);
+  --accent: rgba(50, 50, 50, 1);
+  --accent-foreground: rgba(88, 198, 255, 1);
+  --destructive: rgba(225, 29, 72, 1);
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  --border: rgba(58, 58, 58, 1);
+  --input: rgba(43, 43, 43, 1);
+  --input-background: rgba(43, 43, 43, 1);
+  --ring: rgba(50, 169, 255, 1);
+  --chart-1: rgba(88, 198, 255, 1);
+  --chart-2: rgba(52, 211, 153, 1);
+  --chart-3: rgba(251, 113, 133, 1);
+  --chart-4: rgba(160, 160, 160, 1);
+  --chart-5: rgba(251, 191, 36, 1);
+  --sidebar: rgba(30, 30, 30, 1);
+  --sidebar-foreground: rgba(237, 237, 237, 1);
+  --sidebar-primary: rgba(88, 198, 255, 1);
+  --sidebar-primary-foreground: rgba(88, 198, 255, 1);
+  --sidebar-accent: rgba(50, 50, 50, 1);
+  --sidebar-accent-foreground: rgba(88, 198, 255, 1);
+  --sidebar-border: rgba(58, 58, 58, 1);
+  --sidebar-ring: rgba(50, 169, 255, 1);
+
+  /* Code Block — Dark mode: deeper surface, lighter syntax */
+  --code-bg: rgba(24, 24, 28, 1);
+  --code-surface: rgba(30, 30, 34, 1);
+  --code-border: rgba(55, 55, 60, 1);
+  --code-line-number: rgba(100, 100, 110, 1);
+  --code-text: rgba(212, 212, 220, 1);
+  --code-keyword: rgba(198, 120, 221, 1);
+  --code-string: rgba(152, 195, 121, 1);
+  --code-comment: rgba(92, 99, 112, 1);
+  --code-tag: rgba(224, 108, 117, 1);
+  --code-attr: rgba(209, 154, 102, 1);
+  --code-func: rgba(97, 175, 239, 1);
+  --code-punct: rgba(150, 150, 160, 1);
+
+  /* Elevation — stronger shadow on dark surfaces */
+  --elevation-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-lg);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --shadow-elevation-sm: var(--elevation-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Compact Density Mode
+   Usage: <div data-density="compact"> or <body data-density="compact">
+   Purpose: Admin/internal tools (CCS) needing tighter typography
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-density="compact"] {
+  --text-h1: 28px;
+  --text-h2: 24px;
+  --text-h3: 20px;
+  --text-h4: 16px;
+  --text-p: 14px;
+  --text-label: 12px;
+  --text-caption: 12px;
+  --text-button: 13px;
+
+  /* Sync Tailwind aliases */
+  --text-2xl: var(--text-h1);
+  --text-xl: var(--text-h2);
+  --text-lg: var(--text-h3);
+  --text-base: var(--text-p);
+  --text-sm: var(--text-caption);
+  --text-xs: var(--text-label);
+  --text-button-size: var(--text-button);
+}
