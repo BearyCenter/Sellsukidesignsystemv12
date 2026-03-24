@@ -677,9 +677,15 @@ export function MCPServerShowcase() {
   };
 
   // ─── Sellsuki DS Deployment Info ───────────────────────────────────────────
-  const DS_VERSION = "0.5.0";
+  const DS_VERSION = "0.7.0";
+  const DS_PACKAGES = [
+    { name: "@uxuissk/design-system", version: "0.7.0", desc: "React components (44+)", url: "https://www.npmjs.com/package/@uxuissk/design-system" },
+    { name: "@uxuissk/design-tokens", version: "0.1.0", desc: "Shared CSS + JS tokens", url: "https://www.npmjs.com/package/@uxuissk/design-tokens" },
+    { name: "@uxuissk/design-system-svelte", version: "scaffold", desc: "Svelte components (from CCS)", url: null },
+  ];
   const DS_LINKS = [
     { icon: <Package size={16} />, label: "npm package", url: "https://www.npmjs.com/package/@uxuissk/design-system", code: "npm install @uxuissk/design-system" },
+    { icon: <Package size={16} />, label: "npm tokens", url: "https://www.npmjs.com/package/@uxuissk/design-tokens", code: "npm install @uxuissk/design-tokens" },
     { icon: <Cpu size={16} />, label: "MCP Server URL", url: "https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp", code: "https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp" },
     { icon: <BookOpen size={16} />, label: "Storybook", url: "https://sellsukidesignsystemv12.vercel.app", code: null },
     { icon: <Eye size={16} />, label: "Preview", url: "https://sellsukidesignsystemv12-2bee.vercel.app", code: null },
@@ -733,6 +739,30 @@ export function MCPServerShowcase() {
               </a>
             </div>
 
+            {/* Monorepo packages */}
+            <div className="space-y-2">
+              <span className="text-foreground block" style={fontLabelBold}>Monorepo Packages</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {DS_PACKAGES.map((pkg) => (
+                  <div key={pkg.name} className="p-3 rounded-[var(--radius)] border border-border bg-card">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Package size={13} className="text-primary flex-shrink-0" />
+                      <span className="text-foreground truncate" style={{ ...smallLabel, fontWeight: 600 }}>{pkg.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className={`px-1.5 py-0.5 rounded text-[11px] font-medium ${pkg.version === "scaffold" ? "bg-amber-500/10 text-amber-600" : "bg-chart-2/10 text-chart-2"}`}>{pkg.version}</span>
+                    </div>
+                    <p className="text-muted-foreground" style={smallLabel}>{pkg.desc}</p>
+                    {pkg.url && (
+                      <a href={pkg.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline mt-1.5" style={smallLabel}>
+                        npm <ExternalLink size={10} />
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Install & Import */}
             <div className="space-y-2">
               <span className="text-foreground block" style={fontLabelBold}>Install & Import</span>
@@ -743,18 +773,31 @@ export function MCPServerShowcase() {
               <CodePreview
                 code={`import "@uxuissk/design-system/styles.css";
 import {
+  // Data Entry
   DSButton, IconButton, ButtonGroup,
   DSInput, DSTextarea, DSCheckbox, DSRadio,
   Dropdown, DatePicker, SearchField, Switch,
-  DSTable, Card, CardHeader, CardBody, CardFooter,
-  StatCard, Badge, Tag, Avatar, AvatarGroup,
-  TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination,
-  Modal, Drawer, Alert, ConfirmDialog, Tooltip, Popover,
-  toast, ToastContainer, Spinner, Skeleton, EmptyState,
-  FormField, FormLabel, FormError,
   NumberInput, OTPInput, ColorPicker, FileUpload,
-  TagInput, Rating, TransferList, Timeline, Tree,
-} from "@uxuissk/design-system";`}
+  TagInput, Rating, TransferList,
+  // Data Display
+  DSTable, AdvancedDataTable,
+  Card, CardHeader, CardBody, CardFooter,
+  StatCard, Statistic, Badge, Tag,
+  Avatar, AvatarGroup, Timeline, Tree,
+  EmptyState, Skeleton,
+  // Navigation
+  TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination,
+  // Feedback
+  Modal, Drawer, Alert, ConfirmDialog, Tooltip, Popover,
+  toast, ToastContainer, Notification, Spinner, ProgressBar,
+  // Layout
+  Divider, PageHeader, FilterBar,
+  // Form
+  FormField, FormLabel, FormError,
+} from "@uxuissk/design-system";
+
+// Shared tokens (optional — for CSS-in-JS or Svelte)
+import { colors, typography, spacing } from "@uxuissk/design-tokens";`}
                 title="app.tsx"
               />
             </div>

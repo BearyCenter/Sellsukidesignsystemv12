@@ -18,7 +18,8 @@ import "@uxuissk/design-system/styles.css";
 import { DSButton, DSInput, Card, ... } from "@uxuissk/design-system";
 ```
 
-Install: `npm install @uxuissk/design-system`
+Install: `npm install @uxuissk/design-system@0.7.0`
+Tokens: `npm install @uxuissk/design-tokens@0.1.0` (optional — shared CSS+JS tokens)
 
 ## Visual Identity Cheat Sheet
 
@@ -44,17 +45,19 @@ Install: `npm install @uxuissk/design-system`
 - Form field gap: `16px`
 - Section gap: `32px`
 
-## Components (41 total — always use these, never create custom)
+## Components (48 total — always use these, never create custom)
 
-**Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList
+**Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
 
-**Data Display**: DSTable, Card/CardHeader/CardBody/CardFooter, StatCard, Statistic, Badge, Tag, Avatar/AvatarGroup, Timeline, Tree, EmptyState, Skeleton
+**Data Display**: DSTable, **AdvancedDataTable** (server-side pagination, bulk actions, frozen columns), Card/CardHeader/CardBody/CardFooter, StatCard, Statistic, Badge, Tag, Avatar/AvatarGroup, Timeline, Tree, EmptyState, Skeleton
 
 **Navigation**: TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
 
 **Feedback**: Alert, Modal, Drawer, ConfirmDialog, Notification, toast/ToastContainer, Tooltip, Popover, ProgressBar, Spinner
 
-**Layout**: Divider, Menu, ImagePreview
+**Layout**: Divider, Menu, ImagePreview, **PageHeader**, **FilterBar**
+
+**Form**: FormField, FormLabel, FormError, FormHelperText
 
 ## Button Rules
 
@@ -108,8 +111,18 @@ This project has an MCP server at `mcp-server/` with tools:
 - `get_quick_start` — Get starter template
 - `generate_page_layout` — Generate page scaffold from description
 
+## Monorepo Packages
+
+| Package | Version | Description |
+|---------|---------|-------------|
+| `@uxuissk/design-system` | 0.7.0 | React components (48+) |
+| `@uxuissk/design-tokens` | 0.1.0 | Shared CSS + JS tokens |
+| `@uxuissk/design-system-svelte` | scaffold | Svelte components (from CCS) |
+
 ## Resources
 
 - Storybook: https://sellsukidesignsystemv12.vercel.app
 - Preview: https://sellsukidesignsystemv12-2bee.vercel.app
-- npm: `@uxuissk/design-system`
+- AI Rules: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+- npm (React): https://www.npmjs.com/package/@uxuissk/design-system
+- npm (Tokens): https://www.npmjs.com/package/@uxuissk/design-tokens

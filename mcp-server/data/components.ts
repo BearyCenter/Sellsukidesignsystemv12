@@ -948,6 +948,159 @@ toast.info("Processing...")`,
 <Divider variant="dashed" />`,
   },
 
+  AdvancedDataTable: {
+    name: "AdvancedDataTable",
+    displayName: "Advanced DataTable",
+    category: "display",
+    description: "Server-side DataTable with pagination, sorting, selection, bulk actions, expandable rows, frozen columns, column toggle",
+    imports: ["AdvancedDataTable"],
+    props: [
+      { name: "columns", type: "AdvancedColumn<T>[]", description: "Column definitions with sortable, frozen, hideable, render" },
+      { name: "data", type: "T[]", description: "Row data" },
+      { name: "rowKey", type: "string", default: '"id"', description: "Field used as unique row key" },
+      { name: "pagination", type: "PaginationMeta", description: "Server-side: { page, pageSize, totalCount }" },
+      { name: "sortBy", type: "string", description: "Currently sorted column key" },
+      { name: "sortOrder", type: '"asc" | "desc"', description: "Current sort direction" },
+      { name: "onPageChange", type: "(page, pageSize) => void", description: "Called when page or pageSize changes" },
+      { name: "onSortChange", type: "(sortBy, sortOrder) => void", description: "Called when sort column/direction changes" },
+      { name: "selectable", type: "boolean", default: "false", description: "Enable row checkboxes" },
+      { name: "selectedRows", type: "Set<string | number>", description: "Controlled selection" },
+      { name: "onSelectionChange", type: "(selected, rows) => void", description: "Called when selection changes" },
+      { name: "bulkActions", type: "BulkAction[]", description: "Actions shown in bulk bar when rows selected" },
+      { name: "expandedRowRender", type: "(row) => ReactNode", description: "Render function for expanded row detail" },
+      { name: "showColumnToggle", type: "boolean", default: "false", description: "Show column visibility toggle button" },
+      { name: "loading", type: "boolean", default: "false", description: "Show skeleton loading rows" },
+      { name: "loadingRows", type: "number", default: "5", description: "Number of skeleton rows" },
+      { name: "error", type: "string", description: "Error message to display" },
+      { name: "emptyMessage", type: "string", default: '"No data found"', description: "Empty state message" },
+    ],
+    example: `<AdvancedDataTable
+  rowKey="id"
+  columns={[
+    { key: "id", header: "ID", frozen: true, sortable: true },
+    { key: "name", header: "Company", sortable: true },
+    { key: "status", header: "Status", render: (v) => <Badge>{v}</Badge> },
+    { key: "revenue", header: "Revenue", align: "right", sortable: true },
+  ]}
+  data={pagedData}
+  pagination={{ page, pageSize, totalCount: 120 }}
+  sortBy="name" sortOrder="asc"
+  onPageChange={(p, ps) => fetchPage(p, ps)}
+  onSortChange={(col, dir) => fetchSorted(col, dir)}
+  selectable
+  selectedRows={selected}
+  onSelectionChange={(keys) => setSelected(keys)}
+  bulkActions={[
+    { label: "Export", onClick: (keys) => exportRows(keys) },
+    { label: "Delete", variant: "destructive", onClick: (keys) => deleteRows(keys) },
+  ]}
+  expandedRowRender={(row) => <div>Details for {row.name}</div>}
+  showColumnToggle
+  stickyHeader
+/>`,
+  },
+
+  FormField: {
+    name: "FormField",
+    displayName: "Form Field",
+    category: "form",
+    description: "Generic form field wrapper with label, error, helper text. Wraps any input component.",
+    imports: ["FormField", "FormLabel", "FormError", "FormHelperText"],
+    props: [
+      { name: "label", type: "string", description: "Field label text" },
+      { name: "error", type: "string", description: "Error message" },
+      { name: "helperText", type: "string", description: "Helper text below input" },
+      { name: "required", type: "boolean", default: "false", description: "Show required indicator" },
+      { name: "children", type: "ReactNode", description: "Input component" },
+    ],
+    example: `<FormField label="Email" error={errors.email} required>
+  <DSInput placeholder="you@example.com" state={errors.email ? "error" : "default"} />
+</FormField>
+
+<FormField label="Bio" helperText="Max 200 characters">
+  <DSTextarea maxLength={200} />
+</FormField>`,
+  },
+
+  PageHeader: {
+    name: "PageHeader",
+    displayName: "Page Header",
+    category: "layout",
+    description: "Page title bar with breadcrumbs, title, description, and action buttons",
+    imports: ["PageHeader"],
+    props: [
+      { name: "title", type: "string", description: "Page title" },
+      { name: "description", type: "string", description: "Page description" },
+      { name: "breadcrumbs", type: "BreadcrumbItem[]", description: "Breadcrumb items" },
+      { name: "actions", type: "ReactNode", description: "Action buttons (right side)" },
+      { name: "backHref", type: "string", description: "Back button URL" },
+    ],
+    example: `<PageHeader
+  title="Order Management"
+  description="View and manage all customer orders"
+  breadcrumbs={[{ label: "Home", href: "/" }, { label: "Orders" }]}
+  actions={<DSButton leftIcon={<Plus size={16} />}>New Order</DSButton>}
+/>`,
+  },
+
+  FilterBar: {
+    name: "FilterBar",
+    displayName: "Filter Bar",
+    category: "layout",
+    description: "Search + filter combo toolbar for admin panels. Supports text search, dropdown filters, date range.",
+    imports: ["FilterBar"],
+    props: [
+      { name: "filters", type: "FilterConfig[]", description: "Array of filter definitions" },
+      { name: "values", type: "FilterBarValue", description: "Current filter values" },
+      { name: "onChange", type: "(values: FilterBarValue) => void", description: "Called when any filter changes" },
+      { name: "searchPlaceholder", type: "string", description: "Search input placeholder" },
+    ],
+    example: `<FilterBar
+  searchPlaceholder="Search orders..."
+  filters={[
+    { key: "status", label: "Status", type: "select", options: [
+      { label: "Active", value: "active" },
+      { label: "Pending", value: "pending" },
+    ]},
+    { key: "date", label: "Date", type: "date" },
+  ]}
+  values={filterValues}
+  onChange={setFilterValues}
+/>`,
+  },
+
+  NumberInput: {
+    name: "NumberInput",
+    displayName: "Number Input",
+    category: "form",
+    description: "Numeric input with increment/decrement buttons, min/max, step, formatting",
+    imports: ["NumberInput"],
+    props: [
+      { name: "value", type: "number", description: "Current value" },
+      { name: "onChange", type: "(value: number) => void", description: "Change handler" },
+      { name: "min", type: "number", description: "Minimum value" },
+      { name: "max", type: "number", description: "Maximum value" },
+      { name: "step", type: "number", default: "1", description: "Increment step" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Input size" },
+    ],
+    example: `<NumberInput value={qty} onChange={setQty} min={1} max={100} step={1} />`,
+  },
+
+  OTPInput: {
+    name: "OTPInput",
+    displayName: "OTP Input",
+    category: "form",
+    description: "One-Time Password input with individual digit boxes, auto-focus, paste support",
+    imports: ["OTPInput"],
+    props: [
+      { name: "value", type: "string", description: "Current OTP value" },
+      { name: "onChange", type: "(value: string) => void", description: "Change handler" },
+      { name: "length", type: "number", default: "6", description: "Number of digits" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Input size" },
+    ],
+    example: `<OTPInput value={otp} onChange={setOtp} length={6} />`,
+  },
+
   Accordion: {
     name: "Accordion",
     displayName: "Accordion",

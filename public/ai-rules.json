@@ -1,9 +1,14 @@
 {
   "name": "Sellsuki Design System",
-  "version": "1.2.0",
-  "updated": "2026-03-20",
+  "version": "0.7.0",
+  "updated": "2026-03-24",
   "url": "https://sellsukidesignsystemv12.vercel.app/ai-rules.json",
   "storybook": "https://sellsukidesignsystemv12.vercel.app",
+  "packages": {
+    "react": "@uxuissk/design-system@0.7.0",
+    "tokens": "@uxuissk/design-tokens@0.1.0",
+    "svelte": "@uxuissk/design-system-svelte (scaffold)"
+  },
   "npm": "@uxuissk/design-system",
   "brand": {
     "product": "Sellsuki — E-commerce management platform for Thai merchants",
@@ -52,11 +57,12 @@
     "rule": "Max 1 primary button per view"
   },
   "components": {
-    "data-entry": ["DSButton", "IconButton", "ButtonGroup", "DSInput", "DSTextarea", "DSCheckbox", "CheckboxGroup", "DSRadio", "RadioGroup", "Switch", "Dropdown", "DatePicker", "SearchField", "ColorPicker", "FileUpload", "TagInput", "Rating", "TransferList"],
-    "data-display": ["DSTable", "Card", "CardHeader", "CardBody", "CardFooter", "StatCard", "Statistic", "Badge", "Tag", "Avatar", "AvatarGroup", "Timeline", "Tree", "EmptyState", "Skeleton"],
+    "data-entry": ["DSButton", "IconButton", "ButtonGroup", "DSInput", "DSTextarea", "DSCheckbox", "CheckboxGroup", "DSRadio", "RadioGroup", "Switch", "Dropdown", "DatePicker", "SearchField", "ColorPicker", "FileUpload", "TagInput", "Rating", "TransferList", "NumberInput", "OTPInput"],
+    "data-display": ["DSTable", "AdvancedDataTable", "Card", "CardHeader", "CardBody", "CardFooter", "StatCard", "Statistic", "Badge", "Tag", "Avatar", "AvatarGroup", "Timeline", "Tree", "EmptyState", "Skeleton"],
     "navigation": ["TopNavbar", "Sidebar", "Breadcrumb", "Tabs", "Stepper", "Pagination"],
     "feedback": ["Alert", "Modal", "Drawer", "ConfirmDialog", "Notification", "toast", "ToastContainer", "Tooltip", "Popover", "ProgressBar", "Spinner"],
-    "layout": ["Divider", "Menu", "ImagePreview"]
+    "layout": ["Divider", "Menu", "ImagePreview", "PageHeader", "FilterBar"],
+    "form": ["FormField", "FormLabel", "FormError", "FormHelperText"]
   },
   "rules": [
     "Flat clean design — no heavy shadows or gradients",
