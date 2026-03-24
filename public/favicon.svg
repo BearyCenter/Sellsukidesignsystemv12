@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background rounded square -->
+  <rect width="64" height="64" rx="14" fill="#FDEEE8"/>
+
+  <!-- Left orange wing -->
+  <path d="M10 18 L32 46 L22 46 L4 22 Z" fill="#E8713A"/>
+
+  <!-- Right orange wing -->
+  <path d="M54 18 L32 46 L42 46 L60 22 Z" fill="#E8713A"/>
+
+  <!-- Blue center triangle -->
+  <path d="M22 18 L42 18 L32 38 Z" fill="#1A9FD4"/>
+
+  <!-- Blue dot top right -->
+  <circle cx="51" cy="14" r="5" fill="#32a9ff"/>
+</svg>
