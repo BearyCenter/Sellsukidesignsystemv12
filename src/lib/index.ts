@@ -171,8 +171,8 @@ export { Tree } from "./components/ds-tree";
 export type { TreeProps, TreeNode } from "./components/ds-tree";
 
 // ── FormField ───────────────────────────────────────────────────────────────
-export { FormField, FormLabel, FormError, FormHelperText, useFormField } from "./components/ds-form";
-export type { FormFieldProps, FormLabelProps, FormErrorProps, FormHelperTextProps } from "./components/ds-form";
+export { FormField, FormLabel, FormError, FormHelperText, FormSuccess, useFormField } from "./components/ds-form";
+export type { FormFieldProps, FormLabelProps, FormErrorProps, FormHelperTextProps, FormSuccessProps, FormFieldLayout } from "./components/ds-form";
 
 // ── NumberInput ─────────────────────────────────────────────────────────────
 export { NumberInput } from "./components/ds-numberinput";
@@ -181,3 +181,11 @@ export type { NumberInputProps, NumberInputSize } from "./components/ds-numberin
 // ── OTPInput ────────────────────────────────────────────────────────────────
 export { OTPInput } from "./components/ds-otpinput";
 export type { OTPInputProps, OTPInputSize } from "./components/ds-otpinput";
+
+// ── PageHeader ───────────────────────────────────────────────────────────────
+export { PageHeader } from "./components/ds-pageheader";
+export type { PageHeaderProps } from "./components/ds-pageheader";
+
+// ── FilterBar ────────────────────────────────────────────────────────────────
+export { FilterBar } from "./components/ds-filterbar";
+export type { FilterBarProps, FilterBarValue, FilterConfig, FilterOption, FilterValue } from "./components/ds-filterbar";

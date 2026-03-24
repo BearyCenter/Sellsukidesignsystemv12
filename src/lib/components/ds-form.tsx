@@ -1,7 +1,9 @@
 import React, { createContext, useContext } from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 
 /* ─── Types ──────────────────────────────────────────────────────────────────── */
+
+export type FormFieldLayout = "vertical" | "horizontal";
 
 export interface FormFieldProps {
   /** Field name — used for htmlFor on label */
@@ -12,8 +14,14 @@ export interface FormFieldProps {
   required?: boolean;
   /** Error message to display */
   error?: string;
+  /** Success message to display (overrides helperText when present) */
+  successMessage?: string;
   /** Helper/description text below the field */
   helperText?: string;
+  /** Layout direction: vertical (default) or horizontal (label left, input right) */
+  layout?: FormFieldLayout;
+  /** Label width when layout="horizontal" (default: "160px") */
+  labelWidth?: string;
   /** Field content (input, select, etc.) */
   children: React.ReactNode;
   /** Additional className */
@@ -103,6 +111,28 @@ export function FormError({ message, className = "" }: FormErrorProps) {
   );
 }
 
+/* ─── FormSuccessMessage ─────────────────────────────────────────────────────── */
+
+export interface FormSuccessProps {
+  message?: string;
+  className?: string;
+}
+
+export function FormSuccess({ message, className = "" }: FormSuccessProps) {
+  if (!message) return null;
+
+  return (
+    <div
+      className={`flex items-center gap-1 mt-1.5 text-[var(--color-chart-2,#059669)] ${className}`}
+      style={smallLabel}
+      role="status"
+    >
+      <CheckCircle2 size={12} className="flex-shrink-0" />
+      <span>{message}</span>
+    </div>
+  );
+}
+
 /* ─── FormHelperText ─────────────────────────────────────────────────────────── */
 
 export function FormHelperText({ children, className = "" }: FormHelperTextProps) {
@@ -123,25 +153,50 @@ export function FormField({
   label,
   required,
   error,
+  successMessage,
   helperText,
+  layout = "vertical",
+  labelWidth = "160px",
   children,
   className = "",
 }: FormFieldProps) {
+  const isHorizontal = layout === "horizontal";
+
+  const feedback = error ? (
+    <FormError message={error} />
+  ) : successMessage ? (
+    <FormSuccess message={successMessage} />
+  ) : helperText ? (
+    <FormHelperText>{helperText}</FormHelperText>
+  ) : null;
+
   return (
     <FormFieldContext.Provider value={{ name, error }}>
-      <div className={`${className}`}>
-        {label && (
-          <FormLabel htmlFor={name} required={required}>
-            {label}
-          </FormLabel>
-        )}
-        {children}
-        {error ? (
-          <FormError message={error} />
-        ) : helperText ? (
-          <FormHelperText>{helperText}</FormHelperText>
-        ) : null}
-      </div>
+      {isHorizontal ? (
+        <div className={`flex items-start gap-4 ${className}`}>
+          {label && (
+            <div style={{ width: labelWidth, flexShrink: 0, paddingTop: "6px" }}>
+              <FormLabel htmlFor={name} required={required}>
+                {label}
+              </FormLabel>
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            {children}
+            {feedback}
+          </div>
+        </div>
+      ) : (
+        <div className={`${className}`}>
+          {label && (
+            <FormLabel htmlFor={name} required={required}>
+              {label}
+            </FormLabel>
+          )}
+          {children}
+          {feedback}
+        </div>
+      )}
     </FormFieldContext.Provider>
   );
 }
