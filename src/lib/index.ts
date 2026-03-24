@@ -189,3 +189,7 @@ export type { PageHeaderProps } from "./components/ds-pageheader";
 // ── FilterBar ────────────────────────────────────────────────────────────────
 export { FilterBar } from "./components/ds-filterbar";
 export type { FilterBarProps, FilterBarValue, FilterConfig, FilterOption, FilterValue } from "./components/ds-filterbar";
+
+// ── AdvancedDataTable ────────────────────────────────────────────────────────
+export { AdvancedDataTable } from "./components/ds-advanced-table";
+export type { AdvancedDataTableProps, AdvancedColumn, PaginationMeta, BulkAction, SortOrder, AdvancedTableSize } from "./components/ds-advanced-table";
