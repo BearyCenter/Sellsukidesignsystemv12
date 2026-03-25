@@ -1,9 +1,49 @@
 /*
  * Sellsuki Design System — Font Stack
  *
- * Primary body font: DB HeaventRounded (commercial Thai font — loaded via project host)
- * Fallback body font: Noto Sans Thai (Google Fonts — loaded in index.html)
+ * Primary body font : DB HeaventRounded (self-hosted, public/fonts/)
  * Button/number font: Inter (Google Fonts — loaded in index.html)
+ * Fallback body     : Noto Sans Thai (Google Fonts — loaded in index.html)
  *
- * If DB HeaventRounded font files are available, add @font-face rules below.
+ * Weight mapping:
+ *   400 → Regular
+ *   500 → Med
+ *   700 → Bd (Bold)
+ *   900 → Blk (Black)
  */
+
+@font-face {
+  font-family: 'DB HeaventRounded';
+  src: url('/fonts/DBHeaventRounded-Regular.woff2') format('woff2'),
+       url('/fonts/DBHeaventRounded-Regular.woff')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DB HeaventRounded';
+  src: url('/fonts/DBHeaventRounded-Med.woff2') format('woff2'),
+       url('/fonts/DBHeaventRounded-Med.woff')  format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DB HeaventRounded';
+  src: url('/fonts/DBHeaventRounded-Bold.woff2') format('woff2'),
+       url('/fonts/DBHeaventRounded-Bold.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DB HeaventRounded';
+  src: url('/fonts/DBHeaventRounded-Black.woff2') format('woff2'),
+       url('/fonts/DBHeaventRounded-Black.woff')  format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
