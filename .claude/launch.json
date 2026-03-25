@@ -12,6 +12,12 @@
       "runtimeExecutable": "npx.cmd",
       "runtimeArgs": ["storybook", "dev", "-p", "6006"],
       "port": 6006
+    },
+    {
+      "name": "storybook2",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/storybook/bin/index.cjs", "dev", "-p", "6007"],
+      "port": 6007
     }
   ]
 }

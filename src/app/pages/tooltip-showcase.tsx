@@ -1,26 +1,7 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Info, HelpCircle } from "lucide-react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
-
-function Tooltip({ children, content, placement = "top" }: { children: React.ReactNode; content: string; placement?: "top" | "bottom" | "left" | "right" }) {
-  const [show, setShow] = useState(false);
-  const posMap = {
-    top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-    bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-    left: "right-full top-1/2 -translate-y-1/2 mr-2",
-    right: "left-full top-1/2 -translate-y-1/2 ml-2",
-  };
-  return (
-    <div className="relative inline-flex" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)} onFocus={() => setShow(true)} onBlur={() => setShow(false)}>
-      {children}
-      {show && (
-        <div className={`absolute ${posMap[placement]} z-50 px-3 py-1.5 rounded-[var(--radius-sm)] bg-foreground text-background whitespace-nowrap shadow-md`} style={smallLabel} role="tooltip">
-          {content}
-        </div>
-      )}
-    </div>
-  );
-}
+import { Tooltip } from "../../lib/components/ds-tooltip";
 
 export function TooltipShowcase() {
   return (

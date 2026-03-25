@@ -1,4 +1,6 @@
 import React from "react";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Tooltip } from "./ds-tooltip";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -40,6 +42,8 @@ export interface SidebarProps {
   collapsed?: boolean;
   /** Toggle collapse callback */
   onCollapsedChange?: (collapsed: boolean) => void;
+  /** Show the footer collapse toggle button (default: true). Set false when collapse is controlled from TopNavbar */
+  showCollapseToggle?: boolean;
   /** Sidebar width (default: 256px) */
   width?: string;
   /** Additional class name */
@@ -80,17 +84,22 @@ export function Sidebar({
   onNavigate,
   collapsed = false,
   onCollapsedChange,
+  showCollapseToggle = true,
   className = "",
 }: SidebarProps) {
   return (
     <div
-      className={`bg-sidebar border-r border-sidebar-border flex flex-col flex-shrink-0 transition-all ${
-        collapsed ? "w-16" : "w-64"
-      } ${className}`}
+      className={`bg-sidebar border-r border-sidebar-border flex flex-col flex-shrink-0 ${className}`}
+      style={{
+        width: collapsed ? "64px" : "256px",
+        minWidth: collapsed ? "64px" : "256px",
+        transition: "width 0.25s cubic-bezier(0.4,0,0.2,1), min-width 0.25s cubic-bezier(0.4,0,0.2,1)",
+        overflow: "visible",
+      }}
     >
       {/* Brand */}
       {brand && (
-        <div className="px-4 py-4 border-b border-sidebar-border flex items-center gap-2">
+        <div className={`${collapsed ? "px-2" : "px-4"} py-4 border-b border-sidebar-border flex items-center ${collapsed ? "justify-center" : "gap-2"}`}>
           {brand.logo ? (
             <img
               src={brand.logo}
@@ -114,7 +123,7 @@ export function Sidebar({
       )}
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-3 px-2">
+      <nav className={`flex-1 overflow-y-auto py-3 ${collapsed ? "px-1.5" : "px-2"}`}>
         {groups.map((g) => (
           <div key={g.label} className="mb-4">
             {!collapsed && (
@@ -125,21 +134,24 @@ export function Sidebar({
                 {g.label}
               </span>
             )}
+            {collapsed && (
+              <div className="h-px bg-sidebar-border mx-1 mb-2 mt-1" />
+            )}
             <div className="space-y-0.5">
               {g.items.map((item) => {
                 const active = activeItem === item.id;
-                return (
+                const btn = (
                   <button
                     key={item.id}
                     onClick={() => onNavigate?.(item)}
-                    className={`w-full flex items-center gap-2 px-2 py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${
+                    className={`w-full flex items-center ${collapsed ? "justify-center" : "gap-2"} ${collapsed ? "px-0" : "px-2"} py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${
                       active
                         ? "bg-sidebar-accent text-sidebar-accent-foreground"
                         : "text-sidebar-foreground hover:bg-sidebar-accent/50"
                     }`}
                     style={fontLabel}
                   >
-                    <span className={active ? "text-sidebar-primary" : "text-muted-foreground"}>
+                    <span className={`flex-shrink-0 ${active ? "text-sidebar-primary" : "text-muted-foreground"}`}>
                       {item.icon}
                     </span>
                     {!collapsed && (
@@ -155,21 +167,28 @@ export function Sidebar({
                     )}
                   </button>
                 );
+                return collapsed ? (
+                  <Tooltip key={item.id} content={item.label} placement="right">
+                    {btn}
+                  </Tooltip>
+                ) : btn;
               })}
             </div>
           </div>
         ))}
       </nav>
 
-      {/* Footer */}
-      {onCollapsedChange && (
-        <div className="px-3 py-3 border-t border-sidebar-border">
+      {/* Footer — Collapse toggle */}
+      {showCollapseToggle && onCollapsedChange && (
+        <div className={`${collapsed ? "px-1.5" : "px-3"} py-3 border-t border-sidebar-border`}>
           <button
             onClick={() => onCollapsedChange(!collapsed)}
-            className="w-full px-2 py-1.5 rounded-[var(--radius-md)] text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50 cursor-pointer text-left"
+            className={`w-full flex items-center ${collapsed ? "justify-center" : "gap-2 px-2"} py-1.5 rounded-[var(--radius-md)] text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50 cursor-pointer`}
             style={smallLabel}
+            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {collapsed ? ">" : "Collapse"}
+            {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+            {!collapsed && <span>Collapse</span>}
           </button>
         </div>
       )}

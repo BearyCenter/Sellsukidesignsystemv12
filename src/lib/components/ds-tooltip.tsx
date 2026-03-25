@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -15,15 +16,6 @@ export interface TooltipProps {
   className?: string;
 }
 
-// ─── Config ──────────────────────────────────────────────────────────────────
-
-const placementClasses: Record<TooltipPlacement, string> = {
-  top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
-  bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
-  left: "right-full top-1/2 -translate-y-1/2 mr-2",
-  right: "left-full top-1/2 -translate-y-1/2 ml-2",
-};
-
 const smallLabel: React.CSSProperties = {
   fontFamily: "var(--font-button)",
   fontSize: "var(--text-button)",
@@ -39,26 +31,97 @@ export function Tooltip({
   className = "",
 }: TooltipProps) {
   const [show, setShow] = useState(false);
+  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const updateCoords = () => {
+    if (!wrapperRef.current) return;
+    const rect = wrapperRef.current.getBoundingClientRect();
+    const gap = 8;
+    let top = 0;
+    let left = 0;
+
+    if (placement === "right") {
+      top = rect.top + rect.height / 2;
+      left = rect.right + gap;
+    } else if (placement === "left") {
+      top = rect.top + rect.height / 2;
+      left = rect.left - gap;
+    } else if (placement === "bottom") {
+      top = rect.bottom + gap;
+      left = rect.left + rect.width / 2;
+    } else {
+      // top (default)
+      top = rect.top - gap;
+      left = rect.left + rect.width / 2;
+    }
+
+    setCoords({ top, left });
+  };
+
+  const handleMouseEnter = () => {
+    updateCoords();
+    setShow(true);
+  };
+
+  const handleMouseLeave = () => setShow(false);
+
+  // Recalculate on scroll/resize
+  useEffect(() => {
+    if (!show) return;
+    const onScroll = () => updateCoords();
+    window.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [show]);
+
+  // Portal transform style by placement
+  const transformStyle: React.CSSProperties = (() => {
+    if (placement === "right") return { transform: "translateY(-50%)" };
+    if (placement === "left") return { transform: "translate(-100%, -50%)" };
+    if (placement === "bottom") return { transform: "translateX(-50%)" };
+    return { transform: "translate(-50%, -100%)" }; // top
+  })();
+
+  const tooltipEl = show ? (
+    <div
+      style={{
+        position: "fixed",
+        top: coords.top,
+        left: coords.left,
+        zIndex: 9999,
+        pointerEvents: "none",
+        ...transformStyle,
+      }}
+    >
+      <div
+        className="px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-foreground text-background whitespace-nowrap shadow-md"
+        style={smallLabel}
+        role="tooltip"
+      >
+        {content}
+      </div>
+    </div>
+  ) : null;
 
   return (
-    <div
-      className={`relative inline-flex ${className}`}
-      onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
-      onFocus={() => setShow(true)}
-      onBlur={() => setShow(false)}
-    >
-      {children}
-      {show && (
-        <div
-          className={`absolute ${placementClasses[placement]} z-50 px-3 py-1.5 rounded-[var(--radius-sm)] bg-foreground text-background whitespace-nowrap shadow-md`}
-          style={smallLabel}
-          role="tooltip"
-        >
-          {content}
-        </div>
-      )}
-    </div>
+    <>
+      <div
+        ref={wrapperRef}
+        className={`relative inline-flex ${className}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onFocus={handleMouseEnter}
+        onBlur={handleMouseLeave}
+      >
+        {children}
+      </div>
+      {typeof document !== "undefined" &&
+        ReactDOM.createPortal(tooltipEl, document.body)}
+    </>
   );
 }
 

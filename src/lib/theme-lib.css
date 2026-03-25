@@ -407,37 +407,37 @@
 
   /* H1 - Main page titles, hero sections, and primary page headers */
   --text-h1: 60px;
-  --font-h1: 'DB HeaventRounded', sans-serif;
+  --font-h1: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h1: 400;
 
   /* H2 - Major section headings within a page */
   --text-h2: 52px;
-  --font-h2: 'DB HeaventRounded', sans-serif;
+  --font-h2: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h2: 400;
 
   /* H3 - Sub-section headings, modal titles, card headers */
   --text-h3: 28px;
-  --font-h3: 'DB HeaventRounded', sans-serif;
+  --font-h3: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h3: 700;
 
   /* H4 - Smaller headings, form section titles, card subtitles */
   --text-h4: 24px;
-  --font-h4: 'DB HeaventRounded', sans-serif;
+  --font-h4: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h4: 500;
 
   /* P - Default body text for all content */
   --text-p: 24px;
-  --font-p: 'DB HeaventRounded', sans-serif;
+  --font-p: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-p: 400;
 
   /* Label - Form labels, helper text, captions */
   --text-label: 18px;
-  --font-label: 'DB HeaventRounded', sans-serif;
+  --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-label: 400;
 
   /* Caption - Navigation breadcrumb text, pagination text */
   --text-caption: 20px;
-  --font-caption: 'DB HeaventRounded', sans-serif;
+  --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-caption: 400;
 
   /* Button - Button text across all button types */

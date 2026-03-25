@@ -660,17 +660,27 @@ export const components: Record<string, ComponentInfo> = {
     name: "Sidebar",
     displayName: "Sidebar",
     category: "navigation",
-    description: "Side navigation with groups, active states, badges, collapse mode",
+    description: "Side navigation with groups, active states, badges, collapse to icon-only mode with DS Tooltip on hover",
     imports: ["Sidebar"],
     props: [
       { name: "brand", type: "SidebarBrand", description: "Brand logo and name" },
       { name: "groups", type: "SidebarGroup[]", description: "Navigation groups" },
       { name: "activeItem", type: "string", description: "Active item ID" },
       { name: "onNavigate", type: "(item: SidebarItem) => void", description: "Navigation handler" },
-      { name: "collapsed", type: "boolean", default: "false", description: "Collapsed mode (icon only)" },
+      { name: "collapsed", type: "boolean", default: "false", description: "Collapsed mode (icon only, shows tooltip on hover)" },
       { name: "onCollapsedChange", type: "(collapsed: boolean) => void", description: "Collapse toggle handler" },
+      { name: "showCollapseToggle", type: "boolean", default: "true", description: "Show footer collapse button. Set false when controlled from TopNavbar burger" },
+      { name: "width", type: "string", default: "256px", description: "Expanded sidebar width" },
+      { name: "className", type: "string", description: "Additional class name" },
     ],
-    example: `<Sidebar
+    example: `const [collapsed, setCollapsed] = useState(false);
+
+// Controlled by TopNavbar burger (recommended pattern):
+<TopNavbar onSidebarToggle={() => setCollapsed(c => !c)} ... />
+<Sidebar
+  collapsed={collapsed}
+  onCollapsedChange={setCollapsed}
+  showCollapseToggle={false}
   brand={{ name: "Sellsuki", logo: "/logo.svg" }}
   groups={[
     { label: "Main", items: [
@@ -688,24 +698,32 @@ export const components: Record<string, ComponentInfo> = {
     name: "TopNavbar",
     displayName: "Top Navbar",
     category: "navigation",
-    description: "Top navigation bar with brand, breadcrumbs, search, notifications, user avatar",
+    description: "Top navigation bar with brand, breadcrumbs, search, notifications, user avatar, and sidebar burger toggle",
     imports: ["TopNavbar"],
     props: [
       { name: "brand", type: "TopNavbarBrand", description: "Brand logo and name" },
       { name: "breadcrumbs", type: "BreadcrumbItem[]", description: "Breadcrumb trail" },
+      { name: "title", type: "string", description: "Page title shown after brand" },
       { name: "showSearch", type: "boolean", default: "false", description: "Show search bar" },
       { name: "user", type: "TopNavbarUser", description: "User avatar and name" },
       { name: "notificationCount", type: "number", description: "Notification badge count" },
       { name: "onNotificationClick", type: "() => void", description: "Notification click handler" },
-      { name: "onMobileMenuClick", type: "() => void", description: "Mobile menu toggle" },
+      { name: "onSidebarToggle", type: "() => void", description: "Sidebar burger toggle — shows Menu icon always visible, use to collapse/expand sidebar" },
+      { name: "onMobileMenuClick", type: "() => void", description: "Mobile menu toggle (legacy, prefer onSidebarToggle)" },
+      { name: "onUserClick", type: "() => void", description: "User avatar click handler" },
+      { name: "actions", type: "ReactNode", description: "Custom right-side actions slot" },
+      { name: "height", type: "string", default: "72px", description: "Navbar height" },
     ],
-    example: `<TopNavbar
+    example: `const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+<TopNavbar
   brand={{ name: "Sellsuki", logo: "/logo.svg" }}
   breadcrumbs={[{ label: "Home" }, { label: "Orders" }]}
   showSearch
   user={{ name: "John Doe", avatar: "/john.jpg" }}
   notificationCount={3}
   onNotificationClick={() => setShowNotif(true)}
+  onSidebarToggle={() => setSidebarCollapsed(c => !c)}
 />`,
   },
 

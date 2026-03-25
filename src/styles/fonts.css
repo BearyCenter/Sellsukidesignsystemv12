@@ -1,0 +1,9 @@
+/*
+ * Sellsuki Design System — Font Stack
+ *
+ * Primary body font: DB HeaventRounded (commercial Thai font — loaded via project host)
+ * Fallback body font: Noto Sans Thai (Google Fonts — loaded in index.html)
+ * Button/number font: Inter (Google Fonts — loaded in index.html)
+ *
+ * If DB HeaventRounded font files are available, add @font-face rules below.
+ */

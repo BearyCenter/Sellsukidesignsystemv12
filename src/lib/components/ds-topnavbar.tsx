@@ -29,6 +29,8 @@ export interface TopNavbarProps {
   brand?: TopNavbarBrand;
   /** Breadcrumb items */
   breadcrumbs?: BreadcrumbItem[];
+  /** Page title displayed after brand (used for current page context) */
+  title?: string;
   /** Right-side action area */
   actions?: React.ReactNode;
   /** User avatar */
@@ -45,8 +47,10 @@ export interface TopNavbarProps {
   notificationCount?: number;
   /** Notification click handler */
   onNotificationClick?: () => void;
-  /** Mobile menu click handler */
+  /** Mobile menu click handler (shows only on mobile) */
   onMobileMenuClick?: () => void;
+  /** Sidebar toggle handler — shows burger icon (always visible) to collapse/expand sidebar */
+  onSidebarToggle?: () => void;
   /** User click handler */
   onUserClick?: () => void;
   /** Breadcrumb click handler */
@@ -68,6 +72,7 @@ const btnStyle: React.CSSProperties = {
 export function TopNavbar({
   brand,
   breadcrumbs,
+  title,
   actions,
   user,
   height = "72px",
@@ -77,6 +82,7 @@ export function TopNavbar({
   notificationCount,
   onNotificationClick,
   onMobileMenuClick,
+  onSidebarToggle,
   onUserClick,
   onBreadcrumbClick,
   className = "",
@@ -95,8 +101,19 @@ export function TopNavbar({
       className={`bg-card border-b border-border flex items-center px-5 gap-4 ${className}`}
       style={{ height }}
     >
-      {/* Mobile menu button */}
-      {onMobileMenuClick && (
+      {/* Sidebar toggle button — always visible */}
+      {onSidebarToggle && (
+        <button
+          className="w-9 h-9 flex items-center justify-center rounded-[var(--radius-md)] text-foreground hover:bg-muted/30 transition-colors cursor-pointer"
+          onClick={onSidebarToggle}
+          title="Toggle sidebar"
+        >
+          <Menu size={18} />
+        </button>
+      )}
+
+      {/* Mobile menu button (mobile only, legacy) */}
+      {!onSidebarToggle && onMobileMenuClick && (
         <button
           className="lg:hidden w-8 h-8 flex items-center justify-center rounded-[var(--radius-md)] text-foreground hover:bg-muted/30 transition-colors cursor-pointer"
           onClick={onMobileMenuClick}
@@ -127,6 +144,13 @@ export function TopNavbar({
             </div>
           )}
         </>
+      )}
+
+      {/* Page title */}
+      {title && (
+        <span className="text-foreground hidden sm:block truncate" style={btnStyle}>
+          {title}
+        </span>
       )}
 
       {/* Breadcrumbs */}

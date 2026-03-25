@@ -25,6 +25,7 @@ import {
   Grid3X3,
 } from "lucide-react";
 import SSKIcon from "../../imports/Icon";
+import { Tooltip } from "../../lib/components/ds-tooltip";
 
 /**
  * Vibe Code Demo — Sellsuki Main Brand (Sky-500 primary)
@@ -32,8 +33,8 @@ import SSKIcon from "../../imports/Icon";
  * Layout: Header 72px + Sidebar 280px + Content
  */
 
-const fontBody = "'DB HeaventRounded', 'Noto Sans Thai', sans-serif";
-const fontButton = "Inter, sans-serif";
+const fontBody = "'DB HeaventRounded', 'Noto Sans Thai', 'Noto Sans', sans-serif";
+const fontButton = "Inter, 'Noto Sans Thai', sans-serif";
 
 const f = {
   h3: { fontFamily: fontBody, fontSize: 28, fontWeight: 700 } as React.CSSProperties,
@@ -104,6 +105,7 @@ export function VibeCodeDemo() {
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({ MAIN: true, MARKETING: true });
   const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState(companies[0]);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const companyDropdownRef = useRef<HTMLDivElement>(null);
 
   // Close company dropdown on outside click
@@ -180,16 +182,22 @@ export function VibeCodeDemo() {
       {/* ═══════════════════════════════════════════════════════════════════════ */}
       <div className="rounded-[12px] border overflow-hidden" style={{ borderColor: c.border, background: c.bgPage }}>
 
-        {/* ─── HEADER 72px ─── */}
+        {/* ─── HEADER 72px (full width) ─── */}
         <div className="flex items-center justify-between px-4 border-b" style={{ height: 72, borderColor: c.border, background: c.bgCard }}>
           <div className="flex items-center gap-4">
-            <button className="w-10 h-10 flex items-center justify-center rounded-[8px] hover:bg-gray-50">
+            <button
+              className="w-10 h-10 flex items-center justify-center rounded-[8px] hover:bg-gray-50 cursor-pointer transition-colors"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            >
               <MenuIcon size={20} color="#111827" />
             </button>
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 flex-shrink-0 rounded-[8px] overflow-hidden"><SSKIcon /></div>
               <span style={{ ...f.h4, fontSize: 20, color: "#0F225A" }}>Sellsuki</span>
             </div>
+            {/* Page title in header */}
+            <span style={{ ...f.label, color: c.textSec, fontSize: 16 }}>Order Management</span>
           </div>
           <div className="flex items-center gap-2 px-4 py-2 rounded-[8px] border" style={{ borderColor: c.border, background: c.bgPage, width: 320 }}>
             <Search size={16} color={c.placeholder} />
@@ -211,121 +219,170 @@ export function VibeCodeDemo() {
         </div>
 
         <div className="flex" style={{ minHeight: 620 }}>
-          {/* ─── SIDEBAR 280px ─── */}
-          <aside className="flex-shrink-0 flex flex-col border-r" style={{ width: 280, borderColor: c.border, background: c.bgCard }}>
+          {/* ─── SIDEBAR (collapsible) ─── */}
+          <aside
+            className="flex-shrink-0 flex flex-col border-r"
+            style={{
+              width: sidebarCollapsed ? 64 : 280,
+              minWidth: sidebarCollapsed ? 64 : 280,
+              borderColor: c.border,
+              background: c.bgCard,
+              transition: "width 0.25s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+              overflow: "visible",
+            }}
+          >
             {/* Profile / Company Switcher */}
-            <div className="p-4 relative" ref={companyDropdownRef}>
-              <button
-                onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
-                className="w-full flex items-center gap-3 p-3 rounded-[8px] transition-colors text-left"
-                style={{ background: c.primaryLight, border: `1px solid ${c.primaryBorder}` }}
-              >
-                <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.primary }}>
-                  <span style={{ color: "white", ...f.button, fontSize: 16 }}>{selectedCompany.initials}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="truncate" style={{ ...f.label, fontWeight: 600, color: c.text }}>{selectedCompany.name}</p>
-                  <p className="truncate" style={{ fontFamily: fontButton, fontSize: 12, color: c.textSec }}>{selectedCompany.email}</p>
-                </div>
-                <ChevronDown
-                  size={16}
-                  color={c.primary}
-                  style={{ transition: "transform 0.2s", transform: companyDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                />
-              </button>
-
-              {/* Company Dropdown */}
-              {companyDropdownOpen && (
-                <div
-                  className="absolute left-4 right-4 mt-2 rounded-[8px] border shadow-lg overflow-hidden z-50"
-                  style={{ background: c.bgCard, borderColor: c.border }}
+            {!sidebarCollapsed ? (
+              <div className="p-4 relative" ref={companyDropdownRef}>
+                <button
+                  onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
+                  className="w-full flex items-center gap-3 p-3 rounded-[8px] transition-colors text-left"
+                  style={{ background: c.primaryLight, border: `1px solid ${c.primaryBorder}` }}
                 >
-                  <div className="px-3 py-2 border-b" style={{ borderColor: c.border }}>
-                    <p style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>SWITCH COMPANY</p>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.primary }}>
+                    <span style={{ color: "white", ...f.button, fontSize: 16 }}>{selectedCompany.initials}</span>
                   </div>
-                  {companies.map((company) => (
-                    <button
-                      key={company.id}
-                      onClick={() => { setSelectedCompany(company); setCompanyDropdownOpen(false); }}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 transition-colors text-left"
-                      style={{ background: selectedCompany.id === company.id ? c.primaryLight : "transparent" }}
-                    >
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selectedCompany.id === company.id ? c.primary : c.border }}>
-                        <span style={{ color: selectedCompany.id === company.id ? "white" : c.textSec, ...f.numSm }}>{company.initials}</span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="truncate" style={{ ...f.label, fontSize: 16, fontWeight: 500, color: c.text }}>{company.name}</p>
-                        <p className="truncate" style={{ fontFamily: fontButton, fontSize: 11, color: c.textSec }}>{company.email}</p>
-                      </div>
-                      {selectedCompany.id === company.id && (
-                        <Check size={16} color={c.primary} />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="truncate" style={{ ...f.label, fontWeight: 600, color: c.text }}>{selectedCompany.name}</p>
+                    <p className="truncate" style={{ fontFamily: fontButton, fontSize: 12, color: c.textSec }}>{selectedCompany.email}</p>
+                  </div>
+                  <ChevronDown
+                    size={16}
+                    color={c.primary}
+                    style={{ transition: "transform 0.2s", transform: companyDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                  />
+                </button>
 
-            <nav className="flex-1 overflow-y-auto px-4 space-y-4">
+                {/* Company Dropdown */}
+                {companyDropdownOpen && (
+                  <div
+                    className="absolute left-4 right-4 mt-2 rounded-[8px] border shadow-lg overflow-hidden z-50"
+                    style={{ background: c.bgCard, borderColor: c.border }}
+                  >
+                    <div className="px-3 py-2 border-b" style={{ borderColor: c.border }}>
+                      <p style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>SWITCH COMPANY</p>
+                    </div>
+                    {companies.map((company) => (
+                      <button
+                        key={company.id}
+                        onClick={() => { setSelectedCompany(company); setCompanyDropdownOpen(false); }}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 transition-colors text-left"
+                        style={{ background: selectedCompany.id === company.id ? c.primaryLight : "transparent" }}
+                      >
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selectedCompany.id === company.id ? c.primary : c.border }}>
+                          <span style={{ color: selectedCompany.id === company.id ? "white" : c.textSec, ...f.numSm }}>{company.initials}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="truncate" style={{ ...f.label, fontSize: 16, fontWeight: 500, color: c.text }}>{company.name}</p>
+                          <p className="truncate" style={{ fontFamily: fontButton, fontSize: 11, color: c.textSec }}>{company.email}</p>
+                        </div>
+                        {selectedCompany.id === company.id && (
+                          <Check size={16} color={c.primary} />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Collapsed: show avatar only */
+              <div className="flex justify-center py-4 border-b" style={{ borderColor: c.border }}>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.primary }}>
+                  <span style={{ color: "white", ...f.button, fontSize: 14 }}>{selectedCompany.initials}</span>
+                </div>
+              </div>
+            )}
+
+            <nav className={`flex-1 overflow-y-auto ${sidebarCollapsed ? "px-1.5" : "px-4"} space-y-4 py-2`}>
               {sidebarMenus.map((group) => {
                 const isExpanded = expandedGroups[group.label] !== false;
                 return (
                   <div key={group.label}>
-                    <button
-                      onClick={() => toggleGroup(group.label)}
-                      className="w-full flex items-center justify-between px-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
-                    >
-                      <span className="uppercase" style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>
-                        {group.label}
-                      </span>
-                      {isExpanded ? (
-                        <ChevronUp size={14} color={c.placeholder} />
-                      ) : (
-                        <ChevronDown size={14} color={c.placeholder} />
-                      )}
-                    </button>
+                    {!sidebarCollapsed ? (
+                      <button
+                        onClick={() => toggleGroup(group.label)}
+                        className="w-full flex items-center justify-between px-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
+                      >
+                        <span className="uppercase" style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>
+                          {group.label}
+                        </span>
+                        {isExpanded ? (
+                          <ChevronUp size={14} color={c.placeholder} />
+                        ) : (
+                          <ChevronDown size={14} color={c.placeholder} />
+                        )}
+                      </button>
+                    ) : (
+                      <div className="h-px mx-1 mb-2 mt-1" style={{ background: c.border }} />
+                    )}
                     <div
                       className="space-y-1 overflow-hidden transition-all"
                       style={{
-                        maxHeight: isExpanded ? 500 : 0,
-                        opacity: isExpanded ? 1 : 0,
+                        maxHeight: sidebarCollapsed || isExpanded ? 500 : 0,
+                        opacity: sidebarCollapsed || isExpanded ? 1 : 0,
                         transition: "max-height 0.25s ease, opacity 0.2s ease",
                       }}
                     >
-                      {group.items.map((item) => (
-                        <button
-                          key={item.label}
-                          className="w-full flex items-center gap-3 px-3 rounded-[8px] transition-colors"
-                          style={{
-                            height: 48,
-                            background: item.active ? c.primaryLight : "transparent",
-                            color: item.active ? c.primary : c.textSec,
-                          }}
-                        >
-                          <span style={{ color: item.active ? c.primary : c.textSec }}>{item.icon}</span>
-                          <span style={{ ...f.label, fontWeight: item.active ? 600 : 400, color: c.text }}>{item.label}</span>
-                          {item.badge && (
-                            <span className="ml-auto px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: item.active ? c.primary : c.border, color: item.active ? "white" : c.textSec }}>
-                              {item.badge}
-                            </span>
-                          )}
-                        </button>
-                      ))}
+                      {group.items.map((item) => {
+                        const btn = (
+                          <button
+                            key={item.label}
+                            className={`w-full flex items-center ${sidebarCollapsed ? "justify-center" : "gap-3 px-3"} rounded-[8px] transition-colors`}
+                            style={{
+                              height: 48,
+                              background: item.active ? c.primaryLight : "transparent",
+                              color: item.active ? c.primary : c.textSec,
+                            }}
+                          >
+                            <span style={{ color: item.active ? c.primary : c.textSec }}>{item.icon}</span>
+                            {!sidebarCollapsed && (
+                              <span style={{ ...f.label, fontWeight: item.active ? 600 : 400, color: c.text }}>{item.label}</span>
+                            )}
+                            {!sidebarCollapsed && item.badge && (
+                              <span className="ml-auto px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: item.active ? c.primary : c.border, color: item.active ? "white" : c.textSec }}>
+                                {item.badge}
+                              </span>
+                            )}
+                          </button>
+                        );
+                        return sidebarCollapsed ? (
+                          <Tooltip key={item.label} content={item.label} placement="right">
+                            {btn}
+                          </Tooltip>
+                        ) : btn;
+                      })}
                     </div>
                   </div>
                 );
               })}
             </nav>
 
-            <div className="p-4 border-t space-y-1" style={{ borderColor: c.border }}>
-              <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
-                <HelpCircle size={20} color={c.textSec} />
-                <span style={{ ...f.label, color: c.text }}>Help & Support</span>
-              </button>
-              <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
-                <Settings size={20} color={c.textSec} />
-                <span style={{ ...f.label, color: c.text }}>Settings</span>
-              </button>
+            <div className={`${sidebarCollapsed ? "px-1.5" : "p-4"} py-3 border-t space-y-1`} style={{ borderColor: c.border }}>
+              {sidebarCollapsed ? (
+                <>
+                  <Tooltip content="Help & Support" placement="right">
+                    <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
+                      <HelpCircle size={20} color={c.textSec} />
+                    </button>
+                  </Tooltip>
+                  <Tooltip content="Settings" placement="right">
+                    <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
+                      <Settings size={20} color={c.textSec} />
+                    </button>
+                  </Tooltip>
+                </>
+              ) : (
+                <>
+                  <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
+                    <HelpCircle size={20} color={c.textSec} />
+                    <span style={{ ...f.label, color: c.text }}>Help & Support</span>
+                  </button>
+                  <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
+                    <Settings size={20} color={c.textSec} />
+                    <span style={{ ...f.label, color: c.text }}>Settings</span>
+                  </button>
+                </>
+              )}
             </div>
           </aside>
 
