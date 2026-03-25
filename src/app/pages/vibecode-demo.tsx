@@ -362,16 +362,20 @@ export function VibeCodeDemo() {
             <div className={`${sidebarCollapsed ? "px-1.5" : "p-4"} py-3 border-t space-y-1`} style={{ borderColor: c.border }}>
               {sidebarCollapsed ? (
                 <>
-                  <Tooltip content="Help & Support" placement="right">
-                    <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
-                      <HelpCircle size={20} color={c.textSec} />
-                    </button>
-                  </Tooltip>
-                  <Tooltip content="Settings" placement="right">
-                    <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
-                      <Settings size={20} color={c.textSec} />
-                    </button>
-                  </Tooltip>
+                  <div className="w-full flex">
+                    <Tooltip content="Help & Support" placement="right" className="flex-1">
+                      <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
+                        <HelpCircle size={20} color={c.textSec} />
+                      </button>
+                    </Tooltip>
+                  </div>
+                  <div className="w-full flex">
+                    <Tooltip content="Settings" placement="right" className="flex-1">
+                      <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
+                        <Settings size={20} color={c.textSec} />
+                      </button>
+                    </Tooltip>
+                  </div>
                 </>
               ) : (
                 <>
