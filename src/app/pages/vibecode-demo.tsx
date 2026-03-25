@@ -346,9 +346,11 @@ export function VibeCodeDemo() {
                           </button>
                         );
                         return sidebarCollapsed ? (
-                          <Tooltip key={item.label} content={item.label} placement="right">
-                            {btn}
-                          </Tooltip>
+                          <div key={item.label} className="w-full">
+                            <Tooltip content={item.label} placement="right">
+                              {btn}
+                            </Tooltip>
+                          </div>
                         ) : btn;
                       })}
                     </div>

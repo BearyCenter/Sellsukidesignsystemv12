@@ -470,9 +470,11 @@ function AppInner() {
                     </button>
                   );
                   return sidebarCollapsed ? (
-                    <Tooltip key={item.id} content={item.label} placement="right">
-                      {btn}
-                    </Tooltip>
+                    <div key={item.id} className="w-full">
+                      <Tooltip content={item.label} placement="right">
+                        {btn}
+                      </Tooltip>
+                    </div>
                   ) : btn;
                 })}
               </div>
