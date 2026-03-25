@@ -52,6 +52,7 @@ import {
   Tag,
   Star,
   Server,
+  Activity,
 } from "lucide-react";
 import SSKIcon from "../imports/Icon";
 import { I18nProvider, useI18n } from "./i18n";
@@ -110,6 +111,7 @@ import { ColorPickerShowcase } from "./pages/colorpicker-showcase";
 import { ImagePreviewShowcase } from "./pages/imagepreview-showcase";
 import { MCPServerShowcase } from "./pages/mcp-server-showcase";
 import { VibeCodeDemo } from "./pages/vibecode-demo";
+import { MCPTrackerPage } from "./pages/mcp-tracker";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -162,7 +164,8 @@ type PageId =
   | "colorpicker"
   | "imagepreview"
   | "mcpserver"
-  | "vibecode";
+  | "vibecode"
+  | "mcp-tracker";
 
 interface SidebarItem {
   id: PageId;
@@ -192,6 +195,7 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "changelog", label: t("sidebar.changelog"), icon: <History size={16} />, badge: `v${latestChangelog.version}` },
         { id: "mcpserver", label: t("sidebar.mcpserver"), icon: <Server size={16} />, badge: "New" },
         { id: "vibecode", label: "Vibe Code Demo", icon: <MousePointerClick size={16} />, badge: "Demo" },
+        { id: "mcp-tracker", label: "MCP Tracker", icon: <Activity size={16} />, badge: "Live" },
       ],
     },
     {
@@ -322,6 +326,7 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   imagepreview: ImagePreviewShowcase,
   mcpserver: MCPServerShowcase,
   vibecode: VibeCodeDemo,
+  "mcp-tracker": MCPTrackerPage,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────

@@ -27,7 +27,7 @@ export const WithBreadcrumb: Story = {
     title: "Create Campaign",
     subtitle: "Set up a new marketing campaign",
     breadcrumb: (
-      <nav style={{ fontSize: 13, color: "#6b7280", fontFamily: "Inter, sans-serif" }}>
+      <nav style={{ fontSize: 13, color: "#6b7280", fontFamily: "var(--font-label)" }}>
         <span>Dashboard</span>
         <span style={{ margin: "0 6px" }}>/</span>
         <span>Marketing</span>
@@ -48,7 +48,7 @@ export const WithActions: Story = {
           style={{
             height: 36, padding: "0 16px", borderRadius: 8,
             border: "1px solid #e5e7eb", background: "#fff",
-            fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600,
+            fontFamily: "var(--font-button)", fontSize: 14, fontWeight: 600,
             cursor: "pointer", color: "#1f2937",
           }}
         >
@@ -58,7 +58,7 @@ export const WithActions: Story = {
           style={{
             height: 36, padding: "0 16px", borderRadius: 8,
             border: "none", background: "#32a9ff",
-            fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600,
+            fontFamily: "var(--font-button)", fontSize: 14, fontWeight: 600,
             cursor: "pointer", color: "#fff",
           }}
         >
@@ -77,7 +77,7 @@ export const WithTabs: Story = {
         style={{
           height: 36, padding: "0 16px", borderRadius: 8,
           border: "none", background: "#32a9ff",
-          fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600,
+          fontFamily: "var(--font-button)", fontSize: 14, fontWeight: 600,
           cursor: "pointer", color: "#fff",
         }}
       >
@@ -91,7 +91,7 @@ export const WithTabs: Story = {
             key={t}
             style={{
               padding: "8px 16px", border: "none", background: "none",
-              fontFamily: "Inter, sans-serif", fontSize: 14, cursor: "pointer",
+              fontFamily: "var(--font-button)", fontSize: 14, cursor: "pointer",
               borderBottom: i === 0 ? "2px solid #32a9ff" : "2px solid transparent",
               color: i === 0 ? "#32a9ff" : "#6b7280", fontWeight: i === 0 ? 600 : 400,
             }}
@@ -110,7 +110,7 @@ export const FullFeature: Story = {
     subtitle: "Create and manage marketing campaigns",
     sticky: false,
     breadcrumb: (
-      <nav style={{ fontSize: 13, color: "#6b7280", fontFamily: "Inter, sans-serif" }}>
+      <nav style={{ fontSize: 13, color: "#6b7280", fontFamily: "var(--font-button)" }}>
         <span>Dashboard</span>
         <span style={{ margin: "0 6px" }}>/</span>
         <span style={{ color: "#1f2937" }}>Campaign</span>
@@ -118,10 +118,10 @@ export const FullFeature: Story = {
     ),
     actions: (
       <div style={{ display: "flex", gap: 8 }}>
-        <button style={{ height: 36, padding: "0 16px", borderRadius: 8, border: "1px solid #e5e7eb", background: "#fff", fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, cursor: "pointer", color: "#1f2937" }}>
+        <button style={{ height: 36, padding: "0 16px", borderRadius: 8, border: "1px solid #e5e7eb", background: "#fff", fontFamily: "var(--font-button)", fontSize: 14, fontWeight: 600, cursor: "pointer", color: "#1f2937" }}>
           Import
         </button>
-        <button style={{ height: 36, padding: "0 16px", borderRadius: 8, border: "none", background: "#32a9ff", fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, cursor: "pointer", color: "#fff" }}>
+        <button style={{ height: 36, padding: "0 16px", borderRadius: 8, border: "none", background: "#32a9ff", fontFamily: "var(--font-button)", fontSize: 14, fontWeight: 600, cursor: "pointer", color: "#fff" }}>
           + New Campaign
         </button>
       </div>
@@ -129,7 +129,7 @@ export const FullFeature: Story = {
     tabs: (
       <div style={{ display: "flex" }}>
         {["All Campaigns", "Active", "Scheduled", "Completed"].map((t, i) => (
-          <button key={t} style={{ padding: "8px 16px", border: "none", background: "none", fontFamily: "Inter, sans-serif", fontSize: 14, cursor: "pointer", borderBottom: i === 0 ? "2px solid #32a9ff" : "2px solid transparent", color: i === 0 ? "#32a9ff" : "#6b7280", fontWeight: i === 0 ? 600 : 400 }}>
+          <button key={t} style={{ padding: "8px 16px", border: "none", background: "none", fontFamily: "var(--font-button)", fontSize: 14, cursor: "pointer", borderBottom: i === 0 ? "2px solid #32a9ff" : "2px solid transparent", color: i === 0 ? "#32a9ff" : "#6b7280", fontWeight: i === 0 ? 600 : 400 }}>
             {t}
           </button>
         ))}

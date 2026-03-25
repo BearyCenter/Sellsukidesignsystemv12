@@ -20,10 +20,10 @@ export interface DSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElem
 // ─── Size Config ──────────────────────────────────────────────────────────────
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 gap-1.5",
-  md: "h-10 px-4 gap-2",
-  lg: "h-12 px-6 gap-2.5",
-  xl: "h-14 px-8 gap-3",
+  sm: "h-8 px-3 gap-1.5",       // 32px
+  md: "h-9 px-4 gap-2",         // 36px
+  lg: "h-10 px-5 gap-2",        // 40px
+  xl: "h-11 px-6 gap-2.5",      // 44px
 };
 
 const sizeTextStyles: Record<ButtonSize, React.CSSProperties> = {
@@ -139,10 +139,10 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ) => {
     const isDisabled = disabled || loading;
     const sizeMap: Record<ButtonSize, string> = {
-      sm: "w-8 h-8",
-      md: "w-10 h-10",
-      lg: "w-12 h-12",
-      xl: "w-14 h-14",
+      sm: "w-8 h-8",       // 32px
+      md: "w-9 h-9",       // 36px
+      lg: "w-10 h-10",     // 40px
+      xl: "w-11 h-11",     // 44px
     };
 
     return (

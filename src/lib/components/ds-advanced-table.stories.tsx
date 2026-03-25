@@ -64,7 +64,7 @@ function StatusBadge({ status }: { status: string }) {
         borderRadius: 9999,
         background: s.bg,
         color: s.text,
-        fontFamily: "Inter, sans-serif",
+        fontFamily: "var(--font-button)",
         fontSize: 12,
         fontWeight: 500,
         whiteSpace: "nowrap",
@@ -248,7 +248,7 @@ export const ExpandableRows: Story = {
       ]}
       data={MOCK_COMPANIES.slice(0, 5)}
       expandedRowRender={(row) => (
-        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#6b7280" }}>
+        <div style={{ fontFamily: "var(--font-button)", fontSize: 13, color: "#6b7280" }}>
           <strong style={{ color: "#1f2937" }}>Details for {row.name}</strong>
           <div style={{ marginTop: 8, display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
             <div><span style={{ display: "block", fontWeight: 600, color: "#1f2937" }}>Revenue</span>฿{row.revenue.toLocaleString()}</div>
@@ -331,7 +331,7 @@ export const CCSAdminPanel: Story = {
         bulkActions={bulkActions}
         showColumnToggle
         expandedRowRender={(row) => (
-          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: "#6b7280" }}>
+          <div style={{ fontFamily: "var(--font-button)", fontSize: 13, color: "#6b7280" }}>
             <strong style={{ color: "#1f2937" }}>{row.name}</strong> — Revenue: ฿{row.revenue.toLocaleString()} · Created: {row.createdAt}
           </div>
         )}

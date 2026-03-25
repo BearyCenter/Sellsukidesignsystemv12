@@ -4,6 +4,7 @@ import { z } from "zod";
 import { components, componentCategories } from "./data/components.js";
 import { colorPalette, typography, spacing, borderRadius, semanticColors, elevation, darkMode } from "./data/tokens.js";
 import { brandIdentity, doRules, dontRules, layoutPatterns, buttonSystem, quickStartTemplate, resources } from "./data/brand-rules.js";
+import { withLog } from "./logger.js";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -20,7 +21,7 @@ export function createServer(): McpServer {
     {
       category: z.enum(["form", "display", "navigation", "feedback", "layout", "all"]).optional().describe("Filter by category (default: all)"),
     },
-    async ({ category }) => {
+    async ({ category }) => withLog("list_components", { category: category ?? "all" }, async () => {
       const filterCat = category === "all" ? undefined : category;
 
       const grouped: Record<string, string[]> = {};
@@ -44,7 +45,7 @@ export function createServer(): McpServer {
       }
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: get_component ─────────────────────────────────────────────────────
@@ -55,7 +56,7 @@ export function createServer(): McpServer {
     {
       name: z.string().describe("Component name (e.g. DSButton, Modal, Dropdown, Badge)"),
     },
-    async ({ name }) => {
+    async ({ name }) => withLog("get_component", { name }, async () => {
       let comp = components[name];
       if (!comp) {
         const lower = name.toLowerCase();
@@ -87,7 +88,7 @@ export function createServer(): McpServer {
       text += `\n## Example\n\`\`\`tsx\n${comp.example}\n\`\`\`\n`;
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: get_design_tokens ─────────────────────────────────────────────────
@@ -98,7 +99,7 @@ export function createServer(): McpServer {
     {
       category: z.enum(["typography", "spacing", "radius", "elevation", "colors", "dark-mode", "all"]).describe("Token category"),
     },
-    async ({ category }) => {
+    async ({ category }) => withLog("get_design_tokens", { category }, async () => {
       let text = `# Sellsuki Design Tokens`;
       if (category !== "all") text += ` — ${category}`;
       text += "\n\n";
@@ -172,7 +173,7 @@ export function createServer(): McpServer {
       }
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: get_color_palette ─────────────────────────────────────────────────
@@ -183,7 +184,7 @@ export function createServer(): McpServer {
     {
       palette: z.enum(["brand", "neutral", "success", "warning", "danger", "secondary", "all"]).optional().describe("Specific palette (default: all)"),
     },
-    async ({ palette }) => {
+    async ({ palette }) => withLog("get_color_palette", { palette: palette ?? "all" }, async () => {
       const show = palette === "all" || !palette
         ? Object.entries(colorPalette)
         : Object.entries(colorPalette).filter(([k]) => k === palette);
@@ -199,7 +200,7 @@ export function createServer(): McpServer {
       }
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: get_brand_rules ───────────────────────────────────────────────────
@@ -208,7 +209,7 @@ export function createServer(): McpServer {
     "get_brand_rules",
     "Get the DO and DON'T rules for generating UI with Sellsuki Design System, including brand identity and layout patterns",
     {},
-    async () => {
+    async () => withLog("get_brand_rules", {}, async () => {
       let text = "# Sellsuki Brand & Design Rules\n\n";
       text += "## Brand Identity\n";
       for (const [k, v] of Object.entries(brandIdentity)) {
@@ -248,7 +249,7 @@ export function createServer(): McpServer {
       }
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: get_quick_start ───────────────────────────────────────────────────
@@ -257,7 +258,7 @@ export function createServer(): McpServer {
     "get_quick_start",
     "Get the quick-start code template for setting up a new page with Sellsuki Design System",
     {},
-    async () => {
+    async () => withLog("get_quick_start", {}, async () => {
       let text = "# Quick Start — Sellsuki Design System\n\n";
       text += `## Install\n\`\`\`bash\nnpm install @uxuissk/design-system\n\`\`\`\n\n`;
       text += `## Template\n\`\`\`tsx\n${quickStartTemplate}\n\`\`\`\n\n`;
@@ -267,7 +268,7 @@ export function createServer(): McpServer {
       text += `- **Figma**: ${resources.figma}\n`;
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Tool: generate_page_layout ──────────────────────────────────────────────
@@ -279,7 +280,7 @@ export function createServer(): McpServer {
       description: z.string().describe("Description of the page (e.g. 'order list page with table, search, and pagination')"),
       includeLayout: z.boolean().optional().describe("Include TopNavbar + Sidebar layout (default: true)"),
     },
-    async ({ description, includeLayout = true }) => {
+    async ({ description, includeLayout = true }) => withLog("generate_page_layout", { description, includeLayout }, async () => {
       const desc = description.toLowerCase();
 
       const suggested: string[] = [];
@@ -361,7 +362,7 @@ export function createServer(): McpServer {
       text += `4. Add error handling with \`<Alert />\`\n`;
 
       return { content: [{ type: "text", text }] };
-    }
+    })
   );
 
   // ─── Resources ───────────────────────────────────────────────────────────────
