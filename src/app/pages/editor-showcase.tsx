@@ -11,7 +11,7 @@ export function EditorShowcase() {
         <div className="flex items-center gap-2 text-primary mb-2 caption">
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.editor.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.editor.title")}</h1>
+        <h2 className="text-foreground">{t("page.editor.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.editor.desc")}
         </p>

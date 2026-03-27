@@ -52,7 +52,7 @@ export function Drawer({
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-foreground/20" onClick={onClose} />
       <div
-        className={`absolute bg-card border border-border shadow-lg flex flex-col ${sideClasses[side]} ${className}`}
+        className={`absolute bg-card border border-border shadow-elevation-sm flex flex-col ${sideClasses[side]} ${className}`}
       >
         {title && (
           <div className="px-5 py-4 border-b border-border flex items-center justify-between flex-shrink-0">

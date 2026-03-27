@@ -39,7 +39,7 @@ export function SidebarShowcase() {
               <nav className="flex-1 overflow-y-auto py-3 px-2">
                 {groups.map((g) => (
                   <div key={g.label} className="mb-4">
-                    {!collapsed && <span className="px-2 mb-1.5 block text-muted-foreground uppercase tracking-wider" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>{g.label}</span>}
+                    {!collapsed && <span className="px-2 mb-1.5 block text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>{g.label}</span>}
                     <div className="space-y-0.5">
                       {g.items.map((item) => {
                         const active = activeItem === item.id;

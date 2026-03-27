@@ -62,8 +62,8 @@ export interface TopNavbarProps {
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const btnStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-button)",
 };
 

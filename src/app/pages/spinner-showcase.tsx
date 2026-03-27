@@ -1,15 +1,6 @@
 import React from "react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle } from "./_showcase-factory";
-
-function Spinner({ size = "md", color }: { size?: "sm" | "md" | "lg" | "xl"; color?: string }) {
-  const sizes = { sm: "w-4 h-4 border-2", md: "w-8 h-8 border-[3px]", lg: "w-12 h-12 border-4", xl: "w-16 h-16 border-4" };
-  return (
-    <div
-      className={`${sizes[size]} rounded-full border-muted animate-spin`}
-      style={{ borderTopColor: color ?? "var(--primary)" }}
-    />
-  );
-}
+import { Spinner } from "../../lib/components/ds-spinner";
 
 export function SpinnerShowcase() {
   return (

@@ -1,41 +1,7 @@
 import React, { useState } from "react";
 import { Info } from "lucide-react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
-
-/* ─── Switch Component ─────────────────────────────────────────────────────── */
-
-function Switch({
-  checked, onChange, label, description, size = "md", disabled, color = "primary",
-}: {
-  checked: boolean; onChange: (v: boolean) => void; label?: string; description?: string;
-  size?: "sm" | "md" | "lg"; disabled?: boolean; color?: "primary" | "success" | "warning" | "destructive";
-}) {
-  const sizes = {
-    sm: { track: "w-7 h-4", thumb: "w-3 h-3", on: "translate-x-3" },
-    md: { track: "w-10 h-6", thumb: "w-4.5 h-4.5", on: "translate-x-4.5" },
-    lg: { track: "w-14 h-8", thumb: "w-6.5 h-6.5", on: "translate-x-6" },
-  };
-  const s = sizes[size];
-  const colors: Record<string, string> = { primary: "bg-primary", success: "bg-chart-2", warning: "bg-chart-5", destructive: "bg-destructive" };
-  const thumbPx = { sm: { w: 12, h: 12, on: 14 }, md: { w: 18, h: 18, on: 18 }, lg: { w: 26, h: 26, on: 24 } };
-  const tp = thumbPx[size];
-
-  return (
-    <label className={`inline-flex items-start gap-3 ${disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"}`}>
-      <button role="switch" aria-checked={checked} onClick={() => onChange(!checked)} disabled={disabled}
-        className={`${s.track} rounded-full relative flex-shrink-0 transition-colors cursor-pointer ${checked ? colors[color] : "bg-muted"}`}>
-        <span className="rounded-full bg-white shadow-sm absolute transition-transform"
-          style={{ width: tp.w, height: tp.h, top: "50%", transform: `translateY(-50%) translateX(${checked ? tp.on : 2}px)`, left: 0 }} />
-      </button>
-      {(label || description) && (
-        <div>
-          {label && <span className="text-foreground block" style={fontLabel}>{label}</span>}
-          {description && <span className="text-muted-foreground block" style={smallLabel}>{description}</span>}
-        </div>
-      )}
-    </label>
-  );
-}
+import { Switch } from "../../lib/components/ds-switch";
 
 /* ─── Showcase ─────────────────────────────────────────────────────────────── */
 

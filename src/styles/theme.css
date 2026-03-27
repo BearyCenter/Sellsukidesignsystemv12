@@ -400,12 +400,12 @@
      ═══════════════════════════════════════════════════════════════════════════ */
 
   /* H1 - Main page titles, hero sections, and primary page headers */
-  --text-h1: 60px;
+  --text-h1: 48px;
   --font-h1: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h1: 400;
-  
+
   /* H2 - Major section headings within a page */
-  --text-h2: 52px;
+  --text-h2: 40px;
   --font-h2: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-h2: 400;
   
@@ -420,24 +420,27 @@
   --weight-h4: 500;
   
   /* P - Default body text for all content */
-  --text-p: 24px;
+  --text-p: 20px;
   --font-p: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-p: 400;
-  
-  /* Label - Form labels, helper text, captions */
+
+  /* Label - Form labels, helper text, UI labels */
   --text-label: 18px;
   --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-label: 400;
-  
-  /* Caption - Navigation breadcrumb text, pagination text */
+
+  /* Caption - Small captions, breadcrumbs, pagination */
   --text-caption: 20px;
   --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-caption: 400;
   
   /* Button - Button text across all button types */
-  --text-button: 14px;
-  --font-button: 'Inter', sans-serif;
+  --text-button: 18px;
+  --font-button: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-button: 600;
+
+  /* Badge/Tag inline label (sidebar nav badge, version badge, etc.) */
+  --text-badge: 16px;
   
   /* Base text sizes for Tailwind compatibility */
   --text-2xl: var(--text-h1);
@@ -560,6 +563,11 @@
     font-family: var(--font-p);
     font-size: var(--text-p);
     font-weight: var(--weight-p);
+  }
+
+  /* Native checkbox: use primary color and fix default black border */
+  input[type="checkbox"] {
+    accent-color: var(--primary);
   }
 }
 

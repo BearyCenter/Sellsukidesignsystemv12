@@ -27,10 +27,10 @@ const sizeStyles: Record<ButtonSize, string> = {
 };
 
 const sizeTextStyles: Record<ButtonSize, React.CSSProperties> = {
-  sm: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" },
-  md: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" },
-  lg: { fontFamily: "var(--font-button)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" },
-  xl: { fontFamily: "var(--font-button)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-button)" },
+  sm: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" },
+  md: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" },
+  lg: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" },
+  xl: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" },
 };
 
 const sizeIconMap: Record<ButtonSize, number> = {

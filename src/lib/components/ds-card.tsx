@@ -11,9 +11,9 @@ export interface CardProps {
 
 const elevationMap: Record<string, string> = {
   none: "",
-  sm: "shadow-sm",
-  md: "shadow-md",
-  lg: "shadow-lg",
+  sm: "shadow-elevation-sm",
+  md: "shadow-elevation-sm",
+  lg: "shadow-elevation-sm",
 };
 
 // ─── Card ────────────────────────────────────────────────────────────────────
@@ -21,7 +21,7 @@ const elevationMap: Record<string, string> = {
 export function Card({ children, className, hover, elevation = "none" }: CardProps) {
   return (
     <div
-      className={`rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden ${elevationMap[elevation] ?? ""} ${hover ? "hover:border-primary/40 hover:shadow-md transition-all cursor-pointer" : ""} ${className ?? ""}`}
+      className={`rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden ${elevationMap[elevation] ?? ""} ${hover ? "hover:border-primary/40 hover:shadow-elevation-sm transition-all cursor-pointer" : ""} ${className ?? ""}`}
     >
       {children}
     </div>

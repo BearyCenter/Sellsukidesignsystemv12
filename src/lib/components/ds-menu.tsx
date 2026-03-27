@@ -82,7 +82,7 @@ function SubMenu({ items, parentRect }: { items: MenuItem[]; parentRect: DOMRect
   return createPortal(
     <div
       ref={ref}
-      className="fixed z-[9999] min-w-[200px] rounded-[var(--radius)] border border-border bg-popover shadow-md py-1"
+      className="fixed z-[9999] min-w-[200px] rounded-[var(--radius)] border border-border bg-popover shadow-elevation-sm py-1"
       style={{ top: pos.top, left: pos.left }}
     >
       {items.map((item, i) => (
@@ -104,7 +104,7 @@ function MenuItemRow({ item }: { item: MenuItem }) {
 
   if (item.label) {
     return (
-      <div className="px-3 py-1.5 text-muted-foreground uppercase tracking-wider" style={labelStyle}>
+      <div className="px-3 py-1.5 text-muted-foreground" style={labelStyle}>
         {item.label}
       </div>
     );
@@ -188,7 +188,7 @@ export function Menu({ items, open, onClose, triggerRef, className = "" }: MenuP
   return createPortal(
     <div
       ref={menuRef}
-      className={`fixed z-[9999] min-w-[200px] rounded-[var(--radius)] border border-border bg-popover shadow-md py-1 animate-[fadeIn_0.15s_ease] ${className}`}
+      className={`fixed z-[9999] min-w-[200px] rounded-[var(--radius)] border border-border bg-popover shadow-elevation-sm py-1 animate-[fadeIn_0.15s_ease] ${className}`}
       style={{ top: pos.top, left: pos.left }}
     >
       {items.map((item, i) => (

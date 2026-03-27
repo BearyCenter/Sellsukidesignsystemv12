@@ -41,7 +41,7 @@ export function TableShowcase() {
         <div className="flex items-center gap-2 text-primary mb-2 caption">
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.table.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.table.title")}</h1>
+        <h2 className="text-foreground">{t("page.table.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.table.desc")}
         </p>
@@ -75,11 +75,11 @@ export function TableShowcase() {
       <Section title="Sizes" description="Three density options." code={`<DSTable columns={columns} data={data} size="sm" />`}>
         <div className="space-y-6">
           <div>
-            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Small</span>
+            <span className="text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Small</span>
             <DSTable columns={columns} data={sampleData.slice(0, 3)} size="sm" />
           </div>
           <div>
-            <span className="uppercase tracking-wider text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Large</span>
+            <span className="text-muted-foreground block mb-2" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>Large</span>
             <DSTable columns={columns} data={sampleData.slice(0, 3)} size="lg" />
           </div>
         </div>

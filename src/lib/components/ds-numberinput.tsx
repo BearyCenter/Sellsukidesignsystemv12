@@ -41,9 +41,9 @@ const smallLabel: React.CSSProperties = {
 };
 
 const sizeMap: Record<NumberInputSize, string> = {
-  sm: "h-8 text-sm",
+  sm: "h-8",
   md: "h-10",
-  lg: "h-12 text-lg",
+  lg: "h-12",
 };
 
 const btnSizeMap: Record<NumberInputSize, number> = {

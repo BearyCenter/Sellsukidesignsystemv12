@@ -19,7 +19,7 @@ export function InputShowcase() {
         <div className="flex items-center gap-2 text-primary mb-2 caption">
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.input.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.input.title")}</h1>
+        <h2 className="text-foreground">{t("page.input.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.input.desc")}
         </p>
@@ -46,14 +46,14 @@ export function InputShowcase() {
       <Section
         title="Sizes"
         description="Three sizes for different density."
-        code={`<DSInput inputSize="sm" placeholder="Small" label="Name" />
-<DSInput inputSize="md" placeholder="Medium" label="Name" />
-<DSInput inputSize="lg" placeholder="Large" label="Name" />`}
+        code={`<DSInput size="sm" placeholder="Small" label="Name" />
+<DSInput size="md" placeholder="Medium" label="Name" />
+<DSInput size="lg" placeholder="Large" label="Name" />`}
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <DemoCard label="Small"><DSInput inputSize="sm" placeholder="Small input" label="Name" /></DemoCard>
-          <DemoCard label="Medium"><DSInput inputSize="md" placeholder="Medium input" label="Name" /></DemoCard>
-          <DemoCard label="Large"><DSInput inputSize="lg" placeholder="Large input" label="Name" /></DemoCard>
+          <DemoCard label="Small"><DSInput size="sm" placeholder="Small input" label="Name" /></DemoCard>
+          <DemoCard label="Medium"><DSInput size="md" placeholder="Medium input" label="Name" /></DemoCard>
+          <DemoCard label="Large"><DSInput size="lg" placeholder="Large input" label="Name" /></DemoCard>
         </div>
       </Section>
 

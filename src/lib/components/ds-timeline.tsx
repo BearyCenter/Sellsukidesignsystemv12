@@ -55,11 +55,11 @@ export function Timeline({
 
   const statusColor = (s?: string) =>
     s === "completed"
-      ? "bg-chart-2 text-white"
+      ? "bg-chart-2 text-primary-foreground"
       : s === "current"
       ? "bg-primary text-primary-foreground"
       : s === "error"
-      ? "bg-destructive text-white"
+      ? "bg-destructive text-primary-foreground"
       : "bg-muted text-muted-foreground";
 
   if (variant === "compact") {

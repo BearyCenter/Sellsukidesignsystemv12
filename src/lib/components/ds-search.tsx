@@ -31,7 +31,7 @@ interface SearchFieldProps {
 const sizeMap: Record<SearchSize, { input: string; icon: number; style: React.CSSProperties }> = {
   sm: { input: "h-8 px-8", icon: 14, style: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" } },
   md: { input: "h-10 px-9", icon: 16, style: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" } },
-  lg: { input: "h-12 px-10", icon: 18, style: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" } },
+  lg: { input: "h-12 px-10", icon: 18, style: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" } },
 };
 
 const variantMap: Record<SearchVariant, string> = {
@@ -110,7 +110,7 @@ export function SearchField({
   }, [suggestions, val]);
 
   const labelStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-  const smallLabelStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
+  const smallLabelStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
 
   return (
     <div ref={containerRef} className={`relative ${className}`}>
@@ -150,7 +150,7 @@ export function SearchField({
 
       {/* Suggestions dropdown */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-popover border border-border rounded-[var(--radius-md)] shadow-lg z-50 overflow-hidden max-h-64 overflow-y-auto" style={{ padding: "var(--Spacing--Spacing-sm)" }}>
+        <div className="absolute top-full left-0 right-0 mt-1 bg-popover border border-border rounded-[var(--radius-md)] shadow-elevation-sm z-50 overflow-hidden max-h-64 overflow-y-auto" style={{ padding: "var(--Spacing--Spacing-sm)" }}>
           {suggestions.map((sug, idx) => (
             <button
               key={sug.id}

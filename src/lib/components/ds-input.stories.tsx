@@ -7,7 +7,7 @@ const meta: Meta<typeof DSInput> = {
   component: DSInput,
   tags: ["autodocs"],
   argTypes: {
-    inputSize: { control: "select", options: ["sm", "md", "lg"] },
+    size: { control: "select", options: ["sm", "md", "lg"] },
     variant: { control: "select", options: ["default", "outlined", "filled", "ghost"] },
     state: { control: "select", options: ["default", "error", "success", "warning"] },
   },

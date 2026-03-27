@@ -98,7 +98,7 @@ export function Tooltip({
       }}
     >
       <div
-        className="px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-foreground text-background whitespace-nowrap shadow-md"
+        className="px-2.5 py-1.5 rounded-[var(--radius-sm)] bg-foreground text-background whitespace-nowrap shadow-elevation-sm"
         style={smallLabel}
         role="tooltip"
       >

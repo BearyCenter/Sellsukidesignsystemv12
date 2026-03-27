@@ -1,50 +1,7 @@
 import React from "react";
 import { Inbox, Search, FileText, ShieldAlert, WifiOff, FolderOpen, Plus, Upload, ArrowRight } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
-
-/* ─── EmptyState Component ─────────────────────────────────────────────────── */
-
-function EmptyState({
-  icon, title, description, action, secondaryAction, size = "md",
-}: {
-  icon?: React.ReactNode; title: string; description?: string;
-  action?: { label: string; onClick: () => void; icon?: React.ReactNode };
-  secondaryAction?: { label: string; onClick: () => void };
-  size?: "sm" | "md" | "lg";
-}) {
-  const iconSize = size === "sm" ? "w-10 h-10" : size === "lg" ? "w-16 h-16" : "w-12 h-12";
-  const pad = size === "sm" ? "py-6 px-4" : size === "lg" ? "py-14 px-8" : "py-10 px-6";
-
-  return (
-    <div className={`flex flex-col items-center text-center ${pad}`}>
-      {icon && (
-        <div className={`${iconSize} rounded-full bg-muted flex items-center justify-center mb-4`}>
-          <span className="text-muted-foreground">{icon}</span>
-        </div>
-      )}
-      <h4 className="text-foreground">{title}</h4>
-      {description && <p className="text-muted-foreground mt-1.5 max-w-sm" style={fontLabel}>{description}</p>}
-      {(action || secondaryAction) && (
-        <div className="flex items-center gap-3 mt-5">
-          {action && (
-            <button onClick={action.onClick}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
-              style={btnStyle}>
-              {action.icon}{action.label}
-            </button>
-          )}
-          {secondaryAction && (
-            <button onClick={secondaryAction.onClick}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-accent transition-colors cursor-pointer"
-              style={btnStyle}>
-              {secondaryAction.label}
-            </button>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
+import { PageHeader, Section, DemoBox, DemoCard, APITable } from "./_showcase-factory";
+import { EmptyState } from "../../lib/components/ds-emptystate";
 
 /* ─── Showcase ─────────────────────────────────────────────────────────────── */
 

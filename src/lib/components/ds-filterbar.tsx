@@ -44,14 +44,14 @@ export interface FilterBarProps {
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
 
 const labelStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button, 'Inter', sans-serif)",
-  fontSize: "var(--text-button, 14px)",
-  fontWeight: "var(--weight-button, 600)",
+  fontFamily: "var(--font-button)",
+  fontSize: "var(--text-button)",
+  fontWeight: "var(--weight-button)",
 };
 
 const smallStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button, 'Inter', sans-serif)",
-  fontSize: "var(--text-button, 13px)",
+  fontFamily: "var(--font-button)",
+  fontSize: "var(--text-button)",
   fontWeight: 400,
 };
 
@@ -104,15 +104,15 @@ function FilterDropdown({ config, value, onChange }: FilterDropdownProps) {
         onClick={() => setOpen((v) => !v)}
         className={`inline-flex items-center gap-1.5 h-9 px-3 rounded-lg border transition-colors cursor-pointer select-none ${
           isActive
-            ? "bg-[var(--primary,#32a9ff)]/10 border-[var(--primary,#32a9ff)] text-[var(--primary,#32a9ff)]"
-            : "bg-[var(--background,#fff)] border-[var(--border,#e5e7eb)] text-[var(--foreground,#1f2937)] hover:bg-[var(--muted,#f3f4f6)]"
+            ? "bg-[var(--primary)]/10 border-[var(--primary)] text-[var(--primary)]"
+            : "bg-[var(--background)] border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--muted)]"
         }`}
         style={labelStyle}
       >
         {activeLabel}
         {isActive && (
           <span
-            className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--primary,#32a9ff)] text-white text-[10px] font-bold"
+            className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--primary)] text-primary-foreground text-[10px] font-bold"
           >
             {selectedValues.length}
           </span>
@@ -131,7 +131,7 @@ function FilterDropdown({ config, value, onChange }: FilterDropdownProps) {
             onClick={() => setOpen(false)}
           />
           {/* Dropdown */}
-          <div className="absolute left-0 top-full mt-1 z-20 bg-[var(--card,#fff)] border border-[var(--border,#e5e7eb)] rounded-lg shadow-md min-w-[160px] py-1 overflow-hidden">
+          <div className="absolute left-0 top-full mt-1 z-20 bg-[var(--card)] border border-[var(--border)] rounded-lg shadow-elevation-sm min-w-[160px] py-1 overflow-hidden">
             {config.options.map((opt) => {
               const selected = selectedValues.includes(opt.value);
               return (
@@ -141,8 +141,8 @@ function FilterDropdown({ config, value, onChange }: FilterDropdownProps) {
                   onClick={() => handleSelect(opt.value)}
                   className={`w-full flex items-center gap-2 px-3 py-2 text-left transition-colors cursor-pointer ${
                     selected
-                      ? "bg-[var(--primary,#32a9ff)]/10 text-[var(--primary,#32a9ff)]"
-                      : "text-[var(--foreground,#1f2937)] hover:bg-[var(--muted,#f3f4f6)]"
+                      ? "bg-[var(--primary)]/10 text-[var(--primary)]"
+                      : "text-[var(--foreground)] hover:bg-[var(--muted)]"
                   }`}
                   style={smallStyle}
                 >
@@ -150,15 +150,15 @@ function FilterDropdown({ config, value, onChange }: FilterDropdownProps) {
                     <span
                       className={`inline-flex items-center justify-center w-4 h-4 rounded border flex-shrink-0 ${
                         selected
-                          ? "bg-[var(--primary,#32a9ff)] border-[var(--primary,#32a9ff)]"
-                          : "border-[var(--border,#e5e7eb)]"
+                          ? "bg-[var(--primary)] border-[var(--primary)] text-primary-foreground"
+                          : "border-[var(--border)]"
                       }`}
                     >
                       {selected && (
                         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                           <path
                             d="M1 4L3.5 6.5L9 1"
-                            stroke="white"
+                            stroke="currentColor"
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -233,21 +233,21 @@ export function FilterBar({
 
   return (
     <div
-      className={`flex items-center gap-2 flex-wrap bg-[var(--background,#fff)] border border-[var(--border,#e5e7eb)] rounded-lg px-3 py-2 ${className}`}
+      className={`flex items-center gap-2 flex-wrap bg-[var(--background)] border border-[var(--border)] rounded-lg px-3 py-2 ${className}`}
     >
       {/* Search */}
       {showSearch && (
         <div className="relative flex items-center">
           <Search
             size={14}
-            className="absolute left-2.5 text-[var(--muted-foreground,#6b7280)] pointer-events-none"
+            className="absolute left-2.5 text-[var(--muted-foreground)] pointer-events-none"
           />
           <input
             type="text"
             value={current.search ?? ""}
             onChange={handleSearch}
             placeholder={searchPlaceholder}
-            className="h-8 pl-8 pr-3 rounded-md border border-[var(--border,#e5e7eb)] bg-[var(--background,#fff)] text-[var(--foreground,#1f2937)] placeholder:text-[var(--muted-foreground,#9ca3af)] focus:outline-none focus:border-[var(--primary,#32a9ff)] focus:ring-1 focus:ring-[var(--primary,#32a9ff)] transition-colors min-w-[200px]"
+            className="h-8 pl-8 pr-3 rounded-md border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] transition-colors min-w-[200px]"
             style={smallStyle}
           />
         </div>
@@ -255,14 +255,14 @@ export function FilterBar({
 
       {/* Divider */}
       {showSearch && filters.length > 0 && (
-        <div className="w-px h-5 bg-[var(--border,#e5e7eb)] flex-shrink-0" />
+        <div className="w-px h-5 bg-[var(--border)] flex-shrink-0" />
       )}
 
       {/* Filter icon */}
       {filters.length > 0 && (
         <SlidersHorizontal
           size={14}
-          className="text-[var(--muted-foreground,#6b7280)] flex-shrink-0"
+          className="text-[var(--muted-foreground)] flex-shrink-0"
         />
       )}
 
@@ -279,8 +279,8 @@ export function FilterBar({
       {/* Active count badge */}
       {activeFilterCount > 0 && (
         <span
-          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--primary,#32a9ff)]/10 text-[var(--primary,#32a9ff)]"
-          style={{ ...smallStyle, fontSize: "12px" }}
+          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]"
+          style={smallStyle}
         >
           {activeFilterCount} active
         </span>
@@ -291,7 +291,7 @@ export function FilterBar({
         <button
           type="button"
           onClick={handleClearAll}
-          className="inline-flex items-center gap-1 h-7 px-2 rounded-md text-[var(--muted-foreground,#6b7280)] hover:text-[var(--foreground,#1f2937)] hover:bg-[var(--muted,#f3f4f6)] transition-colors cursor-pointer ml-auto"
+          className="inline-flex items-center gap-1 h-7 px-2 rounded-md text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors cursor-pointer ml-auto"
           style={smallStyle}
         >
           <X size={12} />

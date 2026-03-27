@@ -431,8 +431,8 @@ function AppInner() {
             <div key={group.label} className="mb-4">
               {!sidebarCollapsed && (
                 <span
-                  className="px-2 mb-2 block text-muted-foreground uppercase tracking-wider"
-                  style={{ fontFamily: "var(--font-button)", fontSize: "11px", fontWeight: "var(--weight-button)" }}
+                  className="px-2 mb-2 block text-muted-foreground"
+                  style={{ fontFamily: "var(--font-label)", fontSize: "16px", fontWeight: "var(--weight-label)" }}
                 >
                   {group.label}
                 </span>
@@ -467,7 +467,7 @@ function AppInner() {
                       {!sidebarCollapsed && item.badge && (
                         <span
                           className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-primary text-primary-foreground"
-                          style={{ fontFamily: "var(--font-button)", fontSize: "11px", fontWeight: "var(--weight-button)", lineHeight: "1" }}
+                          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
                         >
                           {item.badge}
                         </span>
@@ -493,7 +493,7 @@ function AppInner() {
             <div className="flex items-center justify-between px-1">
               <span
                 className="text-muted-foreground truncate"
-                style={{ fontFamily: "var(--font-button)", fontSize: "12px", fontWeight: "var(--weight-button)" }}
+                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)" }}
               >
                 v{latestChangelog.version} &middot; {latestChangelog.date}
               </span>
@@ -504,7 +504,7 @@ function AppInner() {
                   aria-label={lang === "en" ? "เปลี่ยนเป็นภาษาไทย" : "Switch to English"}
                   title={lang === "en" ? "เปลี่ยนเป็นภาษาไทย" : "Switch to English"}
                 >
-                  <span style={{ fontFamily: "var(--font-label)", fontSize: "11px", fontWeight: "var(--weight-button)" }}>
+                  <span style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)" }}>
                     {t("app.switchLang")}
                   </span>
                 </button>

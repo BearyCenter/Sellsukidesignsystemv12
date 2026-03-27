@@ -33,8 +33,14 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.0` (optional — shared CSS+JS t
 | Success | Emerald-600 `#059669` | Success states |
 | Warning | Amber-600 `#d97706` | Warning states |
 | Danger | Rose-600 `#e11d48` | Error, destructive |
-| Font body | `DB HeaventRounded` | All text except buttons |
-| Font button | `Inter` | Button text only |
+| Font | `DB HeaventRounded` | **ทุกอย่างทั้งหมด** — body, label, button, heading, nav, table, badge — ห้ามใช้ Inter |
+| H1 | `48px` `var(--text-h1)` | Page hero titles |
+| H2 | `40px` `var(--text-h2)` | Page section titles |
+| H3 | `28px` `var(--text-h3)` | Card/modal headers |
+| H4 | `24px` `var(--text-h4)` | Sub-section headers |
+| Body (P) | `20px` `var(--text-p)` | Default body/paragraph text |
+| Label | `18px` `var(--text-label)` | Form labels, UI labels, helper text |
+| Button/Badge | `18px` `var(--text-button)` | Buttons, badges, tabs, small labels |
 | Radius | `8px` (radius-md) | Default corner radius |
 | Shadow | `0px 1px 2px 0px #0000000d` | Minimal, prefer borders |
 
@@ -71,10 +77,11 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.0` (optional — shared CSS+JS t
 1. Always import CSS first: `import "@uxuissk/design-system/styles.css"`
 2. Use DS components — never create custom buttons, inputs, modals
 3. Use semantic color tokens, not raw hex
-4. Use DB HeaventRounded for text, Inter only for buttons
+4. Use DB HeaventRounded (`var(--font-label)`) for **ALL text** — buttons, labels, nav, table, badge, search, checkbox, tabs, avatar, sidebar — **never use Inter/font-button**
 5. Default size `md` for all components
 6. Handle loading (Skeleton/Spinner), empty (EmptyState), error (Alert) states
 7. Support dark mode — use CSS variables
+8. Always include primary action button (e.g. "สร้างออเดอร์") in page header — max 1 per view
 
 ## DON'T
 
@@ -84,6 +91,8 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.0` (optional — shared CSS+JS t
 4. Don't create custom form components
 5. Don't use more than 1 primary button per view
 6. Don't skip loading/empty/error states
+7. Don't use `<h1>` for page titles in docs/showcase — use `<h2>` (40px) instead
+8. Don't hardcode font sizes — always use `var(--text-h1)` through `var(--text-button)` tokens
 
 ## Layout Pattern
 

@@ -1,9 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import {
-  Search,
   Plus,
-  TrendingUp,
-  TrendingDown,
   Users,
   ShoppingCart,
   DollarSign,
@@ -17,541 +14,401 @@ import {
   Box,
   Settings,
   HelpCircle,
-  ChevronDown,
-  ChevronUp,
-  Check,
-  Menu as MenuIcon,
-  Bell,
-  Grid3X3,
 } from "lucide-react";
 import SSKIcon from "../../imports/Icon";
-import { Tooltip } from "../../lib/components/ds-tooltip";
+import { fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
 
-/**
- * Vibe Code Demo — Sellsuki Main Brand (Sky-500 primary)
- * Font: DB HeaventRounded (body/Thai), Inter (buttons/numbers)
- * Layout: Header 72px + Sidebar 280px + Content
- */
+// ─── DS Components ────────────────────────────────────────────────────────────
+import { TopNavbar } from "../../lib/components/ds-topnavbar";
+import { Sidebar, type SidebarGroup } from "../../lib/components/ds-sidebar";
+import { type SidebarAccountItem } from "../../lib/components/ds-sidebar-account";
+import { DSButton, IconButton } from "../../lib/components/ds-button";
+import { Badge } from "../../lib/components/ds-badge";
+import { Tabs } from "../../lib/components/ds-tabs";
+import { DSTable, type TableColumn } from "../../lib/components/ds-table";
+import { Pagination } from "../../lib/components/ds-pagination";
+import { StatCard } from "../../lib/components/ds-statistic";
+import { Avatar } from "../../lib/components/ds-avatar";
 
-const fontBody = "'DB HeaventRounded', 'Noto Sans Thai', 'Noto Sans', sans-serif";
-const fontButton = "Inter, 'Noto Sans Thai', sans-serif";
+// ─── Typography tokens (DS-aligned) ──────────────────────────────────────────
 
-const f = {
-  h3: { fontFamily: fontBody, fontSize: 28, fontWeight: 700 } as React.CSSProperties,
-  h4: { fontFamily: fontBody, fontSize: 24, fontWeight: 500 } as React.CSSProperties,
-  p: { fontFamily: fontBody, fontSize: 20, fontWeight: 400 } as React.CSSProperties,
-  label: { fontFamily: fontBody, fontSize: 18, fontWeight: 400 } as React.CSSProperties,
-  button: { fontFamily: fontButton, fontSize: 14, fontWeight: 600 } as React.CSSProperties,
-  num: { fontFamily: fontButton, fontSize: 13, fontWeight: 600 } as React.CSSProperties,
-  numSm: { fontFamily: fontButton, fontSize: 12, fontWeight: 600 } as React.CSSProperties,
-  numLg: { fontFamily: fontButton, fontSize: 24, fontWeight: 700 } as React.CSSProperties,
-  // Thai badge text — use body font for Thai readability
-  badge: { fontFamily: fontBody, fontSize: 16, fontWeight: 500, whiteSpace: "nowrap" as const } as React.CSSProperties,
+const fontH3: React.CSSProperties = {
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-h3)",
+  fontWeight: "var(--weight-button)",
 };
 
-// ─── Colors: Main Sellsuki Brand ────────────────────────────────────────────
-
-const c = {
-  primary: "#32a9ff",       // Sky-500
-  primaryHover: "#1b8bf5",  // Sky-600
-  primaryLight: "#f0f9ff",  // Sky-50
-  primaryBorder: "#8edcff", // Sky-300
-  text: "#1f2937",          // Gray-800
-  textSec: "#6b7280",       // Gray-500
-  placeholder: "#9ca3af",   // Gray-400
-  border: "#e5e7eb",        // Gray-200
-  bgPage: "#f9fafb",        // Gray-50
-  bgCard: "#ffffff",
-  success: "#059669",
-  successBg: "#ecfdf5",
-  warning: "#d97706",
-  warningBg: "#fffbeb",
-  danger: "#e11d48",
-  dangerBg: "#fff1f2",
-  infoBg: "#f0f9ff",
+const fontH4: React.CSSProperties = {
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-h4)",
+  fontWeight: "var(--weight-label)",
 };
 
-// ─── Sidebar ────────────────────────────────────────────────────────────────
+// ─── Account Switcher data ────────────────────────────────────────────────────
 
-const sidebarMenus = [
+const COMPANIES: SidebarAccountItem[] = [
+  { id: "ssk", name: "Sellsuki company", handle: "@sellsuki", avatarFallback: "S" },
+  { id: "baby", name: "Baby & Mom", handle: "@babymom", avatarFallback: "B" },
+  { id: "multy", name: "Multy's Shop", handle: "@multy", avatarFallback: "M" },
+];
+const BRANCHES: SidebarAccountItem[] = [
+  { id: "ratchada", name: "สาขา รัชดาภิเษก", handle: "BKK-01", avatarFallback: "ร" },
+  { id: "siam", name: "สาขา สยาม", handle: "BKK-02", avatarFallback: "ส" },
+  { id: "online", name: "Online", handle: "OL-01", avatarFallback: "O" },
+];
+const PROVIDERS: SidebarAccountItem[] = [
+  { id: "line", name: "LINE Shopping", handle: "@line", avatarFallback: "L" },
+  { id: "shopee", name: "Shopee", handle: "@shopee", avatarFallback: "S" },
+  { id: "lazada", name: "Lazada", handle: "@lazada", avatarFallback: "L" },
+];
+
+// ─── Sidebar groups ───────────────────────────────────────────────────────────
+
+const SIDEBAR_GROUPS: SidebarGroup[] = [
   {
-    label: "MAIN",
+    label: "Main",
     items: [
-      { icon: <Home size={20} />, label: "Dashboard" },
-      { icon: <ShoppingCart size={20} />, label: "Orders", active: true, badge: 23 },
-      { icon: <Box size={20} />, label: "Products" },
-      { icon: <Users size={20} />, label: "Customers" },
-      { icon: <FileText size={20} />, label: "Reports" },
+      { id: "dashboard", label: "Dashboard",   icon: <Home size={16} /> },
+      { id: "orders",    label: "Orders",      icon: <ShoppingCart size={16} />, badge: "23" },
+      { id: "products",  label: "Products",    icon: <Box size={16} /> },
+      { id: "customers", label: "Customers",   icon: <Users size={16} /> },
+      { id: "reports",   label: "Reports",     icon: <FileText size={16} /> },
     ],
   },
   {
-    label: "MARKETING",
+    label: "Marketing",
     items: [
-      { icon: <LayoutGrid size={20} />, label: "Campaigns" },
+      { id: "campaigns", label: "Campaigns", icon: <LayoutGrid size={16} /> },
+    ],
+  },
+  {
+    label: "",
+    items: [
+      { id: "help",     label: "Help & Support", icon: <HelpCircle size={16} /> },
+      { id: "settings", label: "Settings",       icon: <Settings size={16} /> },
     ],
   },
 ];
 
-// ─── Companies (for dropdown switcher) ───────────────────────────────────────
+// ─── Order data ───────────────────────────────────────────────────────────────
 
-const companies = [
-  { id: "sellsuki", name: "Sellsuki Company", email: "watcharapong@sellsuki.com", initials: "WC" },
-  { id: "brandx", name: "Brand X Store", email: "admin@brandx.com", initials: "BX" },
-  { id: "shopdee", name: "ShopDee Online", email: "team@shopdee.co.th", initials: "SD" },
+type Order = {
+  id: string;
+  customer: string;
+  channel: string;
+  amount: string;
+  status: "pending" | "confirmed" | "shipping" | "completed";
+  date: string;
+};
+
+const STATUS_BADGE: Record<
+  Order["status"],
+  { label: string; variant: "warning" | "default" | "secondary" | "success" }
+> = {
+  pending:   { label: "รอยืนยัน",      variant: "warning" },
+  confirmed: { label: "ยืนยันแล้ว",    variant: "default" },
+  shipping:  { label: "กำลังจัดส่ง",  variant: "secondary" },
+  completed: { label: "สำเร็จ",        variant: "success" },
+};
+
+const ORDERS: Order[] = [
+  { id: "ORD-2024001", customer: "สมชาย มั่งมี",   channel: "LINE",     amount: "฿3,450",  status: "pending",   date: "18 มี.ค. 2026" },
+  { id: "ORD-2024002", customer: "สุดา รักดี",      channel: "Facebook", amount: "฿1,290",  status: "confirmed", date: "18 มี.ค. 2026" },
+  { id: "ORD-2024003", customer: "วิชัย ศรีสุข",   channel: "Shopee",   amount: "฿5,670",  status: "shipping",  date: "17 มี.ค. 2026" },
+  { id: "ORD-2024004", customer: "นภา จันทร์ทอง", channel: "LINE",     amount: "฿890",    status: "completed", date: "17 มี.ค. 2026" },
+  { id: "ORD-2024005", customer: "อรุณ แสงทอง",   channel: "Website",  amount: "฿12,340", status: "pending",   date: "17 มี.ค. 2026" },
+  { id: "ORD-2024006", customer: "พิมพ์ ใจงาม",   channel: "Facebook", amount: "฿2,150",  status: "confirmed", date: "16 มี.ค. 2026" },
 ];
+
+const TAB_COUNTS: Record<string, number> = {
+  all: 156, pending: 23, confirmed: 45, shipping: 67, completed: 21,
+};
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export function VibeCodeDemo() {
-  const [activeTab, setActiveTab] = useState("all");
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({ MAIN: true, MARKETING: true });
-  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState(companies[0]);
+  const [activeTab,        setActiveTab]        = useState("all");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const companyDropdownRef = useRef<HTMLDivElement>(null);
+  const [activeCompany, setActiveCompany] = useState(COMPANIES[0]);
+  const [activeBranch, setActiveBranch] = useState(BRANCHES[0]);
+  const [activeProvider, setActiveProvider] = useState(PROVIDERS[0]);
+  const [page,             setPage]             = useState(1);
 
-  // Close company dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (companyDropdownRef.current && !companyDropdownRef.current.contains(e.target as Node)) {
-        setCompanyDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const filteredOrders =
+    activeTab === "all" ? ORDERS : ORDERS.filter((o) => o.status === activeTab);
 
-  const toggleGroup = (label: string) => {
-    setExpandedGroups((prev) => ({ ...prev, [label]: !prev[label] }));
-  };
-
-  const stats = [
-    { label: "ยอดขายวันนี้", value: "฿128,450", change: "+12.5%", up: true, icon: <DollarSign size={20} /> },
-    { label: "ออเดอร์ใหม่", value: "47", change: "+8.2%", up: true, icon: <ShoppingCart size={20} /> },
-    { label: "ลูกค้าใหม่", value: "23", change: "+3.1%", up: true, icon: <Users size={20} /> },
-    { label: "สินค้าคงเหลือ", value: "1,847", change: "-2.4%", up: false, icon: <Package size={20} /> },
+  // ─── Table columns ──────────────────────────────────────────────────────────
+  const columns: TableColumn<Order>[] = [
+    {
+      key: "id",
+      header: "Order ID",
+      render: (_, row) => (
+        <span style={{ ...smallLabel, color: "var(--primary)" }}>{row.id}</span>
+      ),
+    },
+    {
+      key: "customer",
+      header: "ลูกค้า",
+      render: (_, row) => (
+        <div className="flex items-center gap-2">
+          <Avatar name={row.customer} size="xs" />
+          <span style={fontLabel}>{row.customer}</span>
+        </div>
+      ),
+    },
+    {
+      key: "channel",
+      header: "ช่องทาง",
+      render: (_, row) => (
+        <span style={{ ...fontLabel, color: "var(--muted-foreground)" }}>{row.channel}</span>
+      ),
+    },
+    {
+      key: "amount",
+      header: "ยอดเงิน",
+      align: "right",
+      render: (_, row) => <span style={btnStyle}>{row.amount}</span>,
+    },
+    {
+      key: "status",
+      header: "สถานะ",
+      render: (_, row) => {
+        const s = STATUS_BADGE[row.status];
+        return <Badge variant={s.variant} size="sm">{s.label}</Badge>;
+      },
+    },
+    {
+      key: "date",
+      header: "วันที่",
+      render: (_, row) => (
+        <span style={{ ...smallLabel, color: "var(--muted-foreground)" }}>{row.date}</span>
+      ),
+    },
+    {
+      key: "actions",
+      header: "",
+      align: "center",
+      width: "48px",
+      render: () => (
+        <IconButton
+          icon={<Eye size={14} />}
+          size="sm"
+          variant="ghost"
+          aria-label="ดูรายละเอียด"
+        />
+      ),
+    },
   ];
-
-  const tabs = [
-    { id: "all", label: "ทั้งหมด", count: 156 },
-    { id: "pending", label: "รอยืนยัน", count: 23 },
-    { id: "confirmed", label: "ยืนยันแล้ว", count: 45 },
-    { id: "shipping", label: "กำลังจัดส่ง", count: 67 },
-    { id: "completed", label: "สำเร็จ", count: 21 },
-  ];
-
-  const orders = [
-    { id: "ORD-2024001", customer: "สมชาย มั่งมี", channel: "LINE", amount: "฿3,450", status: "pending", date: "18 มี.ค. 2026" },
-    { id: "ORD-2024002", customer: "สุดา รักดี", channel: "Facebook", amount: "฿1,290", status: "confirmed", date: "18 มี.ค. 2026" },
-    { id: "ORD-2024003", customer: "วิชัย ศรีสุข", channel: "Shopee", amount: "฿5,670", status: "shipping", date: "17 มี.ค. 2026" },
-    { id: "ORD-2024004", customer: "นภา จันทร์ทอง", channel: "LINE", amount: "฿890", status: "completed", date: "17 มี.ค. 2026" },
-    { id: "ORD-2024005", customer: "อรุณ แสงทอง", channel: "Website", amount: "฿12,340", status: "pending", date: "17 มี.ค. 2026" },
-    { id: "ORD-2024006", customer: "พิมพ์ ใจงาม", channel: "Facebook", amount: "฿2,150", status: "confirmed", date: "16 มี.ค. 2026" },
-  ];
-
-  const statusMap: Record<string, { label: string; color: string; bg: string }> = {
-    pending: { label: "รอยืนยัน", color: c.warning, bg: c.warningBg },
-    confirmed: { label: "ยืนยันแล้ว", color: c.primary, bg: c.infoBg },
-    shipping: { label: "กำลังจัดส่ง", color: "#f97316", bg: "#fff7ed" },
-    completed: { label: "สำเร็จ", color: c.success, bg: c.successBg },
-  };
-
-  const filteredOrders = activeTab === "all" ? orders : orders.filter(o => o.status === activeTab);
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
+
+      {/* ── Page title ─────────────────────────────────────────────────────── */}
       <div>
-        <div className="inline-block px-3 py-1 rounded-full mb-3" style={{ background: c.primaryLight, color: c.primary, ...f.button, fontSize: 12 }}>
-          VIBE CODE DEMO
-        </div>
-        <h1 style={{ ...f.h3, color: "var(--foreground)" }}>ตัวอย่างผลลัพธ์ Vibe Code</h1>
-        <p style={{ ...f.p, color: "var(--muted-foreground)", marginTop: 4 }}>
+        <Badge variant="default" size="sm" className="mb-3">VIBE CODE DEMO</Badge>
+        <h1 style={{ ...fontH3, color: "var(--foreground)" }}>ตัวอย่างผลลัพธ์ Vibe Code</h1>
+        <p style={{ ...fontLabel, color: "var(--muted-foreground)", marginTop: 4 }}>
           จำลองว่า PO สั่ง: "สร้างหน้า Dashboard Order Management ของ Sellsuki" — AI ได้ผลลัพธ์ด้านล่าง
         </p>
       </div>
 
-      {/* Prompt Box */}
-      <div className="rounded-[8px] border p-4" style={{ borderColor: c.primaryBorder, background: c.primaryLight }}>
-        <p style={{ ...f.button, fontSize: 12, color: c.primary, marginBottom: 8 }}>PROMPT ที่ใช้:</p>
-        <p style={{ ...f.label, color: c.text }}>
-          "สร้างหน้า Dashboard สำหรับ Order Management ของ Sellsuki มี stat cards 4 ตัว, tab filter สถานะ, ตารางออเดอร์, search, pagination"
+      {/* ── Prompt box ──────────────────────────────────────────────────────── */}
+      <div
+        className="rounded-[var(--radius-md)] border border-primary/30 bg-primary/5 p-4"
+      >
+        <p style={{ ...btnStyle, fontSize: 12, color: "var(--primary)", marginBottom: 8 }}>
+          PROMPT ที่ใช้:
+        </p>
+        <p style={{ ...fontLabel, color: "var(--foreground)" }}>
+          "สร้างหน้า Dashboard สำหรับ Order Management ของ Sellsuki มี stat cards 4 ตัว,
+          tab filter สถานะ, ตารางออเดอร์, search, pagination"
         </p>
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════════ */}
-      {/* DEMO OUTPUT                                                           */}
-      {/* ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="rounded-[12px] border overflow-hidden" style={{ borderColor: c.border, background: c.bgPage }}>
+      {/* ══════════════════════════════════════════════════════════════════════ */}
+      {/* DEMO OUTPUT                                                          */}
+      {/* ══════════════════════════════════════════════════════════════════════ */}
+      <div className="rounded-[12px] border overflow-hidden border-border bg-background">
 
-        {/* ─── HEADER 72px (full width) ─── */}
-        <div className="flex items-center justify-between px-4 border-b" style={{ height: 72, borderColor: c.border, background: c.bgCard }}>
-          <div className="flex items-center gap-4">
-            <button
-              className="w-10 h-10 flex items-center justify-center rounded-[8px] hover:bg-gray-50 cursor-pointer transition-colors"
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            >
-              <MenuIcon size={20} color="#111827" />
-            </button>
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 flex-shrink-0 rounded-[8px] overflow-hidden"><SSKIcon /></div>
-              <span style={{ ...f.h4, fontSize: 20, color: "#0F225A" }}>Sellsuki</span>
-            </div>
-            {/* Page title in header */}
-            <span style={{ ...f.label, color: c.textSec, fontSize: 16 }}>Order Management</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-[8px] border" style={{ borderColor: c.border, background: c.bgPage, width: 320 }}>
-            <Search size={16} color={c.placeholder} />
-            <span style={{ ...f.label, color: c.placeholder }}>ค้นหาออเดอร์, สินค้า, ลูกค้า...</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="w-10 h-10 flex items-center justify-center rounded-[8px] hover:bg-gray-50 relative">
-              <Bell size={20} color={c.textSec} />
-              <div className="absolute top-2 right-2 w-2 h-2 rounded-full" style={{ background: c.danger }} />
-            </button>
-            <button className="w-10 h-10 flex items-center justify-center rounded-[8px] hover:bg-gray-50">
-              <Grid3X3 size={20} color={c.textSec} />
-            </button>
-            {/* Avatar — Main Sellsuki = Sky blue */}
-            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: c.primary }}>
-              <span style={{ color: "white", ...f.button }}>WC</span>
-            </div>
-          </div>
-        </div>
+        {/* TopNavbar */}
+        <TopNavbar
+          brand={{ name: "Sellsuki", logo: <SSKIcon /> }}
+          title="Order Management"
+          showSearch
+          searchPlaceholder="ค้นหาออเดอร์, สินค้า, ลูกค้า..."
+          notificationCount={1}
+          user={{ name: "Watcharapong Chantong" }}
+          onSidebarToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+        />
 
         <div className="flex" style={{ minHeight: 620 }}>
-          {/* ─── SIDEBAR (collapsible) ─── */}
-          <aside
-            className="flex-shrink-0 flex flex-col border-r"
-            style={{
-              width: sidebarCollapsed ? 64 : 280,
-              minWidth: sidebarCollapsed ? 64 : 280,
-              borderColor: c.border,
-              background: c.bgCard,
-              transition: "width 0.25s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
-              overflow: "visible",
+          {/* Sidebar */}
+          <Sidebar
+            accountSwitcher={{
+              company: activeCompany,
+              branch: activeBranch,
+              provider: activeProvider,
+              companies: COMPANIES,
+              branches: BRANCHES,
+              providers: PROVIDERS,
+              onCompanyChange: setActiveCompany,
+              onBranchChange: setActiveBranch,
+              onProviderChange: setActiveProvider,
             }}
-          >
-            {/* Profile / Company Switcher */}
-            {!sidebarCollapsed ? (
-              <div className="p-4 relative" ref={companyDropdownRef}>
-                <button
-                  onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
-                  className="w-full flex items-center gap-3 p-3 rounded-[8px] transition-colors text-left"
-                  style={{ background: c.primaryLight, border: `1px solid ${c.primaryBorder}` }}
-                >
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.primary }}>
-                    <span style={{ color: "white", ...f.button, fontSize: 16 }}>{selectedCompany.initials}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="truncate" style={{ ...f.label, fontWeight: 600, color: c.text }}>{selectedCompany.name}</p>
-                    <p className="truncate" style={{ fontFamily: fontButton, fontSize: 12, color: c.textSec }}>{selectedCompany.email}</p>
-                  </div>
-                  <ChevronDown
-                    size={16}
-                    color={c.primary}
-                    style={{ transition: "transform 0.2s", transform: companyDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                  />
-                </button>
+            groups={SIDEBAR_GROUPS}
+            activeItem="orders"
+            collapsed={sidebarCollapsed}
+            onCollapsedChange={setSidebarCollapsed}
+            showCollapseToggle={false}
+            version="v1.4.0"
+            versionDate="March 10, 2026"
+          />
 
-                {/* Company Dropdown */}
-                {companyDropdownOpen && (
-                  <div
-                    className="absolute left-4 right-4 mt-2 rounded-[8px] border shadow-lg overflow-hidden z-50"
-                    style={{ background: c.bgCard, borderColor: c.border }}
-                  >
-                    <div className="px-3 py-2 border-b" style={{ borderColor: c.border }}>
-                      <p style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>SWITCH COMPANY</p>
-                    </div>
-                    {companies.map((company) => (
-                      <button
-                        key={company.id}
-                        onClick={() => { setSelectedCompany(company); setCompanyDropdownOpen(false); }}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 transition-colors text-left"
-                        style={{ background: selectedCompany.id === company.id ? c.primaryLight : "transparent" }}
-                      >
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selectedCompany.id === company.id ? c.primary : c.border }}>
-                          <span style={{ color: selectedCompany.id === company.id ? "white" : c.textSec, ...f.numSm }}>{company.initials}</span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="truncate" style={{ ...f.label, fontSize: 16, fontWeight: 500, color: c.text }}>{company.name}</p>
-                          <p className="truncate" style={{ fontFamily: fontButton, fontSize: 11, color: c.textSec }}>{company.email}</p>
-                        </div>
-                        {selectedCompany.id === company.id && (
-                          <Check size={16} color={c.primary} />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Collapsed: show avatar only */
-              <div className="flex justify-center py-4 border-b" style={{ borderColor: c.border }}>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.primary }}>
-                  <span style={{ color: "white", ...f.button, fontSize: 14 }}>{selectedCompany.initials}</span>
-                </div>
-              </div>
-            )}
+          {/* Content */}
+          <main className="flex-1 p-6 space-y-6 overflow-auto bg-background">
 
-            <nav className={`flex-1 overflow-y-auto ${sidebarCollapsed ? "px-1.5" : "px-4"} space-y-4 py-2`}>
-              {sidebarMenus.map((group) => {
-                const isExpanded = expandedGroups[group.label] !== false;
-                return (
-                  <div key={group.label}>
-                    {!sidebarCollapsed ? (
-                      <button
-                        onClick={() => toggleGroup(group.label)}
-                        className="w-full flex items-center justify-between px-3 mb-2 cursor-pointer hover:opacity-80 transition-opacity"
-                      >
-                        <span className="uppercase" style={{ ...f.button, fontSize: 11, color: c.placeholder, letterSpacing: "0.05em" }}>
-                          {group.label}
-                        </span>
-                        {isExpanded ? (
-                          <ChevronUp size={14} color={c.placeholder} />
-                        ) : (
-                          <ChevronDown size={14} color={c.placeholder} />
-                        )}
-                      </button>
-                    ) : (
-                      <div className="h-px mx-1 mb-2 mt-1" style={{ background: c.border }} />
-                    )}
-                    <div
-                      className="space-y-1 overflow-hidden transition-all"
-                      style={{
-                        maxHeight: sidebarCollapsed || isExpanded ? 500 : 0,
-                        opacity: sidebarCollapsed || isExpanded ? 1 : 0,
-                        transition: "max-height 0.25s ease, opacity 0.2s ease",
-                      }}
-                    >
-                      {group.items.map((item) => {
-                        const btn = (
-                          <button
-                            key={item.label}
-                            className={`w-full flex items-center ${sidebarCollapsed ? "justify-center" : "gap-3 px-3"} rounded-[8px] transition-colors`}
-                            style={{
-                              height: 48,
-                              background: item.active ? c.primaryLight : "transparent",
-                              color: item.active ? c.primary : c.textSec,
-                            }}
-                          >
-                            <span style={{ color: item.active ? c.primary : c.textSec }}>{item.icon}</span>
-                            {!sidebarCollapsed && (
-                              <span style={{ ...f.label, fontWeight: item.active ? 600 : 400, color: c.text }}>{item.label}</span>
-                            )}
-                            {!sidebarCollapsed && item.badge && (
-                              <span className="ml-auto px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: item.active ? c.primary : c.border, color: item.active ? "white" : c.textSec }}>
-                                {item.badge}
-                              </span>
-                            )}
-                          </button>
-                        );
-                        return sidebarCollapsed ? (
-                          <div key={item.label} className="w-full flex">
-                            <Tooltip content={item.label} placement="right" className="flex-1">
-                              {btn}
-                            </Tooltip>
-                          </div>
-                        ) : btn;
-                      })}
-                    </div>
-                  </div>
-                );
-              })}
-            </nav>
-
-            <div className={`${sidebarCollapsed ? "px-1.5" : "p-4"} py-3 border-t space-y-1`} style={{ borderColor: c.border }}>
-              {sidebarCollapsed ? (
-                <>
-                  <div className="w-full flex">
-                    <Tooltip content="Help & Support" placement="right" className="flex-1">
-                      <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
-                        <HelpCircle size={20} color={c.textSec} />
-                      </button>
-                    </Tooltip>
-                  </div>
-                  <div className="w-full flex">
-                    <Tooltip content="Settings" placement="right" className="flex-1">
-                      <button className="w-full flex items-center justify-center h-12 rounded-[8px] hover:bg-gray-50">
-                        <Settings size={20} color={c.textSec} />
-                      </button>
-                    </Tooltip>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
-                    <HelpCircle size={20} color={c.textSec} />
-                    <span style={{ ...f.label, color: c.text }}>Help & Support</span>
-                  </button>
-                  <button className="w-full flex items-center gap-3 px-3 h-12 rounded-[8px] hover:bg-gray-50">
-                    <Settings size={20} color={c.textSec} />
-                    <span style={{ ...f.label, color: c.text }}>Settings</span>
-                  </button>
-                </>
-              )}
-            </div>
-          </aside>
-
-          {/* ─── CONTENT ─── */}
-          <main className="flex-1 p-6 space-y-6 overflow-auto" style={{ background: c.bgPage }}>
-            {/* Title */}
+            {/* Page header row */}
             <div className="flex items-center justify-between">
               <div>
-                <h2 style={{ ...f.h3, color: c.text }}>Order Management</h2>
-                <p style={{ ...f.label, color: c.textSec, marginTop: 2 }}>จัดการออเดอร์ทั้งหมดจากทุกช่องทาง</p>
+                <h2 style={{ ...fontH3, color: "var(--foreground)" }}>Order Management</h2>
+                <p style={{ ...fontLabel, color: "var(--muted-foreground)", marginTop: 2 }}>
+                  จัดการออเดอร์ทั้งหมดจากทุกช่องทาง
+                </p>
               </div>
-              <button className="flex items-center gap-2 px-4 py-2.5 rounded-[8px] text-white hover:opacity-90 transition" style={{ background: c.primary, ...f.button }}>
-                <Plus size={16} /> สร้างออเดอร์
-              </button>
+              {/* Max 1 primary button per view */}
+              <DSButton variant="primary" leftIcon={<Plus size={16} />}>
+                สร้างออเดอร์
+              </DSButton>
             </div>
 
-            {/* Stat Cards */}
-            <div className="grid grid-cols-4 gap-4">
-              {stats.map((s, i) => (
-                <div key={i} className="rounded-[8px] border p-4" style={{ borderColor: c.border, background: c.bgCard }}>
-                  <div className="flex items-center justify-between mb-3">
-                    <span style={{ ...f.label, color: c.textSec }}>{s.label}</span>
-                    <div className="w-8 h-8 rounded-[6px] flex items-center justify-center" style={{ background: c.primaryLight, color: c.primary }}>{s.icon}</div>
-                  </div>
-                  <div style={{ ...f.numLg, color: c.text }}>{s.value}</div>
-                  <div className="flex items-center gap-1 mt-1">
-                    {s.up ? <TrendingUp size={14} color={c.success} /> : <TrendingDown size={14} color={c.danger} />}
-                    <span style={{ ...f.numSm, color: s.up ? c.success : c.danger }}>{s.change}</span>
-                    <span style={{ ...f.label, fontSize: 14, color: c.placeholder }}>vs yesterday</span>
-                  </div>
-                </div>
-              ))}
+            {/* Stat cards */}
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+              <StatCard
+                title="ยอดขายวันนี้"
+                value="฿128,450"
+                trend={{ value: 12.5, direction: "up" }}
+                trendLabel="vs yesterday"
+                icon={<DollarSign size={20} />}
+                iconBg="bg-primary/10 text-primary"
+              />
+              <StatCard
+                title="ออเดอร์ใหม่"
+                value="47"
+                trend={{ value: 8.2, direction: "up" }}
+                trendLabel="vs yesterday"
+                icon={<ShoppingCart size={20} />}
+                iconBg="bg-primary/10 text-primary"
+              />
+              <StatCard
+                title="ลูกค้าใหม่"
+                value="23"
+                trend={{ value: 3.1, direction: "up" }}
+                trendLabel="vs yesterday"
+                icon={<Users size={20} />}
+                iconBg="bg-primary/10 text-primary"
+              />
+              <StatCard
+                title="สินค้าคงเหลือ"
+                value="1,847"
+                trend={{ value: 2.4, direction: "down" }}
+                trendLabel="vs yesterday"
+                icon={<Package size={20} />}
+                iconBg="bg-destructive/10 text-destructive"
+              />
             </div>
 
-            {/* Table Card */}
-            <div className="rounded-[8px] border overflow-hidden" style={{ borderColor: c.border, background: c.bgCard }}>
+            {/* Order table card */}
+            <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
+
+              {/* Toolbar */}
               <div className="px-4 pt-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 style={{ ...f.h4, color: c.text }}>รายการออเดอร์</h3>
+                  <h3 style={{ ...fontH4, color: "var(--foreground)" }}>รายการออเดอร์</h3>
                   <div className="flex items-center gap-2">
-                    {[{ icon: <Filter size={14} />, label: "Filter" }, { icon: <Download size={14} />, label: "Export" }].map(btn => (
-                      <button key={btn.label} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border hover:bg-gray-50" style={{ borderColor: c.border, ...f.button, fontSize: 13, fontWeight: 500, color: c.textSec }}>
-                        {btn.icon} {btn.label}
-                      </button>
-                    ))}
+                    <DSButton variant="outline" size="sm" leftIcon={<Filter size={14} />}>
+                      Filter
+                    </DSButton>
+                    <DSButton variant="outline" size="sm" leftIcon={<Download size={14} />}>
+                      Export
+                    </DSButton>
                   </div>
                 </div>
 
-                {/* Tabs */}
-                <div className="flex gap-0 border-b" style={{ borderColor: c.border }}>
-                  {tabs.map(tab => (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className="px-4 py-2.5 transition-colors"
-                      style={{
-                        ...f.label,
-                        fontWeight: activeTab === tab.id ? 600 : 400,
-                        color: activeTab === tab.id ? c.primary : c.textSec,
-                        borderBottom: activeTab === tab.id ? `2px solid ${c.primary}` : "2px solid transparent",
-                        marginBottom: -1,
-                      }}
-                    >
-                      {tab.label}
-                      <span className="ml-1.5 px-1.5 py-0.5 rounded-full" style={{
-                        ...f.numSm, fontSize: 11,
-                        background: activeTab === tab.id ? c.primaryLight : "#f3f4f6",
-                        color: activeTab === tab.id ? c.primary : c.placeholder,
-                      }}>
-                        {tab.count}
-                      </span>
-                    </button>
-                  ))}
-                </div>
+                {/* Status tabs */}
+                <Tabs
+                  variant="underline"
+                  activeTab={activeTab}
+                  onChange={setActiveTab}
+                  tabs={[
+                    { id: "all",       label: "ทั้งหมด",      badge: TAB_COUNTS.all },
+                    { id: "pending",   label: "รอยืนยัน",    badge: TAB_COUNTS.pending },
+                    { id: "confirmed", label: "ยืนยันแล้ว",  badge: TAB_COUNTS.confirmed },
+                    { id: "shipping",  label: "กำลังจัดส่ง", badge: TAB_COUNTS.shipping },
+                    { id: "completed", label: "สำเร็จ",       badge: TAB_COUNTS.completed },
+                  ]}
+                />
               </div>
 
-              {/* Table */}
-              <table className="w-full">
-                <thead>
-                  <tr style={{ borderBottom: `1px solid ${c.border}` }}>
-                    {["", "Order ID", "ลูกค้า", "ช่องทาง", "ยอดเงิน", "สถานะ", "วันที่", ""].map((h, i) => (
-                      <th key={i} className="text-left px-4 py-3" style={{ ...f.label, fontWeight: 500, color: c.textSec, background: c.bgPage }}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredOrders.map((order, i) => (
-                    <tr key={order.id} className="hover:bg-[#f9fafb] transition-colors" style={{ borderBottom: i < filteredOrders.length - 1 ? `1px solid ${c.border}` : "none" }}>
-                      <td className="px-4 py-3 w-10">
-                        <input type="checkbox" className="rounded" style={{ width: 16, height: 16, accentColor: c.primary }} />
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span style={{ ...f.num, color: c.primary }}>{order.id}</span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-2">
-                          <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: c.border }}>
-                            <span style={{ ...f.numSm, fontSize: 11, color: c.textSec }}>{order.customer[0]}</span>
-                          </div>
-                          <span className="whitespace-nowrap" style={{ ...f.label, color: c.text }}>{order.customer}</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span style={{ ...f.label, color: c.textSec }}>{order.channel}</span>
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span style={{ ...f.num, color: c.text }}>{order.amount}</span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className="inline-flex px-2.5 py-0.5 rounded-full" style={{ ...f.badge, color: statusMap[order.status].color, background: statusMap[order.status].bg }}>
-                          {statusMap[order.status].label}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span style={{ ...f.label, color: c.textSec }}>{order.date}</span>
-                      </td>
-                      <td className="px-4 py-3 w-10">
-                        <button className="w-7 h-7 flex items-center justify-center rounded-[6px] hover:bg-[#f9fafb]">
-                          <Eye size={14} color={c.textSec} />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {/* Data table */}
+              <DSTable
+                columns={columns}
+                data={filteredOrders}
+                flush
+                hoverable
+                selectable
+                size="md"
+              />
 
-              {/* Pagination */}
-              <div className="flex items-center justify-between px-4 py-3 border-t" style={{ borderColor: c.border }}>
-                <span style={{ ...f.label, color: c.textSec }}>แสดง 1-6 จาก {tabs.find(t => t.id === activeTab)?.count || 156} รายการ</span>
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, "...", 12].map((p, i) => (
-                    <button key={i} className="w-8 h-8 flex items-center justify-center rounded-[6px]" style={{ ...f.num, background: p === 1 ? c.primary : "transparent", color: p === 1 ? "white" : c.textSec }}>
-                      {p}
-                    </button>
-                  ))}
-                </div>
+              {/* Pagination row */}
+              <div
+                className="flex items-center justify-between px-4 py-3 border-t border-border"
+              >
+                <span style={{ ...smallLabel, color: "var(--muted-foreground)" }}>
+                  แสดง 1–6 จาก {TAB_COUNTS[activeTab] ?? 156} รายการ
+                </span>
+                <Pagination
+                  currentPage={page}
+                  totalPages={Math.ceil((TAB_COUNTS[activeTab] ?? 156) / 6)}
+                  onPageChange={setPage}
+                  size="sm"
+                  siblingCount={1}
+                />
               </div>
             </div>
           </main>
         </div>
       </div>
 
-      {/* Components Info */}
-      <div className="rounded-[8px] border p-4 space-y-3" style={{ borderColor: "var(--border)", background: "var(--card)" }}>
-        <p style={{ ...f.button, fontSize: 12, color: c.success }}>COMPONENTS ที่ใช้ในหน้านี้:</p>
+      {/* ── Components used ─────────────────────────────────────────────────── */}
+      <div className="rounded-[var(--radius-md)] border border-border bg-card p-4 space-y-3">
+        <p style={{ ...btnStyle, fontSize: 12, color: "var(--chart-2)" }}>
+          COMPONENTS ที่ใช้ในหน้านี้:
+        </p>
         <div className="flex flex-wrap gap-2">
-          {["TopNavbar", "Sidebar", "StatCard", "Tabs", "DSTable", "Badge", "Pagination", "SearchField", "DSButton", "Avatar", "Card"].map(comp => (
-            <span key={comp} className="px-2.5 py-1 rounded-[6px] border" style={{ ...f.button, fontSize: 12, fontWeight: 500, borderColor: "var(--border)", color: "var(--foreground)" }}>
+          {[
+            "TopNavbar", "Sidebar", "StatCard", "Tabs",
+            "DSTable",   "Badge",   "Pagination", "DSButton",
+            "IconButton", "Avatar",
+          ].map((comp) => (
+            <span
+              key={comp}
+              className="px-2.5 py-1 rounded-[var(--radius-sm)] border border-border"
+              style={{ ...btnStyle, fontSize: 12, fontWeight: 500, color: "var(--foreground)" }}
+            >
               {comp}
             </span>
           ))}
         </div>
-        <div className="flex gap-6 mt-2">
+        <div className="flex flex-wrap gap-6 mt-2">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full" style={{ background: c.primary }} />
-            <span style={{ ...f.label, fontSize: 14, color: c.textSec }}>Primary: Sky-500 (#32a9ff)</span>
+            <div className="w-3 h-3 rounded-full bg-primary" />
+            <span style={{ ...smallLabel, color: "var(--muted-foreground)" }}>
+              Primary: Sky-500 (var(--primary))
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <span style={{ ...f.label, fontSize: 14, color: c.textSec }}>Font body: DB HeaventRounded</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span style={{ ...f.label, fontSize: 14, color: c.textSec }}>Font button: Inter</span>
-          </div>
+          <span style={{ ...smallLabel, color: "var(--muted-foreground)" }}>
+            Font: DB HeaventRounded (var(--font-label)) — ใช้ทั้งหมด
+          </span>
         </div>
       </div>
     </div>

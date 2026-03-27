@@ -25,6 +25,8 @@ interface TableProps<T = any> {
   loading?: boolean;
   emptyMessage?: string;
   stickyHeader?: boolean;
+  /** Remove border and border-radius — use when table is already inside a bordered container */
+  flush?: boolean;
   className?: string;
 }
 
@@ -47,6 +49,7 @@ export function DSTable<T extends Record<string, any>>({
   loading = false,
   emptyMessage = "No data available",
   stickyHeader = false,
+  flush = false,
   className = "",
 }: TableProps<T>) {
   const [sortKey, setSortKey] = useState<string | null>(null);
@@ -96,10 +99,10 @@ export function DSTable<T extends Record<string, any>>({
   };
 
   const labelStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-  const headerStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
+  const headerStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" };
 
   return (
-    <div className={`rounded-[var(--radius-lg)] border border-border overflow-hidden ${className}`}>
+    <div className={`${flush ? "" : "rounded-[var(--radius-lg)] border border-border"} overflow-hidden ${className}`}>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead className={stickyHeader ? "sticky top-0 z-10" : ""}>
@@ -111,7 +114,8 @@ export function DSTable<T extends Record<string, any>>({
                     checked={allSelected}
                     ref={(el) => { if (el) el.indeterminate = someSelected; }}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded-[var(--radius-sm)] border-border accent-primary cursor-pointer"
+                    className="w-4 h-4 rounded-[var(--radius-sm)] cursor-pointer accent-primary"
+                    style={{ accentColor: "var(--primary)" }}
                   />
                 </th>
               )}
@@ -170,7 +174,8 @@ export function DSTable<T extends Record<string, any>>({
                           type="checkbox"
                           checked={isSelected}
                           onChange={() => toggleRow(idx)}
-                          className="w-4 h-4 rounded-[var(--radius-sm)] border-border accent-primary cursor-pointer"
+                          className="w-4 h-4 rounded-[var(--radius-sm)] cursor-pointer accent-primary"
+                          style={{ accentColor: "var(--primary)" }}
                         />
                       </td>
                     )}

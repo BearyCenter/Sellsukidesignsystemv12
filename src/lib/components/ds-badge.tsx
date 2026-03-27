@@ -42,8 +42,8 @@ const sizeStyles: Record<
   sm: {
     className: "px-1.5 py-0.5 gap-1",
     style: {
-      fontFamily: "var(--font-button)",
-      fontSize: "var(--text-button)",
+      fontFamily: "var(--font-label)",
+      fontSize: "var(--text-label)",
       fontWeight: "var(--weight-button)",
     },
     iconSize: 10,
@@ -51,8 +51,8 @@ const sizeStyles: Record<
   md: {
     className: "px-2.5 py-0.5 gap-1.5",
     style: {
-      fontFamily: "var(--font-button)",
-      fontSize: "var(--text-button)",
+      fontFamily: "var(--font-label)",
+      fontSize: "var(--text-label)",
       fontWeight: "var(--weight-button)",
     },
     iconSize: 12,
@@ -60,8 +60,8 @@ const sizeStyles: Record<
   lg: {
     className: "px-3 py-1 gap-1.5",
     style: {
-      fontFamily: "var(--font-button)",
-      fontSize: "var(--text-button)",
+      fontFamily: "var(--font-label)",
+      fontSize: "var(--text-label)",
       fontWeight: "var(--weight-button)",
     },
     iconSize: 14,

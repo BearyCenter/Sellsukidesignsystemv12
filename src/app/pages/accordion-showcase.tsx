@@ -1,21 +1,7 @@
 import React, { useState } from "react";
-import { ChevronDown, Settings, Shield, Zap, CreditCard } from "lucide-react";
-import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
-
-function AccordionItem({ title, children, open, onToggle, icon }: { title: string; children: React.ReactNode; open: boolean; onToggle: () => void; icon?: React.ReactNode }) {
-  return (
-    <div className="border-b border-border last:border-b-0">
-      <button onClick={onToggle} className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/20 transition-colors cursor-pointer">
-        {icon && <span className="text-primary flex-shrink-0">{icon}</span>}
-        <span className="flex-1 text-foreground" style={fontLabelBold}>{title}</span>
-        <ChevronDown size={16} className={`text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-      <div className={`overflow-hidden transition-all ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="px-4 pb-4 text-muted-foreground" style={fontLabel}>{children}</div>
-      </div>
-    </div>
-  );
-}
+import { Settings, Shield, Zap, CreditCard } from "lucide-react";
+import { PageHeader, Section, DemoBox, APITable } from "./_showcase-factory";
+import { AccordionItem } from "../../lib/components/ds-accordion";
 
 export function AccordionShowcase() {
   const [single, setSingle] = useState<string | null>("item-1");

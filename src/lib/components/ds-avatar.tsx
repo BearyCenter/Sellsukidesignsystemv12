@@ -32,10 +32,10 @@ export interface AvatarGroupProps {
 const colors = ["bg-primary", "bg-chart-2", "bg-chart-5", "bg-destructive", "bg-secondary"];
 
 const sizeMap: Record<AvatarSize, { box: string; font: React.CSSProperties }> = {
-  xs: { box: "w-6 h-6", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
-  sm: { box: "w-8 h-8", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
-  md: { box: "w-10 h-10", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
-  lg: { box: "w-14 h-14", font: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
+  xs: { box: "w-6 h-6", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
+  sm: { box: "w-8 h-8", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
+  md: { box: "w-10 h-10", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" } },
+  lg: { box: "w-14 h-14", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" } },
   xl: { box: "w-20 h-20", font: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" } },
 };
 
@@ -55,7 +55,7 @@ const statusColors: Record<AvatarStatus, string> = {
 };
 
 const btnStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
+  fontFamily: "var(--font-label)",
   fontSize: "var(--text-button)",
   fontWeight: "var(--weight-button)",
 };
@@ -75,11 +75,11 @@ export function Avatar({ src, name, size = "md", status, className = "" }: Avata
         <img
           src={src}
           alt={name || "avatar"}
-          className={`${s.box} rounded-full object-cover border-2 border-card`}
+          className={`${s.box} rounded-full object-cover`}
         />
       ) : (
         <div
-          className={`${s.box} rounded-full ${bgColor} text-white flex items-center justify-center border-2 border-card`}
+          className={`${s.box} rounded-full ${bgColor} text-primary-foreground flex items-center justify-center`}
           style={s.font}
         >
           {initials}

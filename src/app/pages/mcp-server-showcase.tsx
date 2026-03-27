@@ -1122,7 +1122,7 @@ Use only Tailwind CSS for styling (no npm imports). Then build:
                   <span className="capitalize">{tab}</span>
                   <span
                     className="ml-1 px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted text-muted-foreground"
-                    style={{ fontFamily: "var(--font-button)", fontSize: "11px", fontWeight: "var(--weight-button)", lineHeight: "1" }}
+                    style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
                   >
                     {tab === "tools" ? tools.length : resources.length}
                   </span>

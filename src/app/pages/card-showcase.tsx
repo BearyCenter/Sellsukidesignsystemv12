@@ -1,31 +1,7 @@
 import React from "react";
 import { MoreHorizontal, Heart, Share2, ArrowRight, User, Settings } from "lucide-react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
-
-function Card({ children, className, hover }: { children: React.ReactNode; className?: string; hover?: boolean }) {
-  return (
-    <div className={`rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden ${hover ? "hover:border-primary/40 hover:shadow-md transition-all cursor-pointer" : ""} ${className ?? ""}`}>
-      {children}
-    </div>
-  );
-}
-
-function CardHeader({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
-  return (
-    <div className="px-5 py-4 border-b border-border flex items-center justify-between">
-      <div>{children}</div>
-      {action}
-    </div>
-  );
-}
-
-function CardBody({ children }: { children: React.ReactNode }) {
-  return <div className="px-5 py-4">{children}</div>;
-}
-
-function CardFooter({ children }: { children: React.ReactNode }) {
-  return <div className="px-5 py-3 border-t border-border bg-muted/10 flex items-center gap-2">{children}</div>;
-}
+import { Card, CardHeader, CardBody, CardFooter } from "../../lib/components/ds-card";
 
 export function CardShowcase() {
   return (

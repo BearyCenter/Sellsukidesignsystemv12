@@ -47,6 +47,7 @@ import {
   BellDot,
 } from "lucide-react";
 import { useI18n } from "../i18n";
+import { fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
 
 // ─── Changelog Data Types ─────────────────────────────────────────────────────
 
@@ -204,23 +205,6 @@ export function ChangelogPage() {
     setExpandedVersions(all);
   };
 
-  const tagBtnStyle: React.CSSProperties = {
-    fontFamily: "var(--font-button)",
-    fontSize: "var(--text-button)",
-    fontWeight: "var(--weight-button)",
-  };
-
-  const labelStyle: React.CSSProperties = {
-    fontFamily: "var(--font-label)",
-    fontSize: "var(--text-label)",
-    fontWeight: "var(--weight-label)",
-  };
-
-  const smallLabelStyle: React.CSSProperties = {
-    fontFamily: "var(--font-button)",
-    fontSize: "var(--text-button)",
-    fontWeight: "var(--weight-label)",
-  };
 
   return (
     <div className="space-y-10">
@@ -231,8 +215,8 @@ export function ChangelogPage() {
         </div>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-foreground">{t("page.changelog.title")}</h1>
-            <p className="text-muted-foreground mt-1 max-w-2xl" style={labelStyle}>
+            <h2 className="text-foreground">{t("page.changelog.title")}</h2>
+            <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
               {t("page.changelog.desc")}
             </p>
           </div>
@@ -240,14 +224,14 @@ export function ChangelogPage() {
             <button
               onClick={expandAll}
               className="px-3 py-1.5 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
-              style={tagBtnStyle}
+              style={btnStyle}
             >
               {t("changelog.expandAll")}
             </button>
             <button
               onClick={collapseAll}
               className="px-3 py-1.5 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
-              style={tagBtnStyle}
+              style={btnStyle}
             >
               {t("changelog.collapseAll")}
             </button>
@@ -289,7 +273,7 @@ export function ChangelogPage() {
                         className={`px-3 py-1.5 rounded-[var(--radius)] ${
                           isLatest ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
                         }`}
-                        style={tagBtnStyle}
+                        style={btnStyle}
                       >
                         v{release.version}
                       </div>
@@ -303,7 +287,7 @@ export function ChangelogPage() {
                         {isLatest && (
                           <span
                             className="px-2 py-0.5 rounded-[var(--radius-sm)] bg-chart-2/15 text-chart-2"
-                            style={{ ...tagBtnStyle, lineHeight: "1" }}
+                            style={{ ...btnStyle, lineHeight: "1" }}
                           >
                             {t("changelog.latest")}
                           </span>
@@ -312,16 +296,16 @@ export function ChangelogPage() {
                           <span
                             key={tag}
                             className={`px-2 py-0.5 rounded-[var(--radius-sm)] ${changelogTagStyles[tag].bg} ${changelogTagStyles[tag].text}`}
-                            style={{ ...tagBtnStyle, lineHeight: "1" }}
+                            style={{ ...btnStyle, lineHeight: "1" }}
                           >
                             {tagLabels[tag]}
                           </span>
                         ))}
                       </div>
-                      <span className="text-muted-foreground block" style={smallLabelStyle}>
+                      <span className="text-muted-foreground block" style={smallLabel}>
                         {release.date} &middot; {release.features.length} {release.features.length === 1 ? t("changelog.change") : t("changelog.changes")}
                       </span>
-                      <span className="text-muted-foreground block mt-1" style={labelStyle}>
+                      <span className="text-muted-foreground block mt-1" style={fontLabel}>
                         {release.summary}
                       </span>
                     </div>
@@ -351,7 +335,7 @@ export function ChangelogPage() {
                               >
                                 {feature.title}
                               </span>
-                              <span className="text-muted-foreground block mt-0.5" style={smallLabelStyle}>
+                              <span className="text-muted-foreground block mt-0.5" style={smallLabel}>
                                 {feature.description}
                               </span>
                             </div>
@@ -370,7 +354,7 @@ export function ChangelogPage() {
       {/* Footer summary */}
       <div className="rounded-[var(--radius)] border border-border bg-muted/20 px-6 py-4 flex items-center gap-3">
         <Package size={18} className="text-muted-foreground flex-shrink-0" />
-        <span className="text-muted-foreground" style={labelStyle}>
+        <span className="text-muted-foreground" style={fontLabel}>
           {changelogVersions.length} {t("changelog.releases")} &middot; {t("changelog.startedAt")} v1.0.0 {t("changelog.on")} {changelogVersions[changelogVersions.length - 1].date} &middot; {t("changelog.latest")} v{latestChangelog.version}
         </span>
       </div>

@@ -13,7 +13,7 @@ export interface DSInputProps
   helperText?: string;
   errorMessage?: string;
   successMessage?: string;
-  inputSize?: InputSize;
+  size?: InputSize;
   variant?: InputVariant;
   state?: InputState;
   leftIcon?: React.ReactNode;
@@ -36,7 +36,7 @@ export interface DSTextareaProps
   helperText?: string;
   errorMessage?: string;
   successMessage?: string;
-  inputSize?: InputSize;
+  size?: InputSize;
   variant?: InputVariant;
   state?: InputState;
   showCharCount?: boolean;
@@ -116,7 +116,7 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
       helperText,
       errorMessage,
       successMessage,
-      inputSize = "md",
+      size = "md",
       variant = "default",
       state = "default",
       leftIcon,
@@ -144,7 +144,7 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
     const currentValue = value !== undefined ? value : internalValue;
 
-    const sc = inputSizeConfig[inputSize];
+    const sc = inputSizeConfig[size];
     const vs = inputVariantStyles[variant];
     const computedState = errorMessage ? "error" : state;
     const isPassword = typeProp === "password";
@@ -272,7 +272,7 @@ export const DSTextarea = forwardRef<HTMLTextAreaElement, DSTextareaProps>(
       helperText,
       errorMessage,
       successMessage,
-      inputSize = "md",
+      size = "md",
       variant = "default",
       state = "default",
       showCharCount = false,
@@ -289,7 +289,7 @@ export const DSTextarea = forwardRef<HTMLTextAreaElement, DSTextareaProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
     const [charCount, setCharCount] = useState(String(defaultValue ?? "").length);
-    const sc = inputSizeConfig[inputSize];
+    const sc = inputSizeConfig[size];
     const vs = inputVariantStyles[variant];
     const computedState = errorMessage ? "error" : state;
 

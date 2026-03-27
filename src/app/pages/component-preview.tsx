@@ -13,32 +13,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "../i18n";
 import { CodeBlock } from "../components/code-block";
-
-// ─── Shared Styles ────────────────────────────────────────────────────────────
-
-const fontLabel: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
-  fontWeight: "var(--weight-label)",
-};
-
-const fontLabelBold: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
-  fontWeight: "var(--weight-button)",
-};
-
-const btnStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
-  fontWeight: "var(--weight-label)",
-};
-
-const smallLabel: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
-  fontWeight: "var(--weight-label)",
-};
+import { fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
 
 // ─── Prop Control Types ───────────────────────────────────────────────────────
 
@@ -148,7 +123,7 @@ function buildRegistry(): ComponentRegistryEntry[] {
       importName: "DSInput",
       props: [
         { name: "variant", type: "select", defaultValue: "default", options: ["default", "outlined", "filled", "ghost"], description: "Visual variant" },
-        { name: "inputSize", type: "select", defaultValue: "md", options: ["sm", "md", "lg"], description: "Input size" },
+        { name: "size", type: "select", defaultValue: "md", options: ["sm", "md", "lg"], description: "Input size" },
         { name: "label", type: "string", defaultValue: "Label", description: "Input label" },
         { name: "placeholder", type: "string", defaultValue: "Type something...", description: "Placeholder text" },
         { name: "disabled", type: "boolean", defaultValue: false, description: "Disable the input" },
@@ -164,7 +139,7 @@ function buildRegistry(): ComponentRegistryEntry[] {
           )}
           <input
             className={`w-full rounded-[var(--radius-md)] transition-all outline-none
-              ${p.inputSize === "sm" ? "px-2.5 py-1.5" : p.inputSize === "lg" ? "px-4 py-3" : "px-3 py-2"}
+              ${p.size === "sm" ? "px-2.5 py-1.5" : p.size === "lg" ? "px-4 py-3" : "px-3 py-2"}
               ${p.variant === "filled" ? "bg-muted border-transparent" :
                 p.variant === "ghost" ? "bg-transparent border-b border-border rounded-none" :
                 p.variant === "outlined" ? "bg-transparent border-2 border-border" :
@@ -743,7 +718,7 @@ export function ComponentPreviewPage() {
           <ChevronRight size={12} />
           <span>{t("page.preview.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.preview.title")}</h1>
+        <h2 className="text-foreground">{t("page.preview.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.preview.desc")}
         </p>

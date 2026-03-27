@@ -6,9 +6,9 @@ import { useI18n } from "../i18n";
 
 export const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
 export const fontLabelBold: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" };
-export const smallLabel: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
-export const btnStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-export const mono: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
+export const smallLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
+export const btnStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
+export const mono: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
 
 // ─── Collapsible Code Block ───────────────────────────────────────────────────
 
@@ -269,7 +269,7 @@ export function Section({ title, description, children, code }: { title: string;
 export function DemoCard({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) {
   return (
     <div className={`space-y-2 ${className ?? ""}`}>
-      <span className="uppercase tracking-wider text-muted-foreground block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>{label}</span>
+      <span className="text-muted-foreground block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>{label}</span>
       {children}
     </div>
   );
@@ -320,7 +320,7 @@ export function PageHeader({ titleKey, descKey }: { titleKey: string; descKey: s
       <div className="flex items-center gap-2 text-primary mb-2 caption">
         <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t(titleKey)}</span>
       </div>
-      <h1 className="text-foreground">{t(titleKey)}</h1>
+      <h2 className="text-foreground">{t(titleKey)}</h2>
       <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>{t(descKey)}</p>
     </div>
   );

@@ -29,34 +29,10 @@ import {
 } from "lucide-react";
 import { CodeBlock } from "../components/code-block";
 import { useI18n } from "../i18n";
+import { fontLabel, fontLabelBold, smallLabel, btnStyle, mono } from "./_showcase-factory";
 
-// ─── Style Constants (all from CSS variables) ─────────────────────────────────
+// ─── Style Constants ──────────────────────────────────────────────────────────
 
-const fontLabel: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
-  fontWeight: "var(--weight-label)",
-};
-const fontLabelBold: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
-  fontWeight: "var(--weight-button)",
-};
-const smallLabel: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
-  fontWeight: "var(--weight-label)",
-};
-const btnStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
-  fontWeight: "var(--weight-button)",
-};
-const mono: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
-  fontWeight: "var(--weight-label)",
-};
 const captionStyle: React.CSSProperties = {
   fontFamily: "var(--font-caption)",
   fontSize: "var(--text-caption)",
@@ -281,7 +257,7 @@ export function GettingStartedPage() {
           <ChevronRight size={12} />
           <span>{t("page.gettingStarted.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.gettingStarted.title")}</h1>
+        <h2 className="text-foreground">{t("page.gettingStarted.title")}</h2>
         <p
           className="text-muted-foreground mt-1 max-w-2xl"
           style={fontLabel}

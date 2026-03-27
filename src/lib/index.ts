@@ -121,6 +121,8 @@ export type { RatingProps, RatingSize, RatingIcon } from "./components/ds-rating
 // ── Sidebar ──────────────────────────────────────────────────────────────────
 export { Sidebar } from "./components/ds-sidebar";
 export type { SidebarProps, SidebarItem, SidebarGroup, SidebarBrand } from "./components/ds-sidebar";
+export { SidebarAccountSwitcher } from "./components/ds-sidebar-account";
+export type { SidebarAccountSwitcherProps, SidebarAccountItem } from "./components/ds-sidebar-account";
 
 // ── Skeleton ─────────────────────────────────────────────────────────────────
 export { Skeleton, SkeletonCard, SkeletonTable, SkeletonList } from "./components/ds-skeleton";

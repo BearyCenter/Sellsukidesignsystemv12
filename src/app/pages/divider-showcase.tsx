@@ -1,26 +1,6 @@
 import React from "react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
-
-function Divider({ label, orientation = "horizontal", dashed, spacing = "md" }: { label?: string; orientation?: "horizontal" | "vertical"; dashed?: boolean; spacing?: "sm" | "md" | "lg" }) {
-  const spacings = { sm: "my-2", md: "my-4", lg: "my-8" };
-  const style = dashed ? "border-dashed" : "border-solid";
-
-  if (orientation === "vertical") {
-    return <div className={`inline-block h-full min-h-[24px] border-l border-border ${style} mx-3`} />;
-  }
-
-  if (label) {
-    return (
-      <div className={`flex items-center gap-3 ${spacings[spacing]}`}>
-        <div className={`flex-1 border-t border-border ${style}`} />
-        <span className="text-muted-foreground flex-shrink-0" style={smallLabel}>{label}</span>
-        <div className={`flex-1 border-t border-border ${style}`} />
-      </div>
-    );
-  }
-
-  return <hr className={`border-t border-border ${style} ${spacings[spacing]}`} />;
-}
+import { Divider } from "../../lib/components/ds-divider";
 
 export function DividerShowcase() {
   return (

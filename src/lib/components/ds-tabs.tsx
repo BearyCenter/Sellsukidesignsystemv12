@@ -24,9 +24,9 @@ interface TabsProps {
 }
 
 const sizeStyles: Record<TabSize, React.CSSProperties> = {
-  sm: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", padding: "6px 12px" },
-  md: { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", padding: "8px 16px" },
-  lg: { fontFamily: "var(--font-button)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "10px 20px" },
+  sm: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "6px 12px" },
+  md: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "8px 16px" },
+  lg: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "10px 20px" },
 };
 
 export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activeTab: controlled, onChange, fullWidth = false, className = "" }: TabsProps) {
@@ -102,10 +102,10 @@ export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activ
               <span>{tab.label}</span>
               {tab.badge !== undefined && (
                 <span
-                  className={`ml-1 px-1.5 py-0.5 rounded-full min-w-[18px] text-center ${
+                  className={`ml-1 rounded-full min-w-[18px] text-center inline-flex items-center justify-center ${
                     isActive && variant === "pills" ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
                   }`}
-                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
+                  style={{ fontFamily: "var(--font-label)", fontSize: "12px", fontWeight: "var(--weight-label)", lineHeight: "1", padding: "1px 6px" }}
                 >
                   {tab.badge}
                 </span>

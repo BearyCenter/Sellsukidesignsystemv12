@@ -114,20 +114,20 @@ export interface AdvancedDataTableProps<T = Record<string, any>> {
 /* ─── Style constants ────────────────────────────────────────────────────────── */
 
 const btnFont: React.CSSProperties = {
-  fontFamily: "var(--font-button, 'Inter', sans-serif)",
-  fontSize: "var(--text-button, 14px)",
-  fontWeight: "var(--weight-button, 600)",
+  fontFamily: "var(--font-button)",
+  fontSize: "var(--text-button)",
+  fontWeight: "var(--weight-button)",
 };
 
 const cellFont: React.CSSProperties = {
-  fontFamily: "var(--font-label, 'DB HeaventRounded', sans-serif)",
-  fontSize: "var(--text-label, 18px)",
-  fontWeight: "var(--weight-label, 400)",
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-label)",
+  fontWeight: "var(--weight-label)",
 };
 
 const captionFont: React.CSSProperties = {
-  fontFamily: "var(--font-button, 'Inter', sans-serif)",
-  fontSize: "13px",
+  fontFamily: "var(--font-button)",
+  fontSize: "var(--text-button)",
   fontWeight: 400,
 };
 
@@ -177,14 +177,14 @@ function ColumnToggle({ columns, hidden, onToggle }: ColumnToggleProps) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-[var(--border,#e5e7eb)] bg-[var(--background,#fff)] text-[var(--muted-foreground,#6b7280)] hover:bg-[var(--muted,#f3f4f6)] hover:text-[var(--foreground,#1f2937)] transition-colors cursor-pointer"
+        className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
         style={captionFont}
       >
         <Columns3 size={14} />
         Columns
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-1 z-30 bg-[var(--card,#fff)] border border-[var(--border,#e5e7eb)] rounded-lg shadow-md w-44 py-1">
+        <div className="absolute right-0 top-full mt-1 z-30 bg-[var(--card)] border border-[var(--border)] rounded-lg shadow-elevation-sm w-44 py-1">
           {hideableColumns.map((col) => {
             const isVisible = !hidden.has(col.key);
             return (
@@ -192,11 +192,11 @@ function ColumnToggle({ columns, hidden, onToggle }: ColumnToggleProps) {
                 key={col.key}
                 type="button"
                 onClick={() => onToggle(col.key)}
-                className="w-full flex items-center justify-between gap-2 px-3 py-2 hover:bg-[var(--muted,#f3f4f6)] text-[var(--foreground,#1f2937)] transition-colors cursor-pointer"
+                className="w-full flex items-center justify-between gap-2 px-3 py-2 hover:bg-[var(--muted)] text-[var(--foreground)] transition-colors cursor-pointer"
                 style={captionFont}
               >
                 <span>{col.header}</span>
-                {isVisible && <Check size={13} className="text-[var(--primary,#32a9ff)]" />}
+                {isVisible && <Check size={13} className="text-[var(--primary)]" />}
               </button>
             );
           })}
@@ -217,10 +217,10 @@ interface BulkBarProps {
 
 function BulkBar({ count, actions, selectedKeys, onClear }: BulkBarProps) {
   return (
-    <div className="flex items-center gap-3 px-4 py-2.5 bg-[var(--primary,#32a9ff)]/8 border-b border-[var(--primary,#32a9ff)]/20">
+    <div className="flex items-center gap-3 px-4 py-2.5 bg-[var(--primary)]/8 border-b border-[var(--primary)]/20">
       <span
-        className="text-[var(--primary,#32a9ff)] flex-shrink-0"
-        style={{ ...btnFont, fontSize: 13 }}
+        className="text-[var(--primary)] flex-shrink-0"
+        style={btnFont}
       >
         {count} selected
       </span>
@@ -232,8 +232,8 @@ function BulkBar({ count, actions, selectedKeys, onClear }: BulkBarProps) {
             onClick={() => action.onClick(selectedKeys)}
             className={`inline-flex items-center gap-1.5 h-7 px-3 rounded-md border transition-colors cursor-pointer ${
               action.variant === "destructive"
-                ? "border-[var(--destructive,#e11d48)] text-[var(--destructive,#e11d48)] hover:bg-[var(--destructive,#e11d48)]/10"
-                : "border-[var(--primary,#32a9ff)] text-[var(--primary,#32a9ff)] hover:bg-[var(--primary,#32a9ff)]/10"
+                ? "border-[var(--destructive)] text-[var(--destructive)] hover:bg-[var(--destructive)]/10"
+                : "border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)]/10"
             }`}
             style={{ ...captionFont, fontWeight: 500 }}
           >
@@ -245,7 +245,7 @@ function BulkBar({ count, actions, selectedKeys, onClear }: BulkBarProps) {
       <button
         type="button"
         onClick={onClear}
-        className="text-[var(--muted-foreground,#6b7280)] hover:text-[var(--foreground,#1f2937)] transition-colors cursor-pointer p-1 rounded"
+        className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors cursor-pointer p-1 rounded"
         title="Clear selection"
       >
         <X size={14} />
@@ -284,16 +284,16 @@ function PaginationBar({ meta, onPageChange }: PaginationBarProps) {
   }, [page, totalPages]);
 
   return (
-    <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--border,#e5e7eb)] flex-wrap gap-3">
+    <div className="flex items-center justify-between px-4 py-3 border-t border-[var(--border)] flex-wrap gap-3">
       {/* Showing text + page size */}
       <div className="flex items-center gap-3">
-        <span className="text-[var(--muted-foreground,#6b7280)] whitespace-nowrap" style={captionFont}>
+        <span className="text-[var(--muted-foreground)] whitespace-nowrap" style={captionFont}>
           {from}–{to} of {totalCount.toLocaleString()}
         </span>
         <select
           value={pageSize}
           onChange={(e) => onPageChange(1, Number(e.target.value))}
-          className="h-7 px-2 rounded-md border border-[var(--border,#e5e7eb)] bg-[var(--background,#fff)] text-[var(--foreground,#1f2937)] focus:outline-none focus:border-[var(--primary,#32a9ff)] cursor-pointer"
+          className="h-7 px-2 rounded-md border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:border-[var(--primary)] cursor-pointer"
           style={captionFont}
         >
           {PAGE_SIZE_OPTIONS.map((s) => (
@@ -311,7 +311,7 @@ function PaginationBar({ meta, onPageChange }: PaginationBarProps) {
         />
         {pages.map((p, i) =>
           p === "..." ? (
-            <span key={`ellipsis-${i}`} className="px-2 text-[var(--muted-foreground,#6b7280)]" style={captionFont}>…</span>
+            <span key={`ellipsis-${i}`} className="px-2 text-[var(--muted-foreground)]" style={captionFont}>…</span>
           ) : (
             <PagBtn
               key={p}
@@ -349,10 +349,10 @@ function PagBtn({
       disabled={disabled}
       className={`min-w-[28px] h-7 px-2 rounded-md border transition-colors cursor-pointer ${
         active
-          ? "bg-[var(--primary,#32a9ff)] border-[var(--primary,#32a9ff)] text-white"
+          ? "bg-[var(--primary)] border-[var(--primary)] text-primary-foreground"
           : disabled
-          ? "border-transparent text-[var(--muted-foreground,#9ca3af)] cursor-not-allowed"
-          : "border-[var(--border,#e5e7eb)] text-[var(--foreground,#1f2937)] hover:bg-[var(--muted,#f3f4f6)]"
+          ? "border-transparent text-[var(--muted-foreground)] cursor-not-allowed"
+          : "border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--muted)]"
       }`}
       style={{ ...captionFont, fontWeight: active ? 600 : 400 }}
     >
@@ -485,14 +485,14 @@ export function AdvancedDataTable<T extends Record<string, any>>({
     (expandedRowRender ? 1 : 0);
 
   /* ── Helpers ────────────────────────── */
-  const frozenClass = "sticky z-[1] bg-[var(--card,#fff)]";
-  const frozenHeaderClass = "sticky z-[2] bg-[var(--muted,#f9fafb)]";
+  const frozenClass = "sticky z-[1] bg-card";
+  const frozenHeaderClass = "sticky z-[2] bg-muted";
 
   return (
-    <div className={`rounded-[var(--radius-lg,8px)] border border-[var(--border,#e5e7eb)] overflow-hidden ${className}`}>
+    <div className={`rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden ${className}`}>
       {/* ── Toolbar ─────────────────────── */}
       {showColumnToggle && (
-        <div className="flex items-center justify-end gap-2 px-4 py-2.5 border-b border-[var(--border,#e5e7eb)] bg-[var(--background,#fff)]">
+        <div className="flex items-center justify-end gap-2 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--background)]">
           <ColumnToggle columns={columns as AdvancedColumn<Record<string, any>>[]} hidden={hiddenCols} onToggle={toggleCol} />
         </div>
       )}
@@ -512,7 +512,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
         <table className="w-full border-collapse" style={{ minWidth: "100%" }}>
           {/* ── Header ──────────────────── */}
           <thead className={stickyHeader ? "sticky top-0 z-10" : ""}>
-            <tr className="border-b border-[var(--border,#e5e7eb)] bg-[var(--muted,#f9fafb)]">
+            <tr className="border-b border-[var(--border)] bg-[var(--muted)]">
               {/* Expand col */}
               {expandedRowRender && (
                 <th className={`${cellPad[size]} w-10`} />
@@ -525,7 +525,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                     checked={allSelected}
                     ref={(el) => { if (el) el.indeterminate = someSelected; }}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary,#32a9ff)] cursor-pointer"
+                    className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary)] cursor-pointer"
                   />
                 </th>
               )}
@@ -535,12 +535,11 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                 return (
                   <th
                     key={col.key}
-                    className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--muted-foreground,#6b7280)] whitespace-nowrap select-none ${
-                      col.sortable && onSortChange ? "cursor-pointer hover:text-[var(--foreground,#1f2937)]" : ""
+                    className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--muted-foreground)] whitespace-nowrap select-none ${
+                      col.sortable && onSortChange ? "cursor-pointer hover:text-[var(--foreground)]" : ""
                     } ${isFrozen ? frozenHeaderClass : ""}`}
                     style={{
                       ...btnFont,
-                      fontSize: 13,
                       width: col.width,
                       minWidth: col.minWidth ?? 80,
                       ...(isFrozen ? { left: frozenOffsets[col.key], boxShadow: "2px 0 4px rgba(0,0,0,0.04)" } : {}),
@@ -550,7 +549,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                     <span className="inline-flex items-center gap-1">
                       {col.header}
                       {col.sortable && onSortChange && (
-                        <span className="text-[var(--muted-foreground,#9ca3af)]">
+                        <span className="text-[var(--muted-foreground)]">
                           {isSorted ? (
                             sortOrder === "asc" ? <ChevronUp size={13} /> : <ChevronDown size={13} />
                           ) : (
@@ -572,8 +571,8 @@ export function AdvancedDataTable<T extends Record<string, any>>({
               <tr>
                 <td colSpan={colCount} className={`${cellPad[size]} text-center`}>
                   <div className="flex flex-col items-center gap-2 py-10">
-                    <AlertCircle size={32} className="text-[var(--destructive,#e11d48)] opacity-60" />
-                    <span className="text-[var(--destructive,#e11d48)]" style={cellFont}>{error}</span>
+                    <AlertCircle size={32} className="text-[var(--destructive)] opacity-60" />
+                    <span className="text-[var(--destructive)]" style={cellFont}>{error}</span>
                   </div>
                 </td>
               </tr>
@@ -582,7 +581,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
             {/* Skeleton loading */}
             {!error && loading &&
               Array.from({ length: loadingRows }).map((_, i) => (
-                <tr key={`skel-${i}`} className="border-b border-[var(--border,#e5e7eb)] last:border-b-0">
+                <tr key={`skel-${i}`} className="border-b border-[var(--border)] last:border-b-0">
                   {expandedRowRender && <td className={`${cellPad[size]} w-10`} />}
                   {selectable && (
                     <td className={`${cellPad[size]} w-12`}>
@@ -603,12 +602,12 @@ export function AdvancedDataTable<T extends Record<string, any>>({
               <tr>
                 <td colSpan={colCount} className={`${cellPad[size]} text-center`}>
                   <div className="flex flex-col items-center gap-2 py-12">
-                    <div className="w-12 h-12 rounded-full bg-[var(--muted,#f3f4f6)] flex items-center justify-center text-[var(--muted-foreground,#9ca3af)]">
+                    <div className="w-12 h-12 rounded-full bg-[var(--muted)] flex items-center justify-center text-[var(--muted-foreground)]">
                       <ChevronsUpDown size={20} />
                     </div>
-                    <span className="text-[var(--foreground,#1f2937)]" style={cellFont}>{emptyMessage}</span>
+                    <span className="text-[var(--foreground)]" style={cellFont}>{emptyMessage}</span>
                     {emptyDescription && (
-                      <span className="text-[var(--muted-foreground,#6b7280)]" style={captionFont}>{emptyDescription}</span>
+                      <span className="text-[var(--muted-foreground)]" style={captionFont}>{emptyDescription}</span>
                     )}
                   </div>
                 </td>
@@ -626,10 +625,10 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                 return (
                   <React.Fragment key={key ?? idx}>
                     <tr
-                      className={`border-b border-[var(--border,#e5e7eb)] last:border-b-0 transition-colors ${
+                      className={`border-b border-[var(--border)] last:border-b-0 transition-colors ${
                         isSelected
-                          ? "bg-[var(--primary,#32a9ff)]/5"
-                          : "bg-[var(--card,#fff)] hover:bg-[var(--muted,#f9fafb)]"
+                          ? "bg-[var(--primary)]/5"
+                          : "bg-[var(--card)] hover:bg-[var(--muted)]"
                       } ${isClickable ? "cursor-pointer" : ""}`}
                       onClick={() => {
                         onRowClick?.(row);
@@ -644,7 +643,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                         >
                           <ChevronRight
                             size={14}
-                            className={`text-[var(--muted-foreground,#6b7280)] transition-transform mx-auto ${isExpanded ? "rotate-90" : ""}`}
+                            className={`text-[var(--muted-foreground)] transition-transform mx-auto ${isExpanded ? "rotate-90" : ""}`}
                           />
                         </td>
                       )}
@@ -659,7 +658,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                             type="checkbox"
                             checked={isSelected}
                             onChange={() => toggleRow(key)}
-                            className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary,#32a9ff)] cursor-pointer"
+                            className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary)] cursor-pointer"
                           />
                         </td>
                       )}
@@ -670,7 +669,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                         return (
                           <td
                             key={col.key}
-                            className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--foreground,#1f2937)] ${
+                            className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--foreground)] ${
                               isFrozen ? frozenClass : ""
                             }`}
                             style={{
@@ -688,7 +687,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
 
                     {/* Expanded content */}
                     {expandedRowRender && isExpanded && (
-                      <tr className="bg-[var(--muted,#f9fafb)] border-b border-[var(--border,#e5e7eb)]">
+                      <tr className="bg-[var(--muted)] border-b border-[var(--border)]">
                         <td colSpan={colCount} className="px-6 py-4">
                           {expandedRowRender(row)}
                         </td>

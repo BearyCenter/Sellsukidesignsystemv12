@@ -17,7 +17,7 @@ const btnStyle: React.CSSProperties = {
 
 const smallLabel: React.CSSProperties = {
   fontFamily: "var(--font-button)",
-  fontSize: "12px",
+  fontSize: "var(--text-badge)",
   fontWeight: "var(--weight-label)",
 };
 
@@ -227,7 +227,7 @@ export function HeaderSearch({
             Object.entries(grouped).map(([group, groupItems]) => (
               <div key={group}>
                 <div
-                  className="px-4 py-1.5 text-muted-foreground uppercase tracking-wider"
+                  className="px-4 py-1.5 text-muted-foreground"
                   style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
                 >
                   {group}

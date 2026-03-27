@@ -47,14 +47,14 @@ const fontLabelBold: React.CSSProperties = {
 };
 
 const smallLabel: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-label)",
 };
 
 const btnStyle: React.CSSProperties = {
-  fontFamily: "var(--font-button)",
-  fontSize: "var(--text-button)",
+  fontFamily: "var(--font-label)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-button)",
 };
 
@@ -176,9 +176,9 @@ export function StatCard({
       : Minus;
 
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-5">
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
+    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-5 overflow-hidden">
+      <div className="flex items-start justify-between gap-3">
+        <div className="space-y-1 min-w-0 flex-1">
           <span className="text-muted-foreground" style={fontLabel}>
             {title}
           </span>

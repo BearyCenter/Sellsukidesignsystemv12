@@ -37,9 +37,9 @@ const smallLabel: React.CSSProperties = {
 };
 
 const sizeStyles: Record<OTPInputSize, string> = {
-  sm: "w-9 h-9 text-sm",
-  md: "w-11 h-11 text-base",
-  lg: "w-14 h-14 text-xl",
+  sm: "w-9 h-9",
+  md: "w-11 h-11",
+  lg: "w-14 h-14",
 };
 
 /* ─── Component ──────────────────────────────────────────────────────────────── */

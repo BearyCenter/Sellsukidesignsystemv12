@@ -430,7 +430,7 @@ export const TextEditor = forwardRef<HTMLDivElement, TextEditorProps>(
               </div>
               {readOnly && (
                 <span
-                  className="px-2 py-0.5 bg-muted rounded-[var(--radius-sm)] uppercase tracking-wider"
+                  className="px-2 py-0.5 bg-muted rounded-[var(--radius-sm)]"
                   style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
                 >
                   Read Only

@@ -660,7 +660,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                   Object.entries(groupedOptions).map(([group, opts]) => (
                     <div key={group}>
                       <div
-                        className="px-3 py-1.5 uppercase tracking-wider text-muted-foreground"
+                        className="px-3 py-1.5 text-muted-foreground"
                         style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
                       >
                         {group}

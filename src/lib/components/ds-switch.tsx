@@ -80,7 +80,7 @@ export function Switch({
         }`}
       >
         <span
-          className="rounded-full bg-white shadow-sm absolute transition-transform"
+          className="rounded-full bg-background shadow-elevation-sm absolute transition-transform"
           style={{
             width: tp.w,
             height: tp.h,

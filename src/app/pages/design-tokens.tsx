@@ -3,10 +3,7 @@ import { Layers, ChevronRight, Paintbrush, Type, Box, Palette, Sun, Moon, Copy, 
 import { Tabs } from "../components/ds-tabs";
 import { CodeBlock } from "../components/code-block";
 import { useI18n } from "../i18n";
-
-const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
-const btnStyle: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-const smallLabel: React.CSSProperties = { fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
+import { fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
 
 // Copy helper
 function useCopy() {
@@ -474,7 +471,7 @@ export function DesignTokensPage() {
         <div className="flex items-center gap-2 text-primary mb-2 caption">
           <Paintbrush size={14} /><span>{t("breadcrumb.foundation")}</span><ChevronRight size={12} /><span>{t("page.tokens.title")}</span>
         </div>
-        <h1 className="text-foreground">{t("page.tokens.title")}</h1>
+        <h2 className="text-foreground">{t("page.tokens.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.tokens.desc")}
         </p>

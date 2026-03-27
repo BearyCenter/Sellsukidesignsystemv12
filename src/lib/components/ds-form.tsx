@@ -123,7 +123,7 @@ export function FormSuccess({ message, className = "" }: FormSuccessProps) {
 
   return (
     <div
-      className={`flex items-center gap-1 mt-1.5 text-[var(--color-chart-2,#059669)] ${className}`}
+      className={`flex items-center gap-1 mt-1.5 text-chart-2 ${className}`}
       style={smallLabel}
       role="status"
     >
