@@ -1,0 +1,33 @@
+name: Deploy Storybook
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Deploy to Vercel
+        run: |
+          npx vercel deploy storybook-static \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --prod \
+            --yes \
+            --name=sellsuki-storybook \
+            2>&1
