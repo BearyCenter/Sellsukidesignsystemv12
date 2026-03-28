@@ -3,6 +3,7 @@ import { Layers, ChevronRight } from "lucide-react";
 import { DatePicker } from "../components/ds-datepicker";
 import { useI18n } from "../i18n";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function DatePickerShowcase() {
   const { t } = useI18n();
@@ -155,20 +156,12 @@ export function DatePickerShowcase() {
             onChange={setDate7}
             footer={
               <div className="flex gap-2">
-                <button
-                  onClick={() => { const d = new Date(); d.setDate(d.getDate() + 7); setDate7(d); }}
-                  className="px-2 py-1 rounded-[var(--radius-sm)] bg-accent text-accent-foreground hover:bg-accent/80 transition-colors cursor-pointer"
-                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
-                >
+                <DSButton variant="secondary" size="sm" onClick={() => { const d = new Date(); d.setDate(d.getDate() + 7); setDate7(d); }}>
                   +7 days
-                </button>
-                <button
-                  onClick={() => { const d = new Date(); d.setDate(d.getDate() + 30); setDate7(d); }}
-                  className="px-2 py-1 rounded-[var(--radius-sm)] bg-accent text-accent-foreground hover:bg-accent/80 transition-colors cursor-pointer"
-                  style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
-                >
+                </DSButton>
+                <DSButton variant="secondary" size="sm" onClick={() => { const d = new Date(); d.setDate(d.getDate() + 30); setDate7(d); }}>
                   +30 days
-                </button>
+                </DSButton>
               </div>
             }
           />
