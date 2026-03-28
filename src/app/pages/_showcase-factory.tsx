@@ -255,7 +255,7 @@ export function Section({ title, description, children, code }: { title: string;
   return (
     <div className="space-y-4">
       <div>
-        <h4 className="text-foreground">{title}</h4>
+        <h4 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", lineHeight: "1.3" }}>{title}</h4>
         {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
       </div>
       {children}
@@ -320,7 +320,7 @@ export function PageHeader({ titleKey, descKey }: { titleKey: string; descKey: s
       <div className="flex items-center gap-2 text-primary mb-2 caption">
         <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t(titleKey)}</span>
       </div>
-      <h2 className="text-foreground">{t(titleKey)}</h2>
+      <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t(titleKey)}</h2>
       <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>{t(descKey)}</p>
     </div>
   );

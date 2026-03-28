@@ -112,6 +112,7 @@ import { ImagePreviewShowcase } from "./pages/imagepreview-showcase";
 import { MCPServerShowcase } from "./pages/mcp-server-showcase";
 import { VibeCodeDemo } from "./pages/vibecode-demo";
 import { MCPTrackerPage } from "./pages/mcp-tracker";
+import { SidebarAccountShowcase } from "./pages/sidebar-account-showcase";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -165,7 +166,8 @@ type PageId =
   | "imagepreview"
   | "mcpserver"
   | "vibecode"
-  | "mcp-tracker";
+  | "mcp-tracker"
+  | "sidebar-account";
 
 interface SidebarItem {
   id: PageId;
@@ -251,6 +253,7 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "action", label: t("sidebar.action"), icon: <MousePointerClick size={16} /> },
         { id: "menu", label: t("sidebar.menu"), icon: <GripVertical size={16} /> },
         { id: "sidebarcomp", label: t("sidebar.sidebarcomp"), icon: <PanelLeftClose size={16} /> },
+        { id: "sidebar-account", label: t("sidebar.sidebar-account"), icon: <PanelLeftOpen size={16} /> },
         { id: "topnavbar", label: t("sidebar.topnavbar"), icon: <Navigation size={16} /> },
       ],
     },
@@ -327,6 +330,7 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   mcpserver: MCPServerShowcase,
   vibecode: VibeCodeDemo,
   "mcp-tracker": MCPTrackerPage,
+  "sidebar-account": SidebarAccountShowcase,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────

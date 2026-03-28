@@ -68,6 +68,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "sidebar.rating": { en: "Rating", th: "ให้คะแนน" },
   "sidebar.colorpicker": { en: "Color Picker", th: "ตัวเลือกสี" },
   "sidebar.imagepreview": { en: "Image Preview", th: "ดูตัวอย่างรูป" },
+  "sidebar.sidebar-account": { en: "Account Switcher", th: "สลับบัญชี" },
 
   "sidebar.preview": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
 
@@ -246,6 +247,8 @@ const translations: Record<string, Record<Lang, string>> = {
   "page.colorpicker.desc": { en: "Color selection with native picker, preset swatches, hex input, HEX/RGB/HSL format display, and copy to clipboard.", th: "เลือกสีด้วยตัวเลือกเนทีฟ, สวอชพรีเซ็ต, อินพุตเลขฐาน 16, แสดงรูปแบบ HEX/RGB/HSL และคัดลอก" },
   "page.imagepreview.title": { en: "Image Preview", th: "ดูตัวอย่างรูป" },
   "page.imagepreview.desc": { en: "Thumbnail gallery with lightbox viewer, zoom in/out, rotate, navigation arrows, and bottom thumbnail strip.", th: "แกลเลอรีรูปย่อพร้อมตัวแสดงภาพขนาดเต็ม, ซูมเข้า/ออก, หมุน, ลูกศรนำทาง และแถบรูปย่อด้านล่าง" },
+  "page.sidebar-account.title": { en: "Account Switcher", th: "ตัวสลับบัญชี" },
+  "page.sidebar-account.desc": { en: "Sidebar account switcher for switching between companies and branches. Supports collapsed mode, avatar fallback, and multi-level context (company → branch → provider).", th: "ตัวสลับบัญชีใน Sidebar สำหรับสลับระหว่างบริษัทและสาขา รองรับโหมดย่อ, อวาตาร์สำรอง และบริบทหลายระดับ (บริษัท → สาขา → ผู้ให้บริการ)" },
 
   // ── Component Preview Page ──
   "page.preview.title": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
