@@ -1,24 +1,11 @@
 import React, { useState } from "react";
-import { Layers, ChevronRight, AlertTriangle, Trash2, Info, User } from "lucide-react";
+import { Layers, ChevronRight } from "lucide-react";
 import { Modal, ConfirmDialog } from "../components/ds-modal";
-import { Section, DemoCard, fontLabel, btnStyle } from "./_showcase-factory";
+import { DSButton } from "../../lib/components/ds-button";
+import { DSInput, DSTextarea } from "../../lib/components/ds-input";
+import { FormLabel } from "../../lib/components/ds-form";
+import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
-
-function TriggerBtn({ label, onClick, variant = "default" }: { label: string; onClick: () => void; variant?: string }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 py-2 rounded-[var(--radius-md)] transition-colors cursor-pointer ${
-        variant === "destructive"
-          ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
-          : "bg-primary text-primary-foreground hover:bg-primary/90"
-      }`}
-      style={btnStyle}
-    >
-      {label}
-    </button>
-  );
-}
 
 export function ModalShowcase() {
   const { t } = useI18n();
@@ -47,17 +34,17 @@ export function ModalShowcase() {
   Content here
 </Modal>`}>
         <div className="flex flex-wrap gap-3">
-          <TriggerBtn label="Small" onClick={() => setSmOpen(true)} />
-          <TriggerBtn label="Medium (Default)" onClick={() => setBasicOpen(true)} />
-          <TriggerBtn label="Large" onClick={() => setLgOpen(true)} />
-          <TriggerBtn label="Extra Large" onClick={() => setXlOpen(true)} />
+          <DSButton variant="outline" onClick={() => setSmOpen(true)}>Small</DSButton>
+          <DSButton onClick={() => setBasicOpen(true)}>Medium (Default)</DSButton>
+          <DSButton variant="outline" onClick={() => setLgOpen(true)}>Large</DSButton>
+          <DSButton variant="outline" onClick={() => setXlOpen(true)}>Extra Large</DSButton>
         </div>
       </Section>
 
       <Section title="Form Modal" description="Modal with form inputs and footer actions." code={`<Modal open={open} onClose={close} title="Edit Profile" footer={<>...</>}>
   <form>...</form>
 </Modal>`}>
-        <TriggerBtn label="Open Form Modal" onClick={() => setFormOpen(true)} />
+        <DSButton onClick={() => setFormOpen(true)}>Open Form Modal</DSButton>
       </Section>
 
       <Section title="Confirm Dialog" description="Pre-built confirmation pattern with default and destructive variants." code={`<ConfirmDialog
@@ -69,15 +56,15 @@ export function ModalShowcase() {
   description="This cannot be undone."
 />`}>
         <div className="flex flex-wrap gap-3">
-          <TriggerBtn label="Confirm Dialog" onClick={() => setConfirmOpen(true)} />
-          <TriggerBtn label="Destructive Confirm" onClick={() => setDestructiveOpen(true)} variant="destructive" />
+          <DSButton variant="outline" onClick={() => setConfirmOpen(true)}>Confirm Dialog</DSButton>
+          <DSButton variant="destructive" onClick={() => setDestructiveOpen(true)}>Destructive Confirm</DSButton>
         </div>
       </Section>
 
       <Section title="Scrollable Content" description="Long content auto-scrolls within the modal body." code={`<Modal open={open} onClose={close} title="Terms" size="md">
   {longContent}
 </Modal>`}>
-        <TriggerBtn label="Open Scrollable" onClick={() => setScrollOpen(true)} />
+        <DSButton variant="outline" onClick={() => setScrollOpen(true)}>Open Scrollable</DSButton>
       </Section>
 
       {/* Modals */}
@@ -105,23 +92,23 @@ export function ModalShowcase() {
         size="md"
         footer={
           <>
-            <button onClick={() => setFormOpen(false)} className="px-4 py-2 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-muted transition-colors cursor-pointer" style={btnStyle}>Cancel</button>
-            <button onClick={() => setFormOpen(false)} className="px-4 py-2 rounded-[var(--radius-md)] bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer" style={btnStyle}>Save Changes</button>
+            <DSButton variant="outline" onClick={() => setFormOpen(false)}>Cancel</DSButton>
+            <DSButton onClick={() => setFormOpen(false)}>Save Changes</DSButton>
           </>
         }
       >
         <div className="space-y-4">
           <div>
-            <label className="text-foreground block mb-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" }}>Full Name</label>
-            <input className="w-full h-10 px-3 rounded-[var(--radius-md)] border border-border bg-input-background text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/20" style={fontLabel} defaultValue="Somsak Jaidee" />
+            <FormLabel>Full Name</FormLabel>
+            <DSInput defaultValue="Somsak Jaidee" className="mt-1" />
           </div>
           <div>
-            <label className="text-foreground block mb-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" }}>Email</label>
-            <input className="w-full h-10 px-3 rounded-[var(--radius-md)] border border-border bg-input-background text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/20" style={fontLabel} defaultValue="somsak@sellsuki.co.th" />
+            <FormLabel>Email</FormLabel>
+            <DSInput defaultValue="somsak@sellsuki.co.th" type="email" className="mt-1" />
           </div>
           <div>
-            <label className="text-foreground block mb-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" }}>Bio</label>
-            <textarea className="w-full px-3 py-2 rounded-[var(--radius-md)] border border-border bg-input-background text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/20 min-h-[80px] resize-y" style={fontLabel} defaultValue="Senior Frontend Developer at Sellsuki" />
+            <FormLabel>Bio</FormLabel>
+            <DSTextarea defaultValue="Senior Frontend Developer at Sellsuki" rows={3} className="mt-1" />
           </div>
         </div>
       </Modal>

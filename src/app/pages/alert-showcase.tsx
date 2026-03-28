@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
 import { Alert, toast, ToastContainer } from "../components/ds-alert";
-import { Section, DemoCard, fontLabel, btnStyle } from "./_showcase-factory";
+import { DSButton } from "../../lib/components/ds-button";
+import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
 export function AlertShowcase() {
@@ -50,7 +51,7 @@ export function AlertShowcase() {
         </div>
       </Section>
 
-      <Section title="With Actions" description="Alerts with action buttons for inline responses." code={`<Alert variant="warning" title="Update Available" action={<button>Update Now</button>}>
+      <Section title="With Actions" description="Alerts with action buttons for inline responses." code={`<Alert variant="warning" title="Update Available" action={<DSButton size="sm">Update Now</DSButton>}>
   A new version is available.
 </Alert>`}>
         <div className="space-y-3">
@@ -59,8 +60,8 @@ export function AlertShowcase() {
             title="Update Available"
             action={
               <div className="flex gap-2">
-                <button className="px-3 py-1.5 rounded-[var(--radius-md)] bg-chart-5 text-white hover:bg-chart-5/90 transition-colors cursor-pointer" style={btnStyle}>Update Now</button>
-                <button className="px-3 py-1.5 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-muted transition-colors cursor-pointer" style={btnStyle}>Later</button>
+                <DSButton size="sm">Update Now</DSButton>
+                <DSButton variant="outline" size="sm">Later</DSButton>
               </div>
             }
           >
@@ -71,9 +72,7 @@ export function AlertShowcase() {
             title="Payment Failed"
             dismissible
             action={
-              <button className="px-3 py-1.5 rounded-[var(--radius-md)] bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors cursor-pointer" style={btnStyle}>
-                Retry Payment
-              </button>
+              <DSButton variant="destructive" size="sm">Retry Payment</DSButton>
             }
           >
             Your last payment of $49.00 could not be processed. Please update your billing information.
@@ -88,34 +87,18 @@ toast.success("File uploaded successfully!", "Upload Complete");
 toast.warning("Connection unstable.");
 toast.error("Failed to delete item.", "Error");`}>
         <div className="flex flex-wrap gap-3">
-          <button
-            onClick={() => toast.info("Your changes have been saved as a draft.")}
-            className="px-4 py-2 rounded-[var(--radius-md)] bg-primary text-primary-foreground hover:bg-primary/90 transition-colors cursor-pointer"
-            style={btnStyle}
-          >
+          <DSButton onClick={() => toast.info("Your changes have been saved as a draft.")}>
             Info Toast
-          </button>
-          <button
-            onClick={() => toast.success("File uploaded successfully!", "Upload Complete")}
-            className="px-4 py-2 rounded-[var(--radius-md)] bg-chart-2 text-white hover:bg-chart-2/90 transition-colors cursor-pointer"
-            style={btnStyle}
-          >
+          </DSButton>
+          <DSButton variant="secondary" onClick={() => toast.success("File uploaded successfully!", "Upload Complete")}>
             Success Toast
-          </button>
-          <button
-            onClick={() => toast.warning("Your session will expire in 5 minutes.", "Session Warning")}
-            className="px-4 py-2 rounded-[var(--radius-md)] bg-chart-5 text-white hover:bg-chart-5/90 transition-colors cursor-pointer"
-            style={btnStyle}
-          >
+          </DSButton>
+          <DSButton variant="outline" onClick={() => toast.warning("Your session will expire in 5 minutes.", "Session Warning")}>
             Warning Toast
-          </button>
-          <button
-            onClick={() => toast.error("Failed to delete the selected items.", "Deletion Error")}
-            className="px-4 py-2 rounded-[var(--radius-md)] bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors cursor-pointer"
-            style={btnStyle}
-          >
+          </DSButton>
+          <DSButton variant="destructive" onClick={() => toast.error("Failed to delete the selected items.", "Deletion Error")}>
             Error Toast
-          </button>
+          </DSButton>
         </div>
       </Section>
     </div>
