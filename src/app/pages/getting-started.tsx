@@ -69,7 +69,7 @@ function Section({
     <section id={id} className="scroll-mt-8">
       <div className="flex items-center gap-2 mb-4">
         {icon && <span className="text-primary flex-shrink-0">{icon}</span>}
-        <h4 className="text-foreground">{title}</h4>
+        <h4 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", lineHeight: "1.3" }}>{title}</h4>
       </div>
       {children}
     </section>
@@ -257,7 +257,7 @@ export function GettingStartedPage() {
           <ChevronRight size={12} />
           <span>{t("page.gettingStarted.title")}</span>
         </div>
-        <h2 className="text-foreground">{t("page.gettingStarted.title")}</h2>
+        <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.gettingStarted.title")}</h2>
         <p
           className="text-muted-foreground mt-1 max-w-2xl"
           style={fontLabel}

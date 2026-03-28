@@ -471,7 +471,7 @@ export function DesignTokensPage() {
         <div className="flex items-center gap-2 text-primary mb-2 caption">
           <Paintbrush size={14} /><span>{t("breadcrumb.foundation")}</span><ChevronRight size={12} /><span>{t("page.tokens.title")}</span>
         </div>
-        <h2 className="text-foreground">{t("page.tokens.title")}</h2>
+        <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.tokens.title")}</h2>
         <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
           {t("page.tokens.desc")}
         </p>
@@ -542,7 +542,7 @@ export function DesignTokensPage() {
 
       {/* Usage Guide */}
       <div className="space-y-4">
-        <h4 className="text-foreground">{t("tokens.usageGuide")}</h4>
+        <h4 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", lineHeight: "1.3" }}>{t("tokens.usageGuide")}</h4>
         <p className="text-muted-foreground" style={fontLabel}>
           {t("tokens.usageGuideDesc")} <code className="px-1 py-0.5 rounded-[var(--radius-sm)] bg-muted/50 text-primary" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>/src/styles/theme.css</code> {t("tokens.noCodeChanges")}
         </p>

@@ -215,7 +215,7 @@ export function ChangelogPage() {
         </div>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h2 className="text-foreground">{t("page.changelog.title")}</h2>
+            <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.changelog.title")}</h2>
             <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
               {t("page.changelog.desc")}
             </p>
