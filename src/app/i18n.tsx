@@ -69,6 +69,13 @@ const translations: Record<string, Record<Lang, string>> = {
   "sidebar.colorpicker": { en: "Color Picker", th: "ตัวเลือกสี" },
   "sidebar.imagepreview": { en: "Image Preview", th: "ดูตัวอย่างรูป" },
   "sidebar.sidebar-account": { en: "Account Switcher", th: "สลับบัญชี" },
+  "sidebar.numberinput": { en: "Number Input", th: "ช่องกรอกตัวเลข" },
+  "sidebar.otpinput": { en: "OTP Input", th: "ช่องกรอก OTP" },
+  "sidebar.pageheader": { en: "Page Header", th: "หัวหน้าหน้า" },
+  "sidebar.filterbar": { en: "Filter Bar", th: "แถบกรอง" },
+  "sidebar.form": { en: "Form", th: "ฟอร์ม" },
+  "sidebar.advancedtable": { en: "Advanced Table", th: "ตารางขั้นสูง" },
+  "sidebar.mcpserver": { en: "MCP Server", th: "เซิร์ฟเวอร์ MCP" },
 
   "sidebar.preview": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
 
@@ -249,6 +256,19 @@ const translations: Record<string, Record<Lang, string>> = {
   "page.imagepreview.desc": { en: "Thumbnail gallery with lightbox viewer, zoom in/out, rotate, navigation arrows, and bottom thumbnail strip.", th: "แกลเลอรีรูปย่อพร้อมตัวแสดงภาพขนาดเต็ม, ซูมเข้า/ออก, หมุน, ลูกศรนำทาง และแถบรูปย่อด้านล่าง" },
   "page.sidebar-account.title": { en: "Account Switcher", th: "ตัวสลับบัญชี" },
   "page.sidebar-account.desc": { en: "Sidebar account switcher for switching between companies and branches. Supports collapsed mode, avatar fallback, and multi-level context (company → branch → provider).", th: "ตัวสลับบัญชีใน Sidebar สำหรับสลับระหว่างบริษัทและสาขา รองรับโหมดย่อ, อวาตาร์สำรอง และบริบทหลายระดับ (บริษัท → สาขา → ผู้ให้บริการ)" },
+
+  "page.numberinput.title": { en: "Number Input", th: "ช่องกรอกตัวเลข" },
+  "page.numberinput.desc": { en: "Numeric input with increment/decrement stepper buttons, min/max, step, and validation states.", th: "อินพุตตัวเลขพร้อมปุ่มเพิ่ม/ลด, ค่าต่ำสุด/สูงสุด, step และสถานะการตรวจสอบ" },
+  "page.otpinput.title": { en: "OTP Input", th: "ช่องกรอก OTP" },
+  "page.otpinput.desc": { en: "One-time password input with auto-focus, auto-advance, masked mode, and completion callback.", th: "ช่องกรอก OTP พร้อมโฟกัสอัตโนมัติ, เลื่อนอัตโนมัติ, โหมดซ่อน และ callback เมื่อกรอกครบ" },
+  "page.pageheader.title": { en: "Page Header", th: "หัวหน้าหน้า" },
+  "page.pageheader.desc": { en: "Consistent page header layout with title, subtitle, breadcrumb, action buttons, and optional tab navigation.", th: "เลย์เอาต์หัวหน้าหน้าสม่ำเสมอพร้อมชื่อ, คำบรรยาย, เบรดครัมบ์, ปุ่มการกระทำ และแท็บ" },
+  "page.filterbar.title": { en: "Filter Bar", th: "แถบกรอง" },
+  "page.filterbar.desc": { en: "Combined search and filter bar with single/multi-select dropdown filters and clear-all functionality.", th: "แถบค้นหาและกรองรวม พร้อม dropdown กรองแบบเดี่ยว/หลายตัวเลือก และล้างทั้งหมด" },
+  "page.form.title": { en: "Form", th: "ฟอร์ม" },
+  "page.form.desc": { en: "Form layout primitives: FormField wraps inputs with label, helper text, error and success messages in vertical or horizontal layouts.", th: "พื้นฐานเลย์เอาต์ฟอร์ม: FormField ครอบอินพุตพร้อมป้าย, ข้อความช่วยเหลือ, ข้อความแสดงข้อผิดพลาด และเลย์เอาต์แนวตั้ง/แนวนอน" },
+  "page.advancedtable.title": { en: "Advanced Table", th: "ตารางขั้นสูง" },
+  "page.advancedtable.desc": { en: "Server-side data table with pagination, multi-column sort, bulk actions, row selection, frozen columns, column toggle, and loading/error states.", th: "ตารางข้อมูลฝั่งเซิร์ฟเวอร์พร้อมการแบ่งหน้า, เรียงหลายคอลัมน์, การกระทำกลุ่ม, เลือกแถว, คอลัมน์ตรึง และสถานะโหลด/ข้อผิดพลาด" },
 
   // ── Component Preview Page ──
   "page.preview.title": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },

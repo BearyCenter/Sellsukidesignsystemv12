@@ -113,6 +113,12 @@ import { MCPServerShowcase } from "./pages/mcp-server-showcase";
 import { VibeCodeDemo } from "./pages/vibecode-demo";
 import { MCPTrackerPage } from "./pages/mcp-tracker";
 import { SidebarAccountShowcase } from "./pages/sidebar-account-showcase";
+import { NumberInputShowcase } from "./pages/numberinput-showcase";
+import { OTPInputShowcase } from "./pages/otpinput-showcase";
+import { PageHeaderShowcase } from "./pages/pageheader-showcase";
+import { FilterBarShowcase } from "./pages/filterbar-showcase";
+import { FormShowcase } from "./pages/form-showcase";
+import { AdvancedTableShowcase } from "./pages/advanced-table-showcase";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -167,7 +173,13 @@ type PageId =
   | "mcpserver"
   | "vibecode"
   | "mcp-tracker"
-  | "sidebar-account";
+  | "sidebar-account"
+  | "numberinput"
+  | "otpinput"
+  | "pageheader"
+  | "filterbar"
+  | "form"
+  | "advancedtable";
 
 interface SidebarItem {
   id: PageId;
@@ -215,6 +227,10 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "fileupload", label: t("sidebar.fileupload"), icon: <UploadIcon size={16} /> },
         { id: "rating", label: t("sidebar.rating"), icon: <Star size={16} /> },
         { id: "colorpicker", label: t("sidebar.colorpicker"), icon: <Palette size={16} /> },
+        { id: "numberinput", label: t("sidebar.numberinput"), icon: <ChevronsUpDown size={16} /> },
+        { id: "otpinput", label: t("sidebar.otpinput"), icon: <SquareMousePointer size={16} /> },
+        { id: "form", label: t("sidebar.form"), icon: <Type size={16} /> },
+        { id: "filterbar", label: t("sidebar.filterbar"), icon: <SearchIcon size={16} /> },
         { id: "editor", label: t("sidebar.editor"), icon: <PenTool size={16} /> },
       ],
     },
@@ -222,6 +238,7 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
       label: t("sidebar.group.data"),
       items: [
         { id: "table", label: t("sidebar.table"), icon: <Table2 size={16} /> },
+        { id: "advancedtable", label: t("sidebar.advancedtable"), icon: <LayoutGrid size={16} />, badge: "New" },
         { id: "badge", label: t("sidebar.badge"), icon: <BadgeCheck size={16} /> },
         { id: "tag", label: t("sidebar.tag"), icon: <Tag size={16} /> },
         { id: "avatar", label: t("sidebar.avatar"), icon: <UserCircle size={16} /> },
@@ -261,6 +278,7 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
       label: t("sidebar.group.layout"),
       items: [
         { id: "card", label: t("sidebar.card"), icon: <CreditCard size={16} /> },
+        { id: "pageheader", label: t("sidebar.pageheader"), icon: <PanelTop size={16} /> },
         { id: "accordion", label: t("sidebar.accordion"), icon: <ChevronsUpDown size={16} /> },
         { id: "drawer", label: t("sidebar.drawer"), icon: <PanelLeftClose size={16} /> },
         { id: "divider", label: t("sidebar.divider"), icon: <SeparatorHorizontal size={16} /> },
@@ -331,6 +349,12 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   vibecode: VibeCodeDemo,
   "mcp-tracker": MCPTrackerPage,
   "sidebar-account": SidebarAccountShowcase,
+  numberinput: NumberInputShowcase,
+  otpinput: OTPInputShowcase,
+  pageheader: PageHeaderShowcase,
+  filterbar: FilterBarShowcase,
+  form: FormShowcase,
+  advancedtable: AdvancedTableShowcase,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
