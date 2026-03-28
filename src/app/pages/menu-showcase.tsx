@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Copy, Edit3, Trash2, Download, Share2, Archive, Star, MoreHorizontal, Settings, User, LogOut, ChevronRight, Keyboard, FileText, FolderPlus, Mail, MessageSquare, Globe } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, smallLabel } from "./_showcase-factory";
 import { Menu, MenuItem } from "../../lib/components/ds-menu";
+import { DSButton } from "../../lib/components/ds-button";
 
 /* ─── Showcase ────────────────────────────────────────────────────────────── */
 
@@ -75,9 +76,9 @@ export function MenuShowcase() {
       <Section title="Basic Menu" description="Context menu with icons, shortcuts, dividers, and destructive action." code={`<SskMenu items={items}>\n  <button>Open Menu</button>\n</SskMenu>`}>
         <DemoBox>
           <div className="flex justify-center py-4">
-            <button ref={ref1} onClick={() => setOpen1(!open1)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer inline-flex items-center gap-2" style={btnStyle}>
+            <DSButton ref={ref1} variant="outline" onClick={() => setOpen1(!open1)}>
               <MoreHorizontal size={16} /> Actions
-            </button>
+            </DSButton>
             <Menu items={basicItems} open={open1} onClose={() => setOpen1(false)} triggerRef={ref1} />
           </div>
         </DemoBox>
@@ -86,9 +87,9 @@ export function MenuShowcase() {
       <Section title="Nested Sub-menus" description="Menu items can have children that open as nested sub-menus on hover. Supports unlimited nesting depth." code={`<SskMenu items={[\n  { text: "New", children: [\n    { text: "Document" },\n    { text: "Spreadsheet" },\n  ]},\n  { text: "Share", children: [\n    { text: "Email" },\n    { text: "Public Link", children: [\n      { text: "Copy Link" },\n      { text: "Generate QR Code" },\n    ]},\n  ]},\n]} />`}>
         <DemoBox>
           <div className="flex justify-center py-4">
-            <button ref={ref4} onClick={() => setOpen4(!open4)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer inline-flex items-center gap-2" style={btnStyle}>
+            <DSButton ref={ref4} variant="outline" onClick={() => setOpen4(!open4)}>
               <MoreHorizontal size={16} /> Nested Menu
-            </button>
+            </DSButton>
             <Menu items={nestedItems} open={open4} onClose={() => setOpen4(false)} triggerRef={ref4} />
           </div>
         </DemoBox>
@@ -97,9 +98,9 @@ export function MenuShowcase() {
       <Section title="Grouped Menu" description="Menu with labeled groups and dividers." code={`<SskMenu items={groupedItems} />`}>
         <DemoBox>
           <div className="flex justify-center py-4">
-            <button ref={ref2} onClick={() => setOpen2(!open2)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer inline-flex items-center gap-2" style={btnStyle}>
+            <DSButton ref={ref2} variant="outline" onClick={() => setOpen2(!open2)}>
               <User size={16} /> Account Menu
-            </button>
+            </DSButton>
             <Menu items={groupedItems} open={open2} onClose={() => setOpen2(false)} triggerRef={ref2} />
           </div>
         </DemoBox>
@@ -108,9 +109,9 @@ export function MenuShowcase() {
       <Section title="States" description="Disabled and destructive menu items." code={`<SskMenu items={[{ text: "Disabled", disabled: true }]} />`}>
         <DemoBox>
           <div className="flex justify-center py-4">
-            <button ref={ref3} onClick={() => setOpen3(!open3)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer inline-flex items-center gap-2" style={btnStyle}>
+            <DSButton ref={ref3} variant="outline" onClick={() => setOpen3(!open3)}>
               <Settings size={16} /> States Demo
-            </button>
+            </DSButton>
             <Menu items={stateItems} open={open3} onClose={() => setOpen3(false)} triggerRef={ref3} />
           </div>
         </DemoBox>

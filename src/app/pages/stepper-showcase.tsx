@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { PageHeader, Section, DemoBox, APITable, smallLabel, btnStyle } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, APITable, smallLabel } from "./_showcase-factory";
 import { Stepper } from "../../lib/components/ds-stepper";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function StepperShowcase() {
   const [step1, setStep1] = useState(1);
@@ -22,8 +23,8 @@ export function StepperShowcase() {
           <div className="max-w-lg mx-auto space-y-6">
             <Stepper steps={basicSteps} current={step1} />
             <div className="flex justify-center gap-3">
-              <button onClick={() => setStep1(Math.max(0, step1 - 1))} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle} disabled={step1 === 0}>Back</button>
-              <button onClick={() => setStep1(Math.min(basicSteps.length, step1 + 1))} className="px-4 py-2 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle} disabled={step1 >= basicSteps.length}>{step1 === basicSteps.length - 1 ? "Finish" : "Next"}</button>
+              <DSButton variant="outline" onClick={() => setStep1(Math.max(0, step1 - 1))} disabled={step1 === 0}>Back</DSButton>
+              <DSButton onClick={() => setStep1(Math.min(basicSteps.length, step1 + 1))} disabled={step1 >= basicSteps.length}>{step1 === basicSteps.length - 1 ? "Finish" : "Next"}</DSButton>
             </div>
           </div>
         </DemoBox>
@@ -34,8 +35,8 @@ export function StepperShowcase() {
           <div className="max-w-sm">
             <Stepper steps={basicSteps} current={step2} orientation="vertical" />
             <div className="flex gap-3 mt-4 ml-11">
-              <button onClick={() => setStep2(Math.max(0, step2 - 1))} className="px-3 py-1.5 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>Back</button>
-              <button onClick={() => setStep2(Math.min(basicSteps.length, step2 + 1))} className="px-3 py-1.5 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>Next</button>
+              <DSButton variant="outline" size="sm" onClick={() => setStep2(Math.max(0, step2 - 1))}>Back</DSButton>
+              <DSButton size="sm" onClick={() => setStep2(Math.min(basicSteps.length, step2 + 1))}>Next</DSButton>
             </div>
           </div>
         </DemoBox>

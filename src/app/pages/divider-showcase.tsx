@@ -1,6 +1,7 @@
 import React from "react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, smallLabel } from "./_showcase-factory";
 import { Divider } from "../../lib/components/ds-divider";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function DividerShowcase() {
   return (
@@ -22,11 +23,11 @@ export function DividerShowcase() {
       <Section title="With Label" description="Centered text label within the divider." code={`<SskDivider label="OR" />`}>
         <DemoBox>
           <div className="max-w-lg">
-            <button className="w-full px-4 py-2 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>Sign in with Email</button>
+            <DSButton className="w-full">Sign in with Email</DSButton>
             <Divider label="OR" />
-            <button className="w-full px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>Continue with Google</button>
+            <DSButton variant="outline" className="w-full">Continue with Google</DSButton>
             <Divider label="Don't have an account?" />
-            <button className="w-full px-4 py-2 rounded-[var(--radius)] border border-border text-primary hover:bg-accent/30 cursor-pointer" style={btnStyle}>Register</button>
+            <DSButton variant="ghost" className="w-full">Register</DSButton>
           </div>
         </DemoBox>
       </Section>

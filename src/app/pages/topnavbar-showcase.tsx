@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronRight, Bell, Search, User, Menu, Settings, LogOut, HelpCircle } from "lucide-react";
 import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
+import { DSButton } from "../../lib/components/ds-button";
 import { CodeBlock } from "../components/code-block";
 import SSKIcon from "../../imports/Icon";
 
@@ -47,8 +48,8 @@ export function TopNavbarShowcase() {
           <div className="h-[56px] bg-card border-b border-border flex items-center px-5 gap-3">
             <span className="text-foreground" style={fontLabelBold}>New Product</span>
             <div className="flex-1" />
-            <button className="px-3 h-8 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>Cancel</button>
-            <button className="px-3 h-8 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>Save</button>
+            <DSButton variant="outline" size="sm">Cancel</DSButton>
+            <DSButton size="sm">Save</DSButton>
           </div>
         </DemoBox>
       </Section>

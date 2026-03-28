@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layers, ChevronRight, Star, Zap, Bell, Check, AlertTriangle, Clock, Shield, User } from "lucide-react";
 import { Badge, type BadgeVariant, type BadgeSize } from "../components/ds-badge";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { DSButton } from "../../lib/components/ds-button";
 import { useI18n } from "../i18n";
 
 const variants: BadgeVariant[] = ["default", "secondary", "outline", "destructive", "success", "warning"];
@@ -81,7 +82,7 @@ export function BadgeShowcase() {
             </Badge>
           ))}
           {tags.length === 0 && (
-            <span className="text-muted-foreground" style={fontLabel}>All tags removed. <button className="text-primary underline cursor-pointer" onClick={() => setTags(["React", "TypeScript", "Tailwind", "Figma", "Node.js"])}>Reset</button></span>
+            <span className="text-muted-foreground" style={fontLabel}>All tags removed. <DSButton variant="link" onClick={() => setTags(["React", "TypeScript", "Tailwind", "Figma", "Node.js"])}>Reset</DSButton></span>
           )}
         </div>
       </Section>

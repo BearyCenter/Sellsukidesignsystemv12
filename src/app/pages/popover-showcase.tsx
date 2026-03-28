@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Settings, HelpCircle, Info, Bell, X, ChevronDown } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
 import { Popover } from "../../lib/components/ds-popover";
+import { DSButton } from "../../lib/components/ds-button";
+import { DSTextarea } from "../../lib/components/ds-input";
+import { FormLabel } from "../../lib/components/ds-form";
 
 /* ─── Showcase ─────────────────────────────────────────────────────────────── */
 
@@ -16,9 +19,7 @@ export function PopoverShowcase() {
         <DemoBox>
           <div className="flex justify-center py-4">
             <Popover trigger={
-              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>
-                <Info size={14} /> Click me
-              </button>
+              <DSButton><Info size={14} /> Click me</DSButton>
             }>
               <p className="text-foreground" style={fontLabel}>This is popover content. It can contain any elements.</p>
             </Popover>
@@ -30,9 +31,7 @@ export function PopoverShowcase() {
         <DemoBox>
           <div className="flex justify-center py-4">
             <Popover title="Notification Settings" trigger={
-              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-accent cursor-pointer" style={btnStyle}>
-                <Bell size={14} /> Preferences
-              </button>
+              <DSButton variant="outline"><Bell size={14} /> Preferences</DSButton>
             }>
               <div className="space-y-3 w-56">
                 {["Email alerts", "Push notifications", "SMS alerts"].map((item, i) => (
@@ -55,7 +54,7 @@ export function PopoverShowcase() {
           <div className="flex flex-wrap items-center justify-center gap-4 py-12">
             {(["top", "bottom", "left", "right"] as const).map(p => (
               <Popover key={p} placement={p} trigger={
-                <button className="px-3 py-1.5 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-accent cursor-pointer" style={btnStyle}>{p}</button>
+                <DSButton variant="outline" size="sm">{p}</DSButton>
               }>
                 <p className="text-foreground whitespace-nowrap" style={smallLabel}>Placed {p}</p>
               </Popover>
@@ -68,24 +67,22 @@ export function PopoverShowcase() {
         <DemoBox>
           <div className="flex justify-center py-4">
             <Popover title="Quick Feedback" trigger={
-              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] border border-border text-foreground hover:bg-accent cursor-pointer" style={btnStyle}>
-                <HelpCircle size={14} /> Feedback
-              </button>
+              <DSButton variant="outline"><HelpCircle size={14} /> Feedback</DSButton>
             }>
               <div className="space-y-3 w-64">
                 <div>
-                  <label className="block text-foreground mb-1" style={fontLabelBold}>Rating</label>
-                  <div className="flex gap-1">
+                  <FormLabel>Rating</FormLabel>
+                  <div className="flex gap-1 mt-1">
                     {[1, 2, 3, 4, 5].map(n => (
-                      <button key={n} className="w-8 h-8 rounded-[var(--radius-sm)] border border-border text-foreground hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer" style={btnStyle}>{n}</button>
+                      <DSButton key={n} variant="outline" size="sm" className="w-8 px-0">{n}</DSButton>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <label className="block text-foreground mb-1" style={fontLabelBold}>Comment</label>
-                  <textarea rows={2} className="w-full px-3 py-2 rounded-[var(--radius-md)] border border-border bg-background text-foreground placeholder:text-muted-foreground outline-none focus:border-primary" style={fontLabel} placeholder="Your feedback…" />
+                  <FormLabel>Comment</FormLabel>
+                  <DSTextarea rows={2} className="mt-1" placeholder="Your feedback…" />
                 </div>
-                <button className="w-full px-3 py-2 rounded-[var(--radius-md)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>Submit</button>
+                <DSButton className="w-full">Submit</DSButton>
               </div>
             </Popover>
           </div>

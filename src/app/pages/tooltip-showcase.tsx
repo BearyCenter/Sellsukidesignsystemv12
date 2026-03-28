@@ -1,7 +1,8 @@
 import React from "react";
 import { Info, HelpCircle } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, smallLabel } from "./_showcase-factory";
 import { Tooltip } from "../../lib/components/ds-tooltip";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function TooltipShowcase() {
   return (
@@ -12,7 +13,7 @@ export function TooltipShowcase() {
         <DemoBox>
           <div className="flex gap-6 items-center justify-center py-8">
             <Tooltip content="This is helpful information">
-              <button className="px-4 py-2 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>Hover me</button>
+              <DSButton>Hover me</DSButton>
             </Tooltip>
             <Tooltip content="Click for help">
               <span className="text-muted-foreground cursor-help"><HelpCircle size={20} /></span>
@@ -26,7 +27,7 @@ export function TooltipShowcase() {
           <div className="flex gap-6 items-center justify-center py-12">
             {(["top", "bottom", "left", "right"] as const).map((p) => (
               <Tooltip key={p} content={`Tooltip on ${p}`} placement={p}>
-                <button className="px-4 py-2 rounded-[var(--radius)] border border-border bg-card text-foreground hover:bg-muted/30 transition-colors cursor-pointer" style={btnStyle}>{p}</button>
+                <DSButton variant="outline">{p}</DSButton>
               </Tooltip>
             ))}
           </div>

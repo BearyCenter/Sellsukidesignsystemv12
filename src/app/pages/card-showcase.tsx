@@ -1,7 +1,8 @@
 import React from "react";
 import { MoreHorizontal, Heart, Share2, ArrowRight, User, Settings } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
 import { Card, CardHeader, CardBody, CardFooter } from "../../lib/components/ds-card";
+import { DSButton, IconButton } from "../../lib/components/ds-button";
 
 export function CardShowcase() {
   return (
@@ -12,7 +13,7 @@ export function CardShowcase() {
         <DemoBox>
           <div className="max-w-sm">
             <Card>
-              <CardHeader action={<button className="text-muted-foreground hover:text-foreground cursor-pointer"><MoreHorizontal size={16} /></button>}>
+              <CardHeader action={<IconButton icon={<MoreHorizontal size={16} />} variant="ghost" size="sm" aria-label="More options" />}>
                 <span className="text-foreground block" style={fontLabelBold}>Project Overview</span>
                 <span className="text-muted-foreground" style={smallLabel}>Last updated 2 hours ago</span>
               </CardHeader>
@@ -22,8 +23,8 @@ export function CardShowcase() {
                 </p>
               </CardBody>
               <CardFooter>
-                <button className="px-3 py-1.5 rounded-[var(--radius)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>View Details</button>
-                <button className="px-3 py-1.5 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>Dismiss</button>
+                <DSButton size="sm">View Details</DSButton>
+                <DSButton variant="outline" size="sm">Dismiss</DSButton>
               </CardFooter>
             </Card>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel } from "./_showcase-factory";
 import { Skeleton, SkeletonCard, SkeletonTable, SkeletonList } from "../../lib/components/ds-skeleton";
+import { Switch } from "../../lib/components/ds-switch";
 
 /* ─── Showcase ─────────────────────────────────────────────────────────────── */
 
@@ -37,13 +38,7 @@ export function SkeletonShowcase() {
       <Section title="Animation Control" description="Toggle pulse animation.">
         <DemoBox>
           <div className="space-y-4">
-            <label className="inline-flex items-center gap-3 cursor-pointer">
-              <button role="switch" aria-checked={animated} onClick={() => setAnimated(!animated)}
-                className={`w-11 h-6 rounded-full relative flex-shrink-0 transition-colors cursor-pointer ${animated ? "bg-primary" : "bg-muted"}`}>
-                <span className={`w-5 h-5 rounded-full bg-white shadow-sm absolute top-0.5 left-0.5 transition-transform ${animated ? "translate-x-5" : ""}`} />
-              </button>
-              <span className="text-foreground" style={fontLabel}>Animated</span>
-            </label>
+            <Switch checked={animated} onChange={setAnimated} label="Animated" />
             <div className="flex items-center gap-4">
               <Skeleton variant="circular" width={48} height={48} animate={animated} />
               <div className="space-y-2 flex-1 max-w-xs">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
 import { Drawer } from "../../lib/components/ds-drawer";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function DrawerShowcase() {
   const [openSide, setOpenSide] = useState<string | null>(null);
@@ -14,9 +15,9 @@ export function DrawerShowcase() {
         <DemoBox>
           <div className="flex flex-wrap gap-3">
             {(["left", "right", "top", "bottom"] as const).map((s) => (
-              <button key={s} onClick={() => setOpenSide(s)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>
+              <DSButton key={s} variant="outline" onClick={() => setOpenSide(s)}>
                 Open {s}
-              </button>
+              </DSButton>
             ))}
           </div>
           {(["left", "right", "top", "bottom"] as const).map((s) => (
@@ -37,9 +38,9 @@ export function DrawerShowcase() {
         <DemoBox>
           <div className="flex flex-wrap gap-3">
             {(["sm", "md", "lg"] as const).map((s) => (
-              <button key={s} onClick={() => setOpenSize(s)} className="px-4 py-2 rounded-[var(--radius)] border border-border text-foreground hover:bg-muted/30 cursor-pointer" style={btnStyle}>
+              <DSButton key={s} variant="outline" onClick={() => setOpenSize(s)}>
                 Size: {s}
-              </button>
+              </DSButton>
             ))}
           </div>
           {(["sm", "md", "lg"] as const).map((s) => (

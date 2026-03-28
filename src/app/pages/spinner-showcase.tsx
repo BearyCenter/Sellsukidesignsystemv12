@@ -1,6 +1,7 @@
 import React from "react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, btnStyle } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel } from "./_showcase-factory";
 import { Spinner } from "../../lib/components/ds-spinner";
+import { DSButton } from "../../lib/components/ds-button";
 
 export function SpinnerShowcase() {
   return (
@@ -36,10 +37,10 @@ export function SpinnerShowcase() {
               <Spinner size="sm" />
               <span className="text-foreground" style={fontLabel}>Loading data...</span>
             </div>
-            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius)] bg-primary text-primary-foreground opacity-80" style={btnStyle} disabled>
-              <Spinner size="sm" color="white" />
+            <DSButton disabled className="opacity-80 inline-flex items-center gap-2">
+              <Spinner size="sm" color="currentColor" />
               Processing...
-            </button>
+            </DSButton>
           </div>
         </DemoBox>
       </Section>
