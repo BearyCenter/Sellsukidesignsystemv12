@@ -361,9 +361,6 @@ const translations: Record<string, Record<Lang, string>> = {
   "common.showCode": { en: "Show code", th: "แสดงโค้ด" },
   "common.hideCode": { en: "Hide code", th: "ซ่อนโค้ด" },
 
-  // ── Sidebar: MCP Server ──
-  "sidebar.mcpserver": { en: "MCP Server", th: "MCP Server" },
-
   // ── MCP Server Page ──
   "page.mcpServer.title": { en: "MCP Server", th: "MCP Server" },
   "page.mcpServer.desc": {

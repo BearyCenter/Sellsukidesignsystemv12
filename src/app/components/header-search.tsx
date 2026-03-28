@@ -163,7 +163,7 @@ export function HeaderSearch({
         {!compact && (
           <kbd
             className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted text-muted-foreground border border-border/50"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace", fontSize: "12px", fontWeight: "500", letterSpacing: "0" }}
           >
             {shortcutLabel}
           </kbd>
@@ -209,7 +209,7 @@ export function HeaderSearch({
           )}
           <kbd
             className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-muted text-muted-foreground border border-border/50 cursor-pointer"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace", fontSize: "12px", fontWeight: "500" }}
             onClick={() => { setOpen(false); setQuery(""); }}
           >
             ESC
@@ -281,7 +281,7 @@ export function HeaderSearch({
           <div className="flex items-center gap-1 text-muted-foreground">
             <span
               className="px-1 rounded-[var(--radius-sm)] border border-border/50 bg-muted"
-              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+              style={{ fontFamily: "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace", fontSize: "11px", fontWeight: "500" }}
             >
               esc
             </span>

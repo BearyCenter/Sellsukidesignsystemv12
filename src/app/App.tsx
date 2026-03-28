@@ -428,8 +428,6 @@ function AppInner() {
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:sticky lg:top-0 lg:z-30`}
         style={{ width: sidebarCollapsed ? "64px" : "256px", borderRight: "1px solid var(--sidebar-border)" }}
       >
-        {/* Brand accent line */}
-        <div style={{ height: 3, background: "linear-gradient(90deg, var(--primary) 0%, rgba(50,169,255,0.3) 100%)", flexShrink: 0 }} />
         {/* Logo */}
         <div className={`${sidebarCollapsed ? "px-2" : "px-4"} border-b border-sidebar-border flex items-center`} style={{ height: "56px" }}>
           <div className="flex items-center justify-between w-full">
@@ -681,7 +679,7 @@ function AppInner() {
           </div>
         </header>
 
-        <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-8">
+        <main key={activePage} className="flex-1 max-w-5xl mx-auto w-full px-6 py-8 page-enter">
           <ActivePageComponent />
         </main>
       </div>

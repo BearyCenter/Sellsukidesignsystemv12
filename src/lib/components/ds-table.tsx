@@ -106,7 +106,7 @@ export function DSTable<T extends Record<string, any>>({
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead className={stickyHeader ? "sticky top-0 z-10" : ""}>
-            <tr className="bg-muted/50 border-b border-border">
+            <tr className="border-b border-border" style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, var(--background) 70%)" }}>
               {selectable && (
                 <th className={`${cellPadding[size]} w-12`}>
                   <input
@@ -122,14 +122,14 @@ export function DSTable<T extends Record<string, any>>({
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`${cellPadding[size]} text-${col.align ?? "left"} text-muted-foreground ${col.sortable ? "cursor-pointer select-none hover:text-foreground transition-colors" : ""} ${bordered ? "border-x border-border first:border-l-0 last:border-r-0" : ""}`}
+                  className={`${cellPadding[size]} text-${col.align ?? "left"} text-foreground ${col.sortable ? "cursor-pointer select-none hover:text-primary transition-colors" : ""} ${bordered ? "border-x border-border first:border-l-0 last:border-r-0" : ""}`}
                   style={{ ...headerStyle, width: col.width }}
                   onClick={() => col.sortable && handleSort(col.key)}
                 >
                   <span className="inline-flex items-center gap-1">
                     {col.header}
                     {col.sortable && (
-                      <span className="text-muted-foreground/60">
+                      <span className="text-muted-foreground/50">
                         {sortKey === col.key ? (
                           sortDir === "asc" ? <ChevronUp size={14} /> : <ChevronDown size={14} />
                         ) : (
@@ -166,7 +166,7 @@ export function DSTable<T extends Record<string, any>>({
                     key={idx}
                     className={`border-b border-border last:border-b-0 transition-colors ${
                       isSelected ? "bg-primary/5" : striped && idx % 2 === 1 ? "bg-muted/20" : "bg-card"
-                    } ${hoverable ? "hover:bg-[var(--Colors--Background--bg-primary_hover)]" : ""}`}
+                    } ${hoverable ? "hover:bg-[var(--row-hover-bg)]" : ""}`}
                   >
                     {selectable && (
                       <td className={`${cellPadding[size]} w-12`}>

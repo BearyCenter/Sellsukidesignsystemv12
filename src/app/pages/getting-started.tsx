@@ -251,19 +251,33 @@ export function GettingStartedPage() {
     <div className="space-y-14">
       {/* ═══ Hero ═══ */}
       <div>
-        <div className="flex items-center gap-2 text-primary mb-3 caption">
-          <BookOpen size={14} />
-          <span>{t("breadcrumb.docs")}</span>
-          <ChevronRight size={12} />
-          <span>{t("page.gettingStarted.title")}</span>
+        <div className="mb-8">
+          <div className="flex items-center gap-2 text-primary mb-3 caption">
+            <BookOpen size={14} />
+            <span>{t("breadcrumb.docs")}</span>
+            <ChevronRight size={12} />
+            <span>{t("page.gettingStarted.title")}</span>
+          </div>
+          <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.gettingStarted.title")}</h2>
+          <p className="text-muted-foreground mt-2 max-w-2xl" style={fontLabel}>
+            {t("page.gettingStarted.desc")}
+          </p>
+
+          {/* Stats strip */}
+          <div className="flex flex-wrap items-center gap-6 mt-5">
+            {[
+              { value: "48", label: "Components" },
+              { value: "0.7", label: "Version" },
+              { value: "React", label: "Framework" },
+              { value: "CSS", label: "Tokens" },
+            ].map((s) => (
+              <div key={s.label} className="flex items-baseline gap-1.5">
+                <span className="text-primary" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700" }}>{s.value}</span>
+                <span className="text-muted-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)" }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.gettingStarted.title")}</h2>
-        <p
-          className="text-muted-foreground mt-1 max-w-2xl"
-          style={fontLabel}
-        >
-          {t("page.gettingStarted.desc")}
-        </p>
 
         {/* Quick Links */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">

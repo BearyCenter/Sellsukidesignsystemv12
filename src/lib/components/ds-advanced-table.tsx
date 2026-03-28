@@ -485,8 +485,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
     (expandedRowRender ? 1 : 0);
 
   /* ── Helpers ────────────────────────── */
-  const frozenClass = "sticky z-[1] bg-card";
-  const frozenHeaderClass = "sticky z-[2] bg-muted";
+  const frozenHeaderClass = "sticky z-[2] bg-inherit";
 
   return (
     <div className={`rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden ${className}`}>
@@ -512,7 +511,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
         <table className="w-full border-collapse" style={{ minWidth: "100%" }}>
           {/* ── Header ──────────────────── */}
           <thead className={stickyHeader ? "sticky top-0 z-10" : ""}>
-            <tr className="border-b border-[var(--border)] bg-[var(--muted)]">
+            <tr className="border-b border-border" style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, var(--background) 70%)" }}>
               {/* Expand col */}
               {expandedRowRender && (
                 <th className={`${cellPad[size]} w-10`} />
@@ -535,8 +534,8 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                 return (
                   <th
                     key={col.key}
-                    className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--muted-foreground)] whitespace-nowrap select-none ${
-                      col.sortable && onSortChange ? "cursor-pointer hover:text-[var(--foreground)]" : ""
+                    className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--foreground)] whitespace-nowrap select-none ${
+                      col.sortable && onSortChange ? "cursor-pointer hover:text-[var(--primary)]" : ""
                     } ${isFrozen ? frozenHeaderClass : ""}`}
                     style={{
                       ...btnFont,
@@ -549,7 +548,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                     <span className="inline-flex items-center gap-1">
                       {col.header}
                       {col.sortable && onSortChange && (
-                        <span className="text-[var(--muted-foreground)]">
+                        <span className={isSorted ? "text-[var(--primary)]" : "text-[var(--muted-foreground)]/60"}>
                           {isSorted ? (
                             sortOrder === "asc" ? <ChevronUp size={13} /> : <ChevronDown size={13} />
                           ) : (
@@ -625,10 +624,10 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                 return (
                   <React.Fragment key={key ?? idx}>
                     <tr
-                      className={`border-b border-[var(--border)] last:border-b-0 transition-colors ${
+                      className={`group/row border-b border-[var(--border)] last:border-b-0 transition-colors ${
                         isSelected
-                          ? "bg-[var(--primary)]/5"
-                          : "bg-[var(--card)] hover:bg-[var(--muted)]"
+                          ? "bg-primary/5"
+                          : "bg-[var(--card)] hover:bg-[var(--row-hover-bg)]"
                       } ${isClickable ? "cursor-pointer" : ""}`}
                       onClick={() => {
                         onRowClick?.(row);
@@ -666,12 +665,15 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                       {/* Cells */}
                       {visibleCols.map((col) => {
                         const isFrozen = col.frozen && col.key in frozenOffsets;
+                        const frozenCellClass = isFrozen
+                          ? isSelected
+                            ? "sticky z-[1] bg-primary/5"
+                            : "sticky z-[1] bg-[var(--card)] group-hover/row:bg-[var(--row-hover-bg)] transition-colors"
+                          : "";
                         return (
                           <td
                             key={col.key}
-                            className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--foreground)] ${
-                              isFrozen ? frozenClass : ""
-                            }`}
+                            className={`${cellPad[size]} text-${col.align ?? "left"} text-[var(--foreground)] ${frozenCellClass}`}
                             style={{
                               ...cellFont,
                               ...(isFrozen
