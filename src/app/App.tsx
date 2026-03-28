@@ -402,8 +402,10 @@ function AppInner() {
       <aside
         className={`fixed top-0 left-0 h-screen bg-sidebar border-r border-sidebar-border z-50 flex flex-col transition-all duration-200
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:sticky lg:top-0 lg:z-30`}
-        style={{ width: sidebarCollapsed ? "64px" : "256px" }}
+        style={{ width: sidebarCollapsed ? "64px" : "256px", borderRight: "1px solid var(--sidebar-border)" }}
       >
+        {/* Brand accent line */}
+        <div style={{ height: 3, background: "linear-gradient(90deg, var(--primary) 0%, rgba(50,169,255,0.3) 100%)", flexShrink: 0 }} />
         {/* Logo */}
         <div className={`${sidebarCollapsed ? "px-2" : "px-4"} border-b border-sidebar-border flex items-center`} style={{ height: "56px" }}>
           <div className="flex items-center justify-between w-full">
@@ -546,7 +548,7 @@ function AppInner() {
       </aside>
 
       {/* ─── Main Content ────────────────────────────── */}
-      <div className="flex-1 min-w-0 flex flex-col">
+      <div className="flex-1 min-w-0 flex flex-col app-content-area">
         {/* Desktop Top Bar — burger toggle + breadcrumb + search + actions */}
         <header className="hidden lg:flex items-center sticky top-0 z-30 bg-card/80 backdrop-blur-sm border-b border-border" style={{ height: "56px" }}>
           <div className="px-4 flex items-center gap-3 w-full">

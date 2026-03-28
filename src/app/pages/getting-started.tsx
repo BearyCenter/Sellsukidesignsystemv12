@@ -290,7 +290,10 @@ export function GettingStartedPage() {
             <a
               key={link.label}
               href={link.href}
-              className="flex items-center gap-3 p-4 rounded-[var(--radius)] border border-border bg-card hover:border-primary/40 hover:bg-accent/30 transition-all group"
+              className="flex items-center gap-3 p-4 rounded-[var(--radius)] border border-border bg-card hover:border-primary/50 hover:bg-accent/30 transition-all group"
+              style={{ boxShadow: "0 1px 3px rgba(50,169,255,0.04)", transition: "all 0.2s ease" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 6px 16px rgba(50,169,255,0.12)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.transform = ""; (e.currentTarget as HTMLAnchorElement).style.boxShadow = "0 1px 3px rgba(50,169,255,0.04)"; }}
             >
               <span className="w-10 h-10 rounded-[var(--radius-md)] bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                 {link.icon}

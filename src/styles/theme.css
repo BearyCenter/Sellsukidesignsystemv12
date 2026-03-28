@@ -386,7 +386,7 @@
   --radius-full: var(--Border-radius--radius-full);
 
   /* Sidebar */
-  --sidebar: var(--Colors--Background--bg-primary);
+  --sidebar: rgba(247, 251, 255, 1);
   --sidebar-foreground: var(--Colors--Text--text-primary);
   --sidebar-primary: var(--Base_Color--Sky--500);
   --sidebar-primary-foreground: var(--Base_Color--Sky--500);
@@ -563,6 +563,21 @@
     font-family: var(--font-p);
     font-size: var(--text-p);
     font-weight: var(--weight-p);
+  }
+
+  /* ── Subtle dot grid background texture ── */
+  .app-content-area {
+    background-color: var(--background);
+    background-image: radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  :root {
+    --dot-grid-color: rgba(50, 169, 255, 0.07);
+  }
+
+  .dark {
+    --dot-grid-color: rgba(255, 255, 255, 0.04);
   }
 
   /* Native checkbox: use primary color and fix default black border */

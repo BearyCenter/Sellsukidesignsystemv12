@@ -255,8 +255,11 @@ export function Section({ title, description, children, code }: { title: string;
   return (
     <div className="space-y-4">
       <div>
-        <h4 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", lineHeight: "1.3" }}>{title}</h4>
-        {description && <p className="text-muted-foreground mt-0.5" style={fontLabel}>{description}</p>}
+        <div className="flex items-center gap-3 mb-1">
+          <span style={{ width: 3, minWidth: 3, height: 20, borderRadius: 2, background: "var(--primary)", display: "inline-block", flexShrink: 0 }} />
+          <h4 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", lineHeight: "1.3" }}>{title}</h4>
+        </div>
+        {description && <p className="text-muted-foreground mt-0.5 pl-4" style={fontLabel}>{description}</p>}
       </div>
       {children}
       {code && <CollapsibleCode code={code} />}
@@ -330,7 +333,10 @@ export function PageHeader({ titleKey, descKey }: { titleKey: string; descKey: s
 
 export function DemoBox({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`p-6 rounded-[var(--radius-lg)] border border-border bg-card ${className ?? ""}`}>
+    <div
+      className={`p-6 rounded-[var(--radius-lg)] border border-border bg-card ${className ?? ""}`}
+      style={{ boxShadow: "0 1px 4px rgba(50,169,255,0.05)" }}
+    >
       {children}
     </div>
   );
