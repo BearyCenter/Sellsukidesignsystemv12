@@ -96,7 +96,7 @@ export function NumberInput({
           type="button"
           onClick={() => update(current - step)}
           disabled={disabled || !canDecrement}
-          className="flex items-center justify-center px-2.5 border-r border-border text-muted-foreground hover:text-foreground hover:bg-accent disabled:opacity-30 transition-colors cursor-pointer"
+          className="flex items-center justify-center px-2.5 border-r border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 disabled:opacity-30 transition-colors cursor-pointer"
           style={{ height: "100%" }}
         >
           <Minus size={btnSizeMap[size]} />
@@ -117,7 +117,7 @@ export function NumberInput({
           type="button"
           onClick={() => update(current + step)}
           disabled={disabled || !canIncrement}
-          className="flex items-center justify-center px-2.5 border-l border-border text-muted-foreground hover:text-foreground hover:bg-accent disabled:opacity-30 transition-colors cursor-pointer"
+          className="flex items-center justify-center px-2.5 border-l border-border text-muted-foreground hover:text-foreground hover:bg-muted/50 disabled:opacity-30 transition-colors cursor-pointer"
           style={{ height: "100%" }}
         >
           <Plus size={btnSizeMap[size]} />
