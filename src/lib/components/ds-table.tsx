@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react";
+import { DSCheckbox } from "./ds-checkbox";
 
 export type TableSize = "sm" | "md" | "lg";
 
@@ -109,13 +110,11 @@ export function DSTable<T extends Record<string, any>>({
             <tr className="border-b border-border" style={{ backgroundColor: "color-mix(in srgb, var(--muted) 30%, var(--background) 70%)" }}>
               {selectable && (
                 <th className={`${cellPadding[size]} w-12`}>
-                  <input
-                    type="checkbox"
+                  <DSCheckbox
+                    size="sm"
                     checked={allSelected}
-                    ref={(el) => { if (el) el.indeterminate = someSelected; }}
+                    indeterminate={someSelected}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded-[var(--radius-sm)] cursor-pointer accent-primary"
-                    style={{ accentColor: "var(--primary)" }}
                   />
                 </th>
               )}
@@ -170,12 +169,10 @@ export function DSTable<T extends Record<string, any>>({
                   >
                     {selectable && (
                       <td className={`${cellPadding[size]} w-12`}>
-                        <input
-                          type="checkbox"
+                        <DSCheckbox
+                          size="sm"
                           checked={isSelected}
                           onChange={() => toggleRow(idx)}
-                          className="w-4 h-4 rounded-[var(--radius-sm)] cursor-pointer accent-primary"
-                          style={{ accentColor: "var(--primary)" }}
                         />
                       </td>
                     )}
