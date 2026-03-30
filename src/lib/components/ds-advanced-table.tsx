@@ -9,6 +9,7 @@ import {
   AlertCircle,
   X,
 } from "lucide-react";
+import { DSCheckbox } from "./ds-checkbox";
 
 /* ─── Types ──────────────────────────────────────────────────────────────────── */
 
@@ -519,12 +520,11 @@ export function AdvancedDataTable<T extends Record<string, any>>({
               {/* Checkbox col */}
               {selectable && (
                 <th className={`${cellPad[size]} w-12`}>
-                  <input
-                    type="checkbox"
+                  <DSCheckbox
+                    size="sm"
                     checked={allSelected}
-                    ref={(el) => { if (el) el.indeterminate = someSelected; }}
+                    indeterminate={someSelected && !allSelected}
                     onChange={toggleAll}
-                    className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary)] cursor-pointer"
                   />
                 </th>
               )}
@@ -653,11 +653,10 @@ export function AdvancedDataTable<T extends Record<string, any>>({
                           className={`${cellPad[size]} w-12`}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <input
-                            type="checkbox"
+                          <DSCheckbox
+                            size="sm"
                             checked={isSelected}
                             onChange={() => toggleRow(key)}
-                            className="w-4 h-4 rounded border-[var(--border)] accent-[var(--primary)] cursor-pointer"
                           />
                         </td>
                       )}
