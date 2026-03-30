@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { DSCheckbox, CheckboxGroup } from "../components/ds-checkbox";
+import { DSCheckbox, CheckboxGroup } from "../../lib/components/ds-checkbox";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 

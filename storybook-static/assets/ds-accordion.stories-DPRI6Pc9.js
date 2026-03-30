@@ -1,0 +1,33 @@
+import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{r as y}from"./index-ZH-6pyQh.js";import{C as _}from"./chevron-down-ClZlXrfz.js";import{S as O}from"./settings-BXaJJ-8e.js";import{U}from"./user-6HmpBwmQ.js";import{B}from"./bell-DyFwNdCs.js";import"./_commonjsHelpers-CqkleIqs.js";import"./createLucideIcon-DG6FjBK_.js";const E={fontFamily:"var(--font-label)",fontSize:"var(--text-label)",fontWeight:"var(--weight-button)"},D={fontFamily:"var(--font-label)",fontSize:"var(--text-label)",fontWeight:"var(--weight-label)"};function u({title:o,children:p,open:s,onToggle:n,icon:r}){return t.jsxs("div",{className:"border-b border-border last:border-b-0",children:[t.jsxs("button",{onClick:n,className:"w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/20 transition-colors cursor-pointer",children:[r&&t.jsx("span",{className:"text-primary flex-shrink-0",children:r}),t.jsx("span",{className:"flex-1 text-foreground",style:E,children:o}),t.jsx(_,{size:16,className:`text-muted-foreground transition-transform ${s?"rotate-180":""}`})]}),t.jsx("div",{className:`overflow-hidden transition-all ${s?"max-h-96 opacity-100":"max-h-0 opacity-0"}`,children:t.jsx("div",{className:"px-4 pb-4 text-muted-foreground",style:D,children:p})})]})}function g({type:o="single",items:p,defaultOpen:s,value:n,onChange:r,className:q=""}){const[f,I]=y.useState(typeof s=="string"?s:null),[T,k]=y.useState(Array.isArray(s)?new Set(s):new Set),l=n!==void 0,z=e=>l?o==="single"?n===e:Array.isArray(n)&&n.includes(e):o==="single"?f===e:T.has(e),W=e=>{if(o==="single"){const i=(l?n===e:f===e)?null:e;l||I(i),r==null||r(i)}else if(l){const i=Array.isArray(n)?n:[],a=i.includes(e)?i.filter(M=>M!==e):[...i,e];r==null||r(a)}else k(i=>{const a=new Set(i);return a.has(e)?a.delete(e):a.add(e),a})};return t.jsx("div",{className:`rounded-[var(--radius)] border border-border overflow-hidden ${q}`,children:p.map(e=>t.jsx(u,{title:e.title,open:z(e.id),onToggle:()=>W(e.id),icon:e.icon,children:e.content},e.id))})}g.displayName="Accordion";u.displayName="AccordionItem";u.__docgenInfo={description:"",methods:[],displayName:"AccordionItem",props:{title:{required:!0,tsType:{name:"string"},description:"Header text"},children:{required:!0,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"Content to display when expanded"},open:{required:!0,tsType:{name:"boolean"},description:"Whether this item is open"},onToggle:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:"Toggle callback"},icon:{required:!1,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:"Optional leading icon"}}};g.__docgenInfo={description:"",methods:[],displayName:"Accordion",props:{type:{required:!1,tsType:{name:"union",raw:'"single" | "multiple"',elements:[{name:"literal",value:'"single"'},{name:"literal",value:'"multiple"'}]},description:"Expand behavior",defaultValue:{value:'"single"',computed:!1}},items:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:"{ id: string; title: string; content: React.ReactNode; icon?: React.ReactNode }",signature:{properties:[{key:"id",value:{name:"string",required:!0}},{key:"title",value:{name:"string",required:!0}},{key:"content",value:{name:"ReactReactNode",raw:"React.ReactNode",required:!0}},{key:"icon",value:{name:"ReactReactNode",raw:"React.ReactNode",required:!1}}]}}],raw:"{ id: string; title: string; content: React.ReactNode; icon?: React.ReactNode }[]"},description:"Item definitions"},defaultOpen:{required:!1,tsType:{name:"union",raw:"string | string[]",elements:[{name:"string"},{name:"Array",elements:[{name:"string"}],raw:"string[]"}]},description:"Initially open item(s)"},value:{required:!1,tsType:{name:"union",raw:"string | null | string[]",elements:[{name:"string"},{name:"null"},{name:"Array",elements:[{name:"string"}],raw:"string[]"}]},description:"Controlled open state (for single: string | null, for multiple: string[])"},onChange:{required:!1,tsType:{name:"signature",type:"function",raw:"(value: string | null | string[]) => void",signature:{arguments:[{type:{name:"union",raw:"string | null | string[]",elements:[{name:"string"},{name:"null"},{name:"Array",elements:[{name:"string"}],raw:"string[]"}]},name:"value"}],return:{name:"void"}}},description:"Change callback"},className:{required:!1,tsType:{name:"string"},description:"Additional class name",defaultValue:{value:'""',computed:!1}}}};const J={title:"Components/Accordion",component:g,tags:["autodocs"],argTypes:{type:{control:"select",options:["single","multiple"]}}},j=[{id:"1",title:"What is Sellsuki?",content:"Sellsuki is a comprehensive e-commerce management platform."},{id:"2",title:"How do I get started?",content:"Sign up for an account and follow the onboarding guide."},{id:"3",title:"What payment methods are supported?",content:"We support credit cards, bank transfers, and various e-wallets."}],c={args:{items:j,type:"single"}},d={args:{items:j,type:"multiple",defaultOpen:["1","2"]}},m={args:{items:[{id:"1",title:"Account Settings",content:"Manage your account preferences.",icon:t.jsx(O,{size:16})},{id:"2",title:"Profile",content:"Update your profile information.",icon:t.jsx(U,{size:16})},{id:"3",title:"Notifications",content:"Configure notification preferences.",icon:t.jsx(B,{size:16})}],type:"single",defaultOpen:"1"}};var x,h,v;c.parameters={...c.parameters,docs:{...(x=c.parameters)==null?void 0:x.docs,source:{originalSource:`{
+  args: {
+    items: sampleItems,
+    type: "single"
+  }
+}`,...(v=(h=c.parameters)==null?void 0:h.docs)==null?void 0:v.source}}};var w,b,N;d.parameters={...d.parameters,docs:{...(w=d.parameters)==null?void 0:w.docs,source:{originalSource:`{
+  args: {
+    items: sampleItems,
+    type: "multiple",
+    defaultOpen: ["1", "2"]
+  }
+}`,...(N=(b=d.parameters)==null?void 0:b.docs)==null?void 0:N.source}}};var R,A,S;m.parameters={...m.parameters,docs:{...(R=m.parameters)==null?void 0:R.docs,source:{originalSource:`{
+  args: {
+    items: [{
+      id: "1",
+      title: "Account Settings",
+      content: "Manage your account preferences.",
+      icon: <Settings size={16} />
+    }, {
+      id: "2",
+      title: "Profile",
+      content: "Update your profile information.",
+      icon: <User size={16} />
+    }, {
+      id: "3",
+      title: "Notifications",
+      content: "Configure notification preferences.",
+      icon: <Bell size={16} />
+    }],
+    type: "single",
+    defaultOpen: "1"
+  }
+}`,...(S=(A=m.parameters)==null?void 0:A.docs)==null?void 0:S.source}}};const K=["Default","Multiple","WithIcons"];export{c as Default,d as Multiple,m as WithIcons,K as __namedExportsOrder,J as default};

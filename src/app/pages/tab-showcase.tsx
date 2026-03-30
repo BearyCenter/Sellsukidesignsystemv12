@@ -1,6 +1,6 @@
 import React from "react";
 import { Layers, ChevronRight, Home, Settings, User, Bell, Mail, Star } from "lucide-react";
-import { Tabs, type TabItem } from "../components/ds-tabs";
+import { Tabs, type TabItem } from "../../lib/components/ds-tabs";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 

@@ -7,7 +7,7 @@ import {
   Globe,
   Lock,
 } from "lucide-react";
-import { DSInput, DSTextarea } from "../components/ds-input";
+import { DSInput, DSTextarea } from "../../lib/components/ds-input";
 import { useI18n } from "../i18n";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 

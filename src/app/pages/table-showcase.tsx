@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight, Circle } from "lucide-react";
 import { DSTable, type TableColumn } from "../../lib/components/ds-table";
-import { Badge } from "../components/ds-badge";
+import { Badge } from "../../lib/components/ds-badge";
 import { Section, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 

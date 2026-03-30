@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { DatePicker } from "../components/ds-datepicker";
+import { DatePicker } from "../../lib/components/ds-datepicker";
 import { useI18n } from "../i18n";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { DSButton } from "../../lib/components/ds-button";

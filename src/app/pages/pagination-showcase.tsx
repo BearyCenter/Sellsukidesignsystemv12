@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { Pagination } from "../components/ds-pagination";
+import { Pagination } from "../../lib/components/ds-pagination";
 import { useI18n } from "../i18n";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 

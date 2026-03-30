@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight, Star, Zap, Bell, Check, AlertTriangle, Clock, Shield, User } from "lucide-react";
-import { Badge, type BadgeVariant, type BadgeSize } from "../components/ds-badge";
+import { Badge, type BadgeVariant, type BadgeSize } from "../../lib/components/ds-badge";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { DSButton } from "../../lib/components/ds-button";
 import { useI18n } from "../i18n";

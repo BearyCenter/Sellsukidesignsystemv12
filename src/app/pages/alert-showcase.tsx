@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { Alert, toast, ToastContainer } from "../components/ds-alert";
+import { Alert, toast, ToastContainer } from "../../lib/components/ds-alert";
 import { DSButton } from "../../lib/components/ds-button";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";

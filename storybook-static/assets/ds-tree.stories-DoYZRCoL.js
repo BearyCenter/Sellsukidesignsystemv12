@@ -1,0 +1,30 @@
+import{j as e}from"./jsx-runtime-D_zvdyIk.js";import{r as w}from"./index-ZH-6pyQh.js";import{C as F}from"./chevron-down-ClZlXrfz.js";import{C as $}from"./chevron-right-BjfhjwKz.js";import{c as D}from"./createLucideIcon-DG6FjBK_.js";import{F as H}from"./file-CNoy516B.js";import"./_commonjsHelpers-CqkleIqs.js";/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const M=[["path",{d:"m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2",key:"usdka0"}]],R=D("folder-open",M);/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const W=[["path",{d:"M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z",key:"1kt360"}]],O=D("folder",W),V={fontFamily:"var(--font-label)",fontSize:"var(--text-label)",fontWeight:"var(--weight-label)"};function L({node:a,level:m,expanded:u,selected:f,onToggle:n,onSelect:d,selectable:t,showLines:i}){const o=a.children&&a.children.length>0,l=u.has(a.id),c=f.has(a.id),b=o?l?e.jsx(R,{size:14,className:"text-chart-5"}):e.jsx(O,{size:14,className:"text-chart-5"}):e.jsx(H,{size:14,className:"text-muted-foreground"});return e.jsxs("div",{children:[e.jsxs("div",{className:`flex items-center gap-1.5 py-1 px-2 rounded-[var(--radius-sm)] transition-colors
+          ${a.disabled?"opacity-40 pointer-events-none":"cursor-pointer hover:bg-accent"}
+          ${c?"bg-primary/10 text-primary":"text-foreground"}`,style:{paddingLeft:`${m*20+8}px`,...V},onClick:()=>{o&&n(a.id),t&&d(a.id)},children:[o?e.jsx("span",{className:"w-4 h-4 flex items-center justify-center flex-shrink-0",children:l?e.jsx(F,{size:12}):e.jsx($,{size:12})}):e.jsx("span",{className:"w-4"}),t&&e.jsx("span",{className:`w-4 h-4 rounded-[var(--radius-sm)] border flex items-center justify-center flex-shrink-0 ${c?"bg-primary border-primary":"border-border"}`,children:c&&e.jsx("span",{className:"w-2 h-2 rounded-[1px] bg-primary-foreground"})}),e.jsx("span",{className:"flex-shrink-0",children:a.icon||b}),e.jsx("span",{className:"truncate",children:a.label})]}),o&&l&&e.jsx("div",{className:i?"border-l border-border ml-[22px]":"",children:a.children.map(p=>e.jsx(L,{node:p,level:m+1,expanded:u,selected:f,onToggle:n,onSelect:d,selectable:t,showLines:i},p.id))})]})}function q({data:a,selectable:m,showLines:u,defaultExpanded:f,expandedItems:n,onExpandChange:d,selectedItems:t,onSelect:i}){const[o,l]=w.useState(new Set(f||[])),[c,b]=w.useState(new Set),p=n!==void 0?new Set(n):o,v=t!==void 0?new Set(t):c,_=s=>{const r=new Set(p);r.has(s)?r.delete(s):r.add(s),d&&d(Array.from(r)),n===void 0&&l(r)},z=s=>{const r=new Set(v);r.has(s)?r.delete(s):r.add(s),i&&i(Array.from(r)),t===void 0&&b(r)};return e.jsx("div",{className:"rounded-[var(--radius-md)] border border-border bg-card py-1",children:a.map(s=>e.jsx(L,{node:s,level:0,expanded:p,selected:v,onToggle:_,onSelect:z,selectable:m,showLines:u},s.id))})}q.__docgenInfo={description:"",methods:[],displayName:"Tree",props:{data:{required:!0,tsType:{name:"Array",elements:[{name:"TreeNode"}],raw:"TreeNode[]"},description:""},selectable:{required:!1,tsType:{name:"boolean"},description:""},showLines:{required:!1,tsType:{name:"boolean"},description:""},defaultExpanded:{required:!1,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""},expandedItems:{required:!1,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:"Controlled: expanded node IDs"},onExpandChange:{required:!1,tsType:{name:"signature",type:"function",raw:"(expandedIds: string[]) => void",signature:{arguments:[{type:{name:"Array",elements:[{name:"string"}],raw:"string[]"},name:"expandedIds"}],return:{name:"void"}}},description:"Called when expanded state changes"},selectedItems:{required:!1,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:"Controlled: selected node IDs"},onSelect:{required:!1,tsType:{name:"signature",type:"function",raw:"(selectedIds: string[]) => void",signature:{arguments:[{type:{name:"Array",elements:[{name:"string"}],raw:"string[]"},name:"selectedIds"}],return:{name:"void"}}},description:"Called when selection changes"}}};const U={title:"Components/Tree",component:q,tags:["autodocs"],argTypes:{selectable:{control:"boolean"},showLines:{control:"boolean"}}},y=[{id:"src",label:"src",children:[{id:"components",label:"components",children:[{id:"button",label:"Button.tsx"},{id:"input",label:"Input.tsx"},{id:"modal",label:"Modal.tsx"}]},{id:"utils",label:"utils",children:[{id:"helpers",label:"helpers.ts"},{id:"constants",label:"constants.ts"}]},{id:"app",label:"App.tsx"},{id:"index",label:"index.ts"}]},{id:"package",label:"package.json"},{id:"readme",label:"README.md"}],x={args:{data:y,defaultExpanded:["src"]}},g={args:{data:y,defaultExpanded:["src","components"],showLines:!0}},h={args:{data:y,defaultExpanded:["src","components"],selectable:!0}};var j,N,S;x.parameters={...x.parameters,docs:{...(j=x.parameters)==null?void 0:j.docs,source:{originalSource:`{
+  args: {
+    data: treeData,
+    defaultExpanded: ["src"]
+  }
+}`,...(S=(N=x.parameters)==null?void 0:N.docs)==null?void 0:S.source}}};var E,T,A;g.parameters={...g.parameters,docs:{...(E=g.parameters)==null?void 0:E.docs,source:{originalSource:`{
+  args: {
+    data: treeData,
+    defaultExpanded: ["src", "components"],
+    showLines: true
+  }
+}`,...(A=(T=g.parameters)==null?void 0:T.docs)==null?void 0:A.source}}};var C,I,k;h.parameters={...h.parameters,docs:{...(C=h.parameters)==null?void 0:C.docs,source:{originalSource:`{
+  args: {
+    data: treeData,
+    defaultExpanded: ["src", "components"],
+    selectable: true
+  }
+}`,...(k=(I=h.parameters)==null?void 0:I.docs)==null?void 0:k.source}}};const X=["Default","WithLines","Selectable"];export{x as Default,h as Selectable,g as WithLines,X as __namedExportsOrder,U as default};

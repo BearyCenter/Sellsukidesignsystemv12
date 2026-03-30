@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { Modal, ConfirmDialog } from "../components/ds-modal";
+import { Modal, ConfirmDialog } from "../../lib/components/ds-modal";
 import { DSButton } from "../../lib/components/ds-button";
 import { DSInput, DSTextarea } from "../../lib/components/ds-input";
 import { FormLabel } from "../../lib/components/ds-form";

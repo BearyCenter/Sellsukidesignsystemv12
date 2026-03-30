@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
-import { DSRadio, RadioGroup } from "../components/ds-radio";
+import { DSRadio, RadioGroup } from "../../lib/components/ds-radio";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 

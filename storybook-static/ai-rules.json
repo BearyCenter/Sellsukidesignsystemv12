@@ -1,0 +1,90 @@
+{
+  "name": "Sellsuki Design System",
+  "version": "0.7.0",
+  "updated": "2026-03-24",
+  "url": "https://sellsukidesignsystemv12.vercel.app/ai-rules.json",
+  "storybook": "https://sellsukidesignsystemv12.vercel.app",
+  "packages": {
+    "react": "@uxuissk/design-system@0.7.0",
+    "tokens": "@uxuissk/design-tokens@0.1.0",
+    "svelte": "@uxuissk/design-system-svelte (scaffold)"
+  },
+  "npm": "@uxuissk/design-system",
+  "brand": {
+    "product": "Sellsuki — E-commerce management platform for Thai merchants",
+    "mood": "Professional, clean, trustworthy, light, airy, functional",
+    "design": "Clarity over decoration — flat design, minimal shadows"
+  },
+  "colors": {
+    "primary": "#32a9ff",
+    "primary-hover": "#1b8bf5",
+    "primary-light": "#f0f9ff",
+    "text-primary": "#1f2937",
+    "text-secondary": "#6b7280",
+    "border": "#e5e7eb",
+    "surface": "#f9fafb",
+    "background": "#ffffff",
+    "success": "#059669",
+    "success-light": "#d1fae5",
+    "warning": "#d97706",
+    "warning-light": "#fef3c7",
+    "danger": "#e11d48",
+    "danger-light": "#ffe4e6"
+  },
+  "typography": {
+    "body": "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
+    "button": "'Inter', sans-serif"
+  },
+  "spacing": {
+    "page-desktop": "24px",
+    "page-mobile": "16px",
+    "card-gap": "16px",
+    "form-gap": "16px",
+    "section-gap": "32px"
+  },
+  "border": {
+    "radius": "8px",
+    "shadow": "0px 1px 2px 0px rgba(0,0,0,0.05)"
+  },
+  "layout": {
+    "navbar-height": "72px",
+    "sidebar-width": "280px"
+  },
+  "button": {
+    "variants": ["primary", "secondary", "outline", "ghost", "destructive", "link"],
+    "sizes": { "sm": "32px", "md": "36px", "lg": "40px", "xl": "44px" },
+    "default": "variant=primary size=md",
+    "rule": "Max 1 primary button per view"
+  },
+  "components": {
+    "data-entry": ["DSButton", "IconButton", "ButtonGroup", "DSInput", "DSTextarea", "DSCheckbox", "CheckboxGroup", "DSRadio", "RadioGroup", "Switch", "Dropdown", "DatePicker", "SearchField", "ColorPicker", "FileUpload", "TagInput", "Rating", "TransferList", "NumberInput", "OTPInput"],
+    "data-display": ["DSTable", "AdvancedDataTable", "Card", "CardHeader", "CardBody", "CardFooter", "StatCard", "Statistic", "Badge", "Tag", "Avatar", "AvatarGroup", "Timeline", "Tree", "EmptyState", "Skeleton"],
+    "navigation": ["TopNavbar", "Sidebar", "Breadcrumb", "Tabs", "Stepper", "Pagination"],
+    "feedback": ["Alert", "Modal", "Drawer", "ConfirmDialog", "Notification", "toast", "ToastContainer", "Tooltip", "Popover", "ProgressBar", "Spinner"],
+    "layout": ["Divider", "Menu", "ImagePreview", "PageHeader", "FilterBar"],
+    "form": ["FormField", "FormLabel", "FormError", "FormHelperText"]
+  },
+  "rules": [
+    "Flat clean design — no heavy shadows or gradients",
+    "Max 1 primary button per view",
+    "Handle loading, empty, and error states",
+    "DB HeaventRounded for text, Inter for buttons only",
+    "Only colors from the defined palette",
+    "Follow spacing system strictly"
+  ],
+  "tailwind_patterns": {
+    "button-primary": "h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-sm font-semibold rounded-lg font-['Inter']",
+    "button-secondary": "h-9 px-4 bg-[#f3f4f6] hover:bg-[#e5e7eb] text-[#1f2937] text-sm font-semibold rounded-lg font-['Inter']",
+    "button-outline": "h-9 px-4 border border-[#32a9ff] text-[#32a9ff] bg-white hover:bg-[#f0f9ff] text-sm font-semibold rounded-lg font-['Inter']",
+    "button-destructive": "h-9 px-4 bg-[#e11d48] hover:bg-[#be123c] text-white text-sm font-semibold rounded-lg font-['Inter']",
+    "card": "bg-white rounded-lg border border-[#e5e7eb] p-4",
+    "input": "w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-sm text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none",
+    "badge-success": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#d1fae5] text-[#065f46]",
+    "badge-warning": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#fef3c7] text-[#92400e]",
+    "badge-danger": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#ffe4e6] text-[#9f1239]",
+    "table-header": "px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-xs font-semibold uppercase text-left",
+    "table-cell": "px-4 py-3 text-sm text-[#1f2937]",
+    "sidebar-item": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff]",
+    "sidebar-item-active": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm bg-[#f0f9ff] text-[#32a9ff] font-medium"
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Layers, ChevronRight, FileText, User, Settings, Package, Zap } from "lucide-react";
-import { SearchField, type SearchSize } from "../components/ds-search";
+import { SearchField, type SearchSize } from "../../lib/components/ds-search";
 import { Section, DemoCard, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
