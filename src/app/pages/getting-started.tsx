@@ -211,22 +211,14 @@ const categoryColors: Record<string, string> = {
 // ─── Typography Tokens for reference ──────────────────────────────────────────
 
 const typographyTokens = [
-  { token: "Oversize 1", css: "--fs-oversize1", size: "197px", usage: "Hero / Oversize display" },
-  { token: "Oversize 2", css: "--fs-oversize2", size: "158px", usage: "Large display" },
-  { token: "Page 1", css: "--fs-page1", size: "126px", usage: "Page display" },
-  { token: "Page 2", css: "--fs-page2", size: "96px", usage: "Page display" },
-  { token: "Title", css: "--fs-title", size: "72px", usage: "Section titles" },
-  { token: "H1 (5X-Large)", css: "--fs-h1", size: "60px", usage: "Page headers" },
-  { token: "H2 (4X-Large)", css: "--fs-h2", size: "52px", usage: "Section headings" },
-  { token: "H3 (3X-Large)", css: "--fs-h3", size: "44px", usage: "Sub-sections" },
-  { token: "H4 (2X-Large)", css: "--fs-h4", size: "36px", usage: "Page titles (common)" },
-  { token: "H5 (X-Large)", css: "--fs-h5", size: "28px", usage: "Card headers" },
-  { token: "Text1 / Button", css: "--fs-text1", size: "24px", usage: "Body text, Button text" },
-  { token: "Text2", css: "--fs-text2", size: "20px", usage: "Secondary body" },
-  { token: "Desc1", css: "--fs-desc1", size: "18px", usage: "Descriptions, labels" },
-  { token: "Desc2", css: "--fs-desc2", size: "16px", usage: "Base body text" },
-  { token: "Caption1", css: "--fs-cap1", size: "14px", usage: "Table cells, nav items" },
-  { token: "Caption2", css: "--fs-cap2", size: "12px", usage: "Labels, meta text" },
+  { token: "H1", css: "--text-h1", size: "48px", usage: "Page titles, hero" },
+  { token: "H2", css: "--text-h2", size: "40px", usage: "Section headers" },
+  { token: "H3", css: "--text-h3", size: "28px", usage: "Card titles, subsections" },
+  { token: "H4", css: "--text-h4", size: "24px", usage: "Small headings" },
+  { token: "Body / P", css: "--text-p", size: "20px", usage: "Body text, paragraphs" },
+  { token: "Label", css: "--text-label", size: "18px", usage: "Form labels, UI labels, helper text" },
+  { token: "Button / Badge", css: "--text-button", size: "18px", usage: "Buttons, badges, tabs, small labels" },
+  { token: "Caption", css: "--text-caption", size: "14px", usage: "Helper text, timestamps, captions" },
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────

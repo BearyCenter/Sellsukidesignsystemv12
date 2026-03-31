@@ -399,8 +399,8 @@ export function createServer(): McpServer {
           "DANGER: Rose-600 #e11d48",
           "RADIUS DEFAULT: 8px (radius-md)",
           "SHADOW: 0px 1px 2px 0px #0000000d (minimal)",
-          "FONT BODY: DB HeaventRounded",
-          "FONT BUTTON: Inter",
+          "FONT: DB HeaventRounded — ALL text (body, button, label, heading, badge, nav — NEVER Inter)",
+          "H1: 48px | H2: 40px | H3: 28px | H4: 24px | Body: 20px | Label: 18px | Button/Badge: 18px | Caption: 14px",
         ].join("\n"),
       }],
     })
