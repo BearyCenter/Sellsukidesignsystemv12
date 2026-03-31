@@ -139,20 +139,20 @@ const primitiveTokens: TokenCategory[] = [
   },
   {
     title: "Primitive — Typography",
-    description: "Font families, sizes, and weights. DB HeaventRounded for headings/body, Inter for buttons.",
+    description: "Font families, sizes, and weights. DB HeaventRounded for all text — headings, body, labels, buttons.",
     tokens: [
       { name: "Font Heading", variable: "--font-h1", value: "'DB HeaventRounded'", type: "font" },
       { name: "Font Body", variable: "--font-p", value: "'DB HeaventRounded'", type: "font" },
       { name: "Font Label", variable: "--font-label", value: "'DB HeaventRounded'", type: "font" },
-      { name: "Font Button", variable: "--font-button", value: "'Inter'", type: "font" },
-      { name: "Size H1", variable: "--text-h1", value: "60px", type: "size" },
-      { name: "Size H2", variable: "--text-h2", value: "52px", type: "size" },
+      { name: "Font Button", variable: "--font-button", value: "'DB HeaventRounded'", type: "font" },
+      { name: "Size H1", variable: "--text-h1", value: "48px", type: "size" },
+      { name: "Size H2", variable: "--text-h2", value: "40px", type: "size" },
       { name: "Size H3", variable: "--text-h3", value: "28px", type: "size" },
       { name: "Size H4", variable: "--text-h4", value: "24px", type: "size" },
-      { name: "Size Body", variable: "--text-p", value: "24px", type: "size" },
+      { name: "Size Body", variable: "--text-p", value: "20px", type: "size" },
       { name: "Size Label", variable: "--text-label", value: "18px", type: "size" },
-      { name: "Size Caption", variable: "--text-caption", value: "20px", type: "size" },
-      { name: "Size Button", variable: "--text-button", value: "14px", type: "size" },
+      { name: "Size Caption", variable: "--text-caption", value: "14px", type: "size" },
+      { name: "Size Button", variable: "--text-button", value: "18px", type: "size" },
       { name: "Weight Normal", variable: "--weight-p", value: "400", type: "weight" },
       { name: "Weight Medium", variable: "--weight-h4", value: "500", type: "weight" },
       { name: "Weight Semibold", variable: "--weight-button", value: "600", type: "weight" },
@@ -512,14 +512,14 @@ export function DesignTokensPage() {
         </div>
         <div className="px-6 py-5 space-y-4">
           {[
-            { tag: "H1", font: "--font-h1", size: "--text-h1", weight: "--weight-h1", sample: "Display Heading" },
-            { tag: "H2", font: "--font-h2", size: "--text-h2", weight: "--weight-h2", sample: "Page Title" },
-            { tag: "H3", font: "--font-h3", size: "--text-h3", weight: "--weight-h3", sample: "Section Title" },
-            { tag: "H4", font: "--font-h4", size: "--text-h4", weight: "--weight-h4", sample: "Card Heading" },
-            { tag: "Body", font: "--font-p", size: "--text-p", weight: "--weight-p", sample: "Body text for content and paragraphs" },
-            { tag: "Label", font: "--font-label", size: "--text-label", weight: "--weight-label", sample: "Form labels, helper text" },
-            { tag: "Caption", font: "--font-caption", size: "--text-caption", weight: "--weight-caption", sample: "Breadcrumbs, navigation" },
-            { tag: "Button", font: "--font-button", size: "--text-button", weight: "--weight-button", sample: "Button Label Text" },
+            { tag: "H1", font: "--font-h1", size: "--text-h1", weight: "--weight-h1", sample: "Display Heading", px: "48px" },
+            { tag: "H2", font: "--font-h2", size: "--text-h2", weight: "--weight-h2", sample: "Page Title", px: "40px" },
+            { tag: "H3", font: "--font-h3", size: "--text-h3", weight: "--weight-h3", sample: "Section Title", px: "28px" },
+            { tag: "H4", font: "--font-h4", size: "--text-h4", weight: "--weight-h4", sample: "Card Heading", px: "24px" },
+            { tag: "Body", font: "--font-p", size: "--text-p", weight: "--weight-p", sample: "Body text for content and paragraphs", px: "20px" },
+            { tag: "Label", font: "--font-label", size: "--text-label", weight: "--weight-label", sample: "Form labels, helper text", px: "18px" },
+            { tag: "Caption", font: "--font-caption", size: "--text-caption", weight: "--weight-caption", sample: "Breadcrumbs, navigation", px: "14px" },
+            { tag: "Button", font: "--font-button", size: "--text-button", weight: "--weight-button", sample: "Button Label Text", px: "18px" },
           ].map((row) => (
             <div key={row.tag} className="flex items-baseline gap-4 py-2 border-b border-border/50 last:border-b-0">
               <span className="w-16 flex-shrink-0 text-muted-foreground" style={btnStyle}>{row.tag}</span>
@@ -529,8 +529,9 @@ export function DesignTokensPage() {
               >
                 {row.sample}
               </span>
-              <span className="text-muted-foreground flex-shrink-0 hidden md:block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>
-                {row.size.replace("--", "")}
+              <span className="flex-shrink-0 hidden md:flex items-center gap-2">
+                <span className="text-primary font-medium" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{row.px}</span>
+                <span className="text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{row.size.replace("--", "")}</span>
               </span>
             </div>
           ))}
