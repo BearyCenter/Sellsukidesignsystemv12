@@ -89,13 +89,13 @@
 		display: inline-flex;
 		align-items: center;
 		gap: var(--dss-space-4, 4px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 		text-decoration: none;
 		transition: color 0.15s ease;
 	}
 
 	.breadcrumb-link:hover {
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
 		text-decoration: underline;
 	}
 
@@ -103,7 +103,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: var(--dss-space-4, 4px);
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		font-weight: 500;
 	}
 
@@ -124,9 +124,9 @@
 	}
 
 	/* Sizes */
-	.size-sm { font-size: var(--dss-font-caption, 12px); }
-	.size-md { font-size: var(--dss-font-sm, 13px); }
-	.size-lg { font-size: var(--dss-font-body, 14px); }
+	.size-sm { font-size: var(--text-caption, 12px); }
+	.size-md { font-size: var(--text-sm, 13px); }
+	.size-lg { font-size: var(--text-p, 14px); }
 
 	.size-sm .breadcrumb-separator svg { width: 12px; height: 12px; }
 	.size-md .breadcrumb-separator svg { width: 16px; height: 16px; }

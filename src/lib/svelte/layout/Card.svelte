@@ -10,8 +10,8 @@
 <style>
 	.dss-card {
 		background: var(--dss-bg-primary, #ffffff);
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-lg, 12px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-lg, 12px);
 		overflow: hidden;
 		transition: box-shadow 0.2s ease;
 	}

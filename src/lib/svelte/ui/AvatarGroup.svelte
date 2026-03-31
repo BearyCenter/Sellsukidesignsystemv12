@@ -57,7 +57,7 @@
 		width: 40px;
 		height: 40px;
 		border-radius: 50%;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 		margin-left: -8px;
 		border: 2px solid white;
 		box-sizing: content-box;
@@ -65,7 +65,7 @@
 	}
 
 	.overflow-text {
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 600;
 		color: var(--ssk-colors-text-700, #374151);
 		user-select: none;

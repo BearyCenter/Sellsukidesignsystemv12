@@ -65,4 +65,46 @@
 	--dss-radius-lg: var(--Border-radius--radius-lg, 12px);
 	--dss-radius-xl: var(--Border-radius--radius-xl, 16px);
 	--dss-radius-full: var(--Border-radius--radius-full, 9999px);
+
+	/* ─── Typography (DB HeaventRounded — DS Spec) ─────────────────────── */
+	--font-label: 'DB HeaventRounded', 'Noto Sans Thai', system-ui, sans-serif;
+	--dss-font-family: 'DB HeaventRounded', 'Noto Sans Thai', system-ui, sans-serif;
+	--dss-font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+	--dss-font-h1: 36px;
+	--dss-font-h2: 32px;
+	--dss-font-h3: 28px;
+	--dss-font-h4: 24px;
+	--dss-font-body: 20px;
+	--dss-font-sm: 16px;
+	--dss-font-caption: 14px;
+	--dss-font-label: 18px;
+	--dss-font-button: 18px;
+
+	/* Text scale tokens (React DS compatible) */
+	--text-h1: var(--dss-font-h1);
+	--text-h2: var(--dss-font-h2);
+	--text-h3: var(--dss-font-h3);
+	--text-h4: var(--dss-font-h4);
+	--text-p: var(--dss-font-body);
+	--text-sm: var(--dss-font-sm);
+	--text-caption: var(--dss-font-caption);
+	--text-label: var(--dss-font-label);
+	--text-button: var(--dss-font-button);
+
+	/* ─── Semantic color aliases (React DS compatible) ───────────────────── */
+	--primary: var(--ssk-colors-primary-500);
+	--primary-foreground: #ffffff;
+	--muted: var(--ssk-colors-neutral-100);
+	--muted-foreground: var(--ssk-colors-text-500);
+	--foreground: var(--ssk-colors-text-900);
+	--border: var(--ssk-colors-neutral-200);
+
+	/* ─── Radius aliases (React DS compatible) ───────────────────────────── */
+	--radius-xs: var(--dss-radius-xs);
+	--radius-sm: var(--dss-radius-sm);
+	--radius-md: var(--dss-radius-md);
+	--radius-lg: var(--dss-radius-lg);
+	--radius-xl: var(--dss-radius-xl);
+	--radius-full: var(--dss-radius-full);
 }

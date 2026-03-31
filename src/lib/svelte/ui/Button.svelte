@@ -32,12 +32,12 @@
 		justify-content: center;
 		gap: 6px;
 		border: none;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		font-weight: 600;
 		cursor: pointer;
 		transition: background 0.15s, color 0.15s, border-color 0.15s;
 		white-space: nowrap;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	.dss-btn:disabled {
@@ -55,9 +55,9 @@
 
 	/* Primary — Sky-500 */
 	.variant-primary {
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 		color: white;
-		border: 1px solid var(--ssk-colors-primary-500, #32a9ff);
+		border: 1px solid var(--primary, #32a9ff);
 	}
 	.variant-primary:hover:not(:disabled) {
 		background: var(--ssk-colors-primary-600, #1b8bf5);
@@ -66,12 +66,12 @@
 
 	/* Secondary */
 	.variant-secondary {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		color: var(--ssk-colors-neutral-700, #374151);
-		border: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		border: 1px solid var(--muted, #f3f4f6);
 	}
 	.variant-secondary:hover:not(:disabled) {
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 	}
 
 	/* Outline */
@@ -91,7 +91,7 @@
 		border: 1px solid transparent;
 	}
 	.variant-ghost:hover:not(:disabled) {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 	}
 
 	/* Destructive */
@@ -107,7 +107,7 @@
 	/* Link */
 	.variant-link {
 		background: transparent;
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
 		border: none;
 		padding: 0;
 		height: auto;

@@ -31,7 +31,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: var(--dss-space-4, 4px);
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		font-weight: 500;
 		white-space: nowrap;
 		line-height: 1;
@@ -44,7 +44,7 @@
 
 	/* Colors */
 	.color-default {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		color: var(--ssk-colors-text-700, #374151);
 	}
 	.color-primary {
@@ -79,7 +79,7 @@
 		padding: 0;
 		color: inherit;
 		opacity: 0.6;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		transition: opacity 0.15s;
 		flex-shrink: 0;
 	}

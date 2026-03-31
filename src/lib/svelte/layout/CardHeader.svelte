@@ -18,7 +18,7 @@
 		justify-content: space-between;
 		gap: var(--dss-space-12, 12px);
 		padding: var(--dss-space-16, 16px);
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 
 	.card-header-content {

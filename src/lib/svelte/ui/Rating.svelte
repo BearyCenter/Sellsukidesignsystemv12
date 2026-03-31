@@ -99,7 +99,7 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--dss-space-4, 4px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 	.disabled {
 		opacity: 0.5;
@@ -107,7 +107,7 @@
 	}
 
 	.dss-rating-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 	}
@@ -134,12 +134,12 @@
 		transform: scale(1.15);
 	}
 	.dss-rating-icon:focus-visible {
-		outline: 2px solid var(--ssk-colors-primary-500, #32a9ff);
+		outline: 2px solid var(--primary, #32a9ff);
 		outline-offset: 2px;
 		border-radius: 2px;
 	}
 	.dss-rating-icon.filled {
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
 	}
 
 	.dss-rating-icon svg {
@@ -152,7 +152,7 @@
 	.size-lg .dss-rating-icon svg { width: 28px; height: 28px; }
 
 	.dss-rating-value {
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 600;
 		color: var(--ssk-colors-text-700, #374151);
 		margin-left: var(--dss-space-4, 4px);

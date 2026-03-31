@@ -81,13 +81,13 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--dss-space-1, 4px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 	.full-width { width: 100%; }
 
 	/* Label */
 	.dss-textarea-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;
@@ -100,7 +100,7 @@
 	/* Container */
 	.dss-textarea {
 		display: flex;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
 		overflow: hidden;
 	}
@@ -116,7 +116,7 @@
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 	}
 	.variant-default:focus-within:not(.disabled) {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 
@@ -125,17 +125,17 @@
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 	}
 	.variant-outlined:focus-within:not(.disabled) {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 
 	.variant-filled {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		border: 1px solid transparent;
 	}
 	.variant-filled:focus-within:not(.disabled) {
 		background: white;
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 
@@ -144,7 +144,7 @@
 		border: 1px solid transparent;
 	}
 	.variant-ghost:focus-within:not(.disabled) {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 
 	/* States */
@@ -188,7 +188,7 @@
 		border: none;
 		outline: none;
 		background: transparent;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		font-family: inherit;
 		line-height: 1.5;
 		width: 100%;
@@ -208,9 +208,9 @@
 
 	.dss-textarea-message {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		line-height: 1.4;
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 	.dss-textarea-message.state-error {
 		color: var(--ssk-colors-danger-500, #ef4444);
@@ -223,7 +223,7 @@
 	}
 
 	.char-count {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		flex-shrink: 0;
 	}

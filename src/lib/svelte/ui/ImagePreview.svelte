@@ -96,7 +96,7 @@
 
 <style>
 	.dss-imagepreview {
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	.thumbnail-grid {
@@ -108,15 +108,15 @@
 	.thumbnail {
 		aspect-ratio: 1;
 		border: 2px solid transparent;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		overflow: hidden;
 		cursor: pointer;
 		padding: 0;
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		transition: border-color 0.15s, transform 0.15s;
 	}
 	.thumbnail:hover {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		transform: scale(1.03);
 	}
 	.thumbnail img {
@@ -151,7 +151,7 @@
 		max-width: 100%;
 		max-height: 100%;
 		object-fit: contain;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		user-select: none;
 	}
 
@@ -164,7 +164,7 @@
 		color: white;
 		cursor: pointer;
 		padding: 8px;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -184,7 +184,7 @@
 		color: white;
 		cursor: pointer;
 		padding: 12px;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -203,10 +203,10 @@
 		left: 50%;
 		transform: translateX(-50%);
 		color: white;
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		background: rgba(0, 0, 0, 0.5);
 		padding: 4px 12px;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		user-select: none;
 	}
 </style>

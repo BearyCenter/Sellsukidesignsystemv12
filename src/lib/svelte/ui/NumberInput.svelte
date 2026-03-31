@@ -97,7 +97,7 @@
 <style>
 	.dss-number-input-label {
 		display: block;
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		margin-bottom: var(--dss-space-4, 4px);
@@ -107,12 +107,12 @@
 		display: inline-flex;
 		align-items: center;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		overflow: hidden;
 		transition: border-color 0.15s;
 	}
 	.dss-number-input:focus-within {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-50, #eff8ff);
 	}
 	.dss-number-input.has-error {
@@ -132,13 +132,13 @@
 		justify-content: center;
 		border: none;
 		background: var(--ssk-colors-neutral-50, #f9fafb);
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 		cursor: pointer;
 		flex-shrink: 0;
 		transition: background 0.15s;
 	}
 	.dss-number-btn:hover:not(:disabled) {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		color: var(--ssk-colors-text-700, #374151);
 	}
 	.dss-number-btn:disabled {
@@ -149,8 +149,8 @@
 		border: none;
 		outline: none;
 		text-align: center;
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-900, #111827);
+		font-size: var(--text-p, 14px);
+		color: var(--foreground, #111827);
 		background: transparent;
 		min-width: 0;
 	}
@@ -167,7 +167,7 @@
 
 	.dss-number-input-error {
 		display: block;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: #ef4444;
 		margin-top: var(--dss-space-4, 4px);
 	}

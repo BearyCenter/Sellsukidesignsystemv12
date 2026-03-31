@@ -10,7 +10,7 @@
 	$: percentage = Math.min(100, Math.max(0, (value / max) * 100));
 
 	$: fillColor = (() => {
-		if (!color || color === 'primary') return 'var(--ssk-colors-primary-500, #32a9ff)';
+		if (!color || color === 'primary') return 'var(--primary, #32a9ff)';
 		if (color === 'success') return '#10b981';
 		if (color === 'warning') return '#f59e0b';
 		if (color === 'danger') return '#ef4444';
@@ -51,26 +51,26 @@
 	}
 
 	.dss-progress-bar-label {
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 	}
 
 	.dss-progress-bar-value {
-		font-size: var(--dss-font-caption, 12px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-caption, 12px);
+		color: var(--muted-foreground, #6b7280);
 	}
 
 	.dss-progress-bar-track {
 		width: 100%;
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
-		border-radius: var(--dss-radius-full, 9999px);
+		background: var(--muted, #f3f4f6);
+		border-radius: var(--radius-full, 9999px);
 		overflow: hidden;
 	}
 
 	.dss-progress-bar-fill {
 		height: 100%;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		transition: width 0.3s ease;
 	}
 

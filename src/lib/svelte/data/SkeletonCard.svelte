@@ -19,8 +19,8 @@
 
 <style>
 	.dss-skeleton-card {
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		overflow: hidden;
 		background: white;
 	}

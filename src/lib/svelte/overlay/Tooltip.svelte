@@ -37,11 +37,11 @@
 		font-size: 12px;
 		line-height: 1.4;
 		padding: var(--dss-space-4, 4px) var(--dss-space-8, 8px);
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		white-space: nowrap;
 		pointer-events: none;
 		animation: dss-tooltip-fade 0.15s ease-out;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	/* Arrow via ::after */

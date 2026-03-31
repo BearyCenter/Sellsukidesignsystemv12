@@ -89,7 +89,7 @@
 		align-items: flex-start;
 		gap: var(--dss-space-2, 8px);
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 		user-select: none;
 	}
 	.dss-checkbox.disabled {
@@ -115,7 +115,7 @@
 		align-items: center;
 		justify-content: center;
 		border: 2px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-xs, 4px);
+		border-radius: var(--radius-xs, 4px);
 		background: white;
 		flex-shrink: 0;
 		transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
@@ -124,7 +124,7 @@
 	.checkbox-box:focus-visible {
 		outline: none;
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 
 	.dss-checkbox:not(.disabled):hover .checkbox-box:not(.checked):not(.indeterminate) {
@@ -133,8 +133,8 @@
 
 	.checkbox-box.checked,
 	.checkbox-box.indeterminate {
-		background: var(--ssk-colors-primary-500, #32a9ff);
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 	.dss-checkbox:not(.disabled):hover .checkbox-box.checked,
 	.dss-checkbox:not(.disabled):hover .checkbox-box.indeterminate {
@@ -162,16 +162,16 @@
 	.size-lg .checkbox-label { font-size: 15px; }
 
 	.checkbox-description {
-		font-size: var(--dss-font-caption, 12px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-caption, 12px);
+		color: var(--muted-foreground, #6b7280);
 		line-height: 1.4;
 	}
 
 	/* Error */
 	.dss-checkbox-error {
 		margin: var(--dss-space-1, 4px) 0 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-danger-500, #ef4444);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 </style>

@@ -97,12 +97,12 @@
 		padding: var(--dss-space-4, 4px) var(--dss-space-8, 8px);
 		min-height: 38px;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		cursor: text;
 		transition: border-color 0.15s;
 	}
 	.dss-tag-input:focus-within {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-50, #eff8ff);
 	}
 	.dss-tag-input.disabled {
@@ -124,7 +124,7 @@
 		gap: 2px;
 		background: var(--ssk-colors-primary-50, #eff8ff);
 		color: var(--ssk-colors-primary-700, #0b6bcb);
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		padding: 2px 6px;
 		font-size: 12px;
 		font-weight: 500;
@@ -146,7 +146,7 @@
 		padding: 0;
 		color: inherit;
 		opacity: 0.6;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 	}
 	.dss-tag-input-tag-close:hover {
 		opacity: 1;
@@ -157,8 +157,8 @@
 		min-width: 60px;
 		border: none;
 		outline: none;
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-900, #111827);
+		font-size: var(--text-p, 14px);
+		color: var(--foreground, #111827);
 		background: transparent;
 		padding: 4px 0;
 	}

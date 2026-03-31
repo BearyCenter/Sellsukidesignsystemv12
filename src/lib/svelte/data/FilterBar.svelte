@@ -170,15 +170,15 @@
 		height: 36px;
 		padding: 0 12px 0 32px;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-900, #111827);
+		border-radius: var(--radius-md, 8px);
+		font-size: var(--text-p, 14px);
+		color: var(--foreground, #111827);
 		outline: none;
 		min-width: 200px;
 		transition: border-color 0.15s;
 	}
 	.dss-filter-bar-search-input:focus {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-50, #eff8ff);
 	}
 	.dss-filter-bar-search-input::placeholder {
@@ -197,8 +197,8 @@
 		padding: 0 12px;
 		background: white;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
-		font-size: var(--dss-font-body, 14px);
+		border-radius: var(--radius-md, 8px);
+		font-size: var(--text-p, 14px);
 		color: var(--ssk-colors-text-700, #374151);
 		cursor: pointer;
 		transition: border-color 0.15s, background 0.15s;
@@ -208,7 +208,7 @@
 		background: var(--ssk-colors-neutral-50, #f9fafb);
 	}
 	.dss-filter-btn.active {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		color: var(--ssk-colors-primary-700, #0b6bcb);
 		background: var(--ssk-colors-primary-50, #eff8ff);
 	}
@@ -220,9 +220,9 @@
 		min-width: 18px;
 		height: 18px;
 		padding: 0 5px;
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 		color: white;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		font-size: 11px;
 		font-weight: 600;
 		line-height: 1;
@@ -238,8 +238,8 @@
 		left: 0;
 		min-width: 180px;
 		background: white;
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		z-index: 50;
 		padding: var(--dss-space-4, 4px);
@@ -253,10 +253,10 @@
 		padding: var(--dss-space-8, 8px) var(--dss-space-8, 8px);
 		border: none;
 		background: transparent;
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		color: var(--ssk-colors-text-700, #374151);
 		cursor: pointer;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		text-align: left;
 		transition: background 0.1s;
 	}
@@ -280,12 +280,12 @@
 		transition: background 0.1s, border-color 0.1s;
 	}
 	.dss-filter-checkbox.checked {
-		background: var(--ssk-colors-primary-500, #32a9ff);
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 
 	.dss-filter-dropdown-footer {
-		border-top: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		border-top: 1px solid var(--muted, #f3f4f6);
 		margin-top: var(--dss-space-4, 4px);
 		padding-top: var(--dss-space-4, 4px);
 	}
@@ -294,14 +294,14 @@
 		padding: var(--dss-space-8, 8px);
 		border: none;
 		background: transparent;
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		cursor: pointer;
 		text-align: center;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 	}
 	.dss-filter-clear:hover {
 		background: var(--ssk-colors-neutral-50, #f9fafb);
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 </style>

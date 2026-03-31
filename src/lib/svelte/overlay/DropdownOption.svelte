@@ -29,7 +29,7 @@
 		cursor: pointer;
 		transition: background 0.1s;
 		font-size: 14px;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 	}
 
 	.dss-dropdown-option:hover {

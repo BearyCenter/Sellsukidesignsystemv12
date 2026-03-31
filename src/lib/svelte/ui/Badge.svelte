@@ -11,7 +11,7 @@
 	.dss-badge {
 		display: inline-flex;
 		align-items: center;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		font-weight: 500;
 		white-space: nowrap;
 	}
@@ -23,11 +23,11 @@
 
 	/* Variants */
 	.variant-default {
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 		color: white;
 	}
 	.variant-secondary {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		color: var(--ssk-colors-neutral-700, #374151);
 	}
 	.variant-outline {

@@ -118,12 +118,12 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--dss-space-8, 8px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 	.disabled { opacity: 0.5; pointer-events: none; }
 
 	.dss-otp-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 	}
@@ -136,14 +136,14 @@
 	.dss-otp-digit {
 		text-align: center;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		background: white;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		font-weight: 600;
 		font-family: inherit;
 		outline: none;
 		transition: border-color 0.15s, box-shadow 0.15s;
-		caret-color: var(--ssk-colors-primary-500, #32a9ff);
+		caret-color: var(--primary, #32a9ff);
 	}
 
 	.size-sm { width: 36px; height: 36px; font-size: 16px; }
@@ -151,7 +151,7 @@
 	.size-lg { width: 52px; height: 52px; font-size: 24px; }
 
 	.dss-otp-digit:focus {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 
@@ -169,7 +169,7 @@
 
 	.dss-otp-error {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-danger-500, #ef4444);
 		line-height: 1.4;
 	}

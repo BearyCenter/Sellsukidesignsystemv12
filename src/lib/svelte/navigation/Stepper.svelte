@@ -77,10 +77,10 @@
 		left: calc(50% + 18px);
 		right: calc(-50% + 18px);
 		height: 2px;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 	}
 	.orientation-horizontal .dss-stepper-connector.filled {
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 	}
 	.orientation-horizontal .dss-stepper-content {
 		margin-top: var(--dss-space-8, 8px);
@@ -107,10 +107,10 @@
 		left: 15px;
 		width: 2px;
 		bottom: 0;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 	}
 	.orientation-vertical .dss-stepper-connector.filled {
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 	}
 	.orientation-vertical .dss-stepper-content {
 		margin-left: var(--dss-space-12, 12px);
@@ -131,8 +131,8 @@
 		justify-content: center;
 		width: 32px;
 		height: 32px;
-		border-radius: var(--dss-radius-full, 9999px);
-		font-size: var(--dss-font-sm, 13px);
+		border-radius: var(--radius-full, 9999px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 600;
 		transition: background 0.2s, border-color 0.2s, color 0.2s;
 		flex-shrink: 0;
@@ -140,19 +140,19 @@
 
 	/* States */
 	.completed .dss-stepper-circle {
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 		color: white;
-		border: 2px solid var(--ssk-colors-primary-500, #32a9ff);
+		border: 2px solid var(--primary, #32a9ff);
 	}
 	.active .dss-stepper-circle {
 		background: white;
-		color: var(--ssk-colors-primary-500, #32a9ff);
-		border: 2px solid var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
+		border: 2px solid var(--primary, #32a9ff);
 	}
 	.upcoming .dss-stepper-circle {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		color: var(--ssk-colors-text-400, #9ca3af);
-		border: 2px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border: 2px solid var(--border, #e5e7eb);
 	}
 
 	.dss-stepper-content {
@@ -161,7 +161,7 @@
 	}
 
 	.dss-stepper-label {
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 	}
@@ -173,7 +173,7 @@
 	}
 
 	.dss-stepper-description {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		margin-top: 2px;
 	}

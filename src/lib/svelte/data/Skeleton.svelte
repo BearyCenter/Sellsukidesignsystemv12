@@ -14,17 +14,17 @@
 <style>
 	.dss-skeleton {
 		display: inline-block;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 	}
 
 	.variant-text {
-		border-radius: var(--dss-radius-xs, 4px);
+		border-radius: var(--radius-xs, 4px);
 	}
 	.variant-circular {
 		border-radius: 50%;
 	}
 	.variant-rectangular {
-		border-radius: var(--dss-radius-sm, 6px);
+		border-radius: var(--radius-sm, 6px);
 	}
 
 	.animate {

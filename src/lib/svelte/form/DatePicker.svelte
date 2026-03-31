@@ -284,13 +284,13 @@
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--dss-space-4, 4px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 		position: relative;
 	}
 	.full-width { width: 100%; }
 
 	.dss-datepicker-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;
@@ -304,7 +304,7 @@
 		display: flex;
 		align-items: center;
 		gap: var(--dss-space-8, 8px);
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		cursor: pointer;
 		transition: border-color 0.15s, box-shadow 0.15s;
 		padding: 0 var(--dss-space-12, 12px);
@@ -323,7 +323,7 @@
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 	}
 	.variant-default.open, .variant-default:focus {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 	.variant-outlined {
@@ -331,16 +331,16 @@
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 	}
 	.variant-outlined.open, .variant-outlined:focus {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 	.variant-filled {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 		border: 1px solid transparent;
 	}
 	.variant-filled.open, .variant-filled:focus {
 		background: white;
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
 	}
 
@@ -362,7 +362,7 @@
 
 	.display-value {
 		flex: 1;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -380,7 +380,7 @@
 		cursor: pointer;
 		color: var(--ssk-colors-text-400, #9ca3af);
 		padding: 2px;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		transition: color 0.15s;
 	}
 	.clear-btn:hover {
@@ -395,8 +395,8 @@
 		margin-top: 4px;
 		z-index: 50;
 		background: white;
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-lg, 12px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-lg, 12px);
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 		padding: var(--dss-space-12, 12px);
 		min-width: 280px;
@@ -409,9 +409,9 @@
 		margin-bottom: var(--dss-space-8, 8px);
 	}
 	.month-year {
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		font-weight: 600;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 	}
 	.nav-btn {
 		display: flex;
@@ -420,14 +420,14 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 		padding: 4px;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		transition: background 0.15s, color 0.15s;
 	}
 	.nav-btn:hover {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
-		color: var(--ssk-colors-text-900, #111827);
+		background: var(--muted, #f3f4f6);
+		color: var(--foreground, #111827);
 	}
 
 	.calendar-grid {
@@ -449,7 +449,7 @@
 		justify-content: center;
 		width: 34px;
 		height: 34px;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		font-size: 13px;
 		color: var(--ssk-colors-text-700, #374151);
 		background: none;
@@ -462,14 +462,14 @@
 		cursor: default;
 	}
 	.day-cell:not(.empty):not(.disabled):hover {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 	}
 	.day-cell.today {
 		font-weight: 700;
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
 	}
 	.day-cell.selected {
-		background: var(--ssk-colors-primary-500, #32a9ff) !important;
+		background: var(--primary, #32a9ff) !important;
 		color: white !important;
 		font-weight: 600;
 	}
@@ -491,43 +491,43 @@
 		gap: 4px;
 		margin-top: var(--dss-space-8, 8px);
 		padding-top: var(--dss-space-8, 8px);
-		border-top: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-top: 1px solid var(--border, #e5e7eb);
 	}
 	.time-input {
 		width: 48px;
 		height: 32px;
 		text-align: center;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		font-size: 14px;
 		font-family: inherit;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		outline: none;
 	}
 	.time-input:focus {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 	.time-sep {
 		font-weight: 600;
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 
 	/* Footer */
 	.calendar-footer {
 		margin-top: var(--dss-space-8, 8px);
 		padding-top: var(--dss-space-8, 8px);
-		border-top: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-top: 1px solid var(--border, #e5e7eb);
 		text-align: center;
 	}
 	.today-btn {
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: var(--ssk-colors-primary-500, #32a9ff);
-		font-size: var(--dss-font-sm, 13px);
+		color: var(--primary, #32a9ff);
+		font-size: var(--text-sm, 13px);
 		font-weight: 500;
 		padding: 4px 12px;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		transition: background 0.15s;
 	}
 	.today-btn:hover {
@@ -537,9 +537,9 @@
 	/* Message */
 	.dss-datepicker-message {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		line-height: 1.4;
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 	.dss-datepicker-message.state-error { color: var(--ssk-colors-danger-500, #ef4444); }
 	.dss-datepicker-message.state-success { color: var(--ssk-colors-success-500, #10b981); }

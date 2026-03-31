@@ -65,11 +65,11 @@
 		position: absolute;
 		z-index: 200;
 		background: white;
-		border-radius: var(--dss-radius-lg, 12px);
+		border-radius: var(--radius-lg, 12px);
 		box-shadow: var(--dss-shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.12));
 		min-width: 200px;
 		animation: dss-popover-in 0.15s ease-out;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	.placement-bottom {
@@ -100,8 +100,8 @@
 		padding: var(--dss-space-12, 12px) var(--dss-space-16, 16px);
 		font-size: 14px;
 		font-weight: 600;
-		color: var(--ssk-colors-text-900, #111827);
-		border-bottom: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		color: var(--foreground, #111827);
+		border-bottom: 1px solid var(--muted, #f3f4f6);
 	}
 
 	.popover-content {

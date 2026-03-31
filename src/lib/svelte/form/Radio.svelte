@@ -78,7 +78,7 @@
 		align-items: flex-start;
 		gap: var(--dss-space-2, 8px);
 		cursor: pointer;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 		user-select: none;
 	}
 	.dss-radio.disabled {
@@ -113,7 +113,7 @@
 	.radio-circle:focus-visible {
 		outline: none;
 		box-shadow: 0 0 0 2px var(--ssk-colors-primary-100, #dbeafe);
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 
 	.dss-radio:not(.disabled):hover .radio-circle:not(.checked) {
@@ -121,7 +121,7 @@
 	}
 
 	.radio-circle.checked {
-		border-color: var(--ssk-colors-primary-500, #32a9ff);
+		border-color: var(--primary, #32a9ff);
 	}
 	.dss-radio:not(.disabled):hover .radio-circle.checked {
 		border-color: var(--ssk-colors-primary-600, #1b8bf5);
@@ -130,7 +130,7 @@
 	/* Dot */
 	.radio-dot {
 		border-radius: 50%;
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		background: var(--primary, #32a9ff);
 		transition: transform 0.15s;
 	}
 	.dss-radio:not(.disabled):hover .radio-dot {
@@ -153,8 +153,8 @@
 	.size-lg .radio-label { font-size: 15px; }
 
 	.radio-description {
-		font-size: var(--dss-font-caption, 12px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-caption, 12px);
+		color: var(--muted-foreground, #6b7280);
 		line-height: 1.4;
 	}
 </style>

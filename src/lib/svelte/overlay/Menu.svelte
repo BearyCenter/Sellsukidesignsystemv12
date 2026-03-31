@@ -137,8 +137,8 @@
 		min-width: 180px;
 		padding: var(--dss-space-4, 4px);
 		background: var(--dss-bg-primary, #ffffff);
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		animation: dss-menu-in 0.15s ease;
 	}
@@ -157,10 +157,10 @@
 		width: 100%;
 		padding: var(--dss-space-8, 8px) var(--dss-space-12, 12px);
 		border: none;
-		border-radius: var(--dss-radius-sm, 6px);
+		border-radius: var(--radius-sm, 6px);
 		background: none;
 		cursor: pointer;
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		color: var(--ssk-colors-text-700, #374151);
 		text-align: left;
 		font-family: inherit;
@@ -169,7 +169,7 @@
 	}
 
 	.menu-item:hover:not(:disabled) {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 	}
 
 	.menu-item.destructive {
@@ -189,7 +189,7 @@
 	}
 
 	.menu-item-shortcut {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -200,13 +200,13 @@
 
 	.menu-divider {
 		height: 1px;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 		margin: var(--dss-space-4, 4px) 0;
 	}
 
 	.menu-label {
 		padding: var(--dss-space-8, 8px) var(--dss-space-12, 12px) var(--dss-space-4, 4px);
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;

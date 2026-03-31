@@ -14,7 +14,7 @@
 		align-items: center;
 		gap: 10px;
 		padding: 8px 12px;
-		border-radius: var(--dss-radius-sm, 6px);
+		border-radius: var(--radius-sm, 6px);
 		cursor: pointer;
 		transition: background 0.15s, color 0.15s;
 		font-size: 14px;
@@ -22,7 +22,7 @@
 	}
 
 	.dss-sidebar-item:hover {
-		background: var(--ssk-colors-neutral-100, #f3f4f6);
+		background: var(--muted, #f3f4f6);
 	}
 
 	.dss-sidebar-item.actived {

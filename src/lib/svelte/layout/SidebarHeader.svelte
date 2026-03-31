@@ -13,6 +13,6 @@
 <style>
 	.dss-sidebar-header {
 		padding: 12px;
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 </style>

@@ -29,7 +29,7 @@
 		gap: var(--dss-space-8, 8px);
 		padding: var(--dss-space-16, 16px) var(--dss-space-24, 24px);
 		background: var(--dss-bg-primary, #ffffff);
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 
 	.dss-page-header.sticky {
@@ -54,16 +54,16 @@
 
 	.header-title {
 		margin: 0;
-		font-size: var(--dss-font-h2, 20px);
+		font-size: var(--text-h2, 20px);
 		font-weight: 600;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		line-height: 1.3;
 	}
 
 	.header-subtitle {
 		margin: 0;
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-p, 14px);
+		color: var(--muted-foreground, #6b7280);
 		line-height: 1.4;
 	}
 

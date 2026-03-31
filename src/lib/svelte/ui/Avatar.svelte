@@ -49,12 +49,12 @@
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 		flex-shrink: 0;
 	}
 
 	.shape-circle { border-radius: 50%; }
-	.shape-square { border-radius: var(--dss-radius-md, 8px); }
+	.shape-square { border-radius: var(--radius-md, 8px); }
 
 	.avatar-img {
 		width: 100%;

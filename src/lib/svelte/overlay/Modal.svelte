@@ -36,7 +36,7 @@
 
 	.dss-modal {
 		background: white;
-		border-radius: var(--dss-radius-lg, 12px);
+		border-radius: var(--radius-lg, 12px);
 		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 		max-width: 90vw;
 		max-height: 90vh;

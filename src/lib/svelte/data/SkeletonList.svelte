@@ -30,7 +30,7 @@
 		align-items: center;
 		gap: var(--dss-space-4, 16px);
 		padding: var(--dss-space-4, 16px) 0;
-		border-bottom: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		border-bottom: 1px solid var(--muted, #f3f4f6);
 	}
 	.list-item:last-child {
 		border-bottom: none;

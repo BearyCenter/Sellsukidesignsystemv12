@@ -19,7 +19,7 @@
 		padding: 0 16px;
 		height: 56px;
 		background: white;
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 		box-sizing: border-box;
 	}
 

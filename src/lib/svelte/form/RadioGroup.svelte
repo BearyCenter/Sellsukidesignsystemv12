@@ -56,11 +56,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--dss-space-2, 8px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	.dss-radio-group-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		padding: 0;
@@ -82,7 +82,7 @@
 
 	.dss-radio-group-error {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-danger-500, #ef4444);
 		line-height: 1.4;
 	}

@@ -186,7 +186,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--dss-space-8, 8px);
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 	.disabled { opacity: 0.5; pointer-events: none; }
 
@@ -199,7 +199,7 @@
 	}
 
 	.dss-fileupload-label {
-		font-size: var(--dss-font-label, 13px);
+		font-size: var(--text-label, 13px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 	}
@@ -213,7 +213,7 @@
 		gap: var(--dss-space-8, 8px);
 		padding: var(--dss-space-24, 24px);
 		border: 2px dashed var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-lg, 12px);
+		border-radius: var(--radius-lg, 12px);
 		cursor: pointer;
 		transition: border-color 0.15s, background 0.15s;
 		background: var(--ssk-colors-neutral-50, #f9fafb);
@@ -228,15 +228,15 @@
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 	.dropzone-text {
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-p, 14px);
+		color: var(--muted-foreground, #6b7280);
 	}
 	.link-text {
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		color: var(--primary, #32a9ff);
 		font-weight: 500;
 	}
 	.dropzone-desc {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -248,8 +248,8 @@
 		padding: 8px 16px;
 		background: white;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
-		border-radius: var(--dss-radius-md, 8px);
-		font-size: var(--dss-font-body, 14px);
+		border-radius: var(--radius-md, 8px);
+		font-size: var(--text-p, 14px);
 		color: var(--ssk-colors-text-700, #374151);
 		cursor: pointer;
 		font-family: inherit;
@@ -260,7 +260,7 @@
 		border-color: var(--ssk-colors-neutral-400, #9ca3af);
 	}
 	.btn-desc {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -269,7 +269,7 @@
 		position: relative;
 		width: 80px;
 		height: 80px;
-		border-radius: var(--dss-radius-full, 9999px);
+		border-radius: var(--radius-full, 9999px);
 		border: 2px dashed var(--ssk-colors-neutral-300, #d1d5db);
 		background: var(--ssk-colors-neutral-50, #f9fafb);
 		display: flex;
@@ -321,13 +321,13 @@
 		gap: var(--dss-space-8, 8px);
 		padding: var(--dss-space-8, 8px);
 		background: var(--ssk-colors-neutral-50, #f9fafb);
-		border-radius: var(--dss-radius-md, 8px);
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
 	}
 	.file-thumb {
 		width: 32px;
 		height: 32px;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		object-fit: cover;
 		flex-shrink: 0;
 	}
@@ -342,14 +342,14 @@
 		flex-direction: column;
 	}
 	.file-name {
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		color: var(--ssk-colors-text-700, #374151);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 	.file-size {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 	.file-remove {
@@ -361,7 +361,7 @@
 		cursor: pointer;
 		color: var(--ssk-colors-text-400, #9ca3af);
 		padding: 4px;
-		border-radius: var(--dss-radius-sm, 4px);
+		border-radius: var(--radius-sm, 4px);
 		flex-shrink: 0;
 		transition: color 0.15s, background 0.15s;
 	}

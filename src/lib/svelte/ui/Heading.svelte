@@ -19,7 +19,7 @@
 <style>
 	.dss-heading {
 		margin: 0;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		line-height: 1.3;
 	}
 

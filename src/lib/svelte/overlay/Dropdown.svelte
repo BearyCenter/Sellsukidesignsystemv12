@@ -73,8 +73,8 @@
 		top: calc(100% + 4px);
 		left: 0;
 		background: white;
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		z-index: 50;
 		padding: 4px 0;

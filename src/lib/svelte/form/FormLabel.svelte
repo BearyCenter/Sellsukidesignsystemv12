@@ -12,7 +12,7 @@
 
 <style>
 	.dss-form-label {
-		font-size: var(--dss-font-label, 12px);
+		font-size: var(--text-label, 12px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;

@@ -8,8 +8,8 @@
 <style>
 	.dss-form-helper-text {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		line-height: 1.4;
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 </style>

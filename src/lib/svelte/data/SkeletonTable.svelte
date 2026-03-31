@@ -31,18 +31,18 @@
 <style>
 	.dss-skeleton-table {
 		width: 100%;
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		overflow: hidden;
 	}
 	.table-header {
 		display: flex;
 		background: var(--ssk-colors-neutral-50, #f9fafb);
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 	.table-row {
 		display: flex;
-		border-bottom: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		border-bottom: 1px solid var(--muted, #f3f4f6);
 	}
 	.table-row:last-child {
 		border-bottom: none;

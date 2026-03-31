@@ -152,27 +152,27 @@
 	.dss-table-wrapper {
 		width: 100%;
 		overflow-x: auto;
-		border-radius: var(--dss-radius-md, 8px);
+		border-radius: var(--radius-md, 8px);
 		background: white;
 	}
 	.dss-table-wrapper.bordered {
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border: 1px solid var(--border, #e5e7eb);
 	}
 
 	.dss-table {
 		width: 100%;
 		border-collapse: collapse;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	/* Header */
 	thead th {
 		background: var(--ssk-colors-neutral-50, #f9fafb);
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 		font-weight: 600;
 		text-align: left;
 		white-space: nowrap;
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 
 	.sticky-header thead th {
@@ -185,26 +185,26 @@
 	.size-sm th,
 	.size-sm td {
 		padding: var(--dss-space-2, 8px) var(--dss-space-4, 16px);
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		height: 36px;
 	}
 	.size-md th,
 	.size-md td {
 		padding: var(--dss-space-4, 16px) var(--dss-space-4, 16px);
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 		height: 44px;
 	}
 	.size-lg th,
 	.size-lg td {
 		padding: var(--dss-space-6, 24px) var(--dss-space-4, 16px);
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		height: 52px;
 	}
 
 	/* Body */
 	tbody td {
 		color: var(--ssk-colors-text-700, #374151);
-		border-bottom: 1px solid var(--ssk-colors-neutral-100, #f3f4f6);
+		border-bottom: 1px solid var(--muted, #f3f4f6);
 	}
 
 	/* Alignment */
@@ -236,7 +236,7 @@
 	.checkbox-col input[type="checkbox"] {
 		width: 16px;
 		height: 16px;
-		accent-color: var(--ssk-colors-primary-500, #32a9ff);
+		accent-color: var(--primary, #32a9ff);
 		cursor: pointer;
 	}
 
@@ -245,7 +245,7 @@
 		text-align: center;
 		padding: var(--dss-space-24, 96px) var(--dss-space-4, 16px);
 		color: var(--ssk-colors-text-400, #9ca3af);
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 	}
 
 	/* Skeleton */
@@ -255,8 +255,8 @@
 	.skeleton-bone {
 		display: inline-block;
 		height: 14px;
-		border-radius: var(--dss-radius-xs, 4px);
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		border-radius: var(--radius-xs, 4px);
+		background: var(--border, #e5e7eb);
 		animation: dss-table-pulse 1.5s ease-in-out infinite;
 	}
 

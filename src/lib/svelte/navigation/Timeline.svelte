@@ -63,9 +63,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: var(--dss-radius-full, 9999px);
-		background: var(--ssk-colors-primary-500, #32a9ff);
-		border: 2px solid var(--ssk-colors-primary-500, #32a9ff);
+		border-radius: var(--radius-full, 9999px);
+		background: var(--primary, #32a9ff);
+		border: 2px solid var(--primary, #32a9ff);
 		flex-shrink: 0;
 	}
 
@@ -78,7 +78,7 @@
 	.dss-timeline-line {
 		width: 2px;
 		flex: 1;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 		min-height: 20px;
 	}
 
@@ -96,7 +96,7 @@
 
 	.dss-timeline-title {
 		font-weight: 500;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 	}
 
 	.dss-timeline-time {
@@ -106,7 +106,7 @@
 	}
 
 	.dss-timeline-description {
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 		margin: var(--dss-space-4, 4px) 0 0;
 		line-height: 1.5;
 	}
@@ -114,21 +114,21 @@
 	/* Sizes */
 	.size-sm .dss-timeline-dot { width: 10px; height: 10px; }
 	.size-sm .dss-timeline-content { padding: 0 0 var(--dss-space-16, 16px) var(--dss-space-12, 12px); }
-	.size-sm .dss-timeline-title { font-size: var(--dss-font-sm, 13px); }
-	.size-sm .dss-timeline-time { font-size: var(--dss-font-caption, 12px); }
-	.size-sm .dss-timeline-description { font-size: var(--dss-font-caption, 12px); }
+	.size-sm .dss-timeline-title { font-size: var(--text-sm, 13px); }
+	.size-sm .dss-timeline-time { font-size: var(--text-caption, 12px); }
+	.size-sm .dss-timeline-description { font-size: var(--text-caption, 12px); }
 
 	.size-md .dss-timeline-dot { width: 12px; height: 12px; }
 	.size-md .dss-timeline-content { padding: 0 0 var(--dss-space-24, 24px) var(--dss-space-16, 16px); }
-	.size-md .dss-timeline-title { font-size: var(--dss-font-body, 14px); }
-	.size-md .dss-timeline-time { font-size: var(--dss-font-sm, 13px); }
-	.size-md .dss-timeline-description { font-size: var(--dss-font-sm, 13px); }
+	.size-md .dss-timeline-title { font-size: var(--text-p, 14px); }
+	.size-md .dss-timeline-time { font-size: var(--text-sm, 13px); }
+	.size-md .dss-timeline-description { font-size: var(--text-sm, 13px); }
 
 	.size-lg .dss-timeline-dot { width: 16px; height: 16px; }
 	.size-lg .dss-timeline-content { padding: 0 0 32px var(--dss-space-24, 24px); }
 	.size-lg .dss-timeline-title { font-size: 15px; }
-	.size-lg .dss-timeline-time { font-size: var(--dss-font-body, 14px); }
-	.size-lg .dss-timeline-description { font-size: var(--dss-font-body, 14px); }
+	.size-lg .dss-timeline-time { font-size: var(--text-p, 14px); }
+	.size-lg .dss-timeline-description { font-size: var(--text-p, 14px); }
 
 	/* Compact variant */
 	.variant-compact .dss-timeline-content {

@@ -33,7 +33,7 @@
 		width: 260px;
 		height: 100%;
 		background: white;
-		border-right: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-right: 1px solid var(--border, #e5e7eb);
 		transition: width 0.2s;
 		overflow: hidden;
 		box-sizing: border-box;
@@ -55,7 +55,7 @@
 	.sidebar-footer {
 		flex-shrink: 0;
 		padding: 8px;
-		border-top: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-top: 1px solid var(--border, #e5e7eb);
 	}
 
 	.sidebar-footer:empty {

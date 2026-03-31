@@ -8,7 +8,7 @@
 <style>
 	.dss-divider {
 		flex-shrink: 0;
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 	}
 
 	.horizontal {

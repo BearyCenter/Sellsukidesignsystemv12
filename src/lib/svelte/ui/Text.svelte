@@ -28,9 +28,9 @@
 	.weight-bold { font-weight: 700; }
 
 	/* Colors */
-	.color-default { color: var(--ssk-colors-text-900, #111827); }
+	.color-default { color: var(--foreground, #111827); }
 	.color-neutral { color: var(--ssk-colors-neutral-500, #6b7280); }
-	.color-primary { color: var(--ssk-colors-primary-500, #FF8D00); }
+	.color-primary { color: var(--primary, #FF8D00); }
 	.color-secondary { color: var(--ssk-colors-secondary-500, #FF0006); }
 	.color-muted { color: var(--ssk-colors-neutral-400, #9ca3af); }
 </style>

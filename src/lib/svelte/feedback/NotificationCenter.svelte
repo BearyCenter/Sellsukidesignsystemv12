@@ -17,7 +17,7 @@
 	$: unreadCount = items.filter((i) => !i.read).length;
 
 	const typeColors: Record<string, string> = {
-		info: 'var(--ssk-colors-primary-500, #3b82f6)',
+		info: 'var(--primary, #3b82f6)',
 		success: '#10b981',
 		warning: '#f59e0b',
 		error: '#ef4444'
@@ -105,8 +105,8 @@
 		width: 100%;
 		max-width: 400px;
 		background: var(--dss-bg-primary, #ffffff);
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-lg, 12px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-lg, 12px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		overflow: hidden;
 	}
@@ -116,16 +116,16 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: var(--dss-space-16, 16px);
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 
 	.nc-title {
 		display: flex;
 		align-items: center;
 		gap: var(--dss-space-8, 8px);
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		font-weight: 600;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 	}
 
 	.nc-badge {
@@ -135,8 +135,8 @@
 		min-width: 20px;
 		height: 20px;
 		padding: 0 6px;
-		border-radius: var(--dss-radius-full, 9999px);
-		background: var(--ssk-colors-primary-500, #32a9ff);
+		border-radius: var(--radius-full, 9999px);
+		background: var(--primary, #32a9ff);
 		color: white;
 		font-size: 11px;
 		font-weight: 600;
@@ -151,8 +151,8 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		font-size: var(--dss-font-caption, 12px);
-		color: var(--ssk-colors-primary-500, #32a9ff);
+		font-size: var(--text-caption, 12px);
+		color: var(--primary, #32a9ff);
 		font-family: inherit;
 		padding: 0;
 	}
@@ -175,7 +175,7 @@
 		gap: var(--dss-space-8, 8px);
 		padding: var(--dss-space-32, 32px);
 		color: var(--ssk-colors-text-400, #9ca3af);
-		font-size: var(--dss-font-sm, 13px);
+		font-size: var(--text-sm, 13px);
 	}
 
 	.nc-item {
@@ -212,19 +212,19 @@
 	}
 
 	.nc-item-title {
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		font-weight: 500;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 	}
 
 	.nc-item-message {
-		font-size: var(--dss-font-sm, 13px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-sm, 13px);
+		color: var(--muted-foreground, #6b7280);
 		margin-top: 2px;
 	}
 
 	.nc-item-time {
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		margin-top: 4px;
 	}
@@ -234,7 +234,7 @@
 		border: none;
 		cursor: pointer;
 		padding: 4px;
-		border-radius: var(--dss-radius-sm, 6px);
+		border-radius: var(--radius-sm, 6px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		flex-shrink: 0;
 		opacity: 0;
@@ -246,7 +246,7 @@
 	}
 
 	.nc-dismiss:hover {
-		background: var(--ssk-colors-neutral-200, #e5e7eb);
+		background: var(--border, #e5e7eb);
 		color: var(--ssk-colors-text-700, #374151);
 	}
 </style>

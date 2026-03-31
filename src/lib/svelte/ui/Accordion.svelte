@@ -84,13 +84,13 @@
 <style>
 	.dss-accordion {
 		width: 100%;
-		border: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
-		border-radius: var(--dss-radius-md, 8px);
+		border: 1px solid var(--border, #e5e7eb);
+		border-radius: var(--radius-md, 8px);
 		overflow: hidden;
 	}
 
 	.dss-accordion-item {
-		border-bottom: 1px solid var(--ssk-colors-neutral-200, #e5e7eb);
+		border-bottom: 1px solid var(--border, #e5e7eb);
 	}
 	.dss-accordion-item:last-child {
 		border-bottom: none;
@@ -104,9 +104,9 @@
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		font-size: var(--dss-font-body, 14px);
+		font-size: var(--text-p, 14px);
 		font-weight: 500;
-		color: var(--ssk-colors-text-900, #111827);
+		color: var(--foreground, #111827);
 		text-align: left;
 		gap: var(--dss-space-8, 8px);
 		transition: background 0.15s;
@@ -134,8 +134,8 @@
 
 	.dss-accordion-content {
 		padding: 0 var(--dss-space-16, 16px) var(--dss-space-16, 16px);
-		font-size: var(--dss-font-body, 14px);
-		color: var(--ssk-colors-text-500, #6b7280);
+		font-size: var(--text-p, 14px);
+		color: var(--muted-foreground, #6b7280);
 		line-height: 1.5;
 	}
 </style>

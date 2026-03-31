@@ -38,7 +38,7 @@
 <style>
 	.dss-form-field {
 		display: flex;
-		font-family: 'Inter', sans-serif;
+		font-family: var(--font-label);
 	}
 
 	/* Vertical layout */
@@ -65,7 +65,7 @@
 
 	/* Label */
 	.dss-form-field-label {
-		font-size: var(--dss-font-label, 12px);
+		font-size: var(--text-label, 12px);
 		font-weight: 500;
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;
@@ -85,7 +85,7 @@
 	/* Messages */
 	.dss-form-field-message {
 		margin: 0;
-		font-size: var(--dss-font-caption, 12px);
+		font-size: var(--text-caption, 12px);
 		line-height: 1.4;
 	}
 	.state-error {
@@ -95,6 +95,6 @@
 		color: var(--ssk-colors-success-500, #10b981);
 	}
 	.state-helper {
-		color: var(--ssk-colors-text-500, #6b7280);
+		color: var(--muted-foreground, #6b7280);
 	}
 </style>
