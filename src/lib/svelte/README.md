@@ -79,6 +79,32 @@ Import `styles/tokens.css` to get all DSS CSS custom properties:
 
 Available tokens: `--ssk-colors-*`, `--dss-radius-*`, `--dss-space-*`
 
+> ⚠️ **Token Usage Policy**
+>
+> All components **must** use CSS variable tokens — never hardcode hex values.
+>
+> | Category | Token | Value |
+> |---|---|---|
+> | Primary | `var(--primary)` | Sky-500 #32a9ff |
+> | Success | `var(--success)` | Emerald-600 #059669 |
+> | Warning | `var(--warning)` | Amber-600 #d97706 |
+> | Danger | `var(--danger)` | Rose-600 #e11d48 |
+> | Text | `var(--foreground)` | Gray-800 #1f2937 |
+> | Muted text | `var(--muted-foreground)` | Gray-500 #6b7280 |
+> | Border | `var(--border)` | Gray-200 #e5e7eb |
+> | Font | `var(--font-label)` | DB HeaventRounded |
+> | H1 | `var(--text-h1)` | 48px |
+> | H2 | `var(--text-h2)` | 40px |
+> | H3 | `var(--text-h3)` | 28px |
+> | H4 | `var(--text-h4)` | 24px |
+> | Body | `var(--text-p)` | 20px |
+> | Label | `var(--text-label)` | 18px |
+> | Button | `var(--text-button)` | 18px |
+>
+> ❌ **Do NOT** hardcode: `color: #059669` → ✅ Use: `color: var(--success)`
+> ❌ **Do NOT** hardcode: `font-family: 'Inter'` → ✅ Use: `font-family: var(--font-label)`
+> ❌ **Do NOT** hardcode: `font-size: 14px` → ✅ Use: `font-size: var(--text-label)`
+
 ## Contributing
 
 1. Each component should match the React version's props and behavior

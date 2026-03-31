@@ -100,6 +100,24 @@
 	--foreground: var(--ssk-colors-text-900);
 	--border: var(--ssk-colors-neutral-200);
 
+	--success: #059669;
+	--success-hover: #047857;
+	--success-muted: #ecfdf5;
+	--success-border: #6ee7b7;
+	--success-foreground: #ffffff;
+
+	--warning: #d97706;
+	--warning-hover: #b45309;
+	--warning-muted: #fffbeb;
+	--warning-border: #fcd34d;
+	--warning-foreground: #ffffff;
+
+	--danger: #e11d48;
+	--danger-hover: #be123c;
+	--danger-muted: #fff1f2;
+	--danger-border: #fda4af;
+	--danger-foreground: #ffffff;
+
 	/* ─── Radius aliases (React DS compatible) ───────────────────────────── */
 	--radius-xs: var(--dss-radius-xs);
 	--radius-sm: var(--dss-radius-sm);

@@ -147,11 +147,11 @@
 	}
 
 	.btn-confirm.variant-destructive {
-		background: #ef4444;
-		color: white;
+		background: var(--danger);
+		color: var(--danger-foreground);
 	}
 	.btn-confirm.variant-destructive:hover {
-		background: #dc2626;
+		background: var(--danger-hover);
 	}
 
 	@keyframes dss-fade-in {

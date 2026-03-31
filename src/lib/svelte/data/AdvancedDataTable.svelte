@@ -330,8 +330,8 @@
 		background: var(--ssk-colors-neutral-50, #f9fafb);
 	}
 	.bulk-btn.variant-destructive {
-		color: #ef4444;
-		border-color: #fca5a5;
+		color: var(--danger);
+		border-color: var(--danger-border);
 	}
 	.bulk-btn.variant-primary {
 		background: var(--primary, #32a9ff);
@@ -506,10 +506,10 @@
 		align-items: center;
 		gap: var(--dss-space-4, 16px);
 		padding: var(--dss-space-4, 16px);
-		color: #ef4444;
+		color: var(--danger);
 		font-size: var(--text-sm, 13px);
-		background: #fef2f2;
-		border-bottom: 1px solid #fca5a5;
+		background: var(--danger-muted);
+		border-bottom: 1px solid var(--danger-border);
 	}
 
 	/* Footer / Pagination */
