@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:lib": "npm run lint:svelte-css && vite build --config vite.lib.config.ts && npm run hardcode:log",
+    "build:lib": "npm run lint:svelte-css && vite build --config vite.lib.config.ts && node scripts/inject-font-face.mjs && npm run hardcode:log",
     "lint:svelte-css": "stylelint 'src/lib/svelte/**/*.svelte' --allow-empty-input",
     "hardcode:log": "node scripts/check-hardcodes.mjs",
     "storybook": "storybook dev -p 6006",
@@ -112,7 +112,8 @@
     "typescript": "^5.5.0",
     "vaul": "1.1.2",
     "vite": "6.3.5",
-    "vite-plugin-dts": "^4.0.0"
+    "vite-plugin-dts": "^4.0.0",
+    "vite-plugin-static-copy": "^4.0.0"
   },
   "pnpm": {
     "overrides": {

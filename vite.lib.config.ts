@@ -3,6 +3,7 @@ import path from "path";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import dts from "vite-plugin-dts";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
   plugins: [
@@ -14,6 +15,18 @@ export default defineConfig({
       outDir: "dist/types",
       rollupTypes: true,
       tsconfigPath: "./tsconfig.json",
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "public/fonts/*.woff2",
+          dest: "fonts",
+        },
+        {
+          src: "public/fonts/*.woff",
+          dest: "fonts",
+        },
+      ],
     }),
   ],
   resolve: {
@@ -38,7 +51,7 @@ export default defineConfig({
           "lucide-react": "LucideReact",
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "style.css") return "styles.css";
+          if (assetInfo.name === "style.css") return "sellsuki-ds.css";
           return assetInfo.name ?? "assets/[name]-[hash][extname]";
         },
       },
@@ -46,5 +59,6 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: true,
     minify: "esbuild",
+    assetsInlineLimit: 0,
   },
 });
