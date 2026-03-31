@@ -71,8 +71,8 @@
 	--dss-font-family: 'DB HeaventRounded', 'Noto Sans Thai', system-ui, sans-serif;
 	--dss-font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
 
-	--dss-font-h1: 36px;
-	--dss-font-h2: 32px;
+	--dss-font-h1: 48px;
+	--dss-font-h2: 40px;
 	--dss-font-h3: 28px;
 	--dss-font-h4: 24px;
 	--dss-font-body: 20px;
@@ -107,4 +107,20 @@
 	--radius-lg: var(--dss-radius-lg);
 	--radius-xl: var(--dss-radius-xl);
 	--radius-full: var(--dss-radius-full);
+
+	/* ─── Spacing aliases (--dss-space-* → standard px values) ──────────── */
+	--dss-space-0: 0px;
+	--dss-space-1: 4px;
+	--dss-space-2: 8px;
+	--dss-space-3: 12px;
+	--dss-space-4: 16px;
+	--dss-space-5: 20px;
+	--dss-space-6: 24px;
+	--dss-space-8: 32px;
+	--dss-space-10: 40px;
+	--dss-space-12: 48px;
+	--dss-space-16: 64px;
+	--dss-space-20: 80px;
+	--dss-space-24: 96px;
+	--dss-shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
