@@ -314,9 +314,9 @@
 		background: none;
 	}
 
-	.size-sm { height: 32px; font-size: 13px; }
-	.size-md { height: 36px; font-size: 14px; }
-	.size-lg { height: 40px; font-size: 15px; }
+	.size-sm { height: 32px; font-size: var(--text-input-sm); }
+	.size-md { height: 36px; font-size: var(--text-input-md); }
+	.size-lg { height: 40px; font-size: var(--text-input-lg); }
 
 	.variant-default {
 		background: white;
@@ -437,7 +437,7 @@
 		text-align: center;
 	}
 	.day-name {
-		font-size: 11px;
+		font-size: var(--text-2xs);
 		font-weight: 600;
 		color: var(--ssk-colors-text-400, #9ca3af);
 		padding: 4px 0;
@@ -450,7 +450,7 @@
 		width: 34px;
 		height: 34px;
 		border-radius: var(--radius-md, 8px);
-		font-size: 13px;
+		font-size: var(--text-input-sm);
 		color: var(--ssk-colors-text-700, #374151);
 		background: none;
 		border: none;
@@ -499,7 +499,7 @@
 		text-align: center;
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 		border-radius: var(--radius-sm, 4px);
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		font-family: inherit;
 		color: var(--foreground, #111827);
 		outline: none;

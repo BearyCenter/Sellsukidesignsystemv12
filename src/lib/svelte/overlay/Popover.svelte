@@ -98,7 +98,7 @@
 
 	.popover-header {
 		padding: var(--dss-space-12, 12px) var(--dss-space-16, 16px);
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		font-weight: 600;
 		color: var(--foreground, #111827);
 		border-bottom: 1px solid var(--muted, #f3f4f6);

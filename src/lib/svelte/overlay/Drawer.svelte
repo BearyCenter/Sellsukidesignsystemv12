@@ -134,7 +134,7 @@
 
 	.drawer-title {
 		margin: 0;
-		font-size: 16px;
+		font-size: var(--text-sm);
 		font-weight: 600;
 		color: var(--foreground, #111827);
 		line-height: 1.4;

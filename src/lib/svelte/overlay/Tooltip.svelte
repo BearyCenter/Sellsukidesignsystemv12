@@ -34,7 +34,7 @@
 		z-index: 1000;
 		background: var(--ssk-colors-neutral-800, #1f2937);
 		color: white;
-		font-size: 12px;
+		font-size: var(--text-xs);
 		line-height: 1.4;
 		padding: var(--dss-space-4, 4px) var(--dss-space-8, 8px);
 		border-radius: var(--radius-sm, 4px);

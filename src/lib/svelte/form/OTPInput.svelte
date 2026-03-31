@@ -146,9 +146,9 @@
 		caret-color: var(--primary, #32a9ff);
 	}
 
-	.size-sm { width: 36px; height: 36px; font-size: 16px; }
-	.size-md { width: 44px; height: 44px; font-size: 20px; }
-	.size-lg { width: 52px; height: 52px; font-size: 24px; }
+	.size-sm { width: 36px; height: 36px; font-size: var(--text-sm); }
+	.size-md { width: 44px; height: 44px; font-size: var(--text-p); }
+	.size-lg { width: 52px; height: 52px; font-size: var(--text-h4); }
 
 	.dss-otp-digit:focus {
 		border-color: var(--primary, #32a9ff);

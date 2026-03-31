@@ -106,9 +106,9 @@
 	}
 
 	/* Sizes */
-	.size-sm textarea { font-size: 13px; padding: 6px var(--dss-space-4, 12px); }
-	.size-md textarea { font-size: 14px; padding: 8px var(--dss-space-4, 12px); }
-	.size-lg textarea { font-size: 15px; padding: 10px var(--dss-space-4, 12px); }
+	.size-sm textarea { font-size: var(--text-input-sm); padding: 6px var(--dss-space-4, 12px); }
+	.size-md textarea { font-size: var(--text-input-md); padding: 8px var(--dss-space-4, 12px); }
+	.size-lg textarea { font-size: var(--text-input-lg); padding: 10px var(--dss-space-4, 12px); }
 
 	/* Variants */
 	.variant-default {

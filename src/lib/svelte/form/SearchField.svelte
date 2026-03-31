@@ -109,9 +109,9 @@
 	}
 
 	/* Sizes */
-	.size-sm { height: 32px; font-size: var(--text-sm, 13px); }
-	.size-md { height: 36px; font-size: var(--text-p, 14px); }
-	.size-lg { height: 40px; font-size: 15px; }
+	.size-sm { height: 32px; font-size: var(--text-input-sm); }
+	.size-md { height: 36px; font-size: var(--text-input-md); }
+	.size-lg { height: 40px; font-size: var(--text-input-lg); }
 
 	/* Variants */
 	.variant-default {

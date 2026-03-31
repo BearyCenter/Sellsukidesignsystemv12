@@ -223,7 +223,7 @@
 		background: var(--primary, #32a9ff);
 		color: white;
 		border-radius: var(--radius-full, 9999px);
-		font-size: 11px;
+		font-size: var(--text-2xs);
 		font-weight: 600;
 		line-height: 1;
 	}

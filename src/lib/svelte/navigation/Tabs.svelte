@@ -159,7 +159,7 @@
 		border-radius: var(--radius-full, 9999px);
 		background: var(--border, #e5e7eb);
 		color: var(--ssk-colors-text-700, #374151);
-		font-size: 11px;
+		font-size: var(--text-2xs);
 		font-weight: 600;
 	}
 

@@ -148,9 +148,9 @@
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;
 	}
-	.size-sm .switch-label { font-size: 13px; }
-	.size-md .switch-label { font-size: 14px; }
-	.size-lg .switch-label { font-size: 15px; }
+	.size-sm .switch-label { font-size: var(--text-input-sm); }
+	.size-md .switch-label { font-size: var(--text-input-md); }
+	.size-lg .switch-label { font-size: var(--text-input-lg); }
 
 	.switch-description {
 		font-size: var(--text-caption, 12px);

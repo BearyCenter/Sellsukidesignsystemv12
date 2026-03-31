@@ -138,7 +138,7 @@
 		border-radius: var(--radius-full, 9999px);
 		background: var(--primary, #32a9ff);
 		color: white;
-		font-size: 11px;
+		font-size: var(--text-2xs);
 		font-weight: 600;
 	}
 

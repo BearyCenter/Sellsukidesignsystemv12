@@ -167,9 +167,9 @@
 		outline: none;
 	}
 
-	.size-sm { height: 32px; font-size: 13px; }
-	.size-md { height: 36px; font-size: 14px; }
-	.size-lg { height: 40px; font-size: 15px; }
+	.size-sm { height: 32px; font-size: var(--text-input-sm); }
+	.size-md { height: 36px; font-size: var(--text-input-md); }
+	.size-lg { height: 40px; font-size: var(--text-input-lg); }
 
 	.color-swatch {
 		width: 20px;
@@ -252,7 +252,7 @@
 		border: 1px solid var(--ssk-colors-neutral-300, #d1d5db);
 		border-radius: var(--radius-sm, 4px);
 		padding: 0 8px;
-		font-size: 13px;
+		font-size: var(--text-input-sm);
 		font-family: monospace;
 		color: var(--foreground, #111827);
 		outline: none;

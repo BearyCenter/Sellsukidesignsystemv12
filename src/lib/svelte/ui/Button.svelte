@@ -48,10 +48,10 @@
 	.full-width { width: 100%; }
 
 	/* Sizes */
-	.size-sm { padding: 6px 12px; font-size: 13px; height: 32px; }
-	.size-md { padding: 8px 16px; font-size: 14px; height: 36px; }
-	.size-lg { padding: 10px 20px; font-size: 15px; height: 40px; }
-	.size-xl { padding: 12px 24px; font-size: 16px; height: 44px; }
+	.size-sm { padding: 6px 12px; font-size: var(--text-input-sm); height: 32px; }
+	.size-md { padding: 8px 16px; font-size: var(--text-input-md); height: 36px; }
+	.size-lg { padding: 10px 20px; font-size: var(--text-input-lg); height: 40px; }
+	.size-xl { padding: 12px 24px; font-size: var(--text-sm); height: 44px; }
 
 	/* Primary — Sky-500 */
 	.variant-primary {

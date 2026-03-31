@@ -95,7 +95,7 @@
 
 	.confirm-title {
 		margin: 0;
-		font-size: 16px;
+		font-size: var(--text-sm);
 		font-weight: 600;
 		color: var(--foreground, #111827);
 		line-height: 1.4;
@@ -107,7 +107,7 @@
 
 	.confirm-description {
 		margin: 0;
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		color: var(--muted-foreground, #6b7280);
 		line-height: 1.5;
 	}
@@ -122,7 +122,7 @@
 	.confirm-btn {
 		padding: var(--dss-space-8, 8px) var(--dss-space-16, 16px);
 		border-radius: var(--radius-md, 8px);
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		font-weight: 500;
 		cursor: pointer;
 		border: none;

@@ -81,6 +81,17 @@
 	--dss-font-label: 18px;
 	--dss-font-button: 18px;
 
+	/* Component-scale typography — size variants & utility */
+	--dss-font-input-sm: 13px;
+	--dss-font-input-md: 14px;
+	--dss-font-input-lg: 15px;
+	--dss-font-xs:       12px;
+	--dss-font-2xs:      11px;
+	--dss-font-3xs:      10px;
+	/* App-heading overrides (Svelte app scale — DS spec values are larger) */
+	--dss-font-h1-app:   36px;
+	--dss-font-h3-app:   22px;
+
 	/* Text scale tokens (React DS compatible) */
 	--text-h1: var(--dss-font-h1);
 	--text-h2: var(--dss-font-h2);
@@ -91,6 +102,14 @@
 	--text-caption: var(--dss-font-caption);
 	--text-label: var(--dss-font-label);
 	--text-button: var(--dss-font-button);
+	--text-input-sm:  var(--dss-font-input-sm);
+	--text-input-md:  var(--dss-font-input-md);
+	--text-input-lg:  var(--dss-font-input-lg);
+	--text-xs:        var(--dss-font-xs);
+	--text-2xs:       var(--dss-font-2xs);
+	--text-3xs:       var(--dss-font-3xs);
+	--text-h1-app:    var(--dss-font-h1-app);
+	--text-h3-app:    var(--dss-font-h3-app);
 
 	/* ─── Semantic color aliases (React DS compatible) ───────────────────── */
 	--primary: var(--ssk-colors-primary-500);

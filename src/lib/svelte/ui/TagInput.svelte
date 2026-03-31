@@ -126,7 +126,7 @@
 		color: var(--ssk-colors-primary-700, #0b6bcb);
 		border-radius: var(--radius-sm, 4px);
 		padding: 2px 6px;
-		font-size: 12px;
+		font-size: var(--text-xs);
 		font-weight: 500;
 		line-height: 1;
 		height: 24px;

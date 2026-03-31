@@ -28,7 +28,7 @@
 		padding: 8px 12px;
 		cursor: pointer;
 		transition: background 0.1s;
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		color: var(--foreground, #111827);
 	}
 

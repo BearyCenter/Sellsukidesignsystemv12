@@ -39,7 +39,7 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		font-size: 11px;
+		font-size: var(--text-2xs);
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;

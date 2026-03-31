@@ -17,7 +17,7 @@
 		border-radius: var(--radius-sm, 6px);
 		cursor: pointer;
 		transition: background 0.15s, color 0.15s;
-		font-size: 14px;
+		font-size: var(--text-input-md);
 		color: var(--ssk-colors-neutral-700, #374151);
 	}
 

@@ -70,7 +70,7 @@
 	}
 
 	.dss-timeline-icon {
-		font-size: 10px;
+		font-size: var(--text-3xs);
 		line-height: 1;
 		color: white;
 	}
@@ -126,7 +126,7 @@
 
 	.size-lg .dss-timeline-dot { width: 16px; height: 16px; }
 	.size-lg .dss-timeline-content { padding: 0 0 32px var(--dss-space-24, 24px); }
-	.size-lg .dss-timeline-title { font-size: 15px; }
+	.size-lg .dss-timeline-title { font-size: var(--text-input-lg); }
 	.size-lg .dss-timeline-time { font-size: var(--text-p, 14px); }
 	.size-lg .dss-timeline-description { font-size: var(--text-p, 14px); }
 

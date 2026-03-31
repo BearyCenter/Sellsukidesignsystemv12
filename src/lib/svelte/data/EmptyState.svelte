@@ -68,7 +68,7 @@
 	}
 	.size-sm .empty-title { font-size: var(--text-sm, 13px); }
 	.size-md .empty-title { font-size: var(--text-p, 14px); }
-	.size-lg .empty-title { font-size: 16px; }
+	.size-lg .empty-title { font-size: var(--text-sm); }
 
 	/* Description */
 	.empty-description {

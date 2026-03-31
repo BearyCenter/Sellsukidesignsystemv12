@@ -157,9 +157,9 @@
 		color: var(--ssk-colors-text-700, #374151);
 		line-height: 1.4;
 	}
-	.size-sm .checkbox-label { font-size: 13px; }
-	.size-md .checkbox-label { font-size: 14px; }
-	.size-lg .checkbox-label { font-size: 15px; }
+	.size-sm .checkbox-label { font-size: var(--text-input-sm); }
+	.size-md .checkbox-label { font-size: var(--text-input-md); }
+	.size-lg .checkbox-label { font-size: var(--text-input-lg); }
 
 	.checkbox-description {
 		font-size: var(--text-caption, 12px);

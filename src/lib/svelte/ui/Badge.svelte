@@ -17,9 +17,9 @@
 	}
 
 	/* Sizes */
-	.size-sm { padding: 1px 6px; font-size: 11px; }
-	.size-md { padding: 2px 8px; font-size: 12px; }
-	.size-lg { padding: 3px 10px; font-size: 13px; }
+	.size-sm { padding: 1px 6px; font-size: var(--text-2xs); }
+	.size-md { padding: 2px 8px; font-size: var(--text-xs); }
+	.size-lg { padding: 3px 10px; font-size: var(--text-input-sm); }
 
 	/* Variants */
 	.variant-default {

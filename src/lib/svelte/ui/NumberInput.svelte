@@ -157,13 +157,13 @@
 
 	/* Sizes */
 	.size-sm .dss-number-btn { width: 28px; height: 28px; }
-	.size-sm .dss-number-field { height: 28px; width: 48px; font-size: 13px; }
+	.size-sm .dss-number-field { height: 28px; width: 48px; font-size: var(--text-input-sm); }
 
 	.size-md .dss-number-btn { width: 36px; height: 36px; }
-	.size-md .dss-number-field { height: 36px; width: 60px; font-size: 14px; }
+	.size-md .dss-number-field { height: 36px; width: 60px; font-size: var(--text-input-md); }
 
 	.size-lg .dss-number-btn { width: 44px; height: 44px; }
-	.size-lg .dss-number-field { height: 44px; width: 72px; font-size: 15px; }
+	.size-lg .dss-number-field { height: 44px; width: 72px; font-size: var(--text-input-lg); }
 
 	.dss-number-input-error {
 		display: block;
