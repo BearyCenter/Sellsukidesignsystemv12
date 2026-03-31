@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Layers, ChevronRight, Paintbrush, Type, Box, Palette, Sun, Moon, Copy, Check } from "lucide-react";
 import { Tabs } from "../../lib/components/ds-tabs";
 import { CodeBlock } from "../components/code-block";
@@ -24,9 +24,17 @@ function useCopy() {
   return { copiedKey, copy };
 }
 
-function TokenSwatch({ name, variable, value, preview }: { name: string; variable: string; value: string; preview?: React.ReactNode }) {
+function TokenSwatch({ name, variable, value, preview, type }: { name: string; variable: string; value: string; preview?: React.ReactNode; type?: string }) {
   const { copiedKey, copy } = useCopy();
   const isCopied = copiedKey === variable;
+  // For size/font/weight tokens: read actual computed CSS value so display always matches reality
+  const displayValue = React.useMemo(() => {
+    if ((type === "size" || type === "font" || type === "weight") && typeof window !== "undefined") {
+      const computed = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+      return computed || value;
+    }
+    return value;
+  }, [variable, value, type]);
   return (
     <div
       className="flex items-center gap-3 p-3 rounded-[var(--radius)] border border-border hover:bg-muted/30 transition-colors group cursor-pointer"
@@ -37,7 +45,7 @@ function TokenSwatch({ name, variable, value, preview }: { name: string; variabl
         <span className="text-foreground block truncate" style={{ ...fontLabel, fontWeight: "var(--weight-button)" }}>{name}</span>
         <span className="text-muted-foreground block truncate" style={smallLabel}>{variable}</span>
       </div>
-      <span className="text-muted-foreground truncate max-w-[120px] hidden sm:block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{value}</span>
+      <span className="text-muted-foreground truncate max-w-[120px] hidden sm:block" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{displayValue}</span>
       <span className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
         {isCopied ? <Check size={14} className="text-chart-2" /> : <Copy size={14} />}
       </span>
@@ -356,6 +364,7 @@ function TokenGrid({ category }: { category: TokenCategory }) {
             name={token.name}
             variable={token.variable}
             value={token.value}
+            type={token.type}
             preview={
               token.type === "color" ? (
                 <ColorSwatch variable={token.variable} />
@@ -511,30 +520,37 @@ export function DesignTokensPage() {
           </span>
         </div>
         <div className="px-6 py-5 space-y-4">
-          {[
-            { tag: "H1", font: "--font-h1", size: "--text-h1", weight: "--weight-h1", sample: "Display Heading", px: "48px" },
-            { tag: "H2", font: "--font-h2", size: "--text-h2", weight: "--weight-h2", sample: "Page Title", px: "40px" },
-            { tag: "H3", font: "--font-h3", size: "--text-h3", weight: "--weight-h3", sample: "Section Title", px: "28px" },
-            { tag: "H4", font: "--font-h4", size: "--text-h4", weight: "--weight-h4", sample: "Card Heading", px: "24px" },
-            { tag: "Body", font: "--font-p", size: "--text-p", weight: "--weight-p", sample: "Body text for content and paragraphs", px: "20px" },
-            { tag: "Label", font: "--font-label", size: "--text-label", weight: "--weight-label", sample: "Form labels, helper text", px: "18px" },
-            { tag: "Caption", font: "--font-caption", size: "--text-caption", weight: "--weight-caption", sample: "Breadcrumbs, navigation", px: "14px" },
-            { tag: "Button", font: "--font-button", size: "--text-button", weight: "--weight-button", sample: "Button Label Text", px: "18px" },
-          ].map((row) => (
-            <div key={row.tag} className="flex items-baseline gap-4 py-2 border-b border-border/50 last:border-b-0">
-              <span className="w-16 flex-shrink-0 text-muted-foreground" style={btnStyle}>{row.tag}</span>
-              <span
-                className="flex-1 text-foreground truncate"
-                style={{ fontFamily: `var(${row.font})`, fontSize: `var(${row.size})`, fontWeight: `var(${row.weight})` as any }}
-              >
-                {row.sample}
-              </span>
-              <span className="flex-shrink-0 hidden md:flex items-center gap-2">
-                <span className="text-primary font-medium" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{row.px}</span>
-                <span className="text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{row.size.replace("--", "")}</span>
-              </span>
-            </div>
-          ))}
+          {(() => {
+            const rows = [
+              { tag: "H1", font: "--font-h1", size: "--text-h1", weight: "--weight-h1", sample: "Display Heading" },
+              { tag: "H2", font: "--font-h2", size: "--text-h2", weight: "--weight-h2", sample: "Page Title" },
+              { tag: "H3", font: "--font-h3", size: "--text-h3", weight: "--weight-h3", sample: "Section Title" },
+              { tag: "H4", font: "--font-h4", size: "--text-h4", weight: "--weight-h4", sample: "Card Heading" },
+              { tag: "Body", font: "--font-p", size: "--text-p", weight: "--weight-p", sample: "Body text for content and paragraphs" },
+              { tag: "Label", font: "--font-label", size: "--text-label", weight: "--weight-label", sample: "Form labels, helper text" },
+              { tag: "Caption", font: "--font-caption", size: "--text-caption", weight: "--weight-caption", sample: "Breadcrumbs, navigation" },
+              { tag: "Button", font: "--font-button", size: "--text-button", weight: "--weight-button", sample: "Button Label Text" },
+            ];
+            const cs = typeof window !== "undefined" ? getComputedStyle(document.documentElement) : null;
+            return rows.map((row) => {
+              const computedPx = cs ? cs.getPropertyValue(row.size).trim() : "";
+              return (
+                <div key={row.tag} className="flex items-baseline gap-4 py-2 border-b border-border/50 last:border-b-0">
+                  <span className="w-16 flex-shrink-0 text-muted-foreground" style={btnStyle}>{row.tag}</span>
+                  <span
+                    className="flex-1 text-foreground truncate"
+                    style={{ fontFamily: `var(${row.font})`, fontSize: `var(${row.size})`, fontWeight: `var(${row.weight})` as any }}
+                  >
+                    {row.sample}
+                  </span>
+                  <span className="flex-shrink-0 hidden md:flex items-center gap-2">
+                    <span className="text-primary font-medium" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{computedPx}</span>
+                    <span className="text-muted-foreground" style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}>{row.size.replace("--", "")}</span>
+                  </span>
+                </div>
+              );
+            });
+          })()}
         </div>
       </div>
 
