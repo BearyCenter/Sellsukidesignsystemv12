@@ -497,7 +497,7 @@ export function MCPTrackerPage() {
         </span>
         <Sep />
         <span style={{ ...f.numSm, color: c.textSec }}>
-          Package: <code style={{ color: c.text, fontFamily: "monospace" }}>@uxuissk/design-system@0.7.0</code>
+          Package: <code style={{ color: c.text, fontFamily: "monospace" }}>@uxuissk/design-system@0.7.1</code>
         </span>
         <Sep />
         <span style={{ ...f.numSm, color: c.textSec }}>

@@ -677,9 +677,9 @@ export function MCPServerShowcase() {
   };
 
   // ─── Sellsuki DS Deployment Info ───────────────────────────────────────────
-  const DS_VERSION = "0.7.0";
+  const DS_VERSION = "0.7.1";
   const DS_PACKAGES = [
-    { name: "@uxuissk/design-system", version: "0.7.0", desc: "React components (44+)", url: "https://www.npmjs.com/package/@uxuissk/design-system" },
+    { name: "@uxuissk/design-system", version: "0.7.1", desc: "React components (44+)", url: "https://www.npmjs.com/package/@uxuissk/design-system" },
     { name: "@uxuissk/design-tokens", version: "0.1.0", desc: "Shared CSS + JS tokens", url: "https://www.npmjs.com/package/@uxuissk/design-tokens" },
     { name: "@uxuissk/design-system-svelte", version: "scaffold", desc: "Svelte components (from CCS)", url: null },
   ];

@@ -13,7 +13,7 @@
 - For font: use `font-['Inter']` for buttons, system font for body
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
-- Install: `npm install @uxuissk/design-system@0.7.0`
+- Install: `npm install @uxuissk/design-system@0.7.1`
 - Tokens (optional): `npm install @uxuissk/design-tokens@0.1.0`
 - CSS: `import "@uxuissk/design-system/styles.css"` (always first)
 - Import: `import { DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
@@ -125,7 +125,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 <div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm bg-[#f0f9ff] text-[#32a9ff] font-medium">
 ```
 
-## Components (48 total — v0.7.0)
+## Components (48 total — v0.7.1)
 
 **Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
 
@@ -153,7 +153,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ```bash
 # React components
-npm install @uxuissk/design-system@0.7.0
+npm install @uxuissk/design-system@0.7.1
 
 # Shared tokens (optional — for CSS-in-JS, Svelte, etc.)
 npm install @uxuissk/design-tokens@0.1.0
