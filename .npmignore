@@ -1,0 +1,35 @@
+# Exclude showcase app files from npm package
+dist/ai-rules.json
+dist/ai-rules.md
+dist/favicon.svg
+dist/header-main.svg
+dist/header-sub.svg
+dist/mcp-log.json
+dist/sidebar-ref.svg
+dist/index.html
+dist/assets/
+
+# Exclude duplicate nested fonts (from vite showcase build)
+dist/fonts/public/
+
+# Exclude source maps (too large, not needed by consumers)
+dist/sellsuki-ds.js.map
+dist/sellsuki-ds.umd.cjs.map
+
+# Exclude source & config files
+src/
+mcp-server/
+public/
+scripts/
+.claude/
+*.config.*
+*.json
+!package.json
+*.md
+!README.md
+.gitignore
+.stylelintrc.json
+HARDCODE_LOG.md
+storybook-static/
+index.html
+tsconfig*.json

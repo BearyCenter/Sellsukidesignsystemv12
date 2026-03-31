@@ -19,7 +19,11 @@
     "./styles.css": "./dist/sellsuki-ds.css"
   },
   "files": [
-    "dist",
+    "dist/sellsuki-ds.js",
+    "dist/sellsuki-ds.umd.cjs",
+    "dist/sellsuki-ds.css",
+    "dist/fonts",
+    "dist/types",
     "README.md"
   ],
   "sideEffects": [
@@ -28,7 +32,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:lib": "npm run lint:svelte-css && vite build --config vite.lib.config.ts && node scripts/inject-font-face.mjs && npm run hardcode:log",
+    "clean": "node --input-type=module -e \"import{rmSync}from'fs';try{rmSync('dist',{recursive:true,force:true})}catch{}\"",
+    "build:lib": "npm run clean && npm run lint:svelte-css && vite build --config vite.lib.config.ts && node scripts/inject-font-face.mjs && npm run hardcode:log",
     "lint:svelte-css": "stylelint 'src/lib/svelte/**/*.svelte' --allow-empty-input",
     "hardcode:log": "node scripts/check-hardcodes.mjs",
     "storybook": "storybook dev -p 6006",
