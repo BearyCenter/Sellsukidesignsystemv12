@@ -4,6 +4,7 @@ import { useI18n } from "../i18n";
 
 // ─── Shared styles (CSS variables only) ───────────────────────────────────────
 
+export const fontBody: React.CSSProperties = { fontFamily: "var(--font-p)", fontSize: "var(--text-p)", fontWeight: "var(--weight-p)" };
 export const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
 export const fontLabelBold: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" };
 export const smallLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
@@ -324,7 +325,7 @@ export function PageHeader({ titleKey, descKey }: { titleKey: string; descKey: s
         <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t(titleKey)}</span>
       </div>
       <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t(titleKey)}</h2>
-      <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>{t(descKey)}</p>
+      <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>{t(descKey)}</p>
     </div>
   );
 }

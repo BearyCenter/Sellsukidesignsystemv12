@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { DSButton, IconButton, ButtonGroup } from "../../lib/components/ds-button";
 import { useI18n } from "../i18n";
-import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { Section, DemoCard, fontBody, fontLabel } from "./_showcase-factory";
 
 export function ButtonShowcase() {
   const { t } = useI18n();
@@ -35,7 +35,7 @@ export function ButtonShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.button.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.button.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.button.desc")}
         </p>
       </div>

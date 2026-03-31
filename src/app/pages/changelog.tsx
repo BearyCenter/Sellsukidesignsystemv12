@@ -47,7 +47,7 @@ import {
   BellDot,
 } from "lucide-react";
 import { useI18n } from "../i18n";
-import { fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
+import { fontBody, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
 
 // ─── Changelog Data Types ─────────────────────────────────────────────────────
 
@@ -216,7 +216,7 @@ export function ChangelogPage() {
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.changelog.title")}</h2>
-            <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+            <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
               {t("page.changelog.desc")}
             </p>
           </div>

@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import { CodeBlock } from "../components/code-block";
 import { useI18n } from "../i18n";
-import { fontLabel, fontLabelBold, smallLabel, btnStyle, mono } from "./_showcase-factory";
+import { fontLabel, fontBody, fontLabelBold, smallLabel, btnStyle, mono } from "./_showcase-factory";
 
 // ─── Style Constants ──────────────────────────────────────────────────────────
 
@@ -259,7 +259,7 @@ export function GettingStartedPage() {
             <span>{t("page.gettingStarted.title")}</span>
           </div>
           <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.gettingStarted.title")}</h2>
-          <p className="text-muted-foreground mt-2 max-w-2xl" style={fontLabel}>
+          <p className="text-muted-foreground mt-2 max-w-2xl" style={fontBody}>
             {t("page.gettingStarted.desc")}
           </p>
 

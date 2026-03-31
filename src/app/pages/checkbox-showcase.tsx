@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
 import { DSCheckbox, CheckboxGroup } from "../../lib/components/ds-checkbox";
-import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { Section, DemoCard, fontBody, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
 export function CheckboxShowcase() {
@@ -29,7 +29,7 @@ export function CheckboxShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.checkbox.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.checkbox.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.checkbox.desc")}
         </p>
       </div>

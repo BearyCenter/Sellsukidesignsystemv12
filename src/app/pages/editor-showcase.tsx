@@ -1,7 +1,7 @@
 import { Layers, ChevronRight } from "lucide-react";
 import { TextEditor } from "../components/text-editor";
 import { useI18n } from "../i18n";
-import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { Section, DemoCard, fontBody, fontLabel } from "./_showcase-factory";
 
 export function EditorShowcase() {
   const { t } = useI18n();
@@ -12,7 +12,7 @@ export function EditorShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.editor.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.editor.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.editor.desc")}
         </p>
       </div>

@@ -3,7 +3,7 @@ import { Layers, ChevronRight, Paintbrush, Type, Box, Palette, Sun, Moon, Copy, 
 import { Tabs } from "../../lib/components/ds-tabs";
 import { CodeBlock } from "../components/code-block";
 import { useI18n } from "../i18n";
-import { fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
+import { fontBody, fontLabel, btnStyle, smallLabel } from "./_showcase-factory";
 
 // Copy helper
 function useCopy() {
@@ -481,7 +481,7 @@ export function DesignTokensPage() {
           <Paintbrush size={14} /><span>{t("breadcrumb.foundation")}</span><ChevronRight size={12} /><span>{t("page.tokens.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.tokens.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.tokens.desc")}
         </p>
       </div>

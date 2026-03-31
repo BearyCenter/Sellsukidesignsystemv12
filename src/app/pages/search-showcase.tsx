@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { Layers, ChevronRight, FileText, User, Settings, Package, Zap } from "lucide-react";
 import { SearchField, type SearchSize } from "../../lib/components/ds-search";
-import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { Section, DemoCard, fontBody, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
 const allSuggestions = [
@@ -42,7 +42,7 @@ export function SearchShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.search.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.search.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.search.desc")}
         </p>
       </div>

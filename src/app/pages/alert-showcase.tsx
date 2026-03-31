@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Layers, ChevronRight } from "lucide-react";
 import { Alert, toast, ToastContainer } from "../../lib/components/ds-alert";
 import { DSButton } from "../../lib/components/ds-button";
-import { Section, DemoCard, fontLabel } from "./_showcase-factory";
+import { Section, DemoCard, fontBody, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
 export function AlertShowcase() {
@@ -16,7 +16,7 @@ export function AlertShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.alert.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.alert.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.alert.desc")}
         </p>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Layers, ChevronRight, Circle } from "lucide-react";
 import { DSTable, type TableColumn } from "../../lib/components/ds-table";
 import { Badge } from "../../lib/components/ds-badge";
-import { Section, fontLabel } from "./_showcase-factory";
+import { Section, fontBody, fontLabel } from "./_showcase-factory";
 import { useI18n } from "../i18n";
 
 const sampleData = [
@@ -42,7 +42,7 @@ export function TableShowcase() {
           <Layers size={14} /><span>{t("breadcrumb.components")}</span><ChevronRight size={12} /><span>{t("page.table.title")}</span>
         </div>
         <h2 className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h2)", fontWeight: "700", lineHeight: "1.2" }}>{t("page.table.title")}</h2>
-        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontLabel}>
+        <p className="text-muted-foreground mt-1 max-w-2xl" style={fontBody}>
           {t("page.table.desc")}
         </p>
       </div>
