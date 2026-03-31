@@ -371,16 +371,17 @@ export const components: Record<string, ComponentInfo> = {
     ],
     example: `<DSTable
   columns={[
-    { key: "name", label: "Name", sortable: true },
-    { key: "price", label: "Price", sortable: true, render: (v) => \`฿\${v}\` },
-    { key: "status", label: "Status", render: (v) => <Badge variant={v}>{v}</Badge> },
+    { key: "name", header: "Name", sortable: true },
+    { key: "price", header: "Price", sortable: true, render: (v) => \`฿\${v}\` },
+    { key: "status", header: "Status", render: (v) => <Badge variant={v}>{v}</Badge> },
   ]}
   data={products}
   sortable
   selectable
   hoverable
   striped
-/>`,
+/>
+// ⚠️ Column field is "header" not "label"`,
   },
 
   Badge: {
@@ -444,19 +445,21 @@ export const components: Record<string, ComponentInfo> = {
     name: "Statistic",
     displayName: "Statistic",
     category: "display",
-    description: "Metric display with trend indicator, and StatCard wrapper",
+    description: "Metric display with trend indicator (Statistic), and standalone stat card (StatCard)",
     imports: ["Statistic", "StatCard"],
     props: [
-      { name: "label", type: "string", description: "Metric label" },
+      { name: "title", type: "string", description: "Metric label/title" },
       { name: "value", type: "string | number", description: "Metric value" },
-      { name: "trend", type: '"up" | "down" | "neutral"', description: "Trend direction" },
-      { name: "trendValue", type: "string", description: "Trend percentage (e.g. +12%)" },
+      { name: "trend", type: "{ direction: 'up' | 'down' | 'neutral', value: number }", description: "Trend object — value is a number, % sign added automatically" },
+      { name: "trendLabel", type: "string", description: "Optional trend label text" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Display size" },
       { name: "icon", type: "ReactNode", description: "Leading icon" },
     ],
-    example: `<StatCard>
-  <Statistic label="Revenue" value="฿125,400" trend="up" trendValue="+12.5%" />
-</StatCard>`,
+    example: `// Statistic — standalone metric display
+<Statistic title="Revenue" value="฿125,400" trend={{ direction: "up", value: 8 }} />
+
+// StatCard — card wrapper with same props as Statistic (not a wrapper, standalone)
+<StatCard title="Total Orders" value={1284} trend={{ direction: "up", value: 12 }} trendLabel="vs last month" />`,
   },
 
   Timeline: {
@@ -588,20 +591,21 @@ export const components: Record<string, ComponentInfo> = {
     description: "Tab navigation with 4 variants, 3 sizes, badges, animated indicator",
     imports: ["Tabs"],
     props: [
-      { name: "items", type: "TabItem[]", description: "Tab items" },
-      { name: "value", type: "string", description: "Active tab value" },
-      { name: "onChange", type: "(value: string) => void", description: "Tab change handler" },
+      { name: "tabs", type: "TabItem[]", description: "Tab items — each item: { id: string, label: string, content?: ReactNode, badge?: string, disabled?: boolean }" },
+      { name: "activeTab", type: "string", description: "Controlled active tab id" },
+      { name: "defaultTab", type: "string", description: "Default active tab id (uncontrolled)" },
+      { name: "onChange", type: "(id: string) => void", description: "Tab change handler" },
       { name: "variant", type: '"default" | "bordered" | "pills" | "underline"', default: '"default"', description: "Tab style" },
       { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Tab size" },
       { name: "fullWidth", type: "boolean", default: "false", description: "Full width tabs" },
     ],
     example: `<Tabs
-  items={[
-    { value: "all", label: "All Orders", badge: "128" },
-    { value: "pending", label: "Pending", badge: "24" },
-    { value: "completed", label: "Completed" },
+  tabs={[
+    { id: "all", label: "All Orders", badge: "128" },
+    { id: "pending", label: "Pending", badge: "24" },
+    { id: "completed", label: "Completed" },
   ]}
-  value={activeTab}
+  activeTab={activeTab}
   onChange={setActiveTab}
   variant="underline"
 />`,
@@ -618,8 +622,7 @@ export const components: Record<string, ComponentInfo> = {
       { name: "totalPages", type: "number", description: "Total pages" },
       { name: "onPageChange", type: "(page: number) => void", description: "Page change handler" },
       { name: "siblingCount", type: "number", default: "1", description: "Pages shown around current" },
-      { name: "showFirst", type: "boolean", default: "true", description: "Show first page button" },
-      { name: "showLast", type: "boolean", default: "true", description: "Show last page button" },
+      { name: "showFirstLast", type: "boolean", default: "false", description: "Show first/last page buttons (single prop, not showFirst/showLast)" },
       { name: "pageSize", type: "number", description: "Items per page" },
       { name: "onPageSizeChange", type: "(size: number) => void", description: "Page size change handler" },
       { name: "variant", type: '"default" | "outlined" | "filled" | "minimal"', default: '"default"', description: "Pagination style" },
@@ -1044,19 +1047,19 @@ toast.info("Processing...")`,
     name: "PageHeader",
     displayName: "Page Header",
     category: "layout",
-    description: "Page title bar with breadcrumbs, title, description, and action buttons",
+    description: "Page title bar with breadcrumb node, title, subtitle, and action buttons",
     imports: ["PageHeader"],
     props: [
       { name: "title", type: "string", description: "Page title" },
-      { name: "description", type: "string", description: "Page description" },
-      { name: "breadcrumbs", type: "BreadcrumbItem[]", description: "Breadcrumb items" },
+      { name: "subtitle", type: "string", description: "Optional subtitle below title (not 'description')" },
+      { name: "breadcrumb", type: "ReactNode", description: "Breadcrumb node — pass <Breadcrumb items={...} /> directly (not an array)" },
       { name: "actions", type: "ReactNode", description: "Action buttons (right side)" },
       { name: "backHref", type: "string", description: "Back button URL" },
     ],
     example: `<PageHeader
   title="Order Management"
-  description="View and manage all customer orders"
-  breadcrumbs={[{ label: "Home", href: "/" }, { label: "Orders" }]}
+  subtitle="View and manage all customer orders"
+  breadcrumb={<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Orders" }]} />}
   actions={<DSButton leftIcon={<Plus size={16} />}>New Order</DSButton>}
 />`,
   },
