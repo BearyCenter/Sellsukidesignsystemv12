@@ -2,7 +2,7 @@
 
 > This file is the single source of truth for all AI tools generating Sellsuki UI.
 > URL: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
-> Last updated: 2026-03-20
+> Last updated: 2026-04-01
 
 ## Important: Sandbox vs Full Mode
 
@@ -10,7 +10,8 @@
 - Use ONLY React + Tailwind CSS + lucide-react + recharts
 - DO NOT import from @uxuissk/design-system or any external npm package
 - Recreate components inline using Tailwind classes matching tokens below
-- For font: use `font-['Inter']` for buttons, system font for body
+- Font: `font-['DB_HeaventRounded']` for **all text** — headings, body, labels, buttons, badges, nav
+- **NEVER use Inter or any other font**
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
 - Install: `npm install @uxuissk/design-system@0.7.1`
@@ -45,13 +46,18 @@
 
 ## Typography
 
-| Element | Font | Weight | Size |
-|---------|------|--------|------|
-| Body text | DB HeaventRounded, Noto Sans Thai, sans-serif | 400 | 16px |
-| Heading | DB HeaventRounded, Noto Sans Thai, sans-serif | 700 | 24-32px |
-| Button | Inter, sans-serif | 600 | 14px |
-| Label | DB HeaventRounded | 500 | 14px |
-| Caption | DB HeaventRounded | 400 | 12px |
+**Font: DB HeaventRounded for ALL text — never use Inter or system fonts**
+
+| Element | Token | Size | Weight | Tailwind |
+|---------|-------|------|--------|----------|
+| H1 Display | `--text-h1` | **48px** | 400 | `text-[48px]` |
+| H2 Page Title | `--text-h2` | **40px** | 400 | `text-[40px]` |
+| H3 Section | `--text-h3` | **28px** | 700 | `text-[28px] font-bold` |
+| H4 Card | `--text-h4` | **24px** | 500 | `text-[24px] font-medium` |
+| Body / P | `--text-p` | **20px** | 400 | `text-[20px]` |
+| Label | `--text-label` | **18px** | 400 | `text-[18px]` |
+| Button / Badge | `--text-button` | **18px** | 600 | `text-[18px] font-semibold` |
+| Caption | `--text-caption` | **14px** | 400 | `text-[14px]` |
 
 ## Spacing
 
@@ -86,7 +92,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Button
 ```html
-<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-sm font-semibold rounded-lg font-['Inter']">
+<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']">
 ```
 
 ### Card
@@ -96,33 +102,33 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Input
 ```html
-<input class="w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-sm text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none" />
+<input class="w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-[18px] text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none font-['DB_HeaventRounded']" />
 ```
 
 ### Badge
 ```html
-<span class="px-2 py-0.5 text-xs font-medium rounded-full bg-[#d1fae5] text-[#065f46]">Active</span>
+<span class="px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#d1fae5] text-[#065f46] font-['DB_HeaventRounded']">Active</span>
 ```
 
 ### Table Header
 ```html
-<th class="px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-xs font-semibold uppercase text-left">
+<th class="px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[14px] font-semibold uppercase text-left font-['DB_HeaventRounded']">
 ```
 
 ### Table Row
 ```html
 <tr class="border-b border-[#e5e7eb] hover:bg-[#f9fafb]">
-  <td class="px-4 py-3 text-sm text-[#1f2937]">
+  <td class="px-4 py-3 text-[20px] text-[#1f2937] font-['DB_HeaventRounded']">
 ```
 
 ### Sidebar Menu Item
 ```html
-<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] cursor-pointer">
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] cursor-pointer font-['DB_HeaventRounded']">
 ```
 
 ### Active Menu Item
 ```html
-<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm bg-[#f0f9ff] text-[#32a9ff] font-medium">
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']">
 ```
 
 ## Components (48 total — v0.7.1)
@@ -144,7 +150,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 1. Always use flat, clean design — no heavy shadows or gradients
 2. Max 1 primary button per view
 3. Handle loading (skeleton), empty, and error states
-4. Use DB HeaventRounded for text, Inter for buttons only
+4. Use **DB HeaventRounded** for **ALL text** — headings, body, labels, buttons, badges, nav — never use Inter
 5. Only colors from the palette above — no random colors
 6. Spacing must follow the defined system
 7. Support responsive: desktop-first

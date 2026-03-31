@@ -1,7 +1,7 @@
 {
   "name": "Sellsuki Design System",
   "version": "0.7.1",
-  "updated": "2026-03-24",
+  "updated": "2026-04-01",
   "url": "https://sellsukidesignsystemv12.vercel.app/ai-rules.json",
   "storybook": "https://sellsukidesignsystemv12.vercel.app",
   "packages": {
@@ -32,8 +32,18 @@
     "danger-light": "#ffe4e6"
   },
   "typography": {
-    "body": "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
-    "button": "'Inter', sans-serif"
+    "font": "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
+    "note": "Use DB HeaventRounded for ALL text — headings, body, labels, buttons, badges, nav. NEVER use Inter.",
+    "scale": {
+      "h1": { "token": "--text-h1", "size": "48px", "weight": "400", "tailwind": "text-[48px]" },
+      "h2": { "token": "--text-h2", "size": "40px", "weight": "400", "tailwind": "text-[40px]" },
+      "h3": { "token": "--text-h3", "size": "28px", "weight": "700", "tailwind": "text-[28px] font-bold" },
+      "h4": { "token": "--text-h4", "size": "24px", "weight": "500", "tailwind": "text-[24px] font-medium" },
+      "body": { "token": "--text-p", "size": "20px", "weight": "400", "tailwind": "text-[20px]" },
+      "label": { "token": "--text-label", "size": "18px", "weight": "400", "tailwind": "text-[18px]" },
+      "button": { "token": "--text-button", "size": "18px", "weight": "600", "tailwind": "text-[18px] font-semibold" },
+      "caption": { "token": "--text-caption", "size": "14px", "weight": "400", "tailwind": "text-[14px]" }
+    }
   },
   "spacing": {
     "page-desktop": "24px",
@@ -68,23 +78,23 @@
     "Flat clean design — no heavy shadows or gradients",
     "Max 1 primary button per view",
     "Handle loading, empty, and error states",
-    "DB HeaventRounded for text, Inter for buttons only",
+    "DB HeaventRounded for ALL text — headings, body, labels, buttons, badges — NEVER use Inter",
     "Only colors from the defined palette",
     "Follow spacing system strictly"
   ],
   "tailwind_patterns": {
-    "button-primary": "h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-sm font-semibold rounded-lg font-['Inter']",
-    "button-secondary": "h-9 px-4 bg-[#f3f4f6] hover:bg-[#e5e7eb] text-[#1f2937] text-sm font-semibold rounded-lg font-['Inter']",
-    "button-outline": "h-9 px-4 border border-[#32a9ff] text-[#32a9ff] bg-white hover:bg-[#f0f9ff] text-sm font-semibold rounded-lg font-['Inter']",
-    "button-destructive": "h-9 px-4 bg-[#e11d48] hover:bg-[#be123c] text-white text-sm font-semibold rounded-lg font-['Inter']",
+    "button-primary": "h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']",
+    "button-secondary": "h-9 px-4 bg-[#f3f4f6] hover:bg-[#e5e7eb] text-[#1f2937] text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']",
+    "button-outline": "h-9 px-4 border border-[#32a9ff] text-[#32a9ff] bg-white hover:bg-[#f0f9ff] text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']",
+    "button-destructive": "h-9 px-4 bg-[#e11d48] hover:bg-[#be123c] text-white text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']",
     "card": "bg-white rounded-lg border border-[#e5e7eb] p-4",
-    "input": "w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-sm text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none",
-    "badge-success": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#d1fae5] text-[#065f46]",
-    "badge-warning": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#fef3c7] text-[#92400e]",
-    "badge-danger": "px-2 py-0.5 text-xs font-medium rounded-full bg-[#ffe4e6] text-[#9f1239]",
-    "table-header": "px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-xs font-semibold uppercase text-left",
-    "table-cell": "px-4 py-3 text-sm text-[#1f2937]",
-    "sidebar-item": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff]",
-    "sidebar-item-active": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm bg-[#f0f9ff] text-[#32a9ff] font-medium"
+    "input": "w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-[18px] text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none font-['DB_HeaventRounded']",
+    "badge-success": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#d1fae5] text-[#065f46] font-['DB_HeaventRounded']",
+    "badge-warning": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#fef3c7] text-[#92400e] font-['DB_HeaventRounded']",
+    "badge-danger": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#ffe4e6] text-[#9f1239] font-['DB_HeaventRounded']",
+    "table-header": "px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[14px] font-semibold uppercase text-left font-['DB_HeaventRounded']",
+    "table-cell": "px-4 py-3 text-[20px] text-[#1f2937] font-['DB_HeaventRounded']",
+    "sidebar-item": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] font-['DB_HeaventRounded']",
+    "sidebar-item-active": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']"
   }
 }
