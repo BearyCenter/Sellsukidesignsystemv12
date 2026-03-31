@@ -1,0 +1,163 @@
+/* Design System Tokens Bridge
+ * Maps DSS (@uxuissk/design-system) variables to backward-compatible --ssk-colors-* aliases
+ * and provides semantic design tokens for the app.
+ */
+
+/* DSS tokens are imported via main.ts: import '@uxuissk/design-system/styles.css' */
+
+:root {
+	/* ─── Backward-compatible aliases (ssk → DSS) ────────────────────────── */
+
+	/* Primary (Sky Blue — DSS brand) */
+	--ssk-colors-primary-50: var(--Base_Color--Sky--50, #f0f9ff);
+	--ssk-colors-primary-100: var(--Base_Color--Sky--100, #d9f2ff);
+	--ssk-colors-primary-200: var(--Base_Color--Sky--200, #bce8ff);
+	--ssk-colors-primary-300: var(--Base_Color--Sky--300, #8edcff);
+	--ssk-colors-primary-400: var(--Base_Color--Sky--400, #58c6ff);
+	--ssk-colors-primary-500: var(--Base_Color--Sky--500, #32a9ff);
+	--ssk-colors-primary-600: var(--Base_Color--Sky--600, #1b8bf5);
+	--ssk-colors-primary-700: var(--Base_Color--Sky--700, #1473e1);
+	--ssk-colors-primary-800: var(--Base_Color--Sky--800, #175cb6);
+	--ssk-colors-primary-900: var(--Base_Color--Sky--900, #194f8f);
+
+	/* Secondary (Orange) */
+	--ssk-colors-secondary-50: var(--Base_Color--Orange--50, #fff7ed);
+	--ssk-colors-secondary-100: var(--Base_Color--Orange--100, #ffedd5);
+	--ssk-colors-secondary-200: var(--Base_Color--Orange--200, #fed7aa);
+	--ssk-colors-secondary-300: var(--Base_Color--Orange--300, #fdba74);
+	--ssk-colors-secondary-400: var(--Base_Color--Orange--400, #fb923c);
+	--ssk-colors-secondary-500: var(--Base_Color--Orange--500, #f97316);
+	--ssk-colors-secondary-600: var(--Base_Color--Orange--600, #ea580c);
+	--ssk-colors-secondary-700: var(--Base_Color--Orange--700, #c2410c);
+	--ssk-colors-secondary-800: var(--Base_Color--Orange--800, #9a3412);
+	--ssk-colors-secondary-900: var(--Base_Color--Orange--900, #7c2d12);
+
+	/* Neutral (Gray) */
+	--ssk-colors-neutral-50: var(--Base_Color--Gray--50, #f9fafb);
+	--ssk-colors-neutral-100: var(--Base_Color--Gray--100, #f3f4f6);
+	--ssk-colors-neutral-200: var(--Base_Color--Gray--200, #e5e7eb);
+	--ssk-colors-neutral-300: var(--Base_Color--Gray--300, #d1d5db);
+	--ssk-colors-neutral-400: var(--Base_Color--Gray--400, #9ca3af);
+	--ssk-colors-neutral-500: var(--Base_Color--Gray--500, #6b7280);
+	--ssk-colors-neutral-600: var(--Base_Color--Gray--600, #4b5563);
+	--ssk-colors-neutral-700: var(--Base_Color--Gray--700, #374151);
+	--ssk-colors-neutral-800: var(--Base_Color--Gray--800, #1f2937);
+	--ssk-colors-neutral-900: var(--Base_Color--Gray--900, #111827);
+
+	/* Text */
+	--ssk-colors-text-900: var(--Colors--Text--text-primary, #111827);
+	--ssk-colors-text-700: var(--Colors--Text--text-secondary, #374151);
+	--ssk-colors-text-500: var(--Colors--Text--text-tertiary, #6b7280);
+	--ssk-colors-text-400: var(--Colors--Text--text-placeholder, #9ca3af);
+
+	/* ─── Semantic tokens ────────────────────────────────────────────────── */
+	--dss-bg-primary: var(--Colors--Background--bg-primary, #ffffff);
+	--dss-bg-secondary: var(--Colors--Background--bg-secondary, #f9fafb);
+	--dss-bg-tertiary: var(--Colors--Background--bg-tertiary, #f3f4f6);
+	--dss-bg-active: var(--Colors--Background--bg-active, #f3f4f6);
+	--dss-bg-brand-solid: var(--Colors--Background--bg-brand-solid, #FF8D00);
+	--dss-bg-disabled: var(--Colors--Background--bg-disabled, #f3f4f6);
+
+	/* Border radius */
+	--dss-radius-xs: var(--Border-radius--radius-xs, 4px);
+	--dss-radius-sm: var(--Border-radius--radius-sm, 6px);
+	--dss-radius-md: var(--Border-radius--radius-md, 8px);
+	--dss-radius-lg: var(--Border-radius--radius-lg, 12px);
+	--dss-radius-xl: var(--Border-radius--radius-xl, 16px);
+	--dss-radius-full: var(--Border-radius--radius-full, 9999px);
+
+	/* ─── Typography (DB HeaventRounded — DS Spec) ─────────────────────── */
+	--font-label: 'DB HeaventRounded', 'Noto Sans Thai', system-ui, sans-serif;
+	--dss-font-family: 'DB HeaventRounded', 'Noto Sans Thai', system-ui, sans-serif;
+	--dss-font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+	--dss-font-h1: 48px;
+	--dss-font-h2: 40px;
+	--dss-font-h3: 28px;
+	--dss-font-h4: 24px;
+	--dss-font-body: 20px;
+	--dss-font-sm: 16px;
+	--dss-font-caption: 14px;
+	--dss-font-label: 18px;
+	--dss-font-button: 18px;
+
+	/* Component-scale typography — size variants & utility */
+	--dss-font-input-sm: 13px;
+	--dss-font-input-md: 14px;
+	--dss-font-input-lg: 15px;
+	--dss-font-xs:       12px;
+	--dss-font-2xs:      11px;
+	--dss-font-3xs:      10px;
+	/* App-heading overrides (Svelte app scale — DS spec values are larger) */
+	--dss-font-h1-app:   36px;
+	--dss-font-h3-app:   22px;
+
+	/* Text scale tokens (React DS compatible) */
+	--text-h1: var(--dss-font-h1);
+	--text-h2: var(--dss-font-h2);
+	--text-h3: var(--dss-font-h3);
+	--text-h4: var(--dss-font-h4);
+	--text-p: var(--dss-font-body);
+	--text-sm: var(--dss-font-sm);
+	--text-caption: var(--dss-font-caption);
+	--text-label: var(--dss-font-label);
+	--text-button: var(--dss-font-button);
+	--text-input-sm:  var(--dss-font-input-sm);
+	--text-input-md:  var(--dss-font-input-md);
+	--text-input-lg:  var(--dss-font-input-lg);
+	--text-xs:        var(--dss-font-xs);
+	--text-2xs:       var(--dss-font-2xs);
+	--text-3xs:       var(--dss-font-3xs);
+	--text-h1-app:    var(--dss-font-h1-app);
+	--text-h3-app:    var(--dss-font-h3-app);
+
+	/* ─── Semantic color aliases (React DS compatible) ───────────────────── */
+	--primary: var(--ssk-colors-primary-500);
+	--primary-foreground: #ffffff;
+	--muted: var(--ssk-colors-neutral-100);
+	--muted-foreground: var(--ssk-colors-text-500);
+	--foreground: var(--ssk-colors-text-900);
+	--border: var(--ssk-colors-neutral-200);
+
+	--success: #059669;
+	--success-hover: #047857;
+	--success-muted: #ecfdf5;
+	--success-border: #6ee7b7;
+	--success-foreground: #ffffff;
+
+	--warning: #d97706;
+	--warning-hover: #b45309;
+	--warning-muted: #fffbeb;
+	--warning-border: #fcd34d;
+	--warning-foreground: #ffffff;
+
+	--danger: #e11d48;
+	--danger-hover: #be123c;
+	--danger-muted: #fff1f2;
+	--danger-border: #fda4af;
+	--danger-foreground: #ffffff;
+
+	/* ─── Radius aliases (React DS compatible) ───────────────────────────── */
+	--radius-xs: var(--dss-radius-xs);
+	--radius-sm: var(--dss-radius-sm);
+	--radius-md: var(--dss-radius-md);
+	--radius-lg: var(--dss-radius-lg);
+	--radius-xl: var(--dss-radius-xl);
+	--radius-full: var(--dss-radius-full);
+
+	/* ─── Spacing aliases (--dss-space-* → standard px values) ──────────── */
+	--dss-space-0: 0px;
+	--dss-space-1: 4px;
+	--dss-space-2: 8px;
+	--dss-space-3: 12px;
+	--dss-space-4: 16px;
+	--dss-space-5: 20px;
+	--dss-space-6: 24px;
+	--dss-space-8: 32px;
+	--dss-space-10: 40px;
+	--dss-space-12: 48px;
+	--dss-space-16: 64px;
+	--dss-space-20: 80px;
+	--dss-space-24: 96px;
+	--dss-shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
