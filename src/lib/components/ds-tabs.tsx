@@ -24,9 +24,9 @@ interface TabsProps {
 }
 
 const sizeStyles: Record<TabSize, React.CSSProperties> = {
-  sm: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "6px 12px" },
-  md: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "8px 16px" },
-  lg: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", padding: "10px 20px" },
+  sm: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)", padding: "6px 12px" },
+  md: { fontFamily: "var(--font-label)", fontSize: "var(--text-p)",    fontWeight: "var(--weight-p)",     padding: "8px 16px" },
+  lg: { fontFamily: "var(--font-label)", fontSize: "var(--text-h4)",   fontWeight: "var(--weight-p)",     padding: "10px 20px" },
 };
 
 export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activeTab: controlled, onChange, fullWidth = false, className = "" }: TabsProps) {
@@ -105,7 +105,7 @@ export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activ
                   className={`ml-1 rounded-full min-w-[18px] text-center inline-flex items-center justify-center ${
                     isActive && variant === "pills" ? "bg-primary-foreground/20 text-primary-foreground" : "bg-muted text-muted-foreground"
                   }`}
-                  style={{ fontFamily: "var(--font-label)", fontSize: "12px", fontWeight: "var(--weight-label)", lineHeight: "1", padding: "1px 6px" }}
+                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)", lineHeight: "1", padding: "1px 6px" }}
                 >
                   {tab.badge}
                 </span>

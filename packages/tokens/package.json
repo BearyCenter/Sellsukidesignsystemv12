@@ -1,6 +1,6 @@
 {
   "name": "@uxuissk/design-tokens",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sellsuki Design System — shared design tokens (CSS custom properties + JS constants)",
   "type": "module",
   "main": "./dist/index.js",
@@ -21,7 +21,12 @@
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },
-  "keywords": ["sellsuki", "design-system", "tokens", "css-variables"],
+  "keywords": [
+    "sellsuki",
+    "design-system",
+    "tokens",
+    "css-variables"
+  ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
