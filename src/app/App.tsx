@@ -460,7 +460,7 @@ function AppInner() {
               {!sidebarCollapsed && (
                 <span
                   className="px-2 mb-2 block text-muted-foreground"
-                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-button)" }}
+                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }}
                 >
                   {group.label}
                 </span>

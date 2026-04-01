@@ -43,16 +43,16 @@ const nameStyle: React.CSSProperties = {
 };
 
 const subStyle: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption, 14px)",
-  fontWeight: "var(--weight-label)",
+  fontFamily: "var(--font-p)",
+  fontSize: "var(--text-p, 20px)",
+  fontWeight: "var(--weight-p)",
   lineHeight: "1",
 };
 
 const handleStyle: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption, 14px)",
-  fontWeight: "var(--weight-label)",
+  fontFamily: "var(--font-p)",
+  fontSize: "var(--text-p, 20px)",
+  fontWeight: "var(--weight-p)",
   lineHeight: "1",
 };
 
