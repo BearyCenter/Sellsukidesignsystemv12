@@ -37,21 +37,21 @@ export interface SidebarAccountSwitcherProps {
 
 const nameStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "18px",
+  fontSize: "var(--text-label, 18px)",
   fontWeight: "500",
   lineHeight: "1",
 };
 
 const subStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "14px",
+  fontSize: "var(--text-caption, 14px)",
   fontWeight: "var(--weight-label)",
   lineHeight: "1",
 };
 
 const handleStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "14px",
+  fontSize: "var(--text-caption, 14px)",
   fontWeight: "var(--weight-label)",
   lineHeight: "1",
 };

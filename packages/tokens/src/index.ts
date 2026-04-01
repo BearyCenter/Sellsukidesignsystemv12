@@ -136,7 +136,7 @@ export const colors = {
 export const typography = {
   fontFamily: {
     body: "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
-    button: "'Inter', sans-serif",
+    button: "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
   },
   fontSize: {
     xs: "12px",

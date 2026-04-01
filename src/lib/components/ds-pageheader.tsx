@@ -31,7 +31,7 @@ const titleStyle: React.CSSProperties = {
 
 const subtitleStyle: React.CSSProperties = {
   fontFamily: "var(--font-p, 'DB HeaventRounded', sans-serif)",
-  fontSize: "var(--text-p, 24px)",
+  fontSize: "var(--text-p, 20px)",
   fontWeight: "var(--weight-p, 400)",
   color: "var(--muted-foreground)",
   lineHeight: 1.4,
@@ -39,7 +39,7 @@ const subtitleStyle: React.CSSProperties = {
 
 const breadcrumbWrapStyle: React.CSSProperties = {
   fontFamily: "var(--font-caption, 'DB HeaventRounded', sans-serif)",
-  fontSize: "var(--text-caption, 20px)",
+  fontSize: "var(--text-caption, 14px)",
 };
 
 /* ─── PageHeader ─────────────────────────────────────────────────────────────── */
