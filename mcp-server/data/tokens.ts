@@ -70,21 +70,17 @@ export const colorPalette = {
 
 export const typography = {
   families: [
-    { usage: "Headings (h1–h4)", font: "DB HeaventRounded, sans-serif", notes: "Rounded, friendly, Thai-first" },
-    { usage: "Body (p)", font: "DB HeaventRounded, sans-serif", notes: "Same as headings for cohesion" },
-    { usage: "Caption", font: "DB HeaventRounded, sans-serif", notes: "Smaller body text" },
-    { usage: "Label", font: "DB HeaventRounded, sans-serif", notes: "Form labels, metadata" },
-    { usage: "Button", font: "Inter, sans-serif", notes: "Geometric, precise for actions" },
+    { usage: "ALL text (headings, body, label, button, badge, nav, table)", font: "DB HeaventRounded, sans-serif", notes: "Thai-first, rounded — NEVER use Inter" },
   ],
   scale: [
-    { token: "--text-h1", size: "60px", weight: "400 (normal)", usage: "Page titles, hero" },
-    { token: "--text-h2", size: "52px", weight: "400 (normal)", usage: "Section headers" },
-    { token: "--text-h3", size: "28px", weight: "700 (bold)", usage: "Card titles, subsections" },
+    { token: "--text-h1", size: "48px", weight: "400 (normal)", usage: "Page titles, hero" },
+    { token: "--text-h2", size: "40px", weight: "400 (normal)", usage: "Section headers" },
+    { token: "--text-h3", size: "28px", weight: "400 (normal)", usage: "Card titles, subsections" },
     { token: "--text-h4", size: "24px", weight: "500 (medium)", usage: "Small headings" },
-    { token: "--text-p", size: "24px", weight: "400 (normal)", usage: "Body text" },
-    { token: "--text-caption", size: "20px", weight: "400 (normal)", usage: "Helper text, timestamps" },
-    { token: "--text-label", size: "18px", weight: "400 (normal)", usage: "Form labels, metadata" },
-    { token: "--text-button", size: "14px", weight: "600 (semibold)", usage: "Button text" },
+    { token: "--text-p", size: "20px", weight: "400 (normal)", usage: "Body text, sidebar menu items" },
+    { token: "--text-label", size: "18px", weight: "400 (normal)", usage: "Form labels, sidebar group headers, tabs-sm" },
+    { token: "--text-button", size: "18px", weight: "600 (semibold)", usage: "Buttons, badges, tabs-md" },
+    { token: "--text-caption", size: "14px", weight: "400 (normal)", usage: "Helper text, timestamps, tab badges" },
   ],
 };
 

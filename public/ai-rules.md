@@ -10,7 +10,7 @@
 - Use ONLY React + Tailwind CSS + lucide-react + recharts
 - DO NOT import from @uxuissk/design-system or any external npm package
 - Recreate components inline using Tailwind classes matching tokens below
-- For font: use `font-['Inter']` for buttons, system font for body
+- For font: use `font-['DB_HeaventRounded',sans-serif]` for ALL text (body, button, label, badge)
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
 - Install: `npm install @uxuissk/design-system`
@@ -43,13 +43,18 @@
 
 ## Typography
 
-| Element | Font | Weight | Size |
-|---------|------|--------|------|
-| Body text | DB HeaventRounded, Noto Sans Thai, sans-serif | 400 | 16px |
-| Heading | DB HeaventRounded, Noto Sans Thai, sans-serif | 700 | 24-32px |
-| Button | Inter, sans-serif | 600 | 14px |
-| Label | DB HeaventRounded | 500 | 14px |
-| Caption | DB HeaventRounded | 400 | 12px |
+**Font: DB HeaventRounded, Noto Sans Thai, sans-serif — ALL text. NEVER use Inter.**
+
+| Token | CSS Var | Size | Weight | Usage |
+|-------|---------|------|--------|-------|
+| H1 | `--text-h1` | 48px | 400 | Page titles, hero |
+| H2 | `--text-h2` | 40px | 400 | Section headers |
+| H3 | `--text-h3` | 28px | 400 | Card titles |
+| H4 | `--text-h4` | 24px | 500 | Small headings |
+| Body / P | `--text-p` | 20px | 400 | Body text, sidebar menu |
+| Label | `--text-label` | 18px | 400 | Form labels, sidebar group headers |
+| Button / Badge | `--text-button` | 18px | 600 | Buttons, badges, tabs |
+| Caption | `--text-caption` | 14px | 400 | Helper text, timestamps |
 
 ## Spacing
 
@@ -84,7 +89,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Button
 ```html
-<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-sm font-semibold rounded-lg font-['Inter']">
+<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-lg font-semibold rounded-lg font-['DB_HeaventRounded',sans-serif]">
 ```
 
 ### Card
@@ -140,7 +145,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 1. Always use flat, clean design — no heavy shadows or gradients
 2. Max 1 primary button per view
 3. Handle loading (skeleton), empty, and error states
-4. Use DB HeaventRounded for text, Inter for buttons only
+4. Use DB HeaventRounded for ALL text — body, buttons, labels, badges, nav — NEVER Inter
 5. Only colors from the palette above — no random colors
 6. Spacing must follow the defined system
 7. Support responsive: desktop-first

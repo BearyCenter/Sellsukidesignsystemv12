@@ -27,8 +27,18 @@
     "danger-light": "#ffe4e6"
   },
   "typography": {
-    "body": "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
-    "button": "'Inter', sans-serif"
+    "font": "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
+    "rule": "ALL text uses DB HeaventRounded — NEVER Inter",
+    "scale": {
+      "--text-h1": { "size": "48px", "weight": "400", "usage": "Page titles" },
+      "--text-h2": { "size": "40px", "weight": "400", "usage": "Section headers" },
+      "--text-h3": { "size": "28px", "weight": "400", "usage": "Card titles" },
+      "--text-h4": { "size": "24px", "weight": "500", "usage": "Small headings" },
+      "--text-p": { "size": "20px", "weight": "400", "usage": "Body, sidebar menu" },
+      "--text-label": { "size": "18px", "weight": "400", "usage": "Labels, sidebar group" },
+      "--text-button": { "size": "18px", "weight": "600", "usage": "Buttons, badges, tabs" },
+      "--text-caption": { "size": "14px", "weight": "400", "usage": "Helper text, captions" }
+    }
   },
   "spacing": {
     "page-desktop": "24px",

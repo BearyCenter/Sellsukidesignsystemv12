@@ -9,7 +9,7 @@ export const doRules = [
   'Always import CSS first: import "@uxuissk/design-system/styles.css"',
   "Use DS components — never create custom buttons, inputs, modals when DS has them",
   "Use semantic color tokens — bg-primary, text-secondary, not raw hex",
-  "Use DB HeaventRounded for all text, Inter only for buttons",
+  "Use DB HeaventRounded for ALL text — headings, body, labels, buttons, badges, nav, table — NEVER use Inter",
   "Use radius-md (8px) as default border-radius for components",
   "Use elevation-sm sparingly — prefer flat design with borders",
   'Use Sky-500 (#32a9ff) as the primary action color',
