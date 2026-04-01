@@ -76,11 +76,10 @@ const btnStyle: React.CSSProperties = {
   fontWeight: "var(--weight-button)",
 };
 
-// Figma spec: DB HeaventRounded 16px w400 (not uppercase, not bold)
 const groupHeaderStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "16px",
-  fontWeight: "var(--weight-label)",
+  fontSize: "var(--text-caption)",
+  fontWeight: "var(--weight-button)",
 };
 
 const smallLabel: React.CSSProperties = {
@@ -250,13 +249,13 @@ export function Sidebar({
             </button>
           )}
           {version && !collapsed && (
-            <div className="px-2 flex items-center gap-1.5 text-muted-foreground/60" style={{ fontFamily: "var(--font-label)", fontSize: "12px", fontWeight: "var(--weight-label)" }}>
+            <div className="px-2 flex items-center gap-1.5 text-muted-foreground/60" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }}>
               <span>{version}</span>
               {versionDate && <><span>·</span><span>{versionDate}</span></>}
             </div>
           )}
           {version && collapsed && (
-            <div className="flex justify-center text-muted-foreground/60" style={{ fontFamily: "var(--font-label)", fontSize: "10px", fontWeight: "var(--weight-label)" }} title={`${version}${versionDate ? ` · ${versionDate}` : ""}`}>
+            <div className="flex justify-center text-muted-foreground/60" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }} title={`${version}${versionDate ? ` · ${versionDate}` : ""}`}>
               {version}
             </div>
           )}

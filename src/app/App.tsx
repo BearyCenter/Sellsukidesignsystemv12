@@ -460,7 +460,7 @@ function AppInner() {
               {!sidebarCollapsed && (
                 <span
                   className="px-2 mb-2 block text-muted-foreground"
-                  style={{ fontFamily: "var(--font-label)", fontSize: "16px", fontWeight: "var(--weight-label)" }}
+                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-button)" }}
                 >
                   {group.label}
                 </span>
@@ -553,7 +553,7 @@ function AppInner() {
                 className="w-8 h-8 flex items-center justify-center rounded-[var(--radius-md)] text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors cursor-pointer"
                 title={lang === "en" ? "เปลี่ยนเป็นภาษาไทย" : "Switch to English"}
               >
-                <span style={{ fontFamily: "var(--font-label)", fontSize: "11px", fontWeight: "var(--weight-button)" }}>
+                <span style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-button)" }}>
                   {t("app.switchLang")}
                 </span>
               </button>

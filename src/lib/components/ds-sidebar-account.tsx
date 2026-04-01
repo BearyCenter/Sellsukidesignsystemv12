@@ -38,7 +38,7 @@ export interface SidebarAccountSwitcherProps {
 const nameStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
   fontSize: "var(--text-label, 18px)",
-  fontWeight: "500",
+  fontWeight: "var(--weight-button)",
   lineHeight: "1",
 };
 
@@ -240,7 +240,7 @@ export function SidebarAccountSwitcher({
                 >
                   <AvatarCircle item={item} size={36} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ ...nameStyle, fontSize: "16px", color: "var(--foreground, #1f2937)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    <div style={{ ...nameStyle, color: "var(--foreground, #1f2937)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {item.name}
                     </div>
                     {item.handle && (
