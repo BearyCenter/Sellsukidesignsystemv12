@@ -460,7 +460,7 @@ function AppInner() {
               {!sidebarCollapsed && (
                 <span
                   className="px-2 mb-2 block text-muted-foreground"
-                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }}
+                  style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" }}
                 >
                   {group.label}
                 </span>
@@ -484,7 +484,7 @@ function AppInner() {
                           : "text-sidebar-foreground hover:bg-sidebar-accent/50"
                         }
                       `}
-                      style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: isActive ? "var(--weight-button)" : "var(--weight-label)" }}
+                      style={{ fontFamily: "var(--font-p)", fontSize: "var(--text-p)", fontWeight: isActive ? "var(--weight-button)" : "var(--weight-p)" }}
                     >
                       <span className={`flex-shrink-0 ${isActive ? "text-sidebar-primary" : "text-muted-foreground"}`}>
                         {item.icon}

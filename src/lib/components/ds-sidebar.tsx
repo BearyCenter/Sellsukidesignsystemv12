@@ -66,8 +66,8 @@ const fontLabelBold: React.CSSProperties = {
 };
 
 const fontLabel: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
+  fontFamily: "var(--font-p)",
+  fontSize: "var(--text-p)",
 };
 
 const btnStyle: React.CSSProperties = {
@@ -78,7 +78,7 @@ const btnStyle: React.CSSProperties = {
 
 const groupHeaderStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-label)",
 };
 
