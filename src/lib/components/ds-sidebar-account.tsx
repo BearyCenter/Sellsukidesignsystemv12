@@ -44,14 +44,14 @@ const nameStyle: React.CSSProperties = {
 
 const subStyle: React.CSSProperties = {
   fontFamily: "var(--font-p)",
-  fontSize: "var(--text-p, 20px)",
+  fontSize: "var(--text-p)",
   fontWeight: "var(--weight-p)",
   lineHeight: "1",
 };
 
 const handleStyle: React.CSSProperties = {
   fontFamily: "var(--font-p)",
-  fontSize: "var(--text-p, 20px)",
+  fontSize: "var(--text-p)",
   fontWeight: "var(--weight-p)",
   lineHeight: "1",
 };
