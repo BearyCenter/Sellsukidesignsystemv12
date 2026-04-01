@@ -36,8 +36,8 @@ export interface SidebarAccountSwitcherProps {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const nameStyle: React.CSSProperties = {
-  fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label, 18px)",
+  fontFamily: "var(--font-p)",
+  fontSize: "var(--text-p)",
   fontWeight: "var(--weight-button)",
   lineHeight: "1",
 };
