@@ -66,7 +66,7 @@ const tabStyle: React.CSSProperties = {
 
 function AvatarCircle({ item, size = 40 }: { item: SidebarAccountItem; size?: number }) {
   const s = size + "px";
-  const fs = Math.round(size * 0.4) + "px";
+  const fs = size >= 40 ? "var(--text-label)" : "var(--text-caption)";
   if (item.avatarUrl) {
     return (
       <img
@@ -83,7 +83,7 @@ function AvatarCircle({ item, size = 40 }: { item: SidebarAccountItem; size?: nu
         width: s, height: s, borderRadius: "50%", flexShrink: 0,
         background: "var(--Base_Color--Sky--100, #e0f2fe)",
         display: "flex", alignItems: "center", justifyContent: "center",
-        fontFamily: "var(--font-label)", fontSize: fs, fontWeight: "600",
+        fontFamily: "var(--font-label)", fontSize: fs, fontWeight: "var(--weight-button)",
         color: "var(--Base_Color--Sky--600, #1b8bf5)",
       }}
     >
@@ -141,7 +141,7 @@ export function SidebarAccountSwitcher({
         }}
       >
         {currentItem ? <AvatarCircle item={currentItem} size={36} /> : (
-          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "var(--font-label)", fontSize: "14px", fontWeight: "600" }}>S</div>
+          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-button)" }}>S</div>
         )}
       </button>
     );
@@ -171,7 +171,7 @@ export function SidebarAccountSwitcher({
         {currentItem ? (
           <AvatarCircle item={currentItem} size={40} />
         ) : (
-          <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "var(--font-label)", fontSize: "16px", fontWeight: "600", flexShrink: 0 }}>S</div>
+          <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)", flexShrink: 0 }}>S</div>
         )}
 
         {/* Title block */}
