@@ -56,12 +56,12 @@ const inputSizeConfig: Record<
 > = {
   sm: {
     wrapper: "h-9 px-2.5 gap-1.5",
-    textStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
+    textStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" },
     icon: 14,
   },
   md: {
     wrapper: "h-11 px-3 gap-2",
-    textStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" },
+    textStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
     icon: 16,
   },
   lg: {
