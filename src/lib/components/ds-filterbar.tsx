@@ -112,7 +112,8 @@ function FilterDropdown({ config, value, onChange }: FilterDropdownProps) {
         {activeLabel}
         {isActive && (
           <span
-            className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--primary)] text-primary-foreground text-[10px] font-bold"
+            className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--primary)] text-primary-foreground font-bold"
+            style={{ fontSize: "var(--text-caption)", lineHeight: 1 }}
           >
             {selectedValues.length}
           </span>

@@ -248,7 +248,7 @@ function buildRegistry(): ComponentRegistryEntry[] {
       ],
       renderPreview: (p) => {
         const sizeMap: Record<string, string> = { sm: "w-8 h-8", md: "w-10 h-10", lg: "w-12 h-12", xl: "w-16 h-16" };
-        const textSize: Record<string, string> = { sm: "11px", md: "var(--text-button)", lg: "var(--text-label)", xl: "var(--text-caption)" };
+        const textSize: Record<string, string> = { sm: "var(--text-caption)", md: "var(--text-button)", lg: "var(--text-label)", xl: "var(--text-p)" };
         const statusColors: Record<string, string> = { online: "bg-chart-2", offline: "bg-muted-foreground", busy: "bg-destructive", away: "bg-chart-5" };
         const statusSize: Record<string, string> = { sm: "w-2 h-2", md: "w-2.5 h-2.5", lg: "w-3 h-3", xl: "w-3.5 h-3.5" };
         return (
