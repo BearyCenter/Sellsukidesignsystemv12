@@ -33,8 +33,10 @@ export function createServer(): McpServer {
       }
 
       let text = `# Sellsuki Design System — Components${filterCat ? ` (${componentCategories[filterCat]})` : ""}\n\n`;
-      text += `Package: \`npm install @uxuissk/design-system\`\n`;
+      text += `Package: \`npm install @uxuissk/design-system@latest\`\n`;
       text += `Total: ${Object.values(components).filter(c => !filterCat || c.category === filterCat).length} components\n\n`;
+      text += `> ⚠️ **Always import CSS first** — without this, fonts and tokens will NOT work:\n`;
+      text += `> \`import "@uxuissk/design-system/styles.css";\` (at app root, before any component)\n\n`;
 
       for (const [cat, items] of Object.entries(grouped)) {
         text += `## ${cat}\n`;
@@ -76,9 +78,11 @@ export function createServer(): McpServer {
       }
 
       let text = `# ${comp.displayName} (${comp.name})\n\n`;
+      text += `> ⚠️ **CSS import required** — fonts and all design tokens (size, color, spacing) will NOT work without this line at your app root:\n`;
+      text += `> \`\`\`tsx\n> import "@uxuissk/design-system/styles.css";\n> \`\`\`\n> Add this **before** any component import. Missing this = tiny/wrong fonts, broken colors.\n\n`;
       text += `**Category:** ${componentCategories[comp.category]}\n`;
       text += `**Description:** ${comp.description}\n\n`;
-      text += `## Import\n\`\`\`tsx\nimport { ${comp.imports.join(", ")} } from "@uxuissk/design-system";\n\`\`\`\n\n`;
+      text += `## Import\n\`\`\`tsx\n// 1. CSS FIRST — required for tokens (fonts, colors, spacing)\nimport "@uxuissk/design-system/styles.css";\n\n// 2. Components\nimport { ${comp.imports.join(", ")} } from "@uxuissk/design-system";\n\`\`\`\n\n`;
       text += `## Props\n\n`;
       text += `| Prop | Type | Default | Description |\n`;
       text += `|------|------|---------|-------------|\n`;
@@ -260,7 +264,13 @@ export function createServer(): McpServer {
     {},
     async () => withLog("get_quick_start", {}, async () => {
       let text = "# Quick Start — Sellsuki Design System\n\n";
-      text += `## Install\n\`\`\`bash\nnpm install @uxuissk/design-system\n\`\`\`\n\n`;
+      text += `## Install\n\`\`\`bash\nnpm install @uxuissk/design-system@latest\n\`\`\`\n\n`;
+      text += `## ⚠️ CRITICAL: CSS Import (Step 1 — Do NOT skip)\n\n`;
+      text += `The CSS file contains **all design tokens**: font sizes, colors, spacing, border-radius.\n`;
+      text += `**Without it**: fonts render at wrong sizes (too small/large), colors are broken, components look unstyled.\n\n`;
+      text += `\`\`\`tsx\n// main.tsx or App.tsx — MUST be the very first import\nimport "@uxuissk/design-system/styles.css";\n\`\`\`\n\n`;
+      text += `**Font rule**: DB HeaventRounded is used for ALL text — headings, body, buttons, badges, nav.\n`;
+      text += `Minimum font size in the system: **14px** (\`var(--text-caption)\`). Nothing should be smaller.\n\n`;
       text += `## Template\n\`\`\`tsx\n${quickStartTemplate}\n\`\`\`\n\n`;
       text += `## Links\n`;
       text += `- **Storybook**: ${resources.storybook}\n`;
@@ -352,14 +362,18 @@ export function createServer(): McpServer {
       code += `}\n`;
 
       let text = `# Generated Page Layout\n\n`;
+      text += `> ⚠️ **CSS import is line 1 of the generated code — do NOT remove it.**\n`;
+      text += `> \`import "@uxuissk/design-system/styles.css"\` loads all tokens: fonts (DB HeaventRounded), colors, spacing.\n`;
+      text += `> Without it: fonts default to browser size (~16px unstyled), colors and spacing break.\n\n`;
       text += `**Description:** ${description}\n\n`;
       text += `**Suggested Components:** ${suggested.join(", ")}\n\n`;
       text += `\`\`\`tsx\n${code}\`\`\`\n\n`;
       text += `## Next Steps\n`;
-      text += `1. Fill in the TODO sections with actual component usage\n`;
-      text += `2. Add loading state with \`<Skeleton />\` or \`<Spinner />\`\n`;
-      text += `3. Add empty state with \`<EmptyState />\`\n`;
-      text += `4. Add error handling with \`<Alert />\`\n`;
+      text += `1. ✅ CSS import is already included — keep it as the first line\n`;
+      text += `2. Fill in the TODO sections with actual component usage\n`;
+      text += `3. Add loading state with \`<Skeleton />\` or \`<Spinner />\`\n`;
+      text += `4. Add empty state with \`<EmptyState />\`\n`;
+      text += `5. Add error handling with \`<Alert />\`\n`;
 
       return { content: [{ type: "text", text }] };
     })
