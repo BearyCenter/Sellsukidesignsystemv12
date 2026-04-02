@@ -16,7 +16,7 @@ interface I18nContextValue {
 const translations: Record<string, Record<Lang, string>> = {
   // ── Sidebar Groups ──
   "sidebar.group.getting-started": { en: "Getting Started", th: "เริ่มต้นใช้งาน" },
-  "sidebar.group.foundation": { en: "Foundation", th: "พื้นฐาน" },
+  "sidebar.group.foundation": { en: "Foundations", th: "พื้นฐาน" },
   "sidebar.group.components": { en: "Components", th: "คอมโพเนนต์" },
 
   // ── Sidebar Items ──
