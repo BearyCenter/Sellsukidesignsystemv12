@@ -195,3 +195,25 @@ export type { FilterBarProps, FilterBarValue, FilterConfig, FilterOption, Filter
 // ── AdvancedDataTable ────────────────────────────────────────────────────────
 export { AdvancedDataTable } from "./components/ds-advanced-table";
 export type { AdvancedDataTableProps, AdvancedColumn, PaginationMeta, BulkAction, SortOrder, AdvancedTableSize } from "./components/ds-advanced-table";
+
+// ── Shell Types (Stage 2) ────────────────────────────────────────────────────
+export type {
+  NavItem,
+  NavResolver,
+  ShellUser,
+  ProductId,
+  ShellPrefs,
+  ProductBrandConfig,
+  AppShellContextValue,
+  BreadcrumbEntry,
+} from "./types/shell";
+// Note: SidebarGroup for AppShell nav is exported from "./types/shell" as ShellSidebarGroup
+// The existing SidebarGroup from ds-sidebar remains for standalone Sidebar component usage
+export type { ShellSidebarGroup } from "./types/shell";
+export {
+  sellsukiBrandConfig,
+  patonaBrandConfig,
+  sukispaceBrandConfig,
+  shipmunkBrandConfig,
+  akitaBrandConfig,
+} from "./types/shell";
