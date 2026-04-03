@@ -56,16 +56,16 @@ Stage 6: AppShell ........................ [Final Shell]
 
 | ID | Task | Size | Status |
 |----|------|------|--------|
-| T-01 | Audit tokens ทั้งหมด — ตรวจว่าไม่มีค่าผิด ไม่มี hardcode px ใน components | M | ☐ |
-| T-02 | เพิ่ม shell tokens: `--shell-nav-height`, `--shell-sidebar-width`, `--shell-sidebar-collapsed`, `--shell-content-padding`, `--shell-content-padding-sm` | S | ☐ |
-| T-03 | เพิ่ม z-index tokens: `--z-shell-nav`, `--z-shell-sidebar`, `--z-shell-overlay` | S | ☐ |
-| T-04 | เพิ่ม product theme tokens: `data-product="sellsuki/patona/sukispace"` CSS override layer | M | ☐ |
-| T-05 | เพิ่ม motion tokens: `--duration-fast`, `--duration-normal`, `--easing-default` | S | ☐ |
+| T-01 | Audit tokens ทั้งหมด — ตรวจว่าไม่มีค่าผิด ไม่มี hardcode px ใน components | M | ✅ |
+| T-02 | เพิ่ม shell tokens: `--shell-nav-height`, `--shell-sidebar-width`, `--shell-sidebar-collapsed`, `--shell-content-padding`, `--shell-content-padding-sm` | S | ✅ |
+| T-03 | เพิ่ม z-index tokens: `--z-shell-nav`, `--z-shell-sidebar`, `--z-shell-overlay` | S | ✅ |
+| T-04 | เพิ่ม product theme tokens: `data-product="sellsuki/patona/sukispace"` CSS override layer | M | ✅ |
+| T-05 | เพิ่ม motion tokens: `--duration-fast`, `--duration-normal`, `--easing-default` | S | ✅ |
 
 **90% Gate Criteria:**
-- [ ] ทุก token มีค่า ไม่มี component ใช้ค่า hardcode
-- [ ] product theme switch ทำงานได้ด้วย data attribute
-- [ ] `tsc --strict` pass
+- [x] ทุก token มีค่า ไม่มี component ใช้ค่า hardcode
+- [x] product theme switch ทำงานได้ด้วย data attribute
+- [x] `tsc --strict` pass
 
 ---
 
@@ -75,17 +75,17 @@ Stage 6: AppShell ........................ [Final Shell]
 
 | ID | Task | Size | Status |
 |----|------|------|--------|
-| C-01 | Audit 48 components — ทุกตัวต้องมี: loading, empty, error, disabled state | L | ☐ |
-| C-02 | Audit responsive behavior — 375px / 768px / 1280px | M | ☐ |
-| C-03 | Audit font token compliance — ไม่มี hardcode px, ใช้ `var(--text-*)` ทุกจุด | M | ☐ |
-| C-04 | Fix gaps ที่พบจาก audit | L | ☐ |
-| C-05 | Badge/count support บน `SidebarItem` — dynamic badge count | S | ☐ |
-| C-06 | `TopNavbar` รองรับ workspace switcher slot (optional) | S | ☐ |
+| C-01 | Audit 48 components — ทุกตัวต้องมี: loading, empty, error, disabled state | L | ✅ |
+| C-02 | Audit responsive behavior — 375px / 768px / 1280px | M | ✅ (no violations found) |
+| C-03 | Audit font token compliance — ไม่มี hardcode px, ใช้ `var(--text-*)` ทุกจุด | M | ✅ |
+| C-04 | Fix gaps: ds-table(error), ds-transferlist(loading/error), ds-tree(loading/empty/error), ds-colorpicker(disabled), ds-accordion(disabled), ds-stepper(disabled) | L | ✅ |
+| C-05 | Badge/count support บน `SidebarItem` — badge: string\|number, fix var(--text-badge)→caption | S | ✅ |
+| C-06 | `TopNavbar` รองรับ workspace switcher slot (optional ReactNode) | S | ✅ |
 
 **90% Gate Criteria:**
-- [ ] ≥ 90% components ผ่าน state checklist
-- [ ] badge บน sidebar ทำงาน
-- [ ] ไม่มี hardcode font/color (0 violations)
+- [x] ≥ 90% components ผ่าน state checklist
+- [x] badge บน sidebar ทำงาน
+- [x] ไม่มี hardcode font/color (0 violations)
 
 ---
 
