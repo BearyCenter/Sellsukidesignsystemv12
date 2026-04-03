@@ -230,6 +230,21 @@ export type { RichTextEditorProps } from "./components/ds-richtexteditor";
 export { ImageGallery, ThumbnailCell } from "./components/ds-imagegallery";
 export type { ImageGalleryProps, GalleryImage, ThumbnailCellProps } from "./components/ds-imagegallery";
 
+// ── Stage 3 — AppShell Context & Hooks ───────────────────────────────────────
+export {
+  AppShellProvider,
+  useAppShell,
+  useAppShellFull,
+  useBreadcrumbs,
+  useNavResolver,
+  AppShellErrorBoundary,
+} from "./shell";
+export type {
+  AppShellProviderProps,
+  AppShellFullContextValue,
+  NavState,
+} from "./shell";
+
 // ── Shell Types (Stage 2) ────────────────────────────────────────────────────
 export type {
   NavItem,
