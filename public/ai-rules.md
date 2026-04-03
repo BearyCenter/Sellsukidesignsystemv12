@@ -2,7 +2,7 @@
 
 > This file is the single source of truth for all AI tools generating Sellsuki UI.
 > URL: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
-> Last updated: 2026-04-01
+> Last updated: 2026-04-04
 
 ## Important: Sandbox vs Full Mode
 
@@ -17,7 +17,7 @@
 - Install: `npm install @uxuissk/design-system@0.7.2`
 - Tokens (optional): `npm install @uxuissk/design-tokens@0.1.1`
 - CSS: `import "@uxuissk/design-system/styles.css"` (always first)
-- Import: `import { DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
+- Import: `import { AppShell, DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
 - Tokens JS: `import { colors, typography, spacing } from "@uxuissk/design-tokens"`
 
 ## Brand
@@ -68,11 +68,44 @@
 - Border radius: `8px` (default)
 - Shadow: `0px 1px 2px 0px rgba(0,0,0,0.05)` — prefer borders
 
-## Layout
+## Layout & Shell
 
-- Navbar: `72px` height, white background, bottom border
-- Sidebar: `280px` width, white background, right border
+- Navbar: `56px` height, white background, bottom border
+- Sidebar: `240px` width (collapsed: `64px`), white background, right border
 - Content: `flex-1`, `24px` padding
+
+### AppShell — Preferred Full-Page Layout (Full mode only)
+
+```tsx
+import {
+  AppShell, sellsukiBrandConfig,
+  FeaturePageScaffold, ScaffoldKPIRow,
+  PageHeader, StatCard, FilterBar,
+} from "@uxuissk/design-system";
+
+<AppShell
+  product={sellsukiBrandConfig}  // patonaBrandConfig | sukispaceBrandConfig | shipmunkBrandConfig
+  user={currentUser}
+  navResolver={async (user) => resolveNavGroups(user)}
+  activeItemId="orders"
+  onNavigate={(item) => router.push(item.href!)}
+  notificationCount={5}
+  showSearch
+>
+  <FeaturePageScaffold
+    layout="list"   // list | detail | settings | wizard | dashboard | form | report
+    header={<PageHeader title="Orders" primaryAction={{ label: "Create order" }} />}
+    stats={<ScaffoldKPIRow><StatCard title="Total" value="1,284" /></ScaffoldKPIRow>}
+    filters={<FilterBar filters={[...]} value={{}} onChange={() => {}} />}
+    content={<DSTable columns={cols} dataSource={data} loading={loading} />}
+  />
+</AppShell>
+
+// While loading session:
+<AppShellSkeleton />
+```
+
+Multi-product theming via `data-product` CSS attribute — swap `product` prop only.
 
 ## Button System
 
@@ -88,7 +121,7 @@
 Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 **Rule: Max 1 primary button per view**
 
-## Component Patterns (Tailwind)
+## Component Patterns (Tailwind — Sandbox mode)
 
 ### Button
 ```html
@@ -131,34 +164,51 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 <div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']">
 ```
 
-## Components (48 total — v0.7.1)
+### Stat Card
+```html
+<div class="bg-white rounded-lg border border-[#e5e7eb] p-4">
+  <p class="text-[14px] text-[#6b7280] font-['DB_HeaventRounded']">Revenue</p>
+  <p class="text-[28px] font-bold text-[#1f2937] font-['DB_HeaventRounded']">฿284,500</p>
+  <span class="text-[14px] text-[#059669] font-['DB_HeaventRounded']">↑ 12%</span>
+</div>
+```
 
-**Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
+## Components (60+ total — v0.7.2)
 
-**Data Display**: DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton
+**Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, **DateRangePicker**, **TimePicker**, **DateTimePicker**, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput, **RepeatableFieldList**, **RichTextEditor**
+
+**Data Display**: DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton, **ImageGallery**, **ThumbnailCell**
+
+**Charts** (zero-dep SVG): **LineChart**, **AreaChart**, **BarChart**, **DonutChart**, **MiniSparkline**
+
+**Choice / Selection**: **ChoiceCard**, **ChoiceCardGroup**, **RadioCard**
 
 **Navigation**: TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
 
 **Feedback**: Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer, Tooltip, Popover, ProgressBar, Spinner
 
-**Layout**: Divider, Menu, ImagePreview, PageHeader, FilterBar
+**Layout & Scaffold**: Divider, Menu, ImagePreview, PageHeader, FilterBar, **FeaturePageScaffold**, **ScaffoldSection**, **ScaffoldKPIRow**
 
 **Form**: FormField, FormLabel, FormError, FormHelperText
+
+**Shell**: **AppShell**, **AppShellSkeleton**, AppShellProvider, useAppShell, useBreadcrumbs
 
 ## Rules
 
 1. Always use flat, clean design — no heavy shadows or gradients
 2. Max 1 primary button per view
-3. Handle loading (skeleton), empty, and error states
+3. Handle loading (Skeleton/Spinner), empty (EmptyState), and error (Alert) states
 4. Use **DB HeaventRounded** for **ALL text** — headings, body, labels, buttons, badges, nav — never use Inter
 5. Only colors from the palette above — no random colors
 6. Spacing must follow the defined system
 7. Support responsive: desktop-first
+8. **Full mode**: Use `AppShell` for all full-page layouts — never compose raw `TopNavbar + Sidebar + div`
+9. **Full mode**: Use `FeaturePageScaffold` layout prop for page structure — never custom layout wrappers
 
 ## npm Packages (production code)
 
 ```bash
-# React components
+# React components (60+ components)
 npm install @uxuissk/design-system@0.7.2
 
 # Shared tokens (optional — for CSS-in-JS, Svelte, etc.)
@@ -167,7 +217,7 @@ npm install @uxuissk/design-tokens@0.1.1
 
 ```tsx
 import "@uxuissk/design-system/styles.css";
-import { DSButton, DSInput, Card, AdvancedDataTable } from "@uxuissk/design-system";
+import { AppShell, sellsukiBrandConfig, FeaturePageScaffold, DSButton, DSInput, Card } from "@uxuissk/design-system";
 import { colors, typography, spacing } from "@uxuissk/design-tokens"; // optional
 ```
 
