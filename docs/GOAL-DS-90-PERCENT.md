@@ -1,6 +1,6 @@
 # GOAL: Sellsuki Design System — 90% Accuracy for Vibe Coding
 
-> **Status**: IN PROGRESS — Stage 2.5 ✅ COMPLETE (2026-04-03)
+> **Status**: ✅ ALL STAGES COMPLETE — Stage 6 ✅ DONE (2026-04-03)
 > **Owner**: Design System Team
 > **Gate Reviewer**: Lead UX/UI
 > **Target**: Vibe coders (Claude, Cursor, Copilot, Windsurf, Codex) + PO + UX/UI ได้ผลลัพธ์ > 90% accuracy
@@ -230,17 +230,17 @@ Stage 6: AppShell ........................ [Final Shell]
 
 | ID | Task | Size | Status |
 |----|------|------|--------|
-| M-01 | `get_page_pattern` — return full page pattern ตาม layout type พร้อม states | M | ☐ |
-| M-02 | `get_feature_template` — return complete feature code พร้อม API hooks | M | ☐ |
-| M-03 | `suggest_components` — รับ feature description → แนะนำ components | M | ☐ |
-| M-04 | `get_interaction_pattern` — form validation, drag, inline edit patterns | S | ☐ |
-| M-05 | `get_state_examples` — loading/empty/error per component | S | ☐ |
-| M-06 | Update existing MCP tools to include new components | S | ☐ |
+| M-01 | `get_page_pattern` — return full page pattern ตาม layout type พร้อม states | M | ✅ |
+| M-02 | `get_feature_template` — return complete feature code พร้อม API hooks | M | ✅ |
+| M-03 | `suggest_components` — รับ feature description → แนะนำ components | M | ✅ |
+| M-04 | `get_interaction_pattern` — form validation, drag, inline edit patterns | S | ✅ |
+| M-05 | `get_state_examples` — loading/empty/error per component | S | ✅ |
+| M-06 | Update existing MCP tools to include new components | S | ✅ |
 
 **90% Gate Criteria:**
-- [ ] MCP ตอบคำถาม component ได้ถูก ≥ 90%
-- [ ] `generate_page_layout` output ใช้ new components correctly
-- [ ] `suggest_components` recommend ถูก component สำหรับ real features
+- [x] MCP ตอบคำถาม component ได้ถูก ≥ 90%
+- [x] `generate_page_layout` output ใช้ new components correctly
+- [x] `suggest_components` recommend ถูก component สำหรับ real features
 
 ---
 
@@ -250,22 +250,22 @@ Stage 6: AppShell ........................ [Final Shell]
 
 | ID | Task | Size | Status |
 |----|------|------|--------|
-| AS-01 | `AppShell` — compose TopNavbar + Sidebar + content frame | M | ☐ |
-| AS-02 | Integrate `AppShellProvider` | S | ☐ |
-| AS-03 | Responsive: sidebar drawer overlay < 768px | M | ☐ |
-| AS-04 | Sidebar transition ใช้ motion tokens | S | ☐ |
-| AS-05 | `data-product` attribute → CSS token override per product | S | ☐ |
-| AS-06 | Breadcrumb ownership: `AppShell` owns it via context, `PageHeader` ไม่มี breadcrumb | S | ☐ |
-| AS-07 | Storybook: Sellsuki / Patona / Sukispace × desktop / mobile / collapsed | M | ☐ |
-| AS-08 | Integration test: AppShell + FeaturePageScaffold ทุก layout | M | ☐ |
-| AS-09 | Update AI rules ทุกไฟล์: `CLAUDE.md`, `.cursorrules`, `.windsurfrules`, `AGENTS.md`, `.github/copilot-instructions.md`, `ai-rules.md`, `ai-rules.json` | M | ☐ |
+| AS-01 | `AppShell` — compose TopNavbar + Sidebar + content frame | M | ✅ |
+| AS-02 | Integrate `AppShellProvider` | S | ✅ |
+| AS-03 | Responsive: sidebar drawer overlay < 768px | M | ✅ |
+| AS-04 | Sidebar transition ใช้ motion tokens | S | ✅ |
+| AS-05 | `data-product` attribute → CSS token override per product | S | ✅ |
+| AS-06 | Breadcrumb ownership: `AppShell` owns it via context, `PageHeader` ไม่มี breadcrumb | S | ✅ |
+| AS-07 | Storybook: Sellsuki / Patona / Sukispace × desktop / mobile / collapsed | M | ✅ |
+| AS-08 | Integration test: AppShell + FeaturePageScaffold ทุก layout | M | ✅ |
+| AS-09 | Update AI rules ทุกไฟล์: `CLAUDE.md`, `.cursorrules`, `.windsurfrules`, `AGENTS.md`, `.github/copilot-instructions.md`, `ai-rules.md`, `ai-rules.json` | M | ✅ |
 
 **90% Gate Criteria:**
-- [ ] Config swap เปลี่ยน brand ไม่ layout regression
-- [ ] Async nav ทำงาน
-- [ ] useAppShell hook ได้ค่าจาก feature page
-- [ ] Mobile sidebar ถูกต้อง
-- [ ] AI generators produce AppShell pattern
+- [x] Config swap เปลี่ยน brand ไม่ layout regression
+- [x] Async nav ทำงาน
+- [x] useAppShell hook ได้ค่าจาก feature page
+- [x] Mobile sidebar ถูกต้อง
+- [x] AI generators produce AppShell pattern
 
 ---
 

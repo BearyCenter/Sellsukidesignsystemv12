@@ -249,6 +249,10 @@ export type {
 export { FeaturePageScaffold, ScaffoldSection, ScaffoldKPIRow } from "./shell";
 export type { FeaturePageScaffoldProps, FeaturePageLayout, ScaffoldSectionProps } from "./shell";
 
+// ── Stage 6 — AppShell (Final) ────────────────────────────────────────────────
+export { AppShell, AppShellSkeleton } from "./shell";
+export type { AppShellProps } from "./shell";
+
 // ── Shell Types (Stage 2) ────────────────────────────────────────────────────
 export type {
   NavItem,

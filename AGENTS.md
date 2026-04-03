@@ -62,22 +62,33 @@ Use CSS vars only — never hardcode hex values directly.
 - Section gap: `32px`
 - Border radius: `8px` (radius-md)
 
-## Layout Pattern
+## AppShell Pattern (preferred full-page layout)
 ```tsx
-<div className="min-h-screen bg-[var(--background)]">
-  <TopNavbar brand={{ name: "Sellsuki" }} breadcrumbs={[...]} user={{...}} />
-  <div className="flex">
-    <Sidebar brand={{ name: "Sellsuki" }} groups={menuGroups} />
-    <main className="flex-1 p-6">
-      <PageHeader
-        title="Page Title"
-        actions={<DSButton variant="primary">สร้าง</DSButton>}
-      />
-      {/* page content */}
-    </main>
-  </div>
-</div>
+import {
+  AppShell, sellsukiBrandConfig, FeaturePageScaffold, ScaffoldKPIRow,
+  PageHeader, StatCard, FilterBar, DSTable
+} from "@uxuissk/design-system";
+
+<AppShell
+  product={sellsukiBrandConfig}  // or patonaBrandConfig / sukispaceBrandConfig
+  user={currentUser}
+  navResolver={async (user) => resolveNavForUser(user)}
+  activeItemId="orders"
+  onNavigate={(item) => router.push(item.href!)}
+  notificationCount={5}
+  showSearch
+>
+  <FeaturePageScaffold
+    layout="list"
+    header={<PageHeader title="Orders" primaryAction={{ label: "Create order" }} />}
+    stats={<ScaffoldKPIRow><StatCard title="Total" value="1,284" /></ScaffoldKPIRow>}
+    filters={<FilterBar filters={[...]} value={{}} onChange={() => {}} />}
+    content={<DSTable columns={columns} dataSource={data} />}
+  />
+</AppShell>
 ```
+
+FeaturePageScaffold layout types: `"list" | "detail" | "settings" | "wizard" | "dashboard" | "form" | "report"`
 
 ## Button Rules
 | Variant | Use |
@@ -91,16 +102,24 @@ Use CSS vars only — never hardcode hex values directly.
 
 Sizes: `sm`=32px · `md`=36px (default) · `lg`=40px · `xl`=44px
 
-## All 48 Components — always use these, never build custom
+## All 60+ Components — always use these, never build custom
 ```
 # Data Entry
 DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup,
-DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker,
-FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
+DSRadio, RadioGroup, Switch, Dropdown, DatePicker, DateRangePicker, TimePicker,
+DateTimePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList,
+NumberInput, OTPInput, RepeatableFieldList, RichTextEditor
 
 # Data Display
 DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter,
-StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton
+StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState,
+Skeleton, ImageGallery, ThumbnailCell
+
+# Charts
+LineChart, AreaChart, BarChart, DonutChart, MiniSparkline
+
+# Choice Components
+ChoiceCard, ChoiceCardGroup, RadioCard
 
 # Navigation
 TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
@@ -110,10 +129,14 @@ Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer,
 Tooltip, Popover, ProgressBar, Spinner
 
 # Layout
-Divider, Menu, ImagePreview, PageHeader, FilterBar
+Divider, Menu, ImagePreview, PageHeader, FilterBar,
+FeaturePageScaffold, ScaffoldSection, ScaffoldKPIRow
 
 # Form
 FormField, FormLabel, FormError, FormHelperText
+
+# Shell
+AppShell, AppShellSkeleton, AppShellProvider
 ```
 
 ## DO

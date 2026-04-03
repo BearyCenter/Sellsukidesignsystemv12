@@ -33,3 +33,6 @@ export type {
   FeaturePageLayout,
   ScaffoldSectionProps,
 } from "./FeaturePageScaffold";
+
+export { AppShell, AppShellSkeleton } from "./AppShell";
+export type { AppShellProps } from "./AppShell";

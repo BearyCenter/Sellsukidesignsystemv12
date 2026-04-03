@@ -52,18 +52,18 @@ var(--surface)        → #f9fafb  (Gray-50)
 - Section gap: 32px
 - Border radius: 8px default
 
-## Layout Scaffold
+## AppShell Layout (preferred)
 ```tsx
-<div className="min-h-screen bg-[var(--background)]">
-  <TopNavbar brand={{ name: "Sellsuki" }} breadcrumbs={[...]} user={{...}} />
-  <div className="flex">
-    <Sidebar brand={{ name: "Sellsuki" }} groups={menuGroups} />
-    <main className="flex-1 p-6">
-      <PageHeader title="..." actions={<DSButton variant="primary">สร้าง</DSButton>} />
-      {/* content */}
-    </main>
-  </div>
-</div>
+import { AppShell, sellsukiBrandConfig, FeaturePageScaffold } from "@uxuissk/design-system";
+
+// Full shell: navbar + sidebar + content frame, multi-product theme
+<AppShell product={sellsukiBrandConfig} user={user} navResolver={navFn} activeItemId="orders">
+  <FeaturePageScaffold
+    layout="list"  // list | detail | settings | wizard | dashboard | form | report
+    header={<PageHeader title="Orders" primaryAction={{ label: "Create" }} />}
+    content={<DSTable columns={cols} dataSource={data} />}
+  />
+</AppShell>
 ```
 
 ## Button System
@@ -78,18 +78,41 @@ var(--surface)        → #f9fafb  (Gray-50)
 
 Sizes: `sm`=32px `md`=36px(default) `lg`=40px `xl`=44px
 
-## All 48 Components
+## All 60+ Components
 ```
+# Data Entry
 DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup,
-DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker,
-FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput,
+DSRadio, RadioGroup, Switch, Dropdown, DatePicker, DateRangePicker, TimePicker,
+DateTimePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList,
+NumberInput, OTPInput, RepeatableFieldList, RichTextEditor
+
+# Data Display
 DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard,
 Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton,
-TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination,
+ImageGallery, ThumbnailCell
+
+# Charts (zero-dep SVG)
+LineChart, AreaChart, BarChart, DonutChart, MiniSparkline
+
+# Choice / Selection
+ChoiceCard, ChoiceCardGroup, RadioCard
+
+# Navigation
+TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
+
+# Feedback
 Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer,
-Tooltip, Popover, ProgressBar, Spinner,
+Tooltip, Popover, ProgressBar, Spinner
+
+# Layout & Scaffold
 Divider, Menu, ImagePreview, PageHeader, FilterBar,
+FeaturePageScaffold, ScaffoldSection, ScaffoldKPIRow
+
+# Form Primitives
 FormField, FormLabel, FormError, FormHelperText
+
+# Shell Layer
+AppShell, AppShellSkeleton, AppShellProvider
 ```
 
 ## Rules

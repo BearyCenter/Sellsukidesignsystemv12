@@ -379,6 +379,416 @@ export function createServer(): McpServer {
     })
   );
 
+  // ─── Tool: suggest_components ───────────────────────────────────────────────
+
+  server.tool(
+    "suggest_components",
+    "Given a feature description, suggest the best Sellsuki DS components to use — includes layout, data entry, display, and feedback components",
+    {
+      feature: z.string().describe("Feature description (e.g. 'order list page with filters', 'product edit form', 'dashboard with charts')"),
+    },
+    async ({ feature }) => withLog("suggest_components", { feature }, async () => {
+      const f = feature.toLowerCase();
+      const suggestions: { component: string; reason: string }[] = [];
+
+      // Layout
+      suggestions.push({ component: "FeaturePageScaffold", reason: "Use as page layout engine — pick the right layout prop" });
+
+      if (f.includes("list") || f.includes("table") || f.includes("order") || f.includes("product")) {
+        suggestions.push({ component: "AdvancedDataTable", reason: "Server-side pagination, sort, bulk actions, expandable rows" });
+        suggestions.push({ component: "PageHeader", reason: "Page title + primary action + breadcrumbs" });
+        suggestions.push({ component: "FilterBar", reason: "Search + multi-filter bar" });
+        suggestions.push({ component: "ThumbnailCell", reason: "Image+title+SKU in table rows" });
+        suggestions.push({ component: "Badge", reason: "Status labels (Pending, Shipped, etc.)" });
+        suggestions.push({ component: "Pagination", reason: "Table pagination footer" });
+      }
+
+      if (f.includes("form") || f.includes("edit") || f.includes("create") || f.includes("add")) {
+        suggestions.push({ component: "DSInput", reason: "Text input with showCount, validation states" });
+        suggestions.push({ component: "DSTextarea", reason: "Multi-line with character count" });
+        suggestions.push({ component: "Dropdown", reason: "Select / dropdown" });
+        suggestions.push({ component: "Switch", reason: "Toggle boolean settings" });
+        suggestions.push({ component: "RepeatableFieldList", reason: "Dynamic add/remove rows (variants, line items)" });
+        suggestions.push({ component: "RichTextEditor", reason: "Product description, campaign content" });
+      }
+
+      if (f.includes("detail") || f.includes("view")) {
+        suggestions.push({ component: "Card", reason: "Content sections (CardHeader + CardBody)" });
+        suggestions.push({ component: "Timeline", reason: "Activity/status history" });
+        suggestions.push({ component: "Divider", reason: "Section dividers" });
+      }
+
+      if (f.includes("dashboard") || f.includes("analytics") || f.includes("report") || f.includes("chart")) {
+        suggestions.push({ component: "StatCard", reason: "KPI metric cards with trend" });
+        suggestions.push({ component: "LineChart", reason: "Revenue/order trends over time" });
+        suggestions.push({ component: "BarChart", reason: "Channel/category comparisons" });
+        suggestions.push({ component: "DonutChart", reason: "Distribution (status, segments)" });
+        suggestions.push({ component: "AreaChart", reason: "Trend with filled area" });
+        suggestions.push({ component: "MiniSparkline", reason: "Inline sparkline in stat cards" });
+        suggestions.push({ component: "DateRangePicker", reason: "Period selection (today/7d/30d/custom)" });
+      }
+
+      if (f.includes("wizard") || f.includes("step") || f.includes("onboard")) {
+        suggestions.push({ component: "Stepper", reason: "Multi-step progress indicator" });
+        suggestions.push({ component: "ChoiceCard", reason: "Selection step (delivery, plan, etc.)" });
+      }
+
+      if (f.includes("setting") || f.includes("config") || f.includes("preference")) {
+        suggestions.push({ component: "ScaffoldSection", reason: "Settings section with title + description" });
+        suggestions.push({ component: "Switch", reason: "Toggle preferences" });
+      }
+
+      if (f.includes("image") || f.includes("gallery") || f.includes("media") || f.includes("photo")) {
+        suggestions.push({ component: "ImageGallery", reason: "Grid gallery with lightbox, select, upload" });
+        suggestions.push({ component: "FileUpload", reason: "Drag-drop file upload" });
+      }
+
+      if (f.includes("payment") || f.includes("shipping") || f.includes("delivery") || f.includes("method")) {
+        suggestions.push({ component: "RadioCard", reason: "Payment/shipping method selection cards" });
+      }
+
+      if (f.includes("date") || f.includes("time") || f.includes("schedule") || f.includes("booking")) {
+        suggestions.push({ component: "DatePicker", reason: "Single date selection" });
+        suggestions.push({ component: "DateRangePicker", reason: "Date range with presets" });
+        suggestions.push({ component: "TimePicker", reason: "Time selection" });
+        suggestions.push({ component: "DateTimePicker", reason: "Combined date+time" });
+      }
+
+      // Always suggest feedback
+      suggestions.push({ component: "Skeleton", reason: "Loading state placeholder" });
+      suggestions.push({ component: "EmptyState", reason: "No data state" });
+      suggestions.push({ component: "Alert", reason: "Error/warning/info messages" });
+      suggestions.push({ component: "toast", reason: "Success/error notifications" });
+      suggestions.push({ component: "DSButton", reason: "Action buttons (max 1 primary per view)" });
+
+      // Determine layout type
+      let layout = "list";
+      if (f.includes("detail") || f.includes("view")) layout = "detail";
+      else if (f.includes("setting") || f.includes("config")) layout = "settings";
+      else if (f.includes("wizard") || f.includes("step") || f.includes("onboard")) layout = "wizard";
+      else if (f.includes("dashboard") || f.includes("overview")) layout = "dashboard";
+      else if (f.includes("form") || f.includes("edit") || f.includes("create")) layout = "form";
+      else if (f.includes("report") || f.includes("analytics")) layout = "report";
+
+      let text = `# Component Suggestions for: "${feature}"\n\n`;
+      text += `**Recommended layout:** \`<FeaturePageScaffold layout="${layout}" />\`\n\n`;
+      text += `## Components\n\n`;
+      text += `| Component | Why |\n|-----------|-----|\n`;
+      const seen = new Set<string>();
+      for (const s of suggestions) {
+        if (seen.has(s.component)) continue;
+        seen.add(s.component);
+        text += `| \`${s.component}\` | ${s.reason} |\n`;
+      }
+      text += `\n## Import\n\`\`\`tsx\nimport "@uxuissk/design-system/styles.css";\nimport {\n  ${[...seen].join(",\n  ")},\n} from "@uxuissk/design-system";\n\`\`\`\n`;
+
+      return { content: [{ type: "text", text }] };
+    })
+  );
+
+  // ─── Tool: get_page_pattern ─────────────────────────────────────────────────
+
+  server.tool(
+    "get_page_pattern",
+    "Get a complete page pattern template for a specific layout type — includes all regions, states (loading/empty/error), and recommended components",
+    {
+      layout: z.enum(["list", "detail", "settings", "wizard", "dashboard", "form", "report"]).describe("Page layout type"),
+    },
+    async ({ layout }) => withLog("get_page_pattern", { layout }, async () => {
+      const patterns: Record<string, { title: string; description: string; regions: string[]; states: string[]; code: string }> = {
+        list: {
+          title: "List Page",
+          description: "Table/grid of items — most common (Orders, Products, Customers)",
+          regions: ["header (PageHeader)", "stats (StatCard grid)", "filters (FilterBar)", "content (AdvancedDataTable)", "footer (Pagination)"],
+          states: ["loading → Skeleton rows", "empty → EmptyState", "error → Alert", "filtered-empty → 'No results for filters'"],
+          code: `import "@uxuissk/design-system/styles.css";
+import {
+  FeaturePageScaffold, PageHeader, FilterBar, AdvancedDataTable,
+  StatCard, Pagination, DSButton, Skeleton, EmptyState, Alert,
+} from "@uxuissk/design-system";
+
+export default function ListPage() {
+  const { data, loading, error, pagination } = useApiData();
+
+  return (
+    <FeaturePageScaffold
+      layout="list"
+      header={
+        <PageHeader
+          title="Orders"
+          breadcrumbs={[{ label: "Home", href: "/" }, { label: "Orders" }]}
+          primaryAction={{ label: "Create order", icon: <Plus size={16} /> }}
+        />
+      }
+      stats={
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard title="Total" value={stats.total} trend={stats.trend} />
+        </div>
+      }
+      filters={<FilterBar filters={filterConfig} value={filters} onChange={setFilters} />}
+      content={
+        loading ? <Skeleton variant="table" rows={8} /> :
+        error ? <Alert variant="error">{error}</Alert> :
+        data.length === 0 ? <EmptyState title="No orders yet" /> :
+        <AdvancedDataTable columns={columns} data={data} pagination={pagination} onPageChange={setPage} />
+      }
+      footer={!loading && data.length > 0 && <Pagination {...pagination} onChange={setPage} />}
+    />
+  );
+}`,
+        },
+        detail: {
+          title: "Detail Page",
+          description: "Item detail with main content and side panel (Order detail, Product view)",
+          regions: ["header (PageHeader)", "main (Cards, sections)", "aside (Summary, customer info, status)"],
+          states: ["loading → Skeleton cards", "error → Alert", "not-found → EmptyState"],
+          code: `<FeaturePageScaffold
+  layout="detail"
+  header={<PageHeader title="Order #1234" breadcrumbs={[...]} secondaryActions={[...]} />}
+  main={
+    <div className="space-y-4">
+      <Card><CardHeader>Items</CardHeader><CardBody>...</CardBody></Card>
+      <Card><CardHeader>Shipping</CardHeader><CardBody>...</CardBody></Card>
+    </div>
+  }
+  aside={
+    <div className="space-y-4">
+      <Card><CardHeader>Summary</CardHeader><CardBody>...</CardBody></Card>
+      <Card><CardHeader>Customer</CardHeader><CardBody>...</CardBody></Card>
+    </div>
+  }
+/>`,
+        },
+        settings: {
+          title: "Settings Page",
+          description: "Stacked sections with forms (Store settings, Notification prefs)",
+          regions: ["header (PageHeader)", "sections (ScaffoldSection × N)"],
+          states: ["loading → Skeleton sections", "save-error → toast error"],
+          code: `<FeaturePageScaffold
+  layout="settings"
+  header={<PageHeader title="Settings" />}
+  sections={
+    <div className="space-y-10">
+      <ScaffoldSection title="General" description="Store info">
+        <DSInput label="Store name" ... />
+      </ScaffoldSection>
+      <Divider />
+      <ScaffoldSection title="Notifications" action={<DSButton variant="ghost">Reset</DSButton>}>
+        <Switch label="New order" ... />
+      </ScaffoldSection>
+    </div>
+  }
+/>`,
+        },
+        wizard: {
+          title: "Wizard Page",
+          description: "Multi-step form with stepper and sticky action bar",
+          regions: ["header (PageHeader)", "stepper (Stepper)", "form (Card with fields)", "actions (sticky bar: Cancel + Next)"],
+          states: ["step-loading → Skeleton", "validation-error → FormError", "submit-loading → Button loading"],
+          code: `<FeaturePageScaffold
+  layout="wizard"
+  header={<PageHeader title="Add Product" />}
+  stepper={<Stepper steps={steps} currentStep={step} />}
+  form={
+    <Card><CardHeader>Step {step} — {steps[step].label}</CardHeader>
+      <CardBody>...</CardBody>
+    </Card>
+  }
+  actions={
+    <>
+      <DSButton variant="ghost" onClick={prev}>Back</DSButton>
+      <DSButton variant="primary" onClick={next}>Next</DSButton>
+    </>
+  }
+/>`,
+        },
+        dashboard: {
+          title: "Dashboard Page",
+          description: "KPI cards + charts + optional table",
+          regions: ["header (PageHeader)", "kpis (ScaffoldKPIRow + StatCard)", "primaryChart (2/3 wide)", "secondaryCharts (1/3 sidebar)", "content (table)"],
+          states: ["loading → Skeleton cards + chart placeholders", "error → Alert"],
+          code: `<FeaturePageScaffold
+  layout="dashboard"
+  header={<PageHeader title="Dashboard" />}
+  kpis={
+    <ScaffoldKPIRow>
+      <StatCard title="Revenue" value="฿284K" trend={{ value: 12, direction: "up" }} />
+      <StatCard title="Orders" value="1,284" />
+    </ScaffoldKPIRow>
+  }
+  primaryChart={<Card><CardBody><AreaChart series={revenueSeries} smooth /></CardBody></Card>}
+  secondaryCharts={
+    <>
+      <Card><CardBody><DonutChart data={statusData} /></CardBody></Card>
+      <Card><CardBody><BarChart series={channelData} /></CardBody></Card>
+    </>
+  }
+  content={<AdvancedDataTable ... />}
+/>`,
+        },
+        form: {
+          title: "Form Page",
+          description: "Single form with sticky save/cancel bar (Edit product, Create campaign)",
+          regions: ["header (PageHeader)", "form (Cards with inputs)", "actions (sticky bar: Discard + Save)"],
+          states: ["loading → Skeleton form", "submit-loading → Button loading", "validation-error → FormError per field"],
+          code: `<FeaturePageScaffold
+  layout="form"
+  header={<PageHeader title="Edit Product" breadcrumbs={[...]} />}
+  form={
+    <div className="space-y-6">
+      <Card><CardHeader>Basic info</CardHeader><CardBody>
+        <DSInput label="Name" required ... />
+        <DSTextarea label="Description" showCharCount maxLength={500} />
+      </CardBody></Card>
+      <Card><CardHeader>Pricing</CardHeader><CardBody>
+        <DSInput label="Price" prefix="฿" />
+      </CardBody></Card>
+    </div>
+  }
+  actions={
+    <>
+      <DSButton variant="ghost">Discard</DSButton>
+      <DSButton variant="primary" loading={saving}>Save changes</DSButton>
+    </>
+  }
+/>`,
+        },
+        report: {
+          title: "Report Page",
+          description: "Analytics page: stats + date range + charts + data table",
+          regions: ["header (PageHeader + Export)", "stats (StatCard grid)", "dateRange (DateRangePicker)", "charts (full-width chart)", "secondaryCharts (3-col grid)", "table (AdvancedDataTable)"],
+          states: ["loading → Skeleton", "no-data → EmptyState", "error → Alert"],
+          code: `<FeaturePageScaffold
+  layout="report"
+  header={<PageHeader title="Sales Report" primaryAction={{ label: "Export CSV", variant: "outline" }} />}
+  stats={<div className="grid grid-cols-2 lg:grid-cols-4 gap-4"><StatCard ... /></div>}
+  dateRange={<DateRangePicker presets={["today","last7","last30","thisMonth","custom"]} />}
+  charts={<Card><CardBody><LineChart series={revenueSeries} smooth /></CardBody></Card>}
+  secondaryCharts={<><Card>...</Card><Card>...</Card><Card>...</Card></>}
+  table={<AdvancedDataTable ... />}
+/>`,
+        },
+      };
+
+      const pattern = patterns[layout];
+      let text = `# Page Pattern: ${pattern.title}\n\n`;
+      text += `**Description:** ${pattern.description}\n\n`;
+      text += `## Regions\n`;
+      for (const r of pattern.regions) text += `- ${r}\n`;
+      text += `\n## Required States\n`;
+      for (const s of pattern.states) text += `- ${s}\n`;
+      text += `\n## Code Template\n\`\`\`tsx\n${pattern.code}\n\`\`\`\n`;
+
+      return { content: [{ type: "text", text }] };
+    })
+  );
+
+  // ─── Tool: get_feature_template ─────────────────────────────────────────────
+
+  server.tool(
+    "get_feature_template",
+    "Generate a complete feature page code template with API hooks, loading/empty/error states, and the recommended FeaturePageScaffold layout",
+    {
+      feature: z.string().describe("Feature name (e.g. 'order list', 'product detail', 'analytics dashboard')"),
+      product: z.enum(["sellsuki", "patona", "sukispace", "shipmunk", "akita"]).optional().describe("Product (affects brand config)"),
+    },
+    async ({ feature, product = "sellsuki" }) => withLog("get_feature_template", { feature, product }, async () => {
+      const f = feature.toLowerCase();
+
+      let layout = "list";
+      if (f.includes("detail") || f.includes("view")) layout = "detail";
+      else if (f.includes("setting")) layout = "settings";
+      else if (f.includes("wizard") || f.includes("step")) layout = "wizard";
+      else if (f.includes("dashboard") || f.includes("overview")) layout = "dashboard";
+      else if (f.includes("form") || f.includes("edit") || f.includes("create")) layout = "form";
+      else if (f.includes("report") || f.includes("analytics")) layout = "report";
+
+      const brandImport = `${product}BrandConfig`;
+      const titleCase = feature.split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
+      const componentName = titleCase.replace(/\s+/g, "");
+
+      let code = `// ─── ${titleCase} Page ─────────────────────────────────────\n\n`;
+      code += `import "@uxuissk/design-system/styles.css";\n`;
+      code += `import { useState, useEffect } from "react";\n`;
+      code += `import {\n`;
+      code += `  FeaturePageScaffold,\n  PageHeader,\n  DSButton,\n`;
+      code += `  Skeleton,\n  EmptyState,\n  Alert,\n  toast,\n  ToastContainer,\n`;
+      code += `  useAppShell,\n  useBreadcrumbs,\n`;
+
+      if (layout === "list") code += `  AdvancedDataTable,\n  FilterBar,\n  StatCard,\n  Pagination,\n  Badge,\n  ThumbnailCell,\n`;
+      if (layout === "detail") code += `  Card,\n  CardHeader,\n  CardBody,\n  Divider,\n  Badge,\n  Timeline,\n`;
+      if (layout === "settings") code += `  ScaffoldSection,\n  DSInput,\n  Switch,\n  Divider,\n`;
+      if (layout === "wizard") code += `  Stepper,\n  Card,\n  CardHeader,\n  CardBody,\n  DSInput,\n  DSTextarea,\n`;
+      if (layout === "dashboard") code += `  ScaffoldKPIRow,\n  StatCard,\n  Card,\n  CardHeader,\n  CardBody,\n  AreaChart,\n  DonutChart,\n  BarChart,\n`;
+      if (layout === "form") code += `  Card,\n  CardHeader,\n  CardBody,\n  DSInput,\n  DSTextarea,\n  Dropdown,\n`;
+      if (layout === "report") code += `  StatCard,\n  Card,\n  CardHeader,\n  CardBody,\n  LineChart,\n  BarChart,\n  DonutChart,\n  DateRangePicker,\n  AdvancedDataTable,\n`;
+
+      code += `} from "@uxuissk/design-system";\n\n`;
+
+      code += `// ─── API Hook (replace with real implementation) ─────────────\n`;
+      code += `function use${componentName}Data() {\n`;
+      code += `  const [data, setData] = useState<any[]>([]);\n`;
+      code += `  const [loading, setLoading] = useState(true);\n`;
+      code += `  const [error, setError] = useState<string | null>(null);\n\n`;
+      code += `  useEffect(() => {\n`;
+      code += `    // TODO: Replace with real API call\n`;
+      code += `    const timer = setTimeout(() => {\n`;
+      code += `      setData([]); // Replace with fetched data\n`;
+      code += `      setLoading(false);\n`;
+      code += `    }, 600);\n`;
+      code += `    return () => clearTimeout(timer);\n`;
+      code += `  }, []);\n\n`;
+      code += `  return { data, loading, error, refetch: () => {} };\n`;
+      code += `}\n\n`;
+
+      code += `// ─── Page Component ──────────────────────────────────────────\n`;
+      code += `export default function ${componentName}Page() {\n`;
+      code += `  const { data, loading, error } = use${componentName}Data();\n`;
+      code += `  useBreadcrumbs([{ label: "Home", href: "/" }, { label: "${titleCase}" }]);\n\n`;
+      code += `  return (\n`;
+      code += `    <FeaturePageScaffold\n      layout="${layout}"\n`;
+      code += `      header={\n        <PageHeader\n          title="${titleCase}"\n          breadcrumbs={[{ label: "Home", href: "/" }, { label: "${titleCase}" }]}\n`;
+      code += `          primaryAction={{ label: "TODO: Primary Action" }}\n        />\n      }\n`;
+
+      if (layout === "list") {
+        code += `      content={\n`;
+        code += `        loading ? <Skeleton variant="table" rows={8} /> :\n`;
+        code += `        error ? <Alert variant="error">{error}</Alert> :\n`;
+        code += `        data.length === 0 ? <EmptyState title="No data yet" action={{ label: "Create", onClick: () => {} }} /> :\n`;
+        code += `        <AdvancedDataTable columns={[]} data={data} />\n`;
+        code += `      }\n`;
+      } else if (layout === "detail") {
+        code += `      main={\n        loading ? <Skeleton variant="card" /> :\n`;
+        code += `        <div className="space-y-4"><Card><CardHeader>Details</CardHeader><CardBody>TODO</CardBody></Card></div>\n      }\n`;
+        code += `      aside={\n        <div className="space-y-4"><Card><CardHeader>Info</CardHeader><CardBody>TODO</CardBody></Card></div>\n      }\n`;
+      } else if (layout === "form") {
+        code += `      form={\n        <div className="space-y-6">\n`;
+        code += `          <Card><CardHeader>Information</CardHeader><CardBody>\n`;
+        code += `            <div className="space-y-4">\n              <DSInput label="Name" required />\n              <DSTextarea label="Description" showCharCount maxLength={500} />\n`;
+        code += `            </div>\n          </CardBody></Card>\n        </div>\n      }\n`;
+        code += `      actions={\n        <>\n          <DSButton variant="ghost">Cancel</DSButton>\n          <DSButton variant="primary">Save</DSButton>\n        </>\n      }\n`;
+      } else {
+        code += `      content={loading ? <Skeleton /> : <div>TODO: Build ${layout} content</div>}\n`;
+      }
+
+      code += `    />\n  );\n}\n`;
+
+      let text = `# Feature Template: ${titleCase}\n\n`;
+      text += `**Layout:** \`${layout}\`  |  **Product:** ${product}\n\n`;
+      text += `## Complete Code\n\`\`\`tsx\n${code}\n\`\`\`\n\n`;
+      text += `## Checklist\n`;
+      text += `- [ ] Replace mock API hook with real implementation\n`;
+      text += `- [ ] Add loading state (Skeleton) ✅ included\n`;
+      text += `- [ ] Add empty state (EmptyState) ✅ included\n`;
+      text += `- [ ] Add error state (Alert) ✅ included\n`;
+      text += `- [ ] Connect to AppShellProvider via useBreadcrumbs ✅ included\n`;
+      text += `- [ ] Ensure max 1 primary button per view\n`;
+      text += `- [ ] Test responsive (375/768/1280px)\n`;
+
+      return { content: [{ type: "text", text }] };
+    })
+  );
+
   // ─── Resources ───────────────────────────────────────────────────────────────
 
   server.resource(

@@ -1150,4 +1150,353 @@ export const componentCategories = {
   navigation: "Navigation",
   feedback: "Feedback",
   layout: "Layout",
+  chart: "Charts",
+  shell: "Shell / Layout Engine",
 };
+
+/* ─── Stage 2.5+ — New Components ───────────────────────────────────────────── */
+
+export const newComponents: Record<string, ComponentInfo> = {
+  LineChart: {
+    name: "LineChart",
+    displayName: "Line Chart",
+    category: "display",
+    description: "SVG line chart with multiple series, tooltips, grid, legend — no external deps",
+    imports: ["LineChart"],
+    props: [
+      { name: "series", type: "ChartSeries[]", description: "Array of { name, data: { label, value }[], color? }" },
+      { name: "height", type: "number", default: "240", description: "Chart height in px" },
+      { name: "showDots", type: "boolean", default: "true", description: "Show dots on data points" },
+      { name: "smooth", type: "boolean", default: "false", description: "Catmull-rom curve smoothing" },
+      { name: "showGrid", type: "boolean", default: "true", description: "Show Y-axis grid lines" },
+      { name: "showLegend", type: "boolean", default: "true", description: "Show series legend" },
+      { name: "showTooltip", type: "boolean", default: "true", description: "Show tooltip on hover" },
+    ],
+    example: `<LineChart
+  series={[
+    { name: "Revenue", data: [{ label: "Jan", value: 42000 }, { label: "Feb", value: 38500 }] },
+  ]}
+  smooth
+  height={240}
+/>`,
+  },
+
+  AreaChart: {
+    name: "AreaChart",
+    displayName: "Area Chart",
+    category: "display",
+    description: "SVG area chart (filled line) with gradient — extends LineChart props",
+    imports: ["AreaChart"],
+    props: [
+      { name: "series", type: "ChartSeries[]", description: "Chart series data" },
+      { name: "fillOpacity", type: "number", default: "0.15", description: "Fill area opacity" },
+      { name: "smooth", type: "boolean", default: "true", description: "Smooth curves" },
+    ],
+    example: `<AreaChart series={[{ name: "Orders", data: monthlyData }]} smooth fillOpacity={0.2} />`,
+  },
+
+  BarChart: {
+    name: "BarChart",
+    displayName: "Bar Chart",
+    category: "display",
+    description: "SVG bar chart with grouped or stacked series, rounded corners",
+    imports: ["BarChart"],
+    props: [
+      { name: "series", type: "ChartSeries[]", description: "Chart series data" },
+      { name: "stacked", type: "boolean", default: "false", description: "Stack bars (multiple series)" },
+      { name: "radius", type: "number", default: "4", description: "Bar corner radius" },
+    ],
+    example: `<BarChart
+  series={[
+    { name: "Shopee", data: [{ label: "Jan", value: 420 }] },
+    { name: "Lazada", data: [{ label: "Jan", value: 310 }] },
+  ]}
+  stacked
+/>`,
+  },
+
+  DonutChart: {
+    name: "DonutChart",
+    displayName: "Donut Chart",
+    category: "display",
+    description: "SVG donut/pie chart with legend, hover highlight, center label",
+    imports: ["DonutChart"],
+    props: [
+      { name: "data", type: "{ label, value, color? }[]", description: "Segments" },
+      { name: "size", type: "number", default: "200", description: "Outer diameter (px)" },
+      { name: "innerRatio", type: "number", default: "0.6", description: "0=pie, 0.6=donut" },
+      { name: "centerLabel", type: "string", description: "Center text label" },
+      { name: "centerValue", type: "string", description: "Center numeric value" },
+    ],
+    example: `<DonutChart
+  data={[
+    { label: "Delivered", value: 820 },
+    { label: "Processing", value: 280 },
+    { label: "Pending", value: 48 },
+  ]}
+  centerLabel="Total"
+  centerValue="1,148"
+/>`,
+  },
+
+  MiniSparkline: {
+    name: "MiniSparkline",
+    displayName: "Mini Sparkline",
+    category: "display",
+    description: "Inline SVG sparkline for stat cards — line, area, or bar type",
+    imports: ["MiniSparkline"],
+    props: [
+      { name: "values", type: "number[]", description: "Data values" },
+      { name: "type", type: '"line" | "area" | "bar"', default: '"line"', description: "Sparkline type" },
+      { name: "width", type: "number", default: "80", description: "Width (px)" },
+      { name: "height", type: "number", default: "32", description: "Height (px)" },
+      { name: "showValue", type: "boolean", default: "false", description: "Show last value as label" },
+      { name: "trend", type: '"up" | "down" | "neutral"', description: "Override auto-computed trend direction" },
+    ],
+    example: `<MiniSparkline values={[40, 55, 48, 62, 58, 74, 71]} type="area" showValue />`,
+  },
+
+  DateRangePicker: {
+    name: "DateRangePicker",
+    displayName: "Date Range Picker",
+    category: "form",
+    description: "Dual-calendar date range picker with presets: today, 7d, 30d, thisMonth, custom",
+    imports: ["DateRangePicker"],
+    props: [
+      { name: "value", type: "DateRange", description: "{ from: Date | null, to: Date | null }" },
+      { name: "onChange", type: "(range: DateRange, preset?) => void", description: "Change handler" },
+      { name: "presets", type: "DateRangePreset[]", default: '["today","last7","last30","custom"]', description: "Preset buttons" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Component size" },
+      { name: "clearable", type: "boolean", default: "true", description: "Show clear button" },
+    ],
+    example: `const [range, setRange] = useState<DateRange>({ from: null, to: null });
+<DateRangePicker value={range} onChange={setRange} presets={["today","last7","last30","custom"]} />`,
+  },
+
+  TimePicker: {
+    name: "TimePicker",
+    displayName: "Time Picker",
+    category: "form",
+    description: "Time picker with scroll columns — supports 12h/24h, optional seconds",
+    imports: ["TimePicker"],
+    props: [
+      { name: "value", type: "TimeValue", description: "{ hours: number, minutes: number, seconds?: number }" },
+      { name: "onChange", type: "(time: TimeValue) => void", description: "Change handler" },
+      { name: "format", type: '"12h" | "24h"', default: '"24h"', description: "Display format" },
+      { name: "showSeconds", type: "boolean", default: "false", description: "Show seconds column" },
+      { name: "minuteStep", type: "number", default: "1", description: "Minute step increment" },
+    ],
+    example: `<TimePicker value={{ hours: 9, minutes: 30 }} onChange={setTime} format="24h" />`,
+  },
+
+  DateTimePicker: {
+    name: "DateTimePicker",
+    displayName: "Date Time Picker",
+    category: "form",
+    description: "Combined calendar + time picker — for scheduling, appointments",
+    imports: ["DateTimePicker"],
+    props: [
+      { name: "value", type: "Date", description: "Selected date and time" },
+      { name: "onChange", type: "(date: Date) => void", description: "Change handler" },
+      { name: "format", type: '"12h" | "24h"', default: '"24h"', description: "Time format" },
+    ],
+    example: `<DateTimePicker value={new Date()} onChange={setDate} format="24h" />`,
+  },
+
+  ChoiceCard: {
+    name: "ChoiceCard",
+    displayName: "Choice Card",
+    category: "form",
+    description: "Clickable selection card with icon, title, description, and arrow/check indicator",
+    imports: ["ChoiceCard", "ChoiceCardGroup"],
+    props: [
+      { name: "value", type: "string", description: "Unique card value" },
+      { name: "title", type: "string", description: "Card title" },
+      { name: "description", type: "string", description: "Subtitle / description" },
+      { name: "icon", type: "ReactNode", description: "Leading icon or image" },
+      { name: "selected", type: "boolean", description: "Selection state" },
+      { name: "showCheck", type: "boolean", default: "false", description: "Show checkmark instead of arrow" },
+      { name: "layout", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Card layout" },
+    ],
+    example: `<ChoiceCardGroup value={selected} onChange={setSelected}>
+  <ChoiceCard value="standard" title="Standard" description="3-5 days" icon={<Truck />} />
+  <ChoiceCard value="express" title="Express" description="1-2 days" icon={<Package />} badge="Popular" />
+</ChoiceCardGroup>`,
+  },
+
+  RadioCard: {
+    name: "RadioCard",
+    displayName: "Radio Card",
+    category: "form",
+    description: "Radio group rendered as selectable cards with icon slots — grid or list layout",
+    imports: ["RadioCard"],
+    props: [
+      { name: "options", type: "RadioCardOption[]", description: "{ value, title, description?, icon?, badge?, disabled? }[]" },
+      { name: "value", type: "string", description: "Selected value" },
+      { name: "onChange", type: "(value: string) => void", description: "Change handler" },
+      { name: "columns", type: "1 | 2 | 3 | 4", default: "2", description: "Grid columns" },
+    ],
+    example: `<RadioCard
+  options={[
+    { value: "card", title: "Credit Card", icon: <CreditCard />, description: "Visa, Mastercard" },
+    { value: "transfer", title: "Bank Transfer", icon: <QrCode />, badge: "Instant" },
+  ]}
+  value={selected}
+  onChange={setSelected}
+/>`,
+  },
+
+  RepeatableFieldList: {
+    name: "RepeatableFieldList",
+    displayName: "Repeatable Field List",
+    category: "form",
+    description: "Dynamic add/remove rows — each row has multiple field columns with custom render",
+    imports: ["RepeatableFieldList"],
+    props: [
+      { name: "columns", type: "RepeatableFieldColumn[]", description: "{ key, label, render(value, onChange) }[]" },
+      { name: "value", type: "RepeatableFieldRow[]", description: "{ id, values: Record<string, unknown> }[]" },
+      { name: "onChange", type: "(rows: RepeatableFieldRow[]) => void", description: "Change handler" },
+      { name: "addLabel", type: "string", default: '"Add row"', description: "Add button label" },
+      { name: "sortable", type: "boolean", default: "false", description: "Enable drag reorder" },
+      { name: "minRows", type: "number", default: "0", description: "Min rows (disables remove at min)" },
+      { name: "maxRows", type: "number", description: "Max rows (hides add at max)" },
+    ],
+    example: `<RepeatableFieldList
+  columns={[
+    { key: "name", label: "Product", render: (v, set) => <DSInput value={v} onChange={e => set(e.target.value)} /> },
+    { key: "qty", label: "Qty", width: "80px", render: (v, set) => <NumberInput value={v} onChange={set} /> },
+  ]}
+  value={rows}
+  onChange={setRows}
+  addLabel="Add product"
+  sortable
+/>`,
+  },
+
+  RichTextEditor: {
+    name: "RichTextEditor",
+    displayName: "Rich Text Editor",
+    category: "form",
+    description: "ContentEditable rich text editor with toolbar (format, list, align, link, block, history) + fullscreen",
+    imports: ["RichTextEditor"],
+    props: [
+      { name: "value", type: "string", description: "HTML content" },
+      { name: "onChange", type: "(html: string) => void", description: "Change handler" },
+      { name: "toolbar", type: 'ToolbarGroup[]', default: '["history","format","list","align","link","block"]', description: "Toolbar groups" },
+      { name: "minHeight", type: "number", default: "160", description: "Minimum editor height (px)" },
+      { name: "fullscreen", type: "boolean", default: "true", description: "Allow fullscreen toggle" },
+      { name: "readOnly", type: "boolean", default: "false", description: "Read-only mode (no toolbar)" },
+    ],
+    example: `<RichTextEditor
+  value={html}
+  onChange={setHtml}
+  toolbar={["format", "list", "link"]}
+  placeholder="Describe your product…"
+/>`,
+  },
+
+  ImageGallery: {
+    name: "ImageGallery",
+    displayName: "Image Gallery",
+    category: "display",
+    description: "Grid/list image gallery with lightbox, selectable mode, upload, delete",
+    imports: ["ImageGallery"],
+    props: [
+      { name: "images", type: "GalleryImage[]", description: "{ id, src, alt?, name?, size? }[]" },
+      { name: "selectable", type: "boolean", default: "false", description: "Enable selection checkmarks" },
+      { name: "selectedIds", type: "string[]", description: "Controlled selected IDs" },
+      { name: "lightbox", type: "boolean", default: "true", description: "Enable lightbox on click" },
+      { name: "uploadable", type: "boolean", default: "false", description: "Show upload button" },
+      { name: "onDelete", type: "(id: string) => void", description: "Delete handler (shows X button)" },
+      { name: "columns", type: "2|3|4|5|6", default: "4", description: "Grid columns" },
+    ],
+    example: `<ImageGallery
+  images={productImages}
+  selectable
+  selectedIds={selected}
+  onSelectChange={setSelected}
+  columns={3}
+  onDelete={handleDelete}
+/>`,
+  },
+
+  ThumbnailCell: {
+    name: "ThumbnailCell",
+    displayName: "Thumbnail Cell",
+    category: "display",
+    description: "Table cell component: small image + title + subtitle — use in product/order tables",
+    imports: ["ThumbnailCell"],
+    props: [
+      { name: "src", type: "string", description: "Image source URL" },
+      { name: "caption", type: "string", description: "Title text" },
+      { name: "subCaption", type: "string", description: "Subtitle (muted)" },
+      { name: "size", type: '"xs" | "sm" | "md"', default: '"sm"', description: "Thumbnail size" },
+    ],
+    example: `<ThumbnailCell
+  src="/products/iphone.jpg"
+  caption="iPhone 15 Pro"
+  subCaption="SKU: IP15P-128"
+  size="sm"
+/>`,
+  },
+
+  FeaturePageScaffold: {
+    name: "FeaturePageScaffold",
+    displayName: "Feature Page Scaffold",
+    category: "layout",
+    description: "Layout engine for feature pages — 7 variants: list, detail, settings, wizard, dashboard, form, report",
+    imports: ["FeaturePageScaffold", "ScaffoldSection", "ScaffoldKPIRow"],
+    props: [
+      { name: "layout", type: '"list"|"detail"|"settings"|"wizard"|"dashboard"|"form"|"report"', default: '"list"', description: "Layout variant" },
+      { name: "header", type: "ReactNode", description: "PageHeader component" },
+      { name: "content", type: "ReactNode", description: "Main content area" },
+      { name: "stats", type: "ReactNode", description: "Stat cards row (list/report)" },
+      { name: "filters", type: "ReactNode", description: "FilterBar (list)" },
+      { name: "main", type: "ReactNode", description: "Left column (detail)" },
+      { name: "aside", type: "ReactNode", description: "Right panel (detail)" },
+      { name: "form", type: "ReactNode", description: "Form body (wizard/form)" },
+      { name: "actions", type: "ReactNode", description: "Sticky action bar (wizard/form)" },
+      { name: "charts", type: "ReactNode", description: "Charts section (report/dashboard)" },
+      { name: "dateRange", type: "ReactNode", description: "DateRangePicker (report)" },
+    ],
+    example: `<FeaturePageScaffold
+  layout="list"
+  header={<PageHeader title="Orders" primaryAction={{ label: "Create" }} />}
+  stats={<ScaffoldKPIRow><StatCard title="Revenue" value="฿284K" /></ScaffoldKPIRow>}
+  filters={<FilterBar ... />}
+  content={<AdvancedDataTable ... />}
+  footer={<Pagination ... />}
+/>`,
+  },
+
+  AppShellProvider: {
+    name: "AppShellProvider",
+    displayName: "AppShell Provider",
+    category: "layout",
+    description: "Context provider for shell state: sidebar, breadcrumbs, user, product, async nav",
+    imports: ["AppShellProvider", "useAppShell", "useBreadcrumbs"],
+    props: [
+      { name: "user", type: "ShellUser", description: "Authenticated user for the session" },
+      { name: "product", type: "ProductBrandConfig", description: "Product brand config (drives theme)" },
+      { name: "navResolver", type: "NavResolver", description: "Async nav resolver (permission-filtered)" },
+      { name: "sidebarOpen", type: "boolean", description: "Controlled sidebar state" },
+      { name: "defaultSidebarOpen", type: "boolean", default: "true", description: "Initial sidebar state" },
+    ],
+    example: `// App root:
+<AppShellProvider user={currentUser} product={sellsukiBrandConfig} navResolver={myNavResolver}>
+  <TopNavbar ... />
+  <Sidebar ... />
+  <main><FeaturePageScaffold ... /></main>
+</AppShellProvider>
+
+// Feature page:
+function OrderPage() {
+  const { user, setBreadcrumbs } = useAppShell();
+  useBreadcrumbs([{ label: "Orders", href: "/orders" }, { label: "#1234" }]);
+  return <div>...</div>;
+}`,
+  },
+};
+
+// Merge into main components object
+Object.assign(components, newComponents);

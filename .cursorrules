@@ -49,17 +49,23 @@ import { DSButton, DSInput, Card, AdvancedDataTable, TopNavbar, Sidebar } from "
 
 Use CSS variables: `var(--primary)`, `var(--foreground)`, `var(--border)` etc. NEVER hardcode hex.
 
-## Layout Pattern
+## Layout Pattern — AppShell (preferred)
 ```tsx
-<div className="min-h-screen bg-[var(--background)]">
-  <TopNavbar brand={{ name: "Sellsuki" }} breadcrumbs={[...]} user={{...}} />
-  <div className="flex">
-    <Sidebar brand={{ name: "Sellsuki" }} groups={[...]} />
-    <main className="flex-1 p-6">
-      {/* content */}
-    </main>
-  </div>
-</div>
+import { AppShell, sellsukiBrandConfig, FeaturePageScaffold } from "@uxuissk/design-system";
+
+<AppShell
+  product={sellsukiBrandConfig}
+  user={currentUser}
+  navResolver={myNavResolver}
+  activeItemId="orders"
+  onNavigate={(item) => router.push(item.href!)}
+>
+  <FeaturePageScaffold
+    layout="list"
+    header={<PageHeader title="Orders" primaryAction={{ label: "Create order" }} />}
+    content={<DSTable ... />}
+  />
+</AppShell>
 ```
 
 ## Button Rules
@@ -67,13 +73,16 @@ Use CSS variables: `var(--primary)`, `var(--foreground)`, `var(--border)` etc. N
 - Sizes: `sm` (32px) | `md` (36px) | `lg` (40px) | `xl` (44px)
 - **MAX 1 primary button per view**
 
-## Components (48 total)
-Data Entry: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
-Data Display: DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton
+## Components (60+ total)
+Data Entry: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, DateRangePicker, TimePicker, DateTimePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput, RepeatableFieldList, RichTextEditor
+Data Display: DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton, ImageGallery, ThumbnailCell
+Charts: LineChart, AreaChart, BarChart, DonutChart, MiniSparkline
+Choice: ChoiceCard, ChoiceCardGroup, RadioCard
 Navigation: TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
 Feedback: Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer, Tooltip, Popover, ProgressBar, Spinner
-Layout: Divider, Menu, ImagePreview, PageHeader, FilterBar
+Layout: Divider, Menu, ImagePreview, PageHeader, FilterBar, FeaturePageScaffold, ScaffoldSection, ScaffoldKPIRow
 Form: FormField, FormLabel, FormError, FormHelperText
+Shell: AppShell, AppShellSkeleton, AppShellProvider, useAppShell, useBreadcrumbs
 
 ## Rules
 1. Always import CSS first — `import "@uxuissk/design-system/styles.css"`

@@ -40,13 +40,31 @@ import { DSButton, DSInput, Card, TopNavbar, Sidebar } from "@uxuissk/design-sys
 - Success: `#059669` | Warning: `#d97706` | Danger: `#e11d48`
 - Use CSS vars: `var(--primary)`, `var(--foreground)`, `var(--border)` — no raw hex
 
-## Component Usage
-Always use DS components. Never create custom implementations of:
-- Buttons → `DSButton`
-- Inputs → `DSInput`, `DSTextarea`, `SearchField`
+## AppShell Pattern (full-page layout)
+```tsx
+import { AppShell, sellsukiBrandConfig, FeaturePageScaffold, ScaffoldKPIRow } from "@uxuissk/design-system";
+
+<AppShell product={sellsukiBrandConfig} user={user} navResolver={fn} activeItemId="orders">
+  <FeaturePageScaffold layout="list" header={<PageHeader ... />} content={<DSTable ... />} />
+</AppShell>
+```
+- `layout` values: `"list" | "detail" | "settings" | "wizard" | "dashboard" | "form" | "report"`
+- Multi-product theme: `sellsukiBrandConfig | patonaBrandConfig | sukispaceBrandConfig`
+- While loading session: use `<AppShellSkeleton />`
+
+## Component Usage (60+ components — never build custom)
+Always use DS components:
+- Buttons → `DSButton`, `IconButton`, `ButtonGroup`
+- Inputs → `DSInput`, `DSTextarea`, `SearchField`, `NumberInput`, `OTPInput`
+- Date/Time → `DatePicker`, `DateRangePicker`, `TimePicker`, `DateTimePicker`
+- Rich input → `RichTextEditor`, `RepeatableFieldList`, `TagInput`, `Rating`
 - Tables → `DSTable`, `AdvancedDataTable`
+- Charts → `LineChart`, `AreaChart`, `BarChart`, `DonutChart`, `MiniSparkline`
+- Choice → `ChoiceCard`, `ChoiceCardGroup`, `RadioCard`
+- Media → `ImageGallery`, `ThumbnailCell`, `ImagePreview`
 - Modals → `Modal`, `Drawer`, `ConfirmDialog`
 - Notifications → `toast`, `Alert`, `Notification`
+- Layout → `FeaturePageScaffold`, `PageHeader`, `FilterBar`, `ScaffoldKPIRow`
 
 ## Key Rules
 1. Max 1 `variant="primary"` button per view
@@ -54,6 +72,7 @@ Always use DS components. Never create custom implementations of:
 3. Flat design only — no heavy shadows, no gradients
 4. Desktop-first responsive
 5. Always use `var(--text-*)` tokens — never hardcode px values
+6. Use `AppShell` for all full-page layouts — not raw `TopNavbar + Sidebar + div`
 
 ## Resources
 - Storybook & docs: https://sellsukidesignsystemv12.vercel.app

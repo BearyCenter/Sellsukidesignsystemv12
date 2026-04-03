@@ -57,8 +57,9 @@
     "shadow": "0px 1px 2px 0px rgba(0,0,0,0.05)"
   },
   "layout": {
-    "navbar-height": "72px",
-    "sidebar-width": "280px"
+    "navbar-height": "56px",
+    "sidebar-width": "240px",
+    "sidebar-collapsed": "64px"
   },
   "button": {
     "variants": ["primary", "secondary", "outline", "ghost", "destructive", "link"],
@@ -66,13 +67,23 @@
     "default": "variant=primary size=md",
     "rule": "Max 1 primary button per view"
   },
+  "appshell": {
+    "usage": "Always use AppShell for full-page layouts. Never compose raw TopNavbar + Sidebar + div manually.",
+    "products": ["sellsukiBrandConfig", "patonaBrandConfig", "sukispaceBrandConfig", "shipmunkBrandConfig"],
+    "featurePageScaffoldLayouts": ["list", "detail", "settings", "wizard", "dashboard", "form", "report"],
+    "example": "import { AppShell, sellsukiBrandConfig, FeaturePageScaffold } from '@uxuissk/design-system';"
+  },
   "components": {
-    "data-entry": ["DSButton", "IconButton", "ButtonGroup", "DSInput", "DSTextarea", "DSCheckbox", "CheckboxGroup", "DSRadio", "RadioGroup", "Switch", "Dropdown", "DatePicker", "SearchField", "ColorPicker", "FileUpload", "TagInput", "Rating", "TransferList", "NumberInput", "OTPInput"],
-    "data-display": ["DSTable", "AdvancedDataTable", "Card", "CardHeader", "CardBody", "CardFooter", "StatCard", "Statistic", "Badge", "Tag", "Avatar", "AvatarGroup", "Timeline", "Tree", "EmptyState", "Skeleton"],
+    "total": "60+",
+    "data-entry": ["DSButton", "IconButton", "ButtonGroup", "DSInput", "DSTextarea", "DSCheckbox", "CheckboxGroup", "DSRadio", "RadioGroup", "Switch", "Dropdown", "DatePicker", "DateRangePicker", "TimePicker", "DateTimePicker", "SearchField", "ColorPicker", "FileUpload", "TagInput", "Rating", "TransferList", "NumberInput", "OTPInput", "RepeatableFieldList", "RichTextEditor"],
+    "data-display": ["DSTable", "AdvancedDataTable", "Card", "CardHeader", "CardBody", "CardFooter", "StatCard", "Statistic", "Badge", "Tag", "Avatar", "AvatarGroup", "Timeline", "Tree", "EmptyState", "Skeleton", "ImageGallery", "ThumbnailCell"],
+    "charts": ["LineChart", "AreaChart", "BarChart", "DonutChart", "MiniSparkline"],
+    "choice": ["ChoiceCard", "ChoiceCardGroup", "RadioCard"],
     "navigation": ["TopNavbar", "Sidebar", "Breadcrumb", "Tabs", "Stepper", "Pagination"],
     "feedback": ["Alert", "Modal", "Drawer", "ConfirmDialog", "Notification", "toast", "ToastContainer", "Tooltip", "Popover", "ProgressBar", "Spinner"],
-    "layout": ["Divider", "Menu", "ImagePreview", "PageHeader", "FilterBar"],
-    "form": ["FormField", "FormLabel", "FormError", "FormHelperText"]
+    "layout": ["Divider", "Menu", "ImagePreview", "PageHeader", "FilterBar", "FeaturePageScaffold", "ScaffoldSection", "ScaffoldKPIRow"],
+    "form": ["FormField", "FormLabel", "FormError", "FormHelperText"],
+    "shell": ["AppShell", "AppShellSkeleton", "AppShellProvider"]
   },
   "rules": [
     "Flat clean design — no heavy shadows or gradients",
@@ -80,7 +91,9 @@
     "Handle loading, empty, and error states",
     "DB HeaventRounded for ALL text — headings, body, labels, buttons, badges — NEVER use Inter",
     "Only colors from the defined palette",
-    "Follow spacing system strictly"
+    "Follow spacing system strictly",
+    "Use AppShell for all full-page layouts — not raw TopNavbar + Sidebar",
+    "Use FeaturePageScaffold layout prop — not custom layout wrappers"
   ],
   "tailwind_patterns": {
     "button-primary": "h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']",
