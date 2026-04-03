@@ -196,6 +196,40 @@ export type { FilterBarProps, FilterBarValue, FilterConfig, FilterOption, Filter
 export { AdvancedDataTable } from "./components/ds-advanced-table";
 export type { AdvancedDataTableProps, AdvancedColumn, PaginationMeta, BulkAction, SortOrder, AdvancedTableSize } from "./components/ds-advanced-table";
 
+// ── Stage 2.5 — New Components ───────────────────────────────────────────────
+
+// ── Charts ───────────────────────────────────────────────────────────────────
+export { LineChart, AreaChart, BarChart, DonutChart, MiniSparkline } from "./components/ds-chart";
+export type { ChartDataPoint, ChartSeries, BaseChartProps, LineChartProps, AreaChartProps, BarChartProps, DonutChartProps, MiniSparklineProps } from "./components/ds-chart";
+
+// ── DateRangePicker ──────────────────────────────────────────────────────────
+export { DateRangePicker } from "./components/ds-daterangepicker";
+export type { DateRangePickerProps, DateRange, DateRangePreset } from "./components/ds-daterangepicker";
+
+// ── TimePicker + DateTimePicker ───────────────────────────────────────────────
+export { TimePicker, DateTimePicker } from "./components/ds-timepicker";
+export type { TimePickerProps, DateTimePickerProps, TimeValue, TimePickerFormat } from "./components/ds-timepicker";
+
+// ── ChoiceCard ───────────────────────────────────────────────────────────────
+export { ChoiceCard, ChoiceCardGroup } from "./components/ds-choicecard";
+export type { ChoiceCardProps, ChoiceCardGroupProps } from "./components/ds-choicecard";
+
+// ── RadioCard ────────────────────────────────────────────────────────────────
+export { RadioCard } from "./components/ds-radiocard";
+export type { RadioCardProps, RadioCardOption } from "./components/ds-radiocard";
+
+// ── RepeatableFieldList ──────────────────────────────────────────────────────
+export { RepeatableFieldList } from "./components/ds-repeatablefield";
+export type { RepeatableFieldListProps, RepeatableFieldRow, RepeatableFieldColumn } from "./components/ds-repeatablefield";
+
+// ── RichTextEditor ───────────────────────────────────────────────────────────
+export { RichTextEditor } from "./components/ds-richtexteditor";
+export type { RichTextEditorProps } from "./components/ds-richtexteditor";
+
+// ── ImageGallery + ThumbnailCell ─────────────────────────────────────────────
+export { ImageGallery, ThumbnailCell } from "./components/ds-imagegallery";
+export type { ImageGalleryProps, GalleryImage, ThumbnailCellProps } from "./components/ds-imagegallery";
+
 // ── Shell Types (Stage 2) ────────────────────────────────────────────────────
 export type {
   NavItem,

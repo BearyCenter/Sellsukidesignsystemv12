@@ -25,6 +25,8 @@ export interface DSInputProps
   loading?: boolean;
   fullWidth?: boolean;
   required?: boolean;
+  /** Show character count below input (requires maxLength) */
+  showCount?: boolean;
   onClear?: () => void;
 }
 
@@ -128,6 +130,7 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
       loading = false,
       fullWidth = true,
       required = false,
+      showCount = false,
       onClear,
       disabled,
       type: typeProp = "text",
@@ -143,6 +146,8 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
     const [showPw, setShowPw] = useState(false);
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
     const currentValue = value !== undefined ? value : internalValue;
+    const charCount = String(currentValue).length;
+    const maxLen = props.maxLength;
 
     const sc = inputSizeConfig[size];
     const vs = inputVariantStyles[variant];
@@ -236,6 +241,13 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
             </span>
           )}
         </div>
+
+        {/* Character count */}
+        {showCount && maxLen && (
+          <div className="flex justify-end mt-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", color: charCount >= maxLen ? "var(--destructive)" : "var(--muted-foreground)" }}>
+            {charCount} / {maxLen}
+          </div>
+        )}
 
         {/* Helper / Error */}
         {(helperText || errorMessage || successMessage) && (
@@ -335,7 +347,7 @@ export const DSTextarea = forwardRef<HTMLTextAreaElement, DSTextareaProps>(
           {showCharCount && (
             <div
               className="flex justify-end px-3 py-1.5 border-t border-border text-muted-foreground bg-muted/20"
-              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+              style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }}
             >
               {charCount}{maxLength ? ` / ${maxLength}` : ""} chars
             </div>
