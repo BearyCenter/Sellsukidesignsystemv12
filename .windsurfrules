@@ -1,0 +1,107 @@
+# Sellsuki Design System — Windsurf Rules
+# Full spec: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+
+## Required Setup (ALWAYS do this first)
+```bash
+npm install @uxuissk/design-system@0.7.2
+npm install @uxuissk/design-tokens@0.1.1  # optional
+```
+
+```tsx
+// main.tsx — MUST be the FIRST import
+import "@uxuissk/design-system/styles.css";
+import { DSButton, DSInput, Card, AdvancedDataTable, TopNavbar, Sidebar } from "@uxuissk/design-system";
+```
+
+⚠️ CRITICAL: Without `import "@uxuissk/design-system/styles.css"`:
+- DB HeaventRounded font will NOT load
+- All `var(--text-*)` size tokens will be undefined (render as 0px)
+- Components will appear visually broken
+
+## Font — DB HeaventRounded
+- Applied to: ALL text elements — headings, body, labels, buttons, badges, nav items, table cells, sidebar
+- NEVER use: Inter, Roboto, system-ui, or any other font
+- Source: bundled in npm package via @font-face in styles.css
+
+## Typography Tokens (use these, never px values)
+```
+var(--text-h1)      → 48px / weight 400
+var(--text-h2)      → 40px / weight 400
+var(--text-h3)      → 28px / weight 700
+var(--text-h4)      → 24px / weight 500
+var(--text-p)       → 20px / weight 400  ← default body
+var(--text-label)   → 18px / weight 400  ← form labels, UI labels
+var(--text-button)  → 18px / weight 600  ← buttons, badges, tabs
+var(--text-caption) → 14px / weight 400  ← MINIMUM SIZE — never smaller
+```
+
+## Colors (CSS vars preferred over hex)
+```
+var(--primary)        → #32a9ff  (Sky-500) — buttons, links
+var(--primary-hover)  → #1b8bf5  (Sky-600) — hover
+var(--foreground)     → #1f2937  (Gray-800) — body text
+var(--muted-foreground) → #6b7280 (Gray-500) — muted text
+var(--border)         → #e5e7eb  (Gray-200) — dividers
+var(--background)     → #fff
+var(--surface)        → #f9fafb  (Gray-50)
+```
+
+## Spacing
+- Page padding: 24px desktop / 16px mobile
+- Card/form gap: 16px
+- Section gap: 32px
+- Border radius: 8px default
+
+## Layout Scaffold
+```tsx
+<div className="min-h-screen bg-[var(--background)]">
+  <TopNavbar brand={{ name: "Sellsuki" }} breadcrumbs={[...]} user={{...}} />
+  <div className="flex">
+    <Sidebar brand={{ name: "Sellsuki" }} groups={menuGroups} />
+    <main className="flex-1 p-6">
+      <PageHeader title="..." actions={<DSButton variant="primary">สร้าง</DSButton>} />
+      {/* content */}
+    </main>
+  </div>
+</div>
+```
+
+## Button System
+| Variant | Use case |
+|---------|----------|
+| `primary` | Main CTA — MAX 1 per view |
+| `secondary` | Secondary actions |
+| `outline` | Tertiary/filter actions |
+| `ghost` | Icon buttons, subtle |
+| `destructive` | Delete, danger |
+| `link` | Text links |
+
+Sizes: `sm`=32px `md`=36px(default) `lg`=40px `xl`=44px
+
+## All 48 Components
+```
+DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup,
+DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker,
+FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput,
+DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard,
+Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton,
+TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination,
+Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer,
+Tooltip, Popover, ProgressBar, Spinner,
+Divider, Menu, ImagePreview, PageHeader, FilterBar,
+FormField, FormLabel, FormError, FormHelperText
+```
+
+## Rules
+1. CSS import FIRST — always
+2. DB HeaventRounded for ALL text — never Inter
+3. Min font 14px — never smaller
+4. Max 1 primary button per view
+5. Always handle: loading (Skeleton), empty (EmptyState), error (Alert)
+6. No heavy shadows — flat design only
+7. No random colors — palette only
+
+## Resources
+- Storybook: https://sellsukidesignsystemv12.vercel.app
+- Full AI rules: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+- npm: https://www.npmjs.com/package/@uxuissk/design-system

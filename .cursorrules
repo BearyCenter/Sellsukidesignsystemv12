@@ -1,46 +1,91 @@
-You are a UX/UI developer working with the Sellsuki Design System v1.2.
+# Sellsuki Design System — Cursor Rules
+# Full spec: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
 
-## Setup
-- Always import: `import "@uxuissk/design-system/styles.css"` at root
-- Import components from: `@uxuissk/design-system`
-- Package: `npm install @uxuissk/design-system`
+## Setup (REQUIRED — must do FIRST)
+```bash
+npm install @uxuissk/design-system@0.7.2
+npm install @uxuissk/design-tokens@0.1.1  # optional tokens
+```
 
-## Visual Identity
-- Primary brand color: Sky-500 (#32a9ff), hover: Sky-600 (#1b8bf5)
-- Text primary: Gray-800 (#1f2937), secondary: Gray-500 (#6b7280)
-- Border: Gray-200 (#e5e7eb)
-- Font: "DB HeaventRounded" for headings + body, "Inter" for buttons only
-- Border radius default: 8px (radius-md)
-- Shadows: minimal — only elevation-sm (0px 1px 2px 0px #0000000d)
-- Design is flat, clean, airy — prefer borders over shadows
+```tsx
+// main.tsx or App.tsx — FIRST LINE, before everything else
+import "@uxuissk/design-system/styles.css";
+import { DSButton, DSInput, Card, AdvancedDataTable, TopNavbar, Sidebar } from "@uxuissk/design-system";
+```
 
-## Color Palette
-- Brand: Sky ramp (#f0f9ff -> #194f8f), primary=#32a9ff
-- Neutral: Gray ramp (#f9fafb -> #111827)
-- Success: Emerald ramp, solid=#059669
-- Warning: Amber ramp, solid=#d97706
-- Danger: Rose ramp, solid=#e11d48
-- Secondary accent: Orange-500 (#f97316)
+⚠️ WITHOUT the CSS import: fonts will be wrong (no DB HeaventRounded), all size tokens will be undefined, components will look broken.
 
-## Components (use these, never create custom alternatives)
-Data Entry: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList
-Data Display: DSTable, Card/CardHeader/CardBody/CardFooter, StatCard, Statistic, Badge, Tag, Avatar/AvatarGroup, Timeline, Tree, EmptyState, Skeleton
+## Font — DB HeaventRounded for ALL text
+- NEVER use Inter, system-ui, or any other font
+- Font is bundled in the npm package — no Google Fonts needed
+- Apply to: headings, body, labels, buttons, badges, nav, table, sidebar
+
+## Typography Tokens
+| Token | Size | Weight | Usage |
+|-------|------|--------|-------|
+| `var(--text-h1)` | 48px | 400 | Page hero |
+| `var(--text-h2)` | 40px | 400 | Page title |
+| `var(--text-h3)` | 28px | 700 | Section header |
+| `var(--text-h4)` | 24px | 500 | Card header |
+| `var(--text-p)` | 20px | 400 | Body text |
+| `var(--text-label)` | 18px | 400 | Form labels |
+| `var(--text-button)` | 18px | 600 | Buttons, badges |
+| `var(--text-caption)` | 14px | 400 | Captions, hints |
+
+⚠️ MINIMUM font size: 14px (`var(--text-caption)`) — never use smaller
+
+## Colors
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Primary | `#32a9ff` | Buttons, links, brand |
+| Primary hover | `#1b8bf5` | Hover states |
+| Text primary | `#1f2937` | Headings, body |
+| Text secondary | `#6b7280` | Muted text |
+| Border | `#e5e7eb` | Dividers, cards |
+| Surface | `#f9fafb` | Page background |
+| Success | `#059669` | Success states |
+| Warning | `#d97706` | Warning states |
+| Danger | `#e11d48` | Error, destructive |
+
+Use CSS variables: `var(--primary)`, `var(--foreground)`, `var(--border)` etc. NEVER hardcode hex.
+
+## Layout Pattern
+```tsx
+<div className="min-h-screen bg-[var(--background)]">
+  <TopNavbar brand={{ name: "Sellsuki" }} breadcrumbs={[...]} user={{...}} />
+  <div className="flex">
+    <Sidebar brand={{ name: "Sellsuki" }} groups={[...]} />
+    <main className="flex-1 p-6">
+      {/* content */}
+    </main>
+  </div>
+</div>
+```
+
+## Button Rules
+- Variants: `primary` | `secondary` | `outline` | `ghost` | `destructive` | `link`
+- Sizes: `sm` (32px) | `md` (36px) | `lg` (40px) | `xl` (44px)
+- **MAX 1 primary button per view**
+
+## Components (48 total)
+Data Entry: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput
+Data Display: DSTable, AdvancedDataTable, Card, CardHeader, CardBody, CardFooter, StatCard, Statistic, Badge, Tag, Avatar, AvatarGroup, Timeline, Tree, EmptyState, Skeleton
 Navigation: TopNavbar, Sidebar, Breadcrumb, Tabs, Stepper, Pagination
-Feedback: Alert, Modal, Drawer, ConfirmDialog, Notification, toast/ToastContainer, Tooltip, Popover, ProgressBar, Spinner
-Layout: Divider, Menu, ImagePreview
-
-## Spacing
-- Page padding: 24px desktop, 16px mobile
-- Card gap: 16px, Form field gap: 16px, Section gap: 32px
+Feedback: Alert, Modal, Drawer, ConfirmDialog, Notification, toast, ToastContainer, Tooltip, Popover, ProgressBar, Spinner
+Layout: Divider, Menu, ImagePreview, PageHeader, FilterBar
+Form: FormField, FormLabel, FormError, FormHelperText
 
 ## Rules
-- Default size for all components is "md"
-- Max 1 primary button per view, rest use secondary/outline/ghost
-- Always handle loading (Skeleton/Spinner), empty (EmptyState), and error (Alert) states
-- Support dark mode — use CSS variables, never hardcode colors
+1. Always import CSS first — `import "@uxuissk/design-system/styles.css"`
+2. Use DS components — never create custom buttons, inputs, modals
+3. DB HeaventRounded for ALL text — never Inter
+4. Min font size 14px — never smaller
+5. Max 1 primary button per view
+6. Handle loading (Skeleton), empty (EmptyState), error (Alert) states
+7. Use only palette colors — no random hex values
+8. Flat design — no heavy shadows, no gradients
 
-## Button Variants
-primary (Sky-500 solid) | secondary (Gray text) | outline (Sky-500 border) | ghost (no border) | destructive (Rose-600) | link (text only)
-
-## Storybook Reference
-https://sellsukidesignsystemv12.vercel.app
+## Resources
+- Storybook: https://sellsukidesignsystemv12.vercel.app
+- Full AI rules: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
+- npm: https://www.npmjs.com/package/@uxuissk/design-system
