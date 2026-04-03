@@ -100,10 +100,10 @@ export function SkeletonTable() {
 
 /* ─── Composed: SkeletonList ─────────────────────────────────────────────────── */
 
-export function SkeletonList() {
+export function SkeletonList({ rows = 3 }: { rows?: number }) {
   return (
     <div className="space-y-3 w-full max-w-md">
-      {[0, 1, 2].map((i) => (
+      {Array.from({ length: rows }).map((_, i) => (
         <div
           key={i}
           className="flex items-center gap-3 px-3 py-2.5 rounded-[var(--radius-md)] border border-border bg-card"

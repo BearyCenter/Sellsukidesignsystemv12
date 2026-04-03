@@ -223,7 +223,7 @@ function InnerAppShell({
             </div>
           ) : navError ? (
             <div className="p-3">
-              <Alert variant="error" size="sm">
+              <Alert variant="error">
                 <span style={{ fontSize: "var(--text-caption)" }}>Nav load failed</span>
               </Alert>
               <button
