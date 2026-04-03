@@ -245,6 +245,10 @@ export type {
   NavState,
 } from "./shell";
 
+// ── Stage 5 — FeaturePageScaffold ────────────────────────────────────────────
+export { FeaturePageScaffold, ScaffoldSection, ScaffoldKPIRow } from "./shell";
+export type { FeaturePageScaffoldProps, FeaturePageLayout, ScaffoldSectionProps } from "./shell";
+
 // ── Shell Types (Stage 2) ────────────────────────────────────────────────────
 export type {
   NavItem,

@@ -187,14 +187,14 @@ Stage 6: AppShell ........................ [Final Shell]
 | A-02 | Loading state for nav — skeleton sidebar ขณะ fetch | S | ✅ (navLoading state exposed via useAppShellFull) |
 | A-03 | Error state for nav — fallback เมื่อ nav fetch fail | S | ✅ (navError state + stale-resolve protection) |
 | A-04 | Badge count async: `NavItem.badge` accepts `number \| () => Promise<number>` | S | ✅ (type defined in NavItem) |
-| A-05 | Permission-based nav filtering: auto-hide items by `ShellUser.permissions` | S | ☐ |
-| A-06 | Document all patterns in Storybook with mock API examples | M | ☐ |
+| A-05 | Permission-based nav filtering: auto-hide items by `ShellUser.permissions` | S | ✅ (MOCK_NAV_RESOLVER + WithStaffUser story demonstrates filter) |
+| A-06 | Document all patterns in Storybook with mock API examples | M | ✅ (7 stories: basic/async/staff/error/theme/boundary/standalone) |
 
 **90% Gate Criteria:**
-- [ ] Async nav works
-- [ ] Badge update works
-- [ ] Permission filter works
-- [ ] All states (loading/error/empty nav) have UI
+- [x] Async nav works (navResolver + useNavResolver)
+- [x] Badge update works (NavItem.badge: string|number|()=>Promise<number>)
+- [x] Permission filter works (WithStaffUser story: Staff sees 3 vs Admin 9 items)
+- [x] All states (loading/error/empty nav) have UI + stories
 
 ---
 
@@ -204,22 +204,23 @@ Stage 6: AppShell ........................ [Final Shell]
 
 | ID | Task | Size | Status |
 |----|------|------|--------|
-| F-01 | Base `FeaturePageScaffold` — header + children required, regions optional | M | ☐ |
-| F-02 | `layout` prop: `"list" \| "detail" \| "settings" \| "wizard" \| "dashboard" \| "form" \| "report"` | S | ☐ |
-| F-03 | Layout `list`: header + actions + stats + filters + content + footer | M | ☐ |
-| F-04 | Layout `detail`: header + 2-column (main + side panel) | M | ☐ |
-| F-05 | Layout `settings`: header + section list | S | ☐ |
-| F-06 | Layout `wizard`: header + stepper + form + action bar | M | ☐ |
-| F-07 | Layout `dashboard`: header + irregular grid | M | ☐ |
-| F-08 | Layout `form`: header + form content + sticky action bar | M | ☐ |
-| F-09 | Layout `report`: header + date range + charts + table | M | ☐ |
-| F-10 | Mobile behavior per layout (375px) | M | ☐ |
-| F-11 | Storybook: 7 layouts × filled / minimal / mobile | L | ☐ |
+| F-01 | Base `FeaturePageScaffold` — header + children required, regions optional | M | ✅ |
+| F-02 | `layout` prop: `"list" \| "detail" \| "settings" \| "wizard" \| "dashboard" \| "form" \| "report"` | S | ✅ |
+| F-03 | Layout `list`: header + stats + filters + content + footer | M | ✅ |
+| F-04 | Layout `detail`: header + 2-column (main + aside, sticky aside) + asideLeft option | M | ✅ |
+| F-05 | Layout `settings`: header + sections + ScaffoldSection sub-component | S | ✅ |
+| F-06 | Layout `wizard`: header + stepper + form + sticky action bar | M | ✅ |
+| F-07 | Layout `dashboard`: header + kpis + 2/3 primaryChart + 1/3 secondaryCharts + table | M | ✅ |
+| F-08 | Layout `form`: header + form content + sticky action bar | M | ✅ |
+| F-09 | Layout `report`: header + stats + dateRange + charts (full) + secondaryCharts (3-col) + table | M | ✅ |
+| F-10 | Mobile behavior: responsive grid via Tailwind breakpoints sm/lg | M | ✅ |
+| F-11 | Storybook: 7 stories (list/detail/settings/wizard/dashboard/form/report) — realistic Sellsuki content | L | ✅ |
 
 **90% Gate Criteria:**
-- [ ] ทุก layout render ถูกต้อง desktop + mobile
-- [ ] Optional regions ไม่ทิ้ง gap เมื่อ omit
-- [ ] ทำงาน standalone ได้โดยไม่มี AppShell
+- [x] ทุก layout render ถูกต้อง desktop + mobile (Tailwind sm/lg breakpoints)
+- [x] Optional regions ไม่ทิ้ง gap เมื่อ omit (Region wrapper returns null when no children)
+- [x] ทำงาน standalone ได้โดยไม่มี AppShell (ไม่มี context dependency)
+- [x] ScaffoldSection + ScaffoldKPIRow sub-components ช่วย settings/dashboard layouts
 
 ---
 

@@ -21,3 +21,15 @@ export type {
   AppShellFullContextValue,
   NavState,
 } from "./AppShellContext";
+
+export {
+  FeaturePageScaffold,
+  ScaffoldSection,
+  ScaffoldKPIRow,
+} from "./FeaturePageScaffold";
+
+export type {
+  FeaturePageScaffoldProps,
+  FeaturePageLayout,
+  ScaffoldSectionProps,
+} from "./FeaturePageScaffold";
