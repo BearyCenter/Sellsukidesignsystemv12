@@ -557,6 +557,101 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Shell Layout Tokens — AppShell dimensions and spacing
+   Usage: consumed by AppShell component (Stage 6)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --shell-nav-height: 56px;
+  --shell-sidebar-width: 240px;
+  --shell-sidebar-collapsed: 64px;
+  --shell-content-padding: 24px;
+  --shell-content-padding-sm: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Z-Index Tokens — Stacking layer order
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 50;
+  --z-sticky: 60;
+  --z-shell-overlay: 80;
+  --z-shell-sidebar: 90;
+  --z-shell-nav: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+  --z-tooltip: 400;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Motion Tokens — Animation duration and easing
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --duration-instant: 0ms;
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-sidebar: 250ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-out: cubic-bezier(0, 0, 0.2, 1);
+  --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Product Theme Tokens — Override per-product via data-product attribute
+   Usage: <div data-product="sellsuki"> or <body data-product="patona">
+   Each product overrides --primary and --primary-hover only.
+   All other tokens inherit from :root Sellsuki defaults.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-product="sellsuki"] {
+  --primary: var(--Base_Color--Sky--500);
+  --primary-hover: var(--Base_Color--Sky--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "Sellsuki";
+}
+
+[data-product="patona"] {
+  --primary: var(--Base_Color--Orange--500);
+  --primary-hover: var(--Base_Color--Orange--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "Patona";
+}
+
+[data-product="sukispace"] {
+  --primary: var(--Base_Color--Sky--500);
+  --primary-hover: var(--Base_Color--Sky--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "Sukispace";
+}
+
+[data-product="shipmunk"] {
+  --primary: var(--Base_Color--Sky--500);
+  --primary-hover: var(--Base_Color--Sky--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "Shipmunk";
+}
+
+[data-product="akita"] {
+  --primary: var(--Base_Color--Sky--500);
+  --primary-hover: var(--Base_Color--Sky--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "Akita";
+}
+
+[data-product="oc2plus"] {
+  --primary: var(--Base_Color--Sky--500);
+  --primary-hover: var(--Base_Color--Sky--600);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --product-name: "OC2Plus";
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Compact Density Mode
    Usage: <div data-density="compact"> or <body data-density="compact">
    Purpose: Admin/internal tools (CCS) needing tighter typography

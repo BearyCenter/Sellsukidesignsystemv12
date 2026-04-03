@@ -139,14 +139,20 @@ export const typography = {
     button: "'DB HeaventRounded', 'Noto Sans Thai', sans-serif",
   },
   fontSize: {
-    xs: "12px",
-    sm: "14px",
-    md: "16px",
-    lg: "18px",
-    xl: "20px",
-    "2xl": "24px",
-    "3xl": "28px",
-    "4xl": "32px",
+    /** --text-caption — minimum font size in the system */
+    caption: "14px",
+    /** --text-label / --text-button */
+    label: "18px",
+    /** --text-p */
+    p: "20px",
+    /** --text-h4 */
+    h4: "24px",
+    /** --text-h3 */
+    h3: "28px",
+    /** --text-h2 */
+    h2: "40px",
+    /** --text-h1 */
+    h1: "48px",
   },
   fontWeight: {
     normal: 400,
@@ -220,11 +226,56 @@ export const shadow = {
   md: "0px 4px 6px -1px rgba(0,0,0,0.07)",
 } as const;
 
-/* ─── Layout ──────────────────────────────────────────────────────────────────── */
+/* ─── Shell Layout ────────────────────────────────────────────────────────────── */
+
+export const shell = {
+  navHeight: "56px",
+  sidebarWidth: "240px",
+  sidebarCollapsed: "64px",
+  contentPadding: "24px",
+  contentPaddingSm: "16px",
+} as const;
+
+/* ─── Z-Index ─────────────────────────────────────────────────────────────────── */
+
+export const zIndex = {
+  base: 0,
+  raised: 10,
+  dropdown: 50,
+  sticky: 60,
+  shellOverlay: 80,
+  shellSidebar: 90,
+  shellNav: 100,
+  modal: 200,
+  toast: 300,
+  tooltip: 400,
+} as const;
+
+/* ─── Motion ──────────────────────────────────────────────────────────────────── */
+
+export const motion = {
+  duration: {
+    instant: "0ms",
+    fast: "100ms",
+    normal: "200ms",
+    slow: "300ms",
+    sidebar: "250ms",
+  },
+  easing: {
+    default: "cubic-bezier(0.4, 0, 0.2, 1)",
+    in: "cubic-bezier(0.4, 0, 1, 1)",
+    out: "cubic-bezier(0, 0, 0.2, 1)",
+    spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+  },
+} as const;
+
+/* ─── Layout (legacy — use shell instead) ────────────────────────────────────── */
 
 export const layout = {
-  navbarHeight: "72px",
-  sidebarWidth: "280px",
+  /** @deprecated use shell.navHeight */
+  navbarHeight: "56px",
+  /** @deprecated use shell.sidebarWidth */
+  sidebarWidth: "240px",
   maxContentWidth: "1280px",
 } as const;
 
@@ -250,6 +301,9 @@ export const sellsukiTokens = {
   spacing,
   border,
   shadow,
+  shell,
+  zIndex,
+  motion,
   layout,
   button,
 } as const;
