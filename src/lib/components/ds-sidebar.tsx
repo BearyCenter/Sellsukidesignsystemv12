@@ -12,8 +12,8 @@ export interface SidebarItem {
   label: string;
   /** Leading icon */
   icon?: React.ReactNode;
-  /** Badge text (e.g., count) */
-  badge?: string;
+  /** Badge text or count — shown next to item label */
+  badge?: string | number;
 }
 
 export interface SidebarGroup {
@@ -199,12 +199,12 @@ export function Sidebar({
                     {!collapsed && (
                       <span className="truncate flex-1 text-left">{item.label}</span>
                     )}
-                    {!collapsed && item.badge && (
+                    {item.badge != null && !collapsed && (
                       <span
                         className="rounded-full bg-primary text-primary-foreground"
                         style={{
-                          fontFamily: "var(--font-label)",
-                          fontSize: "var(--text-badge)",
+                          fontFamily: "var(--font-caption)",
+                          fontSize: "var(--text-caption)",
                           fontWeight: "var(--weight-button)",
                           lineHeight: "1",
                           padding: "2px 6px",
@@ -214,7 +214,7 @@ export function Sidebar({
                           justifyContent: "center",
                         }}
                       >
-                        {item.badge}
+                        {String(item.badge)}
                       </span>
                     )}
                   </button>

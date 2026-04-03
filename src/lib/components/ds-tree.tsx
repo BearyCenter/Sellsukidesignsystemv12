@@ -24,6 +24,12 @@ export interface TreeProps {
   selectedItems?: string[];
   /** Called when selection changes */
   onSelect?: (selectedIds: string[]) => void;
+  /** Show loading skeleton */
+  loading?: boolean;
+  /** Show error message */
+  error?: string;
+  /** Message shown when data is empty */
+  emptyMessage?: string;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -130,6 +136,9 @@ export function Tree({
   onExpandChange,
   selectedItems,
   onSelect,
+  loading = false,
+  error,
+  emptyMessage = "No items",
 }: TreeProps) {
   const [internalExpanded, setInternalExpanded] = useState<Set<string>>(
     new Set(defaultExpanded || [])
@@ -163,21 +172,45 @@ export function Tree({
     }
   };
 
+  if (error) {
+    return (
+      <div className="rounded-[var(--radius-md)] border border-border bg-card px-4 py-8 text-center">
+        <span style={{ ...fontLabel, color: "var(--destructive)" }}>{error}</span>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="rounded-[var(--radius-md)] border border-border bg-card py-2 px-3 flex flex-col gap-2">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="h-7 rounded bg-muted/50 animate-pulse" style={{ width: `${60 + (i % 3) * 15}%` }} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-[var(--radius-md)] border border-border bg-card py-1">
-      {data.map((node) => (
-        <TreeItem
-          key={node.id}
-          node={node}
-          level={0}
-          expanded={expanded}
-          selected={selected}
-          onToggle={toggle}
-          onSelect={select}
-          selectable={selectable}
-          showLines={showLines}
-        />
-      ))}
+      {data.length === 0 ? (
+        <div className="px-4 py-8 text-center text-muted-foreground" style={fontLabel}>
+          {emptyMessage}
+        </div>
+      ) : (
+        data.map((node) => (
+          <TreeItem
+            key={node.id}
+            node={node}
+            level={0}
+            expanded={expanded}
+            selected={selected}
+            onToggle={toggle}
+            onSelect={select}
+            selectable={selectable}
+            showLines={showLines}
+          />
+        ))
+      )}
     </div>
   );
 }

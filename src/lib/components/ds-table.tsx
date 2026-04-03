@@ -24,6 +24,7 @@ interface TableProps<T = any> {
   selectedRows?: Set<number>;
   onSelectionChange?: (selected: Set<number>) => void;
   loading?: boolean;
+  error?: string;
   emptyMessage?: string;
   stickyHeader?: boolean;
   /** Remove border and border-radius — use when table is already inside a bordered container */
@@ -48,6 +49,7 @@ export function DSTable<T extends Record<string, any>>({
   selectedRows: controlledSelected,
   onSelectionChange,
   loading = false,
+  error,
   emptyMessage = "No data available",
   stickyHeader = false,
   flush = false,
@@ -148,6 +150,14 @@ export function DSTable<T extends Record<string, any>>({
                   <div className="flex items-center justify-center gap-2 py-8">
                     <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                     <span style={labelStyle}>Loading...</span>
+                  </div>
+                </td>
+              </tr>
+            ) : error ? (
+              <tr>
+                <td colSpan={columns.length + (selectable ? 1 : 0)} className={`${cellPadding[size]} text-center py-12`}>
+                  <div className="flex flex-col items-center gap-2">
+                    <span style={{ ...labelStyle, color: "var(--destructive)" }}>{error}</span>
                   </div>
                 </td>
               </tr>

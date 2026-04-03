@@ -8,6 +8,8 @@ export interface StepDefinition {
   title: string;
   /** Optional step description */
   description?: string;
+  /** Disable click navigation to this step */
+  disabled?: boolean;
 }
 
 export interface StepperProps {
@@ -64,16 +66,17 @@ export function Stepper({
         {steps.map((step, i) => {
           const done = i < current;
           const active = i === current;
+          const isDisabled = step.disabled;
           return (
             <div
               key={i}
-              className="flex gap-3"
-              onClick={() => onStepClick?.(i)}
+              className={`flex gap-3 ${isDisabled ? "opacity-50" : ""}`}
+              onClick={() => !isDisabled && onStepClick?.(i)}
             >
               <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
-                    onStepClick ? "cursor-pointer" : ""
+                    isDisabled ? "cursor-not-allowed" : onStepClick ? "cursor-pointer" : ""
                   } ${
                     done
                       ? "bg-primary text-primary-foreground"
@@ -123,15 +126,15 @@ export function Stepper({
         return (
           <div
             key={i}
-            className={`flex items-center ${i < steps.length - 1 ? "flex-1" : ""}`}
+            className={`flex items-center ${i < steps.length - 1 ? "flex-1" : ""} ${step.disabled ? "opacity-50" : ""}`}
           >
             <div
               className="flex flex-col items-center gap-1"
-              onClick={() => onStepClick?.(i)}
+              onClick={() => !step.disabled && onStepClick?.(i)}
             >
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
-                  onStepClick ? "cursor-pointer" : ""
+                  step.disabled ? "cursor-not-allowed" : onStepClick ? "cursor-pointer" : ""
                 } ${
                   done
                     ? "bg-primary text-primary-foreground"

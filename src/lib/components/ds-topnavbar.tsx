@@ -55,6 +55,8 @@ export interface TopNavbarProps {
   onUserClick?: () => void;
   /** Breadcrumb click handler */
   onBreadcrumbClick?: (item: BreadcrumbItem, index: number) => void;
+  /** Workspace/shop switcher rendered after brand logo — for multi-workspace products */
+  workspaceSwitcher?: React.ReactNode;
   /** Additional class name */
   className?: string;
 }
@@ -85,6 +87,7 @@ export function TopNavbar({
   onSidebarToggle,
   onUserClick,
   onBreadcrumbClick,
+  workspaceSwitcher,
   className = "",
 }: TopNavbarProps) {
   const initials = user?.name
@@ -144,6 +147,13 @@ export function TopNavbar({
             </div>
           )}
         </>
+      )}
+
+      {/* Workspace switcher */}
+      {workspaceSwitcher && (
+        <div className="flex items-center ml-1">
+          {workspaceSwitcher}
+        </div>
       )}
 
       {/* Page title */}

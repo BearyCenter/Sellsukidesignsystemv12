@@ -14,6 +14,8 @@ export interface AccordionItemProps {
   onToggle: () => void;
   /** Optional leading icon */
   icon?: React.ReactNode;
+  /** Disable interaction for this item */
+  disabled?: boolean;
 }
 
 export type AccordionType = "single" | "multiple";
@@ -22,7 +24,7 @@ export interface AccordionProps {
   /** Expand behavior */
   type?: AccordionType;
   /** Item definitions */
-  items: { id: string; title: string; content: React.ReactNode; icon?: React.ReactNode }[];
+  items: { id: string; title: string; content: React.ReactNode; icon?: React.ReactNode; disabled?: boolean }[];
   /** Initially open item(s) */
   defaultOpen?: string | string[];
   /** Controlled open state (for single: string | null, for multiple: string[]) */
@@ -49,12 +51,13 @@ const fontLabel: React.CSSProperties = {
 
 // ─── AccordionItem ───────────────────────────────────────────────────────────
 
-export function AccordionItem({ title, children, open, onToggle, icon }: AccordionItemProps) {
+export function AccordionItem({ title, children, open, onToggle, icon, disabled = false }: AccordionItemProps) {
   return (
-    <div className="border-b border-border last:border-b-0">
+    <div className={`border-b border-border last:border-b-0 ${disabled ? "opacity-50" : ""}`}>
       <button
-        onClick={onToggle}
-        className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/20 transition-colors cursor-pointer"
+        onClick={disabled ? undefined : onToggle}
+        disabled={disabled}
+        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${disabled ? "cursor-not-allowed" : "hover:bg-muted/20 cursor-pointer"}`}
       >
         {icon && <span className="text-primary flex-shrink-0">{icon}</span>}
         <span className="flex-1 text-foreground" style={fontLabelBold}>{title}</span>
@@ -128,6 +131,7 @@ export function Accordion({
           open={isOpen(item.id)}
           onToggle={() => toggle(item.id)}
           icon={item.icon}
+          disabled={item.disabled}
         >
           {item.content}
         </AccordionItem>

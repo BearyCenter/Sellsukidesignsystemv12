@@ -13,6 +13,7 @@ export interface ColorPickerProps {
   showInput?: boolean;
   showFormats?: boolean;
   size?: ColorPickerSize;
+  disabled?: boolean;
 }
 
 /* ─── Default Presets ────────────────────────────────────────────────────────── */
@@ -79,6 +80,7 @@ export function ColorPicker({
   showInput = true,
   showFormats,
   size = "md",
+  disabled = false,
 }: ColorPickerProps) {
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -94,7 +96,7 @@ export function ColorPicker({
   };
 
   return (
-    <div className="space-y-3">
+    <div className={`space-y-3 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
       {label && (
         <label className="block text-foreground" style={fontLabelBold}>
           {label}

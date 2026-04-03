@@ -19,6 +19,10 @@ export interface TransferListProps {
   value?: string[];
   /** Called when target list changes */
   onChange?: (targetIds: string[]) => void;
+  /** Show loading skeleton overlay */
+  loading?: boolean;
+  /** Show error message instead of content */
+  error?: string;
 }
 
 /* ─── Style helpers ──────────────────────────────────────────────────────────── */
@@ -126,6 +130,8 @@ export function TransferList({
   searchable,
   value,
   onChange,
+  loading = false,
+  error,
 }: TransferListProps) {
   const [internalTarget, setInternalTarget] = useState<Set<string>>(
     new Set(defaultTarget)
@@ -195,6 +201,33 @@ export function TransferList({
     else n.add(id);
     setter(n);
   };
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center rounded-[var(--radius-lg)] border border-border bg-card px-6 py-10 text-center">
+        <span style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", color: "var(--destructive)" }}>{error}</span>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-stretch gap-3 flex-wrap opacity-60 pointer-events-none">
+        {[sourceTitle, targetTitle].map((title) => (
+          <div key={title} className="flex-1 min-w-[180px] rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+            <div className="px-3 py-2.5 border-b border-border bg-muted/30">
+              <span style={fontLabelBold}>{title}</span>
+            </div>
+            <div className="p-3 flex flex-col gap-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-8 rounded bg-muted/50 animate-pulse" />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-stretch gap-3 flex-wrap">
