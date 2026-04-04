@@ -460,7 +460,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
         <div className="space-y-6">
           {/* Basic wrapper */}
-          <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+          <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
             <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
               <Puzzle size={16} className="text-primary" />
               <span className="text-foreground" style={fontLabelBold}>
@@ -480,7 +480,7 @@ export default SskButton;`}
           </div>
 
           {/* Usage example */}
-          <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+          <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
             <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
               <Code2 size={16} className="text-primary" />
               <span className="text-foreground" style={fontLabelBold}>
@@ -532,7 +532,7 @@ function MyPage() {
         </span>
 
         {/* Button DSS Spec */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden mb-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden mb-6">
           <div className="px-5 py-3 bg-muted/30 border-b border-border">
             <span className="text-foreground" style={fontLabelBold}>Button DSS Style Spec</span>
           </div>
@@ -565,7 +565,7 @@ function MyPage() {
         </div>
 
         {/* Props table */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
           <div className="px-5 py-3 bg-muted/30 border-b border-border">
             <span className="text-foreground" style={fontLabelBold}>Button Props</span>
           </div>
@@ -613,7 +613,7 @@ function MyPage() {
         </span>
 
         {/* Brand Colors */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden mb-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden mb-6">
           <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
             <Palette size={16} className="text-primary" />
             <span className="text-foreground" style={fontLabelBold}>Brand Colors</span>
@@ -641,7 +641,7 @@ function MyPage() {
         </div>
 
         {/* Gray Scale */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden mb-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden mb-6">
           <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
             <Layers size={16} className="text-muted-foreground" />
             <span className="text-foreground" style={fontLabelBold}>Gray Scale (Tailwind Gray)</span>
@@ -670,7 +670,7 @@ function MyPage() {
         </div>
 
         {/* Typography */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden mb-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden mb-6">
           <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
             <Type size={16} className="text-primary" />
             <span className="text-foreground" style={fontLabelBold}>Typography — DB HeaventRounded</span>
@@ -709,7 +709,7 @@ function MyPage() {
         </div>
 
         {/* Layout Constants */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden mb-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden mb-6">
           <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
             <Settings size={16} className="text-primary" />
             <span className="text-foreground" style={fontLabelBold}>Layout Constants</span>
@@ -746,7 +746,7 @@ function MyPage() {
         </div>
 
         {/* Elevation diagram */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
           <div className="px-5 py-3 bg-muted/30 border-b border-border flex items-center gap-2">
             <Layers size={16} className="text-primary" />
             <span className="text-foreground" style={fontLabelBold}>Elevation (Shadows)</span>
@@ -843,7 +843,7 @@ function MyPage() {
           })}
         </div>
 
-        <div className="rounded-[var(--radius-lg)] border border-border overflow-hidden">
+        <div className="rounded-[var(--radius-md)] border border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>

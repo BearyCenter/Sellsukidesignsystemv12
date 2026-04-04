@@ -219,7 +219,7 @@ function CalendarPanel({
   }
 
   return (
-    <div className="select-none">
+    <div className="select-none flex-1 min-w-0">
       {/* Month nav */}
       <div className="flex items-center justify-between mb-3">
         <button
@@ -244,14 +244,14 @@ function CalendarPanel({
       {/* Day headers */}
       <div className="grid grid-cols-7 mb-1">
         {DAYS.map((d) => (
-          <div key={d} className="text-center text-muted-foreground" style={captionStyle}>
+          <div key={d} className="h-8 flex items-center justify-center text-muted-foreground" style={captionStyle}>
             {d}
           </div>
         ))}
       </div>
 
       {/* Day cells */}
-      <div className="grid grid-cols-7 gap-y-0.5">
+      <div className="grid grid-cols-7">
         {days.map((day, i) => {
           const isCurrentMonth = day.getMonth() === month;
           const isFrom = range.from ? isSameDay(day, range.from) : false;
@@ -268,7 +268,7 @@ function CalendarPanel({
               onMouseLeave={() => onHover(null)}
               onClick={() => !disabled && onSelect(day)}
               className={[
-                "h-7 w-full flex items-center justify-center text-center transition-colors",
+                "h-8 w-full flex items-center justify-center text-center transition-colors",
                 disabled ? "opacity-30 cursor-not-allowed" : "cursor-pointer",
                 !isCurrentMonth ? "text-muted-foreground/40" : "",
                 isFrom || isTo
@@ -410,8 +410,8 @@ export function DateRangePicker({
       {/* Dropdown panel */}
       {open && (
         <div
-          className="absolute top-full mt-1 z-[var(--z-dropdown)] bg-card border border-border rounded-[var(--radius-lg)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] flex"
-          style={{ minWidth: "580px" }}
+          className="absolute top-full mt-1 z-50 bg-card border border-border rounded-[var(--radius-md)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] flex overflow-y-auto"
+          style={{ minWidth: "620px", maxHeight: "calc(100vh - 120px)" }}
         >
           {/* Presets sidebar */}
           <div className="w-36 border-r border-border py-2 flex flex-col gap-0.5 flex-shrink-0">
@@ -434,7 +434,7 @@ export function DateRangePicker({
           </div>
 
           {/* Dual calendars */}
-          <div className="flex gap-4 p-4">
+          <div className="flex gap-4 p-4 flex-1 min-w-0">
             <CalendarPanel
               month={leftMonth}
               year={leftYear}

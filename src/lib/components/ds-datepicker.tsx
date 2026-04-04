@@ -403,7 +403,7 @@ export function DatePicker({
       {/* Dropdown calendar */}
       {open && (
         <div
-          className="absolute z-50 mt-1.5 bg-popover border border-border rounded-[var(--radius-lg)] shadow-elevation-sm overflow-hidden"
+          className="absolute z-50 mt-1.5 bg-popover border border-border rounded-[var(--radius-md)] shadow-elevation-sm overflow-hidden"
           style={{ minWidth: mode === "range" ? "560px" : "300px" }}
         >
           {/* Calendar Header */}

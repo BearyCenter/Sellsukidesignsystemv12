@@ -181,7 +181,7 @@ export function HeaderSearch({
 
       {/* Search panel */}
       <div
-        className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-lg bg-card border border-border rounded-[var(--radius-lg)] shadow-lg overflow-hidden
+        className={`fixed left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-lg bg-card border border-border rounded-[var(--radius-md)] shadow-lg overflow-hidden
           ${compact ? "top-16" : "top-20 lg:top-14"}
         `}
         style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)" }}

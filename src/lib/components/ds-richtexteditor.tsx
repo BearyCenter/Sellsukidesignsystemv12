@@ -163,7 +163,7 @@ export function RichTextEditor({
   const effectiveMinH = minHeight ?? sizeMinHeight[size];
 
   const wrapperCls = [
-    "border border-border rounded-[var(--radius-lg)] bg-card overflow-hidden transition-all",
+    "border border-border rounded-[var(--radius-md)] bg-card overflow-hidden transition-all",
     isFullscreen ? "fixed inset-4 z-[var(--z-modal)] flex flex-col shadow-[0_8px_48px_rgba(0,0,0,0.2)]" : "relative",
     disabled ? "opacity-60" : "",
     className,

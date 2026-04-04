@@ -65,7 +65,7 @@ export function CardShowcase() {
               { label: "Default", shadow: "0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04)" },
               { label: "MD", shadow: "0 4px 16px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06)" },
             ].map((e) => (
-              <div key={e.label} className="w-32 h-24 rounded-[var(--radius-lg)] border border-border bg-card flex items-center justify-center" style={{ boxShadow: e.shadow }}>
+              <div key={e.label} className="w-32 h-24 rounded-[var(--radius-md)] border border-border bg-card flex items-center justify-center" style={{ boxShadow: e.shadow }}>
                 <span className="text-muted-foreground" style={btnStyle}>{e.label}</span>
               </div>
             ))}

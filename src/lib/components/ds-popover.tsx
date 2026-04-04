@@ -66,7 +66,7 @@ export function Popover({
         <div
           className={`absolute z-50 ${posMap[placement]} w-max max-w-xs`}
         >
-          <div className="rounded-[var(--radius-lg)] border border-border bg-card shadow-elevation-sm overflow-hidden">
+          <div className="rounded-[var(--radius-md)] border border-border bg-card shadow-elevation-sm overflow-hidden">
             {title && (
               <div className="px-4 py-2.5 border-b border-border flex items-center justify-between">
                 <span className="text-foreground" style={fontLabelBold}>

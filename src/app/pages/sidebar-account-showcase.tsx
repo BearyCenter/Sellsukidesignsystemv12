@@ -179,7 +179,7 @@ export function SidebarAccountShowcase() {
       />
 
       {/* SidebarAccountItem type */}
-      <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+      <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
         <div className="px-5 py-3 bg-muted/30 border-b border-border">
           <span className="text-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "700" }}>
             SidebarAccountItem Type

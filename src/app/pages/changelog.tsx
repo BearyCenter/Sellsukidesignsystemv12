@@ -262,7 +262,7 @@ export function ChangelogPage() {
                 </div>
 
                 {/* Card */}
-                <div className="sm:ml-12 rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden shadow-elevation-sm">
+                <div className="sm:ml-12 rounded-[var(--radius-md)] border border-border bg-card overflow-hidden shadow-elevation-sm">
                   {/* Header */}
                   <button
                     onClick={() => toggleVersion(release.version)}

@@ -72,8 +72,8 @@ const badgeStyle: React.CSSProperties = {
 
 const sizeMap: Record<ChoiceCardSize, string> = {
   sm: "p-3 gap-2.5 rounded-[var(--radius-md)]",
-  md: "p-4 gap-3 rounded-[var(--radius-lg)]",
-  lg: "p-5 gap-4 rounded-[var(--radius-lg)]",
+  md: "p-4 gap-3 rounded-[var(--radius-md)]",
+  lg: "p-5 gap-4 rounded-[var(--radius-md)]",
 };
 
 const iconSizeMap: Record<ChoiceCardSize, string> = {

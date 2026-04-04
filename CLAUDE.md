@@ -41,7 +41,7 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 | Body (P) | `20px` `var(--text-p)` | Default body/paragraph text |
 | Label | `18px` `var(--text-label)` | Form labels, UI labels, helper text |
 | Button/Badge | `18px` `var(--text-button)` | Buttons, badges, tabs, small labels |
-| Radius | `8px` (radius-md) | Default corner radius |
+| Radius | `6px` | `--radius-md` for inputs/cells, `--radius-lg` for cards/panels/dropdowns — both = 6px |
 | Shadow | `0px 1px 2px 0px #0000000d` | Minimal, prefer borders |
 
 ## Spacing

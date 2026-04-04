@@ -145,7 +145,7 @@ function MockFeaturePage({ title }: { title: string }) {
     { label: title },
   ]);
   return (
-    <div className="p-4 rounded-[var(--radius-lg)] border border-dashed border-border text-muted-foreground text-sm text-center">
+    <div className="p-4 rounded-[var(--radius-md)] border border-dashed border-border text-muted-foreground text-sm text-center">
       Feature page: <strong>{title}</strong><br/>
       <span className="text-xs">(breadcrumbs set via useBreadcrumbs)</span>
     </div>
@@ -195,7 +195,7 @@ export const PaproductTheme: StoryObj = {
   name: "Patona product theme",
   render: () => (
     <AppShellProvider user={ADMIN_USER} product={patonaBrandConfig} navResolver={MOCK_NAV_RESOLVER}>
-      <div className="p-4 rounded-[var(--radius-lg)] bg-primary/10 border border-primary text-primary text-sm font-medium mb-4">
+      <div className="p-4 rounded-[var(--radius-md)] bg-primary/10 border border-primary text-primary text-sm font-medium mb-4">
         Product: Patona — primary colour should be Orange (check data-product attribute on html)
       </div>
       <ShellDebugPanel />
@@ -274,7 +274,7 @@ export const StandaloneNavResolver: StoryObj = {
       );
     }
     return (
-      <div className="max-w-xs p-4 border border-border rounded-[var(--radius-lg)] bg-card">
+      <div className="max-w-xs p-4 border border-border rounded-[var(--radius-md)] bg-card">
         <p className="text-sm font-semibold mb-3">Standalone Nav (no Provider)</p>
         <NavDebug />
       </div>

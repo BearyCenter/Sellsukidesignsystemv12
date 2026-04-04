@@ -226,7 +226,7 @@ export function TimePicker({
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute top-full mt-1 z-[var(--z-dropdown)] bg-card border border-border rounded-[var(--radius-lg)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] p-4">
+        <div className="absolute top-full mt-1 z-50 bg-card border border-border rounded-[var(--radius-md)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] p-4">
           <div className="flex items-start gap-2">
             {/* Hours */}
             {format === "12h" ? (
@@ -400,7 +400,7 @@ export function DateTimePicker({
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 z-[var(--z-dropdown)] bg-card border border-border rounded-[var(--radius-lg)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] p-4 flex gap-6">
+        <div className="absolute top-full mt-1 z-50 bg-card border border-border rounded-[var(--radius-md)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] p-4 flex gap-6">
           {/* Calendar side */}
           <div>
             <div className="flex items-center justify-between mb-3">

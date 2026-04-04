@@ -70,7 +70,7 @@ export function DropdownShowcase() {
       </div>
 
       {/* Migration Note */}
-      <div className="rounded-[var(--radius-lg)] border border-primary/30 bg-accent/50 px-5 py-4 flex gap-3">
+      <div className="rounded-[var(--radius-md)] border border-primary/30 bg-accent/50 px-5 py-4 flex gap-3">
         <div className="w-8 h-8 rounded-[var(--radius)] bg-primary/10 flex items-center justify-center flex-shrink-0">
           <Info size={16} className="text-primary" />
         </div>

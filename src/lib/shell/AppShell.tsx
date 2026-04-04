@@ -350,8 +350,8 @@ export function AppShellSkeleton() {
         {/* Content skeleton */}
         <div className="flex-1 p-6 space-y-4">
           <div className="h-8 w-48 rounded bg-muted/40 animate-pulse" />
-          <div className="h-32 rounded-[var(--radius-lg)] bg-muted/30 animate-pulse" />
-          <div className="h-64 rounded-[var(--radius-lg)] bg-muted/30 animate-pulse" />
+          <div className="h-32 rounded-[var(--radius-md)] bg-muted/30 animate-pulse" />
+          <div className="h-64 rounded-[var(--radius-md)] bg-muted/30 animate-pulse" />
         </div>
       </div>
     </div>

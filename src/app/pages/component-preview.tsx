@@ -752,7 +752,7 @@ export function ComponentPreviewPage() {
         {/* ─── Preview Panel ─── */}
         <div className="space-y-0">
           {/* Toolbar */}
-          <div className="flex items-center justify-between px-4 py-2.5 bg-muted/30 border border-border rounded-t-[var(--radius-lg)] border-b-0">
+          <div className="flex items-center justify-between px-4 py-2.5 bg-muted/30 border border-border rounded-t-[var(--radius-md)] border-b-0">
             <div className="flex items-center gap-2">
               <Eye size={14} className="text-primary" />
               <span className="text-foreground" style={fontLabelBold}>
@@ -778,7 +778,7 @@ export function ComponentPreviewPage() {
           </div>
 
           {/* Preview Area */}
-          <div className="border border-border bg-background rounded-b-[var(--radius-lg)] overflow-hidden">
+          <div className="border border-border bg-background rounded-b-[var(--radius-md)] overflow-hidden">
             <div
               className="mx-auto transition-all duration-300 flex items-center justify-center p-10 min-h-[200px]"
               style={{
@@ -786,7 +786,7 @@ export function ComponentPreviewPage() {
                 background: "repeating-conic-gradient(var(--muted) 0% 25%, transparent 0% 50%) 0 0 / 16px 16px",
               }}
             >
-              <div className="bg-background rounded-[var(--radius-lg)] p-8 shadow-elevation-sm border border-border/50 w-full flex items-center justify-center">
+              <div className="bg-background rounded-[var(--radius-md)] p-8 shadow-elevation-sm border border-border/50 w-full flex items-center justify-center">
                 {entry.renderPreview(currentValues)}
               </div>
             </div>
@@ -794,7 +794,7 @@ export function ComponentPreviewPage() {
         </div>
 
         {/* ─── Controls Panel ─── */}
-        <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden h-fit lg:sticky lg:top-6">
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden h-fit lg:sticky lg:top-6">
           {/* Controls Header */}
           <div className="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
             <span className="text-foreground" style={fontLabelBold}>
@@ -860,7 +860,7 @@ export function ComponentPreviewPage() {
       </div>
 
       {/* ─── Generated Code ─── */}
-      <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+      <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
         <div
           className="w-full px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between cursor-pointer hover:bg-muted/50 transition-colors"
           onClick={() => setShowCode(!showCode)}

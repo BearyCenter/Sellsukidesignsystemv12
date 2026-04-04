@@ -41,7 +41,7 @@ export const WithError: Story = {
 
 export const CompleteForm: Story = {
   render: () => (
-    <div className="max-w-md space-y-5 p-6 rounded-[var(--radius-lg)] border border-border bg-card">
+    <div className="max-w-md space-y-5 p-6 rounded-[var(--radius-md)] border border-border bg-card">
       <h3 className="text-foreground text-lg" style={{ fontFamily: "var(--font-label)", fontWeight: 600 }}>
         Create Account
       </h3>

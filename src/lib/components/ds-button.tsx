@@ -103,7 +103,7 @@ export const DSButton = forwardRef<HTMLButtonElement, DSButtonProps>(
         ) : (
           <>
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
-            {children && <span>{children}</span>}
+            {children && <span className="inline-flex items-center gap-2">{children}</span>}
             {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
           </>
         )}

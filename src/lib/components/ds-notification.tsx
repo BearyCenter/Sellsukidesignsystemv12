@@ -197,7 +197,7 @@ export function NotificationCenter({
   };
 
   return (
-    <div className="max-w-md rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+    <div className="max-w-md rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
       <div className="px-4 py-3 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Bell size={16} className="text-foreground" />

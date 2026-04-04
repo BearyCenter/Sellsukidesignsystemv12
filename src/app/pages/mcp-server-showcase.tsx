@@ -113,7 +113,7 @@ function ArchitectureDiagram() {
       {nodes.map((node, i) => (
         <div key={i} className="flex flex-col md:flex-row items-center flex-1">
           <div
-            className="flex flex-col items-center gap-2 p-5 rounded-[var(--radius-lg)] border border-border bg-card flex-1 w-full"
+            className="flex flex-col items-center gap-2 p-5 rounded-[var(--radius-md)] border border-border bg-card flex-1 w-full"
             style={{ minWidth: 0 }}
           >
             <div
@@ -145,7 +145,7 @@ function ArchitectureDiagram() {
 
 function CapabilityCard({ icon, title, desc, items }: { icon: React.ReactNode; title: string; desc: string; items: string[] }) {
   return (
-    <div className="p-5 rounded-[var(--radius-lg)] border border-border bg-card space-y-3">
+    <div className="p-5 rounded-[var(--radius-md)] border border-border bg-card space-y-3">
       <div className="flex items-center gap-2.5">
         <div className="w-8 h-8 rounded-[var(--radius)] flex items-center justify-center bg-primary/10 text-primary">
           {icon}
@@ -257,7 +257,7 @@ function ToolCard({
   };
 
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 bg-muted/30 border-b border-border">
         <button
           onClick={() => setExpanded((v) => !v)}
@@ -347,7 +347,7 @@ function ResourceCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-4 space-y-3">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card p-4 space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileText size={14} className="text-primary" />
@@ -544,7 +544,7 @@ function CodePreview({ code, title }: { code: string; title: string }) {
       className="overflow-hidden"
       style={{
         backgroundColor: "var(--code-bg)",
-        borderRadius: "var(--radius-lg)",
+        borderRadius: "var(--radius-md)",
         border: "1px solid var(--code-border)",
       }}
     >
@@ -1142,7 +1142,7 @@ Use only Tailwind CSS for styling (no npm imports). Then build:
                 ))}
                 <button
                   onClick={addTool}
-                  className="w-full py-3 rounded-[var(--radius-lg)] border-2 border-dashed border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-[var(--radius-md)] border-2 border-dashed border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer flex items-center justify-center gap-2"
                   style={btnStyle}
                 >
                   <Plus size={14} /> {t("mcp.builder.addTool")}
@@ -1162,7 +1162,7 @@ Use only Tailwind CSS for styling (no npm imports). Then build:
                 ))}
                 <button
                   onClick={addResource}
-                  className="w-full py-3 rounded-[var(--radius-lg)] border-2 border-dashed border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-[var(--radius-md)] border-2 border-dashed border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors cursor-pointer flex items-center justify-center gap-2"
                   style={btnStyle}
                 >
                   <Plus size={14} /> {t("mcp.builder.addResource")}

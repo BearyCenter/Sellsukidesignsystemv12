@@ -65,7 +65,7 @@
 - Card gap: `16px`
 - Form field gap: `16px`
 - Section gap: `32px`
-- Border radius: `8px` (default)
+- Border radius: `6px` — use `var(--radius-md)` for inputs/cells, `var(--radius-lg)` for cards/panels/dropdowns (both = 6px)
 - Shadow: `0px 1px 2px 0px rgba(0,0,0,0.05)` — prefer borders
 
 ## Layout & Shell
@@ -121,21 +121,33 @@ Multi-product theming via `data-product` CSS attribute — swap `product` prop o
 Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 **Rule: Max 1 primary button per view**
 
+**Icon + Text in button (Full mode):** Pass icon and text as direct children — DSButton children span is `inline-flex items-center gap-2`, so icon+text auto-align in one row:
+```tsx
+<DSButton variant="outline"><MoreHorizontal size={16} /> Actions</DSButton>
+```
+**Icon + Text in button (Sandbox mode):** Wrap in `<span class="inline-flex items-center gap-2">` — Tailwind preflight sets SVG to `display:block`, raw `<Icon /> text` inside a plain span will stack vertically:
+```html
+<button class="h-9 px-4 ..."><span class="inline-flex items-center gap-2"><svg>...</svg> Actions</span></button>
+```
+
 ## Component Patterns (Tailwind — Sandbox mode)
 
 ### Button
 ```html
-<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-[18px] font-semibold rounded-lg font-['DB_HeaventRounded']">
+<!-- Icon + Text: wrap in inline-flex span to prevent SVG stacking (Tailwind preflight sets SVG display:block) -->
+<button class="h-9 px-4 bg-[#32a9ff] hover:bg-[#1b8bf5] text-white text-[18px] font-semibold rounded-[6px] font-['DB_HeaventRounded']">
+  <span class="inline-flex items-center gap-2"><svg>...</svg> Label</span>
+</button>
 ```
 
 ### Card
 ```html
-<div class="bg-white rounded-lg border border-[#e5e7eb] p-4">
+<div class="bg-white rounded-[6px] border border-[#e5e7eb] p-4">
 ```
 
 ### Input
 ```html
-<input class="w-full h-9 px-3 border border-[#e5e7eb] rounded-lg text-[18px] text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none font-['DB_HeaventRounded']" />
+<input class="w-full h-9 px-3 border border-[#e5e7eb] rounded-[6px] text-[18px] text-[#1f2937] placeholder:text-[#9ca3af] focus:border-[#32a9ff] focus:ring-1 focus:ring-[#32a9ff] outline-none font-['DB_HeaventRounded']" />
 ```
 
 ### Badge
@@ -156,17 +168,17 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Sidebar Menu Item
 ```html
-<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] cursor-pointer font-['DB_HeaventRounded']">
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-[6px] text-[18px] text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] cursor-pointer font-['DB_HeaventRounded']">
 ```
 
 ### Active Menu Item
 ```html
-<div class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']">
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-[6px] text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']">
 ```
 
 ### Stat Card
 ```html
-<div class="bg-white rounded-lg border border-[#e5e7eb] p-4">
+<div class="bg-white rounded-[6px] border border-[#e5e7eb] p-4">
   <p class="text-[14px] text-[#6b7280] font-['DB_HeaventRounded']">Revenue</p>
   <p class="text-[28px] font-bold text-[#1f2937] font-['DB_HeaventRounded']">฿284,500</p>
   <span class="text-[14px] text-[#059669] font-['DB_HeaventRounded']">↑ 12%</span>

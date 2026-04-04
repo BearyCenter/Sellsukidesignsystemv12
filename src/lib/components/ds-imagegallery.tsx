@@ -261,7 +261,7 @@ export function ImageGallery({
 
   if (images.length === 0 && !uploadable) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-muted-foreground border border-dashed border-border rounded-[var(--radius-lg)]">
+      <div className="flex flex-col items-center justify-center py-12 text-muted-foreground border border-dashed border-border rounded-[var(--radius-md)]">
         <span style={labelStyle}>No images yet</span>
       </div>
     );

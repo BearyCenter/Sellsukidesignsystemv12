@@ -21,7 +21,7 @@ export function SwitchShowcase() {
       <PageHeader titleKey="page.switch.title" descKey="page.switch.desc" />
 
       {/* Migration Note */}
-      <div className="rounded-[var(--radius-lg)] border border-primary/30 bg-accent/50 px-5 py-4 flex gap-3">
+      <div className="rounded-[var(--radius-md)] border border-primary/30 bg-accent/50 px-5 py-4 flex gap-3">
         <div className="w-8 h-8 rounded-[var(--radius)] bg-primary/10 flex items-center justify-center flex-shrink-0">
           <Info size={16} className="text-primary" />
         </div>
@@ -76,7 +76,7 @@ export function SwitchShowcase() {
 
       <Section title="Settings Card" description="Common pattern: switches in a settings list.">
         <DemoBox>
-          <div className="max-w-md rounded-[var(--radius-lg)] border border-border bg-card divide-y divide-border">
+          <div className="max-w-md rounded-[var(--radius-md)] border border-border bg-card divide-y divide-border">
             {[
               { label: "Push Notifications", desc: "Receive push notifications on your device", key: "push", defaultOn: true },
               { label: "Email Digest", desc: "Weekly summary of your activity", key: "email", defaultOn: true },

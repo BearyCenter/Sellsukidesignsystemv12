@@ -65,7 +65,7 @@ function ListBox({
   searchable?: boolean;
 }) {
   return (
-    <div className="flex-1 min-w-[180px] rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+    <div className="flex-1 min-w-[180px] rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
       <div className="px-3 py-2.5 border-b border-border bg-muted/30 flex items-center justify-between">
         <span className="text-foreground" style={fontLabelBold}>
           {title}
@@ -204,7 +204,7 @@ export function TransferList({
 
   if (error) {
     return (
-      <div className="flex items-center justify-center rounded-[var(--radius-lg)] border border-border bg-card px-6 py-10 text-center">
+      <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-border bg-card px-6 py-10 text-center">
         <span style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", color: "var(--destructive)" }}>{error}</span>
       </div>
     );
@@ -214,7 +214,7 @@ export function TransferList({
     return (
       <div className="flex items-stretch gap-3 flex-wrap opacity-60 pointer-events-none">
         {[sourceTitle, targetTitle].map((title) => (
-          <div key={title} className="flex-1 min-w-[180px] rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+          <div key={title} className="flex-1 min-w-[180px] rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
             <div className="px-3 py-2.5 border-b border-border bg-muted/30">
               <span style={fontLabelBold}>{title}</span>
             </div>

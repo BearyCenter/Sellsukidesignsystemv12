@@ -38,7 +38,7 @@ const sparkValues = [42, 58, 51, 67, 72, 68, 81, 76, 89, 94, 87, 102];
 function StatRow({ label, value, values, color }: { label: string; value: string; values: number[]; color: string }) {
   return (
     <div
-      className="flex items-center justify-between p-4 rounded-[var(--radius-lg)] border border-border bg-card"
+      className="flex items-center justify-between p-4 rounded-[var(--radius-md)] border border-border bg-card"
       style={{ gap: 16 }}
     >
       <div>

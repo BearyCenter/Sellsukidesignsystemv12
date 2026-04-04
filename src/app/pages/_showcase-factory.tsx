@@ -139,7 +139,7 @@ function CollapsibleCode({ code }: { code: string }) {
       className="mt-4 overflow-hidden relative"
       style={{
         backgroundColor: "var(--code-bg)",
-        borderRadius: "var(--radius-lg)",
+        borderRadius: "var(--radius-md)",
         border: "1px solid var(--code-border)",
       }}
     >
@@ -285,7 +285,7 @@ interface PropRow { prop: string; type: string; def: string; desc: string; }
 
 export function APITable({ rows }: { rows: PropRow[] }) {
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
       <div className="px-5 py-3 bg-muted/30 border-b border-border">
         <span className="text-foreground" style={fontLabelBold}>API Reference</span>
       </div>
@@ -335,7 +335,7 @@ export function PageHeader({ titleKey, descKey }: { titleKey: string; descKey: s
 export function DemoBox({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`p-6 rounded-[var(--radius-lg)] border border-border bg-card ${className ?? ""}`}
+      className={`p-6 rounded-[var(--radius-md)] border border-border bg-card ${className ?? ""}`}
       style={{ boxShadow: "0 1px 4px rgba(50,169,255,0.05)" }}
     >
       {children}

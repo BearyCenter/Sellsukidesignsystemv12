@@ -72,7 +72,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? "modal-title" : undefined}
-        className={`relative w-full ${sizeMap[size]} bg-card rounded-[var(--radius-lg)] shadow-elevation-sm border border-border animate-in zoom-in-95 fade-in duration-200 flex flex-col ${size === "full" ? "h-full" : "max-h-[85vh]"} ${className}`}
+        className={`relative w-full ${sizeMap[size]} bg-card rounded-[var(--radius-md)] shadow-elevation-sm border border-border animate-in zoom-in-95 fade-in duration-200 flex flex-col ${size === "full" ? "h-full" : "max-h-[85vh]"} ${className}`}
       >
         {/* Header */}
         {(title || showCloseButton) && (

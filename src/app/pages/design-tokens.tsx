@@ -333,7 +333,7 @@ const componentTokenExamples = [
       { prop: "Background", token: "var(--card)", fallback: "bg-card" },
       { prop: "Text", token: "var(--card-foreground)", fallback: "text-card-foreground" },
       { prop: "Border", token: "var(--border)", fallback: "border-border" },
-      { prop: "Border Radius", token: "var(--radius-lg)", fallback: "rounded-[var(--radius-lg)]" },
+      { prop: "Border Radius", token: "var(--radius-md)", fallback: "rounded-[var(--radius-md)]" },
       { prop: "Shadow", token: "var(--elevation-sm)", fallback: "shadow-elevation-sm" },
     ],
   },
@@ -438,7 +438,7 @@ export function DesignTokensPage() {
           </div>
           <div className="space-y-8">
             {componentTokenExamples.map((comp) => (
-              <div key={comp.component} className="rounded-[var(--radius-lg)] border border-border overflow-hidden">
+              <div key={comp.component} className="rounded-[var(--radius-md)] border border-border overflow-hidden">
                 <div className="px-5 py-3 bg-muted/30 border-b border-border">
                   <span className="text-foreground" style={{ fontFamily: "var(--font-h4)", fontSize: "var(--text-h4)", fontWeight: "var(--weight-h4)" }}>{comp.component}</span>
                 </div>
@@ -487,7 +487,7 @@ export function DesignTokensPage() {
       </div>
 
       {/* Token Architecture Diagram */}
-      <div className="p-6 rounded-[var(--radius-lg)] border border-border bg-card">
+      <div className="p-6 rounded-[var(--radius-md)] border border-border bg-card">
         <span className="text-foreground block mb-4" style={{ fontFamily: "var(--font-h4)", fontSize: "var(--text-h4)", fontWeight: "var(--weight-h4)" }}>
           {t("tokens.architecture")}
         </span>
@@ -513,7 +513,7 @@ export function DesignTokensPage() {
       </div>
 
       {/* Typography Preview */}
-      <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+      <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
         <div className="px-6 py-4 border-b border-border bg-muted/20">
           <span className="text-foreground" style={{ fontFamily: "var(--font-h4)", fontSize: "var(--text-h4)", fontWeight: "var(--weight-h4)" }}>
             {t("tokens.typographyScale")}

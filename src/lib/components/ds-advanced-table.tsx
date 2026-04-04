@@ -489,7 +489,7 @@ export function AdvancedDataTable<T extends Record<string, any>>({
   const frozenHeaderClass = "sticky z-[2] bg-inherit";
 
   return (
-    <div className={`rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden ${className}`}>
+    <div className={`rounded-[var(--radius-md)] border border-[var(--border)] overflow-hidden ${className}`}>
       {/* ── Toolbar ─────────────────────── */}
       {showColumnToggle && (
         <div className="flex items-center justify-end gap-2 px-4 py-2.5 border-b border-[var(--border)] bg-[var(--background)]">

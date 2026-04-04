@@ -288,7 +288,7 @@ export function FileUpload({
           addFiles(e.dataTransfer.files);
         }}
         onClick={() => !disabled && inputRef.current?.click()}
-        className={`relative flex flex-col items-center justify-center gap-2 px-6 py-10 rounded-[var(--radius-lg)] border-2 border-dashed transition-all cursor-pointer
+        className={`relative flex flex-col items-center justify-center gap-2 px-6 py-10 rounded-[var(--radius-md)] border-2 border-dashed transition-all cursor-pointer
           ${disabled ? "opacity-50 pointer-events-none" : ""}
           ${
             dragOver

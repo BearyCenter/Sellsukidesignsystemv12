@@ -28,19 +28,19 @@ export function EmptyStateShowcase() {
       <Section title="Use Cases" description="Common empty state scenarios.">
         <DemoBox>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+            <div className="rounded-[var(--radius-md)] border border-border bg-card">
               <EmptyState icon={<Search size={22} />} title="No results found" description='Try adjusting your search terms or filters.'
                 size="sm" action={{ label: "Clear Filters", onClick: () => {} }} />
             </div>
-            <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+            <div className="rounded-[var(--radius-md)] border border-border bg-card">
               <EmptyState icon={<ShieldAlert size={22} />} title="Access Denied" description="You don't have permission to view this resource."
                 size="sm" secondaryAction={{ label: "Request Access", onClick: () => {} }} />
             </div>
-            <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+            <div className="rounded-[var(--radius-md)] border border-border bg-card">
               <EmptyState icon={<WifiOff size={22} />} title="Connection Lost" description="Please check your internet and try again."
                 size="sm" action={{ label: "Retry", onClick: () => {} }} />
             </div>
-            <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+            <div className="rounded-[var(--radius-md)] border border-border bg-card">
               <EmptyState icon={<Upload size={22} />} title="Upload Files" description="Drag files here or click to browse."
                 size="sm" action={{ label: "Browse", onClick: () => {}, icon: <Upload size={14} /> }} />
             </div>
@@ -52,17 +52,17 @@ export function EmptyStateShowcase() {
         <DemoBox>
           <div className="grid md:grid-cols-3 gap-4">
             <DemoCard label="Small">
-              <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+              <div className="rounded-[var(--radius-md)] border border-border bg-card">
                 <EmptyState icon={<FileText size={18} />} title="No documents" size="sm" />
               </div>
             </DemoCard>
             <DemoCard label="Medium">
-              <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+              <div className="rounded-[var(--radius-md)] border border-border bg-card">
                 <EmptyState icon={<FileText size={22} />} title="No documents" description="Upload your first document." size="md" />
               </div>
             </DemoCard>
             <DemoCard label="Large">
-              <div className="rounded-[var(--radius-lg)] border border-border bg-card">
+              <div className="rounded-[var(--radius-md)] border border-border bg-card">
                 <EmptyState icon={<FileText size={28} />} title="No documents" description="Upload your first document to get started." size="lg" />
               </div>
             </DemoCard>

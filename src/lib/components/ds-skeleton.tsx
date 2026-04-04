@@ -49,7 +49,7 @@ export function Skeleton({
 
 export function SkeletonCard() {
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-4 space-y-4 w-full max-w-sm">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card p-4 space-y-4 w-full max-w-sm">
       <Skeleton variant="rounded" height={160} />
       <div className="space-y-2">
         <Skeleton variant="text" width="60%" height={20} />
@@ -71,7 +71,7 @@ export function SkeletonCard() {
 
 export function SkeletonTable() {
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card overflow-hidden">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden">
       <div className="px-4 py-3 border-b border-border bg-muted/30 flex gap-4">
         {[120, 160, 100, 80].map((w, i) => (
           <Skeleton key={i} variant="text" width={w} height={14} />

@@ -108,7 +108,7 @@ export function RadioCard({
           <label
             key={opt.value}
             className={[
-              "relative flex items-start gap-3 border rounded-[var(--radius-lg)] cursor-pointer transition-all duration-150",
+              "relative flex items-start gap-3 border rounded-[var(--radius-md)] cursor-pointer transition-all duration-150",
               sizePadding[size],
               isSelected
                 ? "border-primary bg-primary/5 shadow-[0_0_0_1px_var(--primary)]"

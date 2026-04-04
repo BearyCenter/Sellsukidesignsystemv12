@@ -176,7 +176,7 @@ export function StatCard({
       : Minus;
 
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-5 overflow-hidden">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card p-5 overflow-hidden">
       <div className="flex items-start justify-between gap-3">
         <div className="space-y-1 min-w-0 flex-1">
           <span className="text-muted-foreground" style={fontLabel}>

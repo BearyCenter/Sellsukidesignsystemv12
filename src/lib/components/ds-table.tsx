@@ -105,7 +105,7 @@ export function DSTable<T extends Record<string, any>>({
   const headerStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" };
 
   return (
-    <div className={`${flush ? "" : "rounded-[var(--radius-lg)] border border-border"} overflow-hidden ${className}`}>
+    <div className={`${flush ? "" : "rounded-[var(--radius-md)] border border-border"} overflow-hidden ${className}`}>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead className={stickyHeader ? "sticky top-0 z-10" : ""}>

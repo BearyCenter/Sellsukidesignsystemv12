@@ -86,7 +86,7 @@ export function CodeBlock({ code, title }: CodeBlockProps) {
       className="mt-4 overflow-hidden"
       style={{
         backgroundColor: "var(--code-bg)",
-        borderRadius: "var(--radius-lg)",
+        borderRadius: "var(--radius-md)",
         border: "1px solid var(--code-border)",
       }}
     >

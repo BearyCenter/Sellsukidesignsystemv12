@@ -75,7 +75,7 @@ function BrandCard({ config, active }: { config: typeof sellsukiBrandConfig; act
   const color = THEME_COLORS[config.brand.theme ?? "sellsuki"] ?? "var(--primary)";
   return (
     <div
-      className="p-4 rounded-[var(--radius-lg)] border bg-card flex items-center gap-4"
+      className="p-4 rounded-[var(--radius-md)] border bg-card flex items-center gap-4"
       style={{ borderColor: active ? "var(--primary)" : "var(--border)" }}
     >
       <div
@@ -113,7 +113,7 @@ export function AppShellShowcase() {
           <BrandCard config={sellsukiBrandConfig} active />
           <BrandCard config={patonaBrandConfig} />
           <div
-            className="p-4 rounded-[var(--radius-lg)] border border-dashed border-border bg-muted/20 flex items-center gap-4"
+            className="p-4 rounded-[var(--radius-md)] border border-dashed border-border bg-muted/20 flex items-center gap-4"
           >
             <div className="w-10 h-10 rounded-[var(--radius-md)] bg-muted flex items-center justify-center">
               <Layers size={18} className="text-muted-foreground" />
@@ -124,7 +124,7 @@ export function AppShellShowcase() {
             </div>
           </div>
           <div
-            className="p-4 rounded-[var(--radius-lg)] border border-dashed border-border bg-muted/20 flex items-center gap-4"
+            className="p-4 rounded-[var(--radius-md)] border border-dashed border-border bg-muted/20 flex items-center gap-4"
           >
             <div className="w-10 h-10 rounded-[var(--radius-md)] bg-muted flex items-center justify-center">
               <Package size={18} className="text-muted-foreground" />
@@ -144,7 +144,7 @@ export function AppShellShowcase() {
         code={`// ใช้ขณะที่ session ยังไม่ ready
 if (sessionLoading) return <AppShellSkeleton />;`}
       >
-        <DemoBox className="!p-0 overflow-hidden rounded-[var(--radius-lg)]" style={{ height: 320 }}>
+        <DemoBox className="!p-0 overflow-hidden rounded-[var(--radius-md)]" style={{ height: 320 }}>
           <div style={{ transform: "scale(0.6)", transformOrigin: "top left", width: "167%", height: "167%", pointerEvents: "none" }}>
             <AppShellSkeleton key={skeletonKey} />
           </div>
@@ -190,7 +190,7 @@ if (sessionLoading) return <AppShellSkeleton />;`}
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex-1 px-5 py-3 border border-border rounded-[var(--radius-lg)] bg-card"
+                    className="flex-1 px-5 py-3 border border-border rounded-[var(--radius-md)] bg-card"
                   >
                     <div className="text-muted-foreground" style={{ ...fontLabel, fontSize: "var(--text-button)" }}>{stat.label}</div>
                     <div className="font-bold mt-0.5" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: "700", color: stat.color }}>{stat.value}</div>
@@ -228,15 +228,15 @@ if (sessionLoading) return <AppShellSkeleton />;`}
               </div>
             }
             chart={
-              <div className="h-40 flex items-center justify-center bg-muted/20 rounded-[var(--radius-lg)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
+              <div className="h-40 flex items-center justify-center bg-muted/20 rounded-[var(--radius-md)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
                 [LineChart / AreaChart]
               </div>
             }
             widgets={[
-              <div key="w1" className="h-32 flex flex-col items-center justify-center bg-muted/20 rounded-[var(--radius-lg)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
+              <div key="w1" className="h-32 flex flex-col items-center justify-center bg-muted/20 rounded-[var(--radius-md)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
                 <BarChart3 size={20} className="mb-1" /> [BarChart]
               </div>,
-              <div key="w2" className="h-32 flex flex-col items-center justify-center bg-muted/20 rounded-[var(--radius-lg)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
+              <div key="w2" className="h-32 flex flex-col items-center justify-center bg-muted/20 rounded-[var(--radius-md)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
                 <Users size={20} className="mb-1" /> [DonutChart]
               </div>,
             ]}

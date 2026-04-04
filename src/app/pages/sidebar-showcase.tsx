@@ -28,7 +28,7 @@ export function SidebarShowcase() {
 
       <Section title="Standard Sidebar" description="256px navigation sidebar with groups, collapsible group headers, active states, and badge counts.">
         <DemoBox className="p-0 overflow-hidden">
-          <div className="flex rounded-[var(--radius-lg)] overflow-hidden h-[420px]">
+          <div className="flex rounded-[var(--radius-md)] overflow-hidden h-[420px]">
             <Sidebar
               brand={{ name: "Sellsuki Store" }}
               groups={groups}

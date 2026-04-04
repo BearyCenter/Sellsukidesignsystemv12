@@ -63,7 +63,7 @@ function StatCard({
   const TrendIcon = trend?.direction === "up" ? ArrowUpRight : trend?.direction === "down" ? ArrowDownRight : Minus;
 
   return (
-    <div className="rounded-[var(--radius-lg)] border border-border bg-card p-5">
+    <div className="rounded-[var(--radius-md)] border border-border bg-card p-5">
       <div className="flex items-start justify-between">
         <div className="space-y-1">
           <span className="text-muted-foreground" style={fontLabel}>{title}</span>
