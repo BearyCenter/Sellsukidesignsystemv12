@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import {
   Activity,
   Cpu,
@@ -644,8 +645,8 @@ export function MCPTrackerPage() {
         </span>
       </div>
 
-      {/* ── Feature Report Modal ─────────────────────────────────────────────── */}
-      {showReport && (
+      {/* ── Feature Report Modal (portal → document.body to escape AppShell transform) */}
+      {showReport && createPortal(
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ background: "rgba(0,0,0,0.45)" }}
@@ -720,7 +721,7 @@ export function MCPTrackerPage() {
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
     </div>
   );
 }
