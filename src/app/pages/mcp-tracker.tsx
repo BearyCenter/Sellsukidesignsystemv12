@@ -16,6 +16,7 @@ import {
   FileText,
   Copy,
   Check,
+  Download,
 } from "lucide-react";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
@@ -133,6 +134,11 @@ export function MCPTrackerPage() {
   const [dataSource,   setDataSource]  = useState<"real" | "empty" | "loading">("loading");
   const [reportCopied, setReportCopied] = useState(false);
 
+  // Export date range — default: today
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const [exportFrom, setExportFrom] = useState(todayStr);
+  const [exportTo,   setExportTo]   = useState(todayStr);
+
   const load = useCallback(async () => {
     const data = await fetchLog();
     if (data) {
@@ -174,6 +180,45 @@ export function MCPTrackerPage() {
       setTimeout(() => setReportCopied(false), 2000);
     });
   }, [log]);
+
+  // Filter log by selected date range
+  const filteredLog = log.filter((r) => {
+    const d = r.ts.slice(0, 10); // "YYYY-MM-DD"
+    return d >= exportFrom && d <= exportTo;
+  });
+
+  const handleExportExcel = useCallback(() => {
+    const rows = log.filter((r) => {
+      const d = r.ts.slice(0, 10);
+      return d >= exportFrom && d <= exportTo;
+    });
+
+    const headers = ["Date / Time", "ID", "Tool", "Params", "Duration (ms)", "Status"];
+    const csvRows = rows.map((r) => {
+      const ts = new Date(r.ts);
+      const dateStr = ts.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+      const timeStr = ts.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      return [
+        `${dateStr} ${timeStr}`,
+        r.id,
+        r.tool,
+        r.params ?? "",
+        r.duration,
+        r.status,
+      ].map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",");
+    });
+
+    // UTF-8 BOM so Excel opens Thai/special chars correctly
+    const bom = "\uFEFF";
+    const csv = bom + [headers.join(","), ...csvRows].join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href     = url;
+    a.download = `mcp-report_${exportFrom}_to_${exportTo}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [log, exportFrom, exportTo]);
 
   const { totalToday, avgMs, successPct, errCount, toolCounts } = deriveStats(log);
   const rpm     = calcRpm(log);
@@ -419,20 +464,62 @@ export function MCPTrackerPage() {
             style={{ borderColor: c.border, background: "var(--card)" }}
           >
             <div
-              className="flex items-center justify-between px-4 py-3 border-b"
+              className="flex flex-col border-b"
               style={{ borderColor: c.border }}
             >
-              <div className="flex items-center gap-2">
-                <Clock size={16} color={c.primary} />
-                <h2 style={{ ...f.h4, color: "var(--foreground)" }}>Recent Requests</h2>
-                <span
-                  className="px-1.5 py-0.5 rounded-full"
-                  style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: 10 }}
-                >
-                  Real
+              {/* Row 1: title + count */}
+              <div className="flex items-center justify-between px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <Clock size={16} color={c.primary} />
+                  <h2 style={{ ...f.h4, color: "var(--foreground)" }}>Recent Requests</h2>
+                  <span
+                    className="px-1.5 py-0.5 rounded-full"
+                    style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: 10 }}
+                  >
+                    Real
+                  </span>
+                </div>
+                <span style={{ ...f.numSm, color: c.placeholder }}>
+                  {filteredLog.length} / {log.length} calls
                 </span>
               </div>
-              <span style={{ ...f.numSm, color: c.placeholder }}>Last {log.length} calls</span>
+
+              {/* Row 2: date range filter + export */}
+              <div
+                className="flex items-center gap-2 px-4 pb-3"
+                style={{ borderTop: `1px solid ${c.border}`, paddingTop: 10 }}
+              >
+                <span style={{ ...f.numSm, color: c.textSec }}>Filter:</span>
+                <input
+                  type="date"
+                  value={exportFrom}
+                  onChange={(e) => setExportFrom(e.target.value)}
+                  className="h-7 px-2 rounded-[6px] border text-[12px]"
+                  style={{ borderColor: c.border, fontFamily: "'DB HeaventRounded', sans-serif", color: c.text, background: "var(--card)" }}
+                />
+                <span style={{ ...f.numSm, color: c.textSec }}>–</span>
+                <input
+                  type="date"
+                  value={exportTo}
+                  onChange={(e) => setExportTo(e.target.value)}
+                  className="h-7 px-2 rounded-[6px] border text-[12px]"
+                  style={{ borderColor: c.border, fontFamily: "'DB HeaventRounded', sans-serif", color: c.text, background: "var(--card)" }}
+                />
+                <button
+                  onClick={handleExportExcel}
+                  disabled={filteredLog.length === 0}
+                  className="flex items-center gap-1.5 h-7 px-3 rounded-[6px] border transition-all disabled:opacity-40"
+                  style={{
+                    borderColor: c.primary,
+                    background:  c.primaryLight,
+                    color:       c.primary,
+                    ...f.btn,
+                  }}
+                >
+                  <Download size={12} />
+                  Export Excel ({filteredLog.length})
+                </button>
+              </div>
             </div>
 
             {log.length === 0 ? (
@@ -441,7 +528,7 @@ export function MCPTrackerPage() {
                 <p style={{ ...f.label, color: c.placeholder }}>Waiting for MCP tool calls…</p>
               </div>
             ) : (
-              <div className="overflow-auto" style={{ maxHeight: 420 }}>
+              <div className="overflow-auto" style={{ maxHeight: 380 }}>
                 <table className="w-full">
                   <thead>
                     <tr style={{ borderBottom: `1px solid ${c.border}` }}>
@@ -457,7 +544,13 @@ export function MCPTrackerPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {log.map((req, i) => {
+                    {filteredLog.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="text-center py-10" style={{ ...f.numSm, color: c.placeholder }}>
+                          No requests in selected date range
+                        </td>
+                      </tr>
+                    ) : filteredLog.map((req, i) => {
                       const ts = new Date(req.ts);
                       const dateStr = ts.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
                       const timeStr = `${dateStr} · ${ts.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
@@ -465,7 +558,7 @@ export function MCPTrackerPage() {
                         <tr
                           key={req.id + i}
                           className="hover:bg-[#f9fafb] transition-colors"
-                          style={{ borderBottom: i < log.length - 1 ? `1px solid ${c.border}` : "none" }}
+                          style={{ borderBottom: i < filteredLog.length - 1 ? `1px solid ${c.border}` : "none" }}
                         >
                           <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ ...f.numSm, color: c.placeholder, fontSize: 11 }}>
                             {timeStr}
@@ -504,6 +597,7 @@ export function MCPTrackerPage() {
                       );
                     })}
                   </tbody>
+
                 </table>
               </div>
             )}
