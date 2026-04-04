@@ -395,13 +395,15 @@ export function DateRangePicker({
           {displayText || placeholder}
         </span>
         {clearable && range.from && (
-          <button
-            type="button"
+          <span
+            role="button"
+            tabIndex={0}
             onClick={handleClear}
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            onKeyDown={(e) => e.key === "Enter" && handleClear(e as unknown as React.MouseEvent)}
+            className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer flex-shrink-0"
           >
             <X size={12} />
-          </button>
+          </span>
         )}
       </button>
 

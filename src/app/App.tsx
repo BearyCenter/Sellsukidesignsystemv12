@@ -53,6 +53,8 @@ import {
   Star,
   Server,
   Activity,
+  Clock,
+  Layers,
 } from "lucide-react";
 import SSKIcon from "../imports/Icon";
 import { I18nProvider, useI18n } from "./i18n";
@@ -119,6 +121,14 @@ import { PageHeaderShowcase } from "./pages/pageheader-showcase";
 import { FilterBarShowcase } from "./pages/filterbar-showcase";
 import { FormShowcase } from "./pages/form-showcase";
 import { AdvancedTableShowcase } from "./pages/advanced-table-showcase";
+import { ChartShowcase } from "./pages/chart-showcase";
+import { DateRangePickerShowcase } from "./pages/daterangepicker-showcase";
+import { TimePickerShowcase } from "./pages/timepicker-showcase";
+import { ChoiceCardShowcase } from "./pages/choicecard-showcase";
+import { RepeatableFieldShowcase } from "./pages/repeatablefield-showcase";
+import { RichTextEditorShowcase } from "./pages/richtexteditor-showcase";
+import { ImageGalleryShowcase } from "./pages/imagegallery-showcase";
+import { AppShellShowcase } from "./pages/appshell-showcase";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -179,7 +189,15 @@ type PageId =
   | "pageheader"
   | "filterbar"
   | "form"
-  | "advancedtable";
+  | "advancedtable"
+  | "chart"
+  | "daterangepicker"
+  | "timepicker"
+  | "choicecard"
+  | "repeatablefield"
+  | "richtexteditor"
+  | "imagegallery"
+  | "appshell";
 
 interface SidebarItem {
   id: PageId;
@@ -224,6 +242,11 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "switch", label: t("sidebar.switch"), icon: <Power size={16} /> },
         { id: "dropdown", label: t("sidebar.dropdown"), icon: <ChevronDown size={16} /> },
         { id: "datepicker", label: t("sidebar.datepicker"), icon: <CalendarDays size={16} /> },
+        { id: "daterangepicker", label: "Date Range Picker", icon: <CalendarDays size={16} />, badge: "New" },
+        { id: "timepicker", label: "Time Picker", icon: <Clock size={16} />, badge: "New" },
+        { id: "choicecard", label: "Choice Card", icon: <LayoutGrid size={16} />, badge: "New" },
+        { id: "repeatablefield", label: "Repeatable Field", icon: <ListOrdered size={16} />, badge: "New" },
+        { id: "richtexteditor", label: "Rich Text Editor", icon: <PenTool size={16} />, badge: "New" },
         { id: "fileupload", label: t("sidebar.fileupload"), icon: <UploadIcon size={16} /> },
         { id: "rating", label: t("sidebar.rating"), icon: <Star size={16} /> },
         { id: "colorpicker", label: t("sidebar.colorpicker"), icon: <Palette size={16} /> },
@@ -248,6 +271,8 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
         { id: "emptystate", label: t("sidebar.emptystate"), icon: <Inbox size={16} /> },
         { id: "timeline", label: t("sidebar.timeline"), icon: <GitPullRequest size={16} /> },
         { id: "imagepreview", label: t("sidebar.imagepreview"), icon: <Image size={16} /> },
+        { id: "chart", label: "Charts", icon: <BarChart3 size={16} />, badge: "New" },
+        { id: "imagegallery", label: "Image Gallery", icon: <Image size={16} />, badge: "New" },
       ],
     },
     {
@@ -290,6 +315,12 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
       items: [
         { id: "tree", label: t("sidebar.tree"), icon: <FolderTree size={16} /> },
         { id: "transferlist", label: t("sidebar.transferlist"), icon: <ArrowRightLeft size={16} /> },
+      ],
+    },
+    {
+      label: "Shell",
+      items: [
+        { id: "appshell", label: "AppShell", icon: <Layers size={16} />, badge: "New" },
       ],
     },
   ];
@@ -355,6 +386,14 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   filterbar: FilterBarShowcase,
   form: FormShowcase,
   advancedtable: AdvancedTableShowcase,
+  chart: ChartShowcase,
+  daterangepicker: DateRangePickerShowcase,
+  timepicker: TimePickerShowcase,
+  choicecard: ChoiceCardShowcase,
+  repeatablefield: RepeatableFieldShowcase,
+  richtexteditor: RichTextEditorShowcase,
+  imagegallery: ImageGalleryShowcase,
+  appshell: AppShellShowcase,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────

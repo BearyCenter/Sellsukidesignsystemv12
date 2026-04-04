@@ -270,6 +270,24 @@ const translations: Record<string, Record<Lang, string>> = {
   "page.advancedtable.title": { en: "Advanced Table", th: "ตารางขั้นสูง" },
   "page.advancedtable.desc": { en: "Server-side data table with pagination, multi-column sort, bulk actions, row selection, frozen columns, column toggle, and loading/error states.", th: "ตารางข้อมูลฝั่งเซิร์ฟเวอร์พร้อมการแบ่งหน้า, เรียงหลายคอลัมน์, การกระทำกลุ่ม, เลือกแถว, คอลัมน์ตรึง และสถานะโหลด/ข้อผิดพลาด" },
 
+  // ── Stage 2.5 + 6 New Components ──
+  "page.chart.title": { en: "Charts", th: "กราฟ" },
+  "page.chart.desc": { en: "Zero-dependency SVG charts — LineChart, AreaChart, BarChart, DonutChart, and MiniSparkline. All use CSS tokens for colors and support tooltips.", th: "กราฟ SVG ไม่ต้องพึ่ง library — LineChart, AreaChart, BarChart, DonutChart และ MiniSparkline ใช้ CSS tokens สำหรับสี และรองรับ tooltip" },
+  "page.daterangepicker.title": { en: "Date Range Picker", th: "ตัวเลือกช่วงวันที่" },
+  "page.daterangepicker.desc": { en: "Dual-calendar popup date range picker with preset shortcuts (Today, Last 7 days, This month, etc.) and custom range selection.", th: "ตัวเลือกช่วงวันที่แบบปฏิทินคู่พร้อมทางลัดพรีเซ็ต (วันนี้, 7 วันล่าสุด, เดือนนี้ ฯลฯ) และเลือกช่วงเองได้" },
+  "page.timepicker.title": { en: "Time Picker", th: "ตัวเลือกเวลา" },
+  "page.timepicker.desc": { en: "Scroll-column time picker supporting 12h/24h formats, optional seconds, and a combined DateTimePicker variant.", th: "ตัวเลือกเวลาแบบคอลัมน์เลื่อน รองรับรูปแบบ 12ชม./24ชม., วินาทีเสริม และ DateTimePicker รวมกัน" },
+  "page.choicecard.title": { en: "Choice Card", th: "การ์ดเลือก" },
+  "page.choicecard.desc": { en: "Rich selection cards — ChoiceCard for icon+title+description choices, ChoiceCardGroup for controlled single/multi selection, RadioCard for plan/tier selection.", th: "การ์ดเลือกที่สมบูรณ์ — ChoiceCard สำหรับไอคอน+ชื่อ+คำอธิบาย, ChoiceCardGroup สำหรับเลือกเดี่ยว/หลายตัวควบคุมได้, RadioCard สำหรับเลือกแผน" },
+  "page.repeatablefield.title": { en: "Repeatable Field", th: "ฟิลด์ซ้ำ" },
+  "page.repeatablefield.desc": { en: "Dynamic list of rows with custom column renders, add/remove/reorder support, and configurable min/max row limits.", th: "รายการแถวแบบไดนามิก พร้อม column render กำหนดเอง, เพิ่ม/ลบ/เรียงลำดับ และจำกัดแถวขั้นต่ำ/สูงสุดได้" },
+  "page.richtexteditor.title": { en: "Rich Text Editor", th: "ตัวแก้ไขข้อความ" },
+  "page.richtexteditor.desc": { en: "contentEditable rich text editor with formatting toolbar (bold, italic, lists, alignment, links, headings), fullscreen mode, and HTML output.", th: "Rich text editor แบบ contentEditable พร้อม toolbar (ตัวหนา, เอียง, รายการ, จัดย่อหน้า, ลิงก์, หัวข้อ), โหมดเต็มจอ และ HTML output" },
+  "page.imagegallery.title": { en: "Image Gallery", th: "แกลเลอรีรูปภาพ" },
+  "page.imagegallery.desc": { en: "Grid/list image gallery with lightbox, keyboard navigation, selectable images, upload trigger, and ThumbnailCell for compact table use.", th: "แกลเลอรีรูปภาพแบบตาราง/รายการ พร้อม lightbox, ปุ่มแป้นพิมพ์, เลือกรูปได้, ปุ่มอัปโหลด และ ThumbnailCell สำหรับตาราง" },
+  "page.appshell.title": { en: "AppShell", th: "เชลล์แอป" },
+  "page.appshell.desc": { en: "Full-page product shell composing TopNavbar + responsive Sidebar + content frame. Supports async nav resolver, multi-product theming, and FeaturePageScaffold layouts.", th: "เชลล์หน้าแบบเต็ม ประกอบ TopNavbar + Sidebar แบบ responsive + กรอบเนื้อหา รองรับ async nav resolver, ธีมหลายผลิตภัณฑ์ และ FeaturePageScaffold" },
+
   // ── Component Preview Page ──
   "page.preview.title": { en: "Component Preview", th: "ตัวอย่างคอมโพเนนต์" },
   "page.preview.desc": {
