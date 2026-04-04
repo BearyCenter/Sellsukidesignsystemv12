@@ -13,6 +13,9 @@ import {
   TrendingDown,
   Server,
   WifiOff,
+  FileText,
+  Copy,
+  Check,
 } from "lucide-react";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
@@ -124,10 +127,11 @@ function calcRpm(requests: RequestLog[]): number {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function MCPTrackerPage() {
-  const [log,         setLog]         = useState<RequestLog[]>([]);
-  const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
-  const [isLive,      setIsLive]      = useState(true);
-  const [dataSource,  setDataSource]  = useState<"real" | "empty" | "loading">("loading");
+  const [log,          setLog]         = useState<RequestLog[]>([]);
+  const [lastRefresh,  setLastRefresh] = useState<Date | null>(null);
+  const [isLive,       setIsLive]      = useState(true);
+  const [dataSource,   setDataSource]  = useState<"real" | "empty" | "loading">("loading");
+  const [reportCopied, setReportCopied] = useState(false);
 
   const load = useCallback(async () => {
     const data = await fetchLog();
@@ -149,6 +153,27 @@ export function MCPTrackerPage() {
     const id = setInterval(load, POLL_MS);
     return () => clearInterval(id);
   }, [isLive, load]);
+
+  const handleFeatureReport = useCallback(() => {
+    const { totalToday, avgMs, successPct, toolCounts } = deriveStats(log);
+    const topTools = Object.entries(toolCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const report = [
+      "# Sellsuki DS — MCP Feature Report",
+      `Generated: ${new Date().toLocaleString("th-TH")}`,
+      "",
+      `Total Requests : ${totalToday}`,
+      `Avg Response   : ${avgMs}ms`,
+      `Success Rate   : ${successPct}%`,
+      `Req / min      : ${calcRpm(log)}`,
+      "",
+      "Top Tools:",
+      ...topTools.map(([tool, count]) => `  ${tool}: ${count} calls`),
+    ].join("\n");
+    navigator.clipboard?.writeText(report).then(() => {
+      setReportCopied(true);
+      setTimeout(() => setReportCopied(false), 2000);
+    });
+  }, [log]);
 
   const { totalToday, avgMs, successPct, errCount, toolCounts } = deriveStats(log);
   const rpm     = calcRpm(log);
@@ -248,6 +273,20 @@ export function MCPTrackerPage() {
           >
             <Activity size={14} />
             {isLive ? "Live" : "Paused"}
+          </button>
+
+          <button
+            onClick={handleFeatureReport}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border transition-all"
+            style={{
+              borderColor: reportCopied ? c.success : c.border,
+              background:  reportCopied ? c.successBg : "var(--card)",
+              ...f.btn,
+              color: reportCopied ? c.success : c.textSec,
+            }}
+          >
+            {reportCopied ? <Check size={13} /> : <FileText size={13} />}
+            {reportCopied ? "Copied!" : "Feature Report"}
           </button>
 
           <button
@@ -406,7 +445,7 @@ export function MCPTrackerPage() {
                 <table className="w-full">
                   <thead>
                     <tr style={{ borderBottom: `1px solid ${c.border}` }}>
-                      {["Time", "ID", "Tool", "Params", "Duration", "Status"].map((h) => (
+                      {["Date / Time", "ID", "Tool", "Params", "Duration", "Status"].map((h) => (
                         <th
                           key={h}
                           className="text-left px-3 py-2 sticky top-0"
@@ -420,7 +459,8 @@ export function MCPTrackerPage() {
                   <tbody>
                     {log.map((req, i) => {
                       const ts = new Date(req.ts);
-                      const timeStr = ts.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+                      const dateStr = ts.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
+                      const timeStr = `${dateStr} · ${ts.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
                       return (
                         <tr
                           key={req.id + i}

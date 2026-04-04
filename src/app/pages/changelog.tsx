@@ -57,7 +57,7 @@ interface ChangelogFeature {
   description: string;
 }
 
-type ChangelogTag = "new" | "improved" | "fixed" | "breaking";
+type ChangelogTag = "new" | "improved" | "fixed" | "breaking" | "preview";
 
 interface ChangelogVersion {
   version: string;
@@ -70,6 +70,20 @@ interface ChangelogVersion {
 // ─── Full Changelog Data — Single Source of Truth ─────────────────────────────
 
 export const changelogVersions: ChangelogVersion[] = [
+  {
+    version: "1.5.0",
+    date: "April 4, 2026",
+    summary: "Radius standardization across all 60+ components, DSButton SVG+text stacking fix, DateRangePicker UX improvements, 8 new showcase pages, and vibe accuracy improvements in ai-rules.md.",
+    tags: ["preview", "fixed", "improved"],
+    features: [
+      { icon: <Paintbrush size={16} />, title: "Radius Standardization (--radius-md everywhere)", description: "Replaced all --radius-lg (16px) usages with --radius-md (6px) across 47 files — inputs, dropdowns, calendars, panels, and popovers now consistently use the 6px system radius. Token semantic hierarchy preserved." },
+      { icon: <MousePointerClick size={16} />, title: "DSButton SVG + Text Fix", description: "Fixed icon+text stacking vertically inside buttons due to Tailwind preflight setting SVG to display:block. Children span now wraps with inline-flex items-center gap-2, ensuring icon and text align in one row automatically." },
+      { icon: <CalendarDays size={16} />, title: "DateRangePicker UX Improvements", description: "Fixed dropdown z-index overlap with code blocks (z-50), corrected calendar cells not filling available width (flex-1 min-w-0), increased day cell height to h-8 for better touch targets, and standardized radius." },
+      { icon: <LayoutGrid size={16} />, title: "8 New Showcase Pages", description: "Added showcase pages for AppShell, Charts, ChoiceCard, DateRangePicker, ImageGallery, RepeatableFieldList, RichTextEditor, and TimePicker — covering the full Stage 5.5+6 component set." },
+      { icon: <Star size={16} />, title: "Vibe Accuracy: ai-rules.md Update", description: "Corrected sandbox patterns from rounded-lg (8px Tailwind default) to rounded-[6px] (exact 6px). Added icon+text button guidance for both Full mode and Sandbox mode to prevent SVG stacking in vibe-generated code." },
+      { icon: <TrendingUp size={16} />, title: "MCP Tracker: Feature Report + Date Column", description: "Added Feature Report button that copies a formatted stats summary to clipboard. Recent Requests table now shows full date + time (DD Mon · HH:MM:SS) in the Date / Time column." },
+    ],
+  },
   {
     version: "1.4.0",
     date: "March 10, 2026",
@@ -169,6 +183,7 @@ const changelogTagStyles: Record<ChangelogTag, { bg: string; text: string }> = {
   improved: { bg: "bg-primary/15", text: "text-primary" },
   fixed: { bg: "bg-chart-5/15", text: "text-chart-5" },
   breaking: { bg: "bg-destructive/15", text: "text-destructive" },
+  preview: { bg: "bg-[#f0f9ff]", text: "text-[#0369a1]" },
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -181,6 +196,7 @@ export function ChangelogPage() {
     improved: t("changelog.tagImproved"),
     fixed: t("changelog.tagFixed"),
     breaking: t("changelog.tagBreaking"),
+    preview: "Preview",
   };
 
   const [expandedVersions, setExpandedVersions] = useState<Record<string, boolean>>(() => {
