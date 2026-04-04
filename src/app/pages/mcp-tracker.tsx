@@ -132,7 +132,9 @@ export function MCPTrackerPage() {
   const [lastRefresh,  setLastRefresh] = useState<Date | null>(null);
   const [isLive,       setIsLive]      = useState(true);
   const [dataSource,   setDataSource]  = useState<"real" | "empty" | "loading">("loading");
-  const [reportCopied, setReportCopied] = useState(false);
+  const [reportCopied,  setReportCopied]  = useState(false);
+  const [showReport,    setShowReport]    = useState(false);
+  const [reportText,    setReportText]    = useState("");
 
   // Export date range — default: today
   const todayStr = new Date().toISOString().slice(0, 10);
@@ -163,9 +165,9 @@ export function MCPTrackerPage() {
   const handleFeatureReport = useCallback(() => {
     const { totalToday, avgMs, successPct, toolCounts } = deriveStats(log);
     const topTools = Object.entries(toolCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-    const report = [
+    const text = [
       "# Sellsuki DS — MCP Feature Report",
-      `Generated: ${new Date().toLocaleString("th-TH")}`,
+      `Generated: ${new Date().toLocaleString("en-GB")}`,
       "",
       `Total Requests : ${totalToday}`,
       `Avg Response   : ${avgMs}ms`,
@@ -175,11 +177,16 @@ export function MCPTrackerPage() {
       "Top Tools:",
       ...topTools.map(([tool, count]) => `  ${tool}: ${count} calls`),
     ].join("\n");
-    navigator.clipboard?.writeText(report).then(() => {
+    setReportText(text);
+    setShowReport(true);
+  }, [log]);
+
+  const handleCopyReport = useCallback(() => {
+    navigator.clipboard?.writeText(reportText).then(() => {
       setReportCopied(true);
       setTimeout(() => setReportCopied(false), 2000);
     });
-  }, [log]);
+  }, [reportText]);
 
   // Filter log by selected date range
   const filteredLog = log.filter((r) => {
@@ -322,16 +329,11 @@ export function MCPTrackerPage() {
 
           <button
             onClick={handleFeatureReport}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border transition-all"
-            style={{
-              borderColor: reportCopied ? c.success : c.border,
-              background:  reportCopied ? c.successBg : "var(--card)",
-              ...f.btn,
-              color: reportCopied ? c.success : c.textSec,
-            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border hover:bg-gray-50 transition-all"
+            style={{ borderColor: c.border, background: "var(--card)", ...f.btn, color: c.textSec }}
           >
-            {reportCopied ? <Check size={13} /> : <FileText size={13} />}
-            {reportCopied ? "Copied!" : "Feature Report"}
+            <FileText size={13} />
+            Feature Report
           </button>
 
           <button
@@ -641,6 +643,84 @@ export function MCPTrackerPage() {
           </a>
         </span>
       </div>
+
+      {/* ── Feature Report Modal ─────────────────────────────────────────────── */}
+      {showReport && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: "rgba(0,0,0,0.45)" }}
+          onClick={() => setShowReport(false)}
+        >
+          <div
+            className="relative rounded-[8px] border shadow-[0_8px_32px_0_rgba(0,0,0,0.18)] w-full max-w-lg mx-4"
+            style={{ background: "var(--card)", borderColor: c.border }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal header */}
+            <div
+              className="flex items-center justify-between px-5 py-4 border-b"
+              style={{ borderColor: c.border }}
+            >
+              <div className="flex items-center gap-2">
+                <FileText size={16} color={c.primary} />
+                <span style={{ ...f.h4, color: "var(--foreground)" }}>Feature Report</span>
+              </div>
+              <button
+                onClick={() => setShowReport(false)}
+                className="w-7 h-7 flex items-center justify-center rounded-[6px] hover:bg-gray-100 transition-colors"
+                style={{ color: c.textSec }}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Report body */}
+            <div className="px-5 py-4">
+              <pre
+                className="rounded-[6px] p-4 text-[12px] leading-relaxed overflow-auto"
+                style={{
+                  fontFamily: "'Fira Code', 'Courier New', monospace",
+                  background: c.bgPage,
+                  color: c.text,
+                  border: `1px solid ${c.border}`,
+                  maxHeight: 320,
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                }}
+              >
+                {reportText}
+              </pre>
+            </div>
+
+            {/* Modal footer */}
+            <div
+              className="flex items-center justify-end gap-2 px-5 py-3 border-t"
+              style={{ borderColor: c.border }}
+            >
+              <button
+                onClick={() => setShowReport(false)}
+                className="px-4 py-1.5 rounded-[6px] border hover:bg-gray-50 transition-colors"
+                style={{ borderColor: c.border, ...f.btn, color: c.textSec, background: "var(--card)" }}
+              >
+                Close
+              </button>
+              <button
+                onClick={handleCopyReport}
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-[6px] border transition-all"
+                style={{
+                  borderColor: reportCopied ? c.success : c.primary,
+                  background:  reportCopied ? c.successBg : c.primaryLight,
+                  color:       reportCopied ? c.success : c.primary,
+                  ...f.btn,
+                }}
+              >
+                {reportCopied ? <Check size={13} /> : <Copy size={13} />}
+                {reportCopied ? "Copied!" : "Copy to Clipboard"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
