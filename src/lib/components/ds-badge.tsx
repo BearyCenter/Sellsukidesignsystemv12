@@ -43,8 +43,8 @@ const sizeStyles: Record<
     className: "px-1.5 py-0.5 gap-1",
     style: {
       fontFamily: "var(--font-label)",
-      fontSize: "var(--text-label)",
-      fontWeight: "var(--weight-button)",
+      fontSize: "var(--text-caption)",
+      fontWeight: 400,
     },
     iconSize: 10,
   },
@@ -52,8 +52,8 @@ const sizeStyles: Record<
     className: "px-2.5 py-0.5 gap-1.5",
     style: {
       fontFamily: "var(--font-label)",
-      fontSize: "var(--text-label)",
-      fontWeight: "var(--weight-button)",
+      fontSize: "var(--text-caption)",
+      fontWeight: 400,
     },
     iconSize: 12,
   },
@@ -62,7 +62,7 @@ const sizeStyles: Record<
     style: {
       fontFamily: "var(--font-label)",
       fontSize: "var(--text-label)",
-      fontWeight: "var(--weight-button)",
+      fontWeight: 400,
     },
     iconSize: 14,
   },

@@ -56,7 +56,9 @@
 | H4 Card | `--text-h4` | **24px** | 500 | `text-[24px] font-medium` |
 | Body / P | `--text-p` | **20px** | 400 | `text-[20px]` |
 | Label | `--text-label` | **18px** | 400 | `text-[18px]` |
-| Button / Badge | `--text-button` | **18px** | 600 | `text-[18px] font-semibold` |
+| Button | `--text-button` | **18px** | 600 | `text-[18px] font-semibold` |
+| Badge (sm/md) | `--text-caption` | **16px** | 400 | `text-[16px] font-normal` |
+| Badge (lg) | `--text-label` | **18px** | 400 | `text-[18px] font-normal` |
 | Caption | `--text-caption` | **16px** | 400 | `text-[16px]` |
 
 ## Spacing
@@ -169,7 +171,8 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Badge
 ```html
-<span class="px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#d1fae5] text-[#065f46] font-['DB_HeaventRounded']">Active</span>
+<!-- font-normal (weight 400) — never font-semibold, badge text should be light -->
+<span class="px-2 py-0.5 text-[16px] font-normal rounded-full bg-[#d1fae5] text-[#065f46] font-['DB_HeaventRounded']">Active</span>
 ```
 
 ### Table Header

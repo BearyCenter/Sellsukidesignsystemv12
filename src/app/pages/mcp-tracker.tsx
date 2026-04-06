@@ -42,16 +42,16 @@ const c = {
 };
 
 const fontBody   = "'DB HeaventRounded', 'Noto Sans Thai', sans-serif";
-const fontButton = "Inter, 'Noto Sans Thai', sans-serif";
+const fontButton = "'DB HeaventRounded', 'Noto Sans Thai', sans-serif";
 
 const f = {
-  h3:    { fontFamily: fontBody,   fontSize: 24, fontWeight: 700 } as React.CSSProperties,
-  h4:    { fontFamily: fontBody,   fontSize: 18, fontWeight: 600 } as React.CSSProperties,
-  label: { fontFamily: fontBody,   fontSize: 16, fontWeight: 400 } as React.CSSProperties,
-  num:   { fontFamily: fontButton, fontSize: 14, fontWeight: 600 } as React.CSSProperties,
-  numSm: { fontFamily: fontButton, fontSize: 12, fontWeight: 500 } as React.CSSProperties,
-  numLg: { fontFamily: fontButton, fontSize: 28, fontWeight: 700 } as React.CSSProperties,
-  btn:   { fontFamily: fontButton, fontSize: 13, fontWeight: 600 } as React.CSSProperties,
+  h3:    { fontFamily: fontBody,   fontSize: "var(--text-h4)",      fontWeight: 700 } as React.CSSProperties,
+  h4:    { fontFamily: fontBody,   fontSize: "var(--text-label)",   fontWeight: 600 } as React.CSSProperties,
+  label: { fontFamily: fontBody,   fontSize: "var(--text-caption)", fontWeight: 400 } as React.CSSProperties,
+  num:   { fontFamily: fontButton, fontSize: "var(--text-label)",   fontWeight: 400 } as React.CSSProperties,
+  numSm: { fontFamily: fontButton, fontSize: "var(--text-caption)", fontWeight: 400 } as React.CSSProperties,
+  numLg: { fontFamily: fontButton, fontSize: "var(--text-h3)",      fontWeight: 700 } as React.CSSProperties,
+  btn:   { fontFamily: fontButton, fontSize: "var(--text-caption)", fontWeight: 600 } as React.CSSProperties,
 };
 
 // ─── Tool metadata (colours / icons) for display only ────────────────────────
@@ -333,7 +333,7 @@ export function MCPTrackerPage() {
             style={{ borderColor: c.border, background: "var(--card)", ...f.btn, color: c.textSec }}
           >
             <FileText size={13} />
-            Feature Report
+            Report
           </button>
 
           <button
@@ -388,7 +388,7 @@ export function MCPTrackerPage() {
               style={{ borderColor: c.border, background: "var(--card)" }}
             >
               <div className="flex items-center justify-between mb-3">
-                <span style={{ ...f.label, color: c.textSec, fontSize: 14 }}>{s.label}</span>
+                <span style={{ ...f.label, color: c.textSec, fontSize: "var(--text-caption)" }}>{s.label}</span>
                 <div
                   className="w-9 h-9 rounded-[8px] flex items-center justify-center flex-shrink-0"
                   style={{ background: s.bg, color: s.color }}
@@ -436,12 +436,12 @@ export function MCPTrackerPage() {
                   <div key={name}>
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center gap-2">
-                        <span style={{ fontSize: 14 }}>{meta.icon}</span>
+                        <span style={{ fontSize: "var(--text-caption)" }}>{meta.icon}</span>
                         <div>
-                          <span className="font-mono block" style={{ ...f.numSm, color: "var(--foreground)", fontSize: 12 }}>
+                          <span className="font-mono block" style={{ ...f.numSm, color: "var(--foreground)", fontSize: "var(--text-caption)" }}>
                             {name}
                           </span>
-                          <span style={{ ...f.numSm, color: c.placeholder, fontSize: 11 }}>{meta.category}</span>
+                          <span style={{ ...f.numSm, color: c.placeholder, fontSize: "var(--text-caption)" }}>{meta.category}</span>
                         </div>
                       </div>
                       <span style={{ ...f.num, color: count > 0 ? c.textSec : c.placeholder }}>
@@ -474,7 +474,7 @@ export function MCPTrackerPage() {
                 <h2 style={{ ...f.h4, color: "var(--foreground)" }}>Recent Requests</h2>
                 <span
                   className="px-1.5 py-0.5 rounded-full"
-                  style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: 10 }}
+                  style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: "var(--text-caption)" }}
                 >
                   Real
                 </span>
@@ -496,7 +496,7 @@ export function MCPTrackerPage() {
                         <th
                           key={h}
                           className="text-left px-3 py-2 sticky top-0"
-                          style={{ ...f.numSm, color: c.textSec, background: c.bgPage, fontSize: 11, whiteSpace: "nowrap", zIndex: 1 }}
+                          style={{ ...f.numSm, color: c.textSec, background: c.bgPage, fontSize: "var(--text-caption)", whiteSpace: "nowrap", zIndex: 1 }}
                         >
                           {h}
                         </th>
@@ -514,35 +514,35 @@ export function MCPTrackerPage() {
                           className="hover:bg-[#f9fafb] transition-colors"
                           style={{ borderBottom: i < log.length - 1 ? `1px solid ${c.border}` : "none" }}
                         >
-                          <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ ...f.numSm, color: c.placeholder, fontSize: 11 }}>
+                          <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ ...f.numSm, color: c.placeholder, fontSize: "var(--text-caption)" }}>
                             {timeStr}
                           </td>
-                          <td className="px-3 py-2 font-mono" style={{ ...f.numSm, color: c.placeholder, fontSize: 11 }}>
+                          <td className="px-3 py-2 font-mono" style={{ ...f.numSm, color: c.placeholder, fontSize: "var(--text-caption)" }}>
                             {req.id}
                           </td>
                           <td className="px-3 py-2 whitespace-nowrap">
                             <span
                               className="font-mono"
-                              style={{ ...f.numSm, color: TOOL_META[req.tool]?.color ?? c.primary, fontSize: 11 }}
+                              style={{ ...f.numSm, color: TOOL_META[req.tool]?.color ?? c.primary, fontSize: "var(--text-caption)" }}
                             >
                               {req.tool}
                             </span>
                           </td>
                           <td className="px-3 py-2 max-w-[130px] truncate">
-                            <span style={{ ...f.numSm, color: c.textSec, fontSize: 11 }}>{req.params || "—"}</span>
+                            <span style={{ ...f.numSm, color: c.textSec, fontSize: "var(--text-caption)" }}>{req.params || "—"}</span>
                           </td>
                           <td className="px-3 py-2 whitespace-nowrap">
-                            <span style={{ ...f.num, fontSize: 12, color: req.duration < 150 ? c.success : req.duration < 250 ? c.warning : c.danger }}>
+                            <span style={{ ...f.num, fontSize: "var(--text-caption)", color: req.duration < 150 ? c.success : req.duration < 250 ? c.warning : c.danger }}>
                               {req.duration}ms
                             </span>
                           </td>
                           <td className="px-3 py-2">
                             {req.status === "success" ? (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: c.successBg, color: c.success, fontSize: 11 }}>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: c.successBg, color: c.success, fontSize: "var(--text-caption)" }}>
                                 <CheckCircle2 size={11} /> OK
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: c.dangerBg, color: c.danger, fontSize: 11 }}>
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ ...f.numSm, background: c.dangerBg, color: c.danger, fontSize: "var(--text-caption)" }}>
                                 <AlertCircle size={11} /> ERR
                               </span>
                             )}
@@ -566,7 +566,7 @@ export function MCPTrackerPage() {
       >
         <div className="flex items-center gap-2">
           <Server size={15} color={c.primary} />
-          <span style={{ ...f.label, fontWeight: 600, color: c.text, fontSize: 14 }}>MCP Server</span>
+          <span style={{ ...f.label, fontWeight: 600, color: c.text, fontSize: "var(--text-caption)" }}>MCP Server</span>
           <span
             className="flex items-center gap-1 px-2 py-0.5 rounded-full"
             style={{ ...f.numSm, background: c.successBg, color: c.success }}
@@ -678,7 +678,7 @@ export function MCPTrackerPage() {
                           <div className="space-y-1">
                             {topTools.map(([tool, count]) => (
                               <div key={tool} className="flex items-center justify-between">
-                                <span className="font-mono" style={{ ...f.numSm, color: TOOL_META[tool]?.color ?? c.primary, fontSize: 11 }}>{tool}</span>
+                                <span className="font-mono" style={{ ...f.numSm, color: TOOL_META[tool]?.color ?? c.primary, fontSize: "var(--text-caption)" }}>{tool}</span>
                                 <span style={{ ...f.numSm, color: c.textSec }}>{count} calls</span>
                               </div>
                             ))}

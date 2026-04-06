@@ -66,7 +66,7 @@ const descStyle: React.CSSProperties = {
 
 const badgeStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-label)",
+  fontSize: "var(--text-caption)",
   fontWeight: "var(--weight-button)",
 };
 
@@ -136,7 +136,7 @@ export function ChoiceCard({
       )}
 
       {/* Text content */}
-      <div className={`flex-1 ${isVertical ? "mt-2" : "min-w-0"}`}>
+      <div className={`flex-1 min-w-0 ${isVertical ? "mt-2" : ""}`}>
         <div className="flex items-center gap-2 flex-wrap">
           <span
             className={selected ? "text-foreground" : "text-foreground"}
@@ -155,7 +155,7 @@ export function ChoiceCard({
         </div>
         {description && (
           <p
-            className="text-muted-foreground mt-0.5 truncate"
+            className={`text-muted-foreground mt-0.5 ${isVertical ? "line-clamp-2" : "truncate"}`}
             style={descStyle}
           >
             {description}
