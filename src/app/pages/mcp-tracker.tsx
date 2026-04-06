@@ -162,6 +162,12 @@ export function MCPTrackerPage() {
     return () => clearInterval(id);
   }, [isLive, load]);
 
+  // Filter log by modal date range (for report + export only)
+  const filteredLog = log.filter((r) => {
+    const d = r.ts.slice(0, 10);
+    return d >= exportFrom && d <= exportTo;
+  });
+
   const handleFeatureReport = useCallback(() => {
     setShowReport(true);
   }, []);
@@ -186,12 +192,6 @@ export function MCPTrackerPage() {
       setTimeout(() => setReportCopied(false), 2000);
     });
   }, [filteredLog, exportFrom, exportTo]);
-
-  // Filter log by modal date range (for report + export only)
-  const filteredLog = log.filter((r) => {
-    const d = r.ts.slice(0, 10);
-    return d >= exportFrom && d <= exportTo;
-  });
 
   const handleExportExcel = useCallback(() => {
     const rows = log.filter((r) => {
