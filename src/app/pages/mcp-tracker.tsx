@@ -133,9 +133,8 @@ export function MCPTrackerPage() {
   const [lastRefresh,  setLastRefresh] = useState<Date | null>(null);
   const [isLive,       setIsLive]      = useState(true);
   const [dataSource,   setDataSource]  = useState<"real" | "empty" | "loading">("loading");
-  const [reportCopied,  setReportCopied]  = useState(false);
-  const [showReport,    setShowReport]    = useState(false);
-  const [reportText,    setReportText]    = useState("");
+  const [reportCopied, setReportCopied] = useState(false);
+  const [showReport,   setShowReport]   = useState(false);
 
   // Export date range — default: today
   const todayStr = new Date().toISOString().slice(0, 10);
@@ -164,34 +163,33 @@ export function MCPTrackerPage() {
   }, [isLive, load]);
 
   const handleFeatureReport = useCallback(() => {
-    const { totalToday, avgMs, successPct, toolCounts } = deriveStats(log);
+    setShowReport(true);
+  }, []);
+
+  const handleCopyReport = useCallback(() => {
+    const { totalToday, avgMs, successPct, toolCounts } = deriveStats(filteredLog);
     const topTools = Object.entries(toolCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
     const text = [
       "# Sellsuki DS — MCP Feature Report",
-      `Generated: ${new Date().toLocaleString("en-GB")}`,
+      `Generated  : ${new Date().toLocaleString("en-GB")}`,
+      `Date Range : ${exportFrom} → ${exportTo}`,
       "",
       `Total Requests : ${totalToday}`,
       `Avg Response   : ${avgMs}ms`,
       `Success Rate   : ${successPct}%`,
-      `Req / min      : ${calcRpm(log)}`,
       "",
       "Top Tools:",
       ...topTools.map(([tool, count]) => `  ${tool}: ${count} calls`),
     ].join("\n");
-    setReportText(text);
-    setShowReport(true);
-  }, [log]);
-
-  const handleCopyReport = useCallback(() => {
-    navigator.clipboard?.writeText(reportText).then(() => {
+    navigator.clipboard?.writeText(text).then(() => {
       setReportCopied(true);
       setTimeout(() => setReportCopied(false), 2000);
     });
-  }, [reportText]);
+  }, [filteredLog, exportFrom, exportTo]);
 
-  // Filter log by selected date range
+  // Filter log by modal date range (for report + export only)
   const filteredLog = log.filter((r) => {
-    const d = r.ts.slice(0, 10); // "YYYY-MM-DD"
+    const d = r.ts.slice(0, 10);
     return d >= exportFrom && d <= exportTo;
   });
 
@@ -467,62 +465,20 @@ export function MCPTrackerPage() {
             style={{ borderColor: c.border, background: "var(--card)" }}
           >
             <div
-              className="flex flex-col border-b"
+              className="flex items-center justify-between px-4 py-3 border-b"
               style={{ borderColor: c.border }}
             >
-              {/* Row 1: title + count */}
-              <div className="flex items-center justify-between px-4 py-3">
-                <div className="flex items-center gap-2">
-                  <Clock size={16} color={c.primary} />
-                  <h2 style={{ ...f.h4, color: "var(--foreground)" }}>Recent Requests</h2>
-                  <span
-                    className="px-1.5 py-0.5 rounded-full"
-                    style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: 10 }}
-                  >
-                    Real
-                  </span>
-                </div>
-                <span style={{ ...f.numSm, color: c.placeholder }}>
-                  {filteredLog.length} / {log.length} calls
+              <div className="flex items-center gap-2">
+                <Clock size={16} color={c.primary} />
+                <h2 style={{ ...f.h4, color: "var(--foreground)" }}>Recent Requests</h2>
+                <span
+                  className="px-1.5 py-0.5 rounded-full"
+                  style={{ ...f.numSm, background: c.primaryLight, color: c.primary, fontSize: 10 }}
+                >
+                  Real
                 </span>
               </div>
-
-              {/* Row 2: date range filter + export */}
-              <div
-                className="flex items-center gap-2 px-4 pb-3"
-                style={{ borderTop: `1px solid ${c.border}`, paddingTop: 10 }}
-              >
-                <span style={{ ...f.numSm, color: c.textSec }}>Filter:</span>
-                <input
-                  type="date"
-                  value={exportFrom}
-                  onChange={(e) => setExportFrom(e.target.value)}
-                  className="h-7 px-2 rounded-[6px] border text-[12px]"
-                  style={{ borderColor: c.border, fontFamily: "'DB HeaventRounded', sans-serif", color: c.text, background: "var(--card)" }}
-                />
-                <span style={{ ...f.numSm, color: c.textSec }}>–</span>
-                <input
-                  type="date"
-                  value={exportTo}
-                  onChange={(e) => setExportTo(e.target.value)}
-                  className="h-7 px-2 rounded-[6px] border text-[12px]"
-                  style={{ borderColor: c.border, fontFamily: "'DB HeaventRounded', sans-serif", color: c.text, background: "var(--card)" }}
-                />
-                <button
-                  onClick={handleExportExcel}
-                  disabled={filteredLog.length === 0}
-                  className="flex items-center gap-1.5 h-7 px-3 rounded-[6px] border transition-all disabled:opacity-40"
-                  style={{
-                    borderColor: c.primary,
-                    background:  c.primaryLight,
-                    color:       c.primary,
-                    ...f.btn,
-                  }}
-                >
-                  <Download size={12} />
-                  Export Excel ({filteredLog.length})
-                </button>
-              </div>
+              <span style={{ ...f.numSm, color: c.placeholder }}>Last {log.length} calls</span>
             </div>
 
             {log.length === 0 ? (
@@ -531,7 +487,7 @@ export function MCPTrackerPage() {
                 <p style={{ ...f.label, color: c.placeholder }}>Waiting for MCP tool calls…</p>
               </div>
             ) : (
-              <div className="overflow-auto" style={{ maxHeight: 380 }}>
+              <div className="overflow-auto" style={{ maxHeight: 420 }}>
                 <table className="w-full">
                   <thead>
                     <tr style={{ borderBottom: `1px solid ${c.border}` }}>
@@ -547,13 +503,7 @@ export function MCPTrackerPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredLog.length === 0 ? (
-                      <tr>
-                        <td colSpan={6} className="text-center py-10" style={{ ...f.numSm, color: c.placeholder }}>
-                          No requests in selected date range
-                        </td>
-                      </tr>
-                    ) : filteredLog.map((req, i) => {
+                    {log.map((req, i) => {
                       const ts = new Date(req.ts);
                       const dateStr = ts.toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
                       const timeStr = `${dateStr} · ${ts.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
@@ -561,7 +511,7 @@ export function MCPTrackerPage() {
                         <tr
                           key={req.id + i}
                           className="hover:bg-[#f9fafb] transition-colors"
-                          style={{ borderBottom: i < filteredLog.length - 1 ? `1px solid ${c.border}` : "none" }}
+                          style={{ borderBottom: i < log.length - 1 ? `1px solid ${c.border}` : "none" }}
                         >
                           <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ ...f.numSm, color: c.placeholder, fontSize: 11 }}>
                             {timeStr}
@@ -675,27 +625,77 @@ export function MCPTrackerPage() {
               </button>
             </div>
 
-            {/* Report body */}
-            <div className="px-5 py-4">
-              <pre
-                className="rounded-[6px] p-4 text-[12px] leading-relaxed overflow-auto"
-                style={{
-                  fontFamily: "'Fira Code', 'Courier New', monospace",
-                  background: c.bgPage,
-                  color: c.text,
-                  border: `1px solid ${c.border}`,
-                  maxHeight: 320,
-                  whiteSpace: "pre-wrap",
-                  wordBreak: "break-word",
-                }}
-              >
-                {reportText}
-              </pre>
+            {/* Date range selector */}
+            <div className="px-5 pt-4 pb-3">
+              <p style={{ ...f.numSm, color: c.textSec, marginBottom: 8 }}>Select date range to report</p>
+              <div className="flex items-center gap-2">
+                <input
+                  type="date"
+                  value={exportFrom}
+                  onChange={(e) => setExportFrom(e.target.value)}
+                  className="flex-1 h-8 px-3 rounded-[6px] border"
+                  style={{ borderColor: c.border, ...f.numSm, color: c.text, background: c.bgPage }}
+                />
+                <span style={{ ...f.numSm, color: c.textSec }}>–</span>
+                <input
+                  type="date"
+                  value={exportTo}
+                  onChange={(e) => setExportTo(e.target.value)}
+                  className="flex-1 h-8 px-3 rounded-[6px] border"
+                  style={{ borderColor: c.border, ...f.numSm, color: c.text, background: c.bgPage }}
+                />
+              </div>
+            </div>
+
+            {/* Report stats for selected range */}
+            <div className="px-5 pb-4">
+              {(() => {
+                const r = deriveStats(filteredLog);
+                const topTools = Object.entries(r.toolCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+                return (
+                  <div
+                    className="rounded-[6px] p-4 space-y-2"
+                    style={{ background: c.bgPage, border: `1px solid ${c.border}` }}
+                  >
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
+                      {[
+                        ["Total Requests", `${r.totalToday} calls`],
+                        ["Avg Response",   `${r.avgMs} ms`],
+                        ["Success Rate",   `${r.successPct}%`],
+                        ["In range",       `${filteredLog.length} / ${log.length} calls`],
+                      ].map(([label, value]) => (
+                        <div key={label} className="flex items-center justify-between">
+                          <span style={{ ...f.numSm, color: c.textSec }}>{label}</span>
+                          <span style={{ ...f.num, color: c.text }}>{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {topTools.length > 0 && (
+                      <>
+                        <div className="border-t pt-2" style={{ borderColor: c.border }}>
+                          <p style={{ ...f.numSm, color: c.textSec, marginBottom: 6 }}>Top Tools</p>
+                          <div className="space-y-1">
+                            {topTools.map(([tool, count]) => (
+                              <div key={tool} className="flex items-center justify-between">
+                                <span className="font-mono" style={{ ...f.numSm, color: TOOL_META[tool]?.color ?? c.primary, fontSize: 11 }}>{tool}</span>
+                                <span style={{ ...f.numSm, color: c.textSec }}>{count} calls</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    {filteredLog.length === 0 && (
+                      <p style={{ ...f.numSm, color: c.placeholder }} className="text-center pt-1">No data in selected range</p>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Modal footer */}
             <div
-              className="flex items-center justify-end gap-2 px-5 py-3 border-t"
+              className="flex items-center justify-between gap-2 px-5 py-3 border-t"
               style={{ borderColor: c.border }}
             >
               <button
@@ -705,19 +705,36 @@ export function MCPTrackerPage() {
               >
                 Close
               </button>
-              <button
-                onClick={handleCopyReport}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded-[6px] border transition-all"
-                style={{
-                  borderColor: reportCopied ? c.success : c.primary,
-                  background:  reportCopied ? c.successBg : c.primaryLight,
-                  color:       reportCopied ? c.success : c.primary,
-                  ...f.btn,
-                }}
-              >
-                {reportCopied ? <Check size={13} /> : <Copy size={13} />}
-                {reportCopied ? "Copied!" : "Copy to Clipboard"}
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleCopyReport}
+                  disabled={filteredLog.length === 0}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] border transition-all disabled:opacity-40"
+                  style={{
+                    borderColor: reportCopied ? c.success : c.border,
+                    background:  reportCopied ? c.successBg : "var(--card)",
+                    color:       reportCopied ? c.success : c.textSec,
+                    ...f.btn,
+                  }}
+                >
+                  {reportCopied ? <Check size={13} /> : <Copy size={13} />}
+                  {reportCopied ? "Copied!" : "Copy Report"}
+                </button>
+                <button
+                  onClick={handleExportExcel}
+                  disabled={filteredLog.length === 0}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] border transition-all disabled:opacity-40"
+                  style={{
+                    borderColor: c.primary,
+                    background:  c.primaryLight,
+                    color:       c.primary,
+                    ...f.btn,
+                  }}
+                >
+                  <Download size={13} />
+                  Export Excel ({filteredLog.length})
+                </button>
+              </div>
             </div>
           </div>
         </div>
