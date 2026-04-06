@@ -18,7 +18,7 @@ import "@uxuissk/design-system/styles.css";
 import { DSButton, DSInput, Card, ... } from "@uxuissk/design-system";
 ```
 
-Install: `npm install @uxuissk/design-system@0.8.1`
+Install: `npm install @uxuissk/design-system@0.8.2`
 Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS tokens)
 
 ## Visual Identity Cheat Sheet
@@ -41,6 +41,7 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 | Body (P) | `20px` `var(--text-p)` | Default body/paragraph text |
 | Label | `18px` `var(--text-label)` | Form labels, UI labels, helper text |
 | Button/Badge | `18px` `var(--text-button)` | Buttons, badges, tabs, small labels |
+| Caption | `16px` `var(--text-caption)` | UI chrome, hints, fine print (minimum size) |
 | Radius | `6px` | `--radius-md` for inputs/cells, `--radius-lg` for cards/panels/dropdowns — both = 6px |
 | Shadow | `0px 1px 2px 0px #0000000d` | Minimal, prefer borders |
 
@@ -99,6 +100,8 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 6. Don't skip loading/empty/error states
 7. Don't use `<h1>` for page titles in docs/showcase — use `<h2>` (40px) instead
 8. Don't hardcode font sizes — always use `var(--text-h1)` through `var(--text-button)` tokens
+9. Don't wrap AppShell children in `max-w-*` containers — `<main>` fills `flex-1`, content width is managed by the shell
+10. Don't use `var(--text-caption)` for data/content text — use `var(--text-label)` (18px minimum for data)
 
 ## Layout Pattern — AppShell (preferred)
 
@@ -162,7 +165,7 @@ This project has an MCP server at `mcp-server/` with tools:
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `@uxuissk/design-system` | 0.8.1 | React components (60+) |
+| `@uxuissk/design-system` | 0.8.2 | React components (60+) |
 | `@uxuissk/design-tokens` | 0.1.1 | Shared CSS + JS tokens |
 | `@uxuissk/design-system-svelte` | scaffold | Svelte components (from CCS) |
 

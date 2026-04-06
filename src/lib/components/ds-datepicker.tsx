@@ -156,9 +156,9 @@ const sizeConfig: Record<
   lg: {
     trigger: "h-12 px-4",
     text: {
-      fontFamily: "var(--font-caption)",
-      fontSize: "var(--text-caption)",
-      fontWeight: "var(--weight-caption)",
+      fontFamily: "var(--font-label)",
+      fontSize: "var(--text-label)",
+      fontWeight: "var(--weight-label)",
     },
     icon: 18,
     cell: "w-10 h-10",

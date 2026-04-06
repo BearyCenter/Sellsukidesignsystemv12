@@ -224,11 +224,12 @@ function InnerAppShell({
           ) : navError ? (
             <div className="p-3">
               <Alert variant="error">
-                <span style={{ fontSize: "var(--text-caption)" }}>Nav load failed</span>
+                <span style={{ fontSize: "var(--text-label)" }}>Nav load failed</span>
               </Alert>
               <button
                 type="button"
-                className="mt-2 text-xs text-primary cursor-pointer hover:underline"
+                className="mt-2 text-primary cursor-pointer hover:underline"
+                style={{ fontSize: "var(--text-label)" }}
                 onClick={refreshNav}
               >
                 Retry

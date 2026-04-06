@@ -55,7 +55,7 @@ const labelStyle: React.CSSProperties = {
 
 const captionStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-p)",
 };
 

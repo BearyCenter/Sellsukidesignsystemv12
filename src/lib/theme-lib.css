@@ -435,8 +435,8 @@
   --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-label: 400;
 
-  /* Caption - Navigation breadcrumb text, pagination text */
-  --text-caption: 14px;
+  /* Caption - Fine print, UI chrome (minimum size in system) */
+  --text-caption: 16px;
   --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-caption: 400;
 

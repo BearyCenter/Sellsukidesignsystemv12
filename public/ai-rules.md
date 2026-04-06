@@ -2,7 +2,7 @@
 
 > This file is the single source of truth for all AI tools generating Sellsuki UI.
 > URL: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
-> Last updated: 2026-04-04
+> Last updated: 2026-04-06
 
 ## Important: Sandbox vs Full Mode
 
@@ -14,7 +14,7 @@
 - **NEVER use Inter or any other font**
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
-- Install: `npm install @uxuissk/design-system@0.8.1`
+- Install: `npm install @uxuissk/design-system@0.8.2`
 - Tokens (optional): `npm install @uxuissk/design-tokens@0.1.1`
 - CSS: `import "@uxuissk/design-system/styles.css"` (always first)
 - Import: `import { AppShell, DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
@@ -57,7 +57,7 @@
 | Body / P | `--text-p` | **20px** | 400 | `text-[20px]` |
 | Label | `--text-label` | **18px** | 400 | `text-[18px]` |
 | Button / Badge | `--text-button` | **18px** | 600 | `text-[18px] font-semibold` |
-| Caption | `--text-caption` | **14px** | 400 | `text-[14px]` |
+| Caption | `--text-caption` | **16px** | 400 | `text-[16px]` |
 
 ## Spacing
 
@@ -157,7 +157,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ### Table Header
 ```html
-<th class="px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[14px] font-semibold uppercase text-left font-['DB_HeaventRounded']">
+<th class="px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[16px] font-semibold uppercase text-left font-['DB_HeaventRounded']">
 ```
 
 ### Table Row
@@ -179,13 +179,13 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 ### Stat Card
 ```html
 <div class="bg-white rounded-[6px] border border-[#e5e7eb] p-4">
-  <p class="text-[14px] text-[#6b7280] font-['DB_HeaventRounded']">Revenue</p>
+  <p class="text-[16px] text-[#6b7280] font-['DB_HeaventRounded']">Revenue</p>
   <p class="text-[28px] font-bold text-[#1f2937] font-['DB_HeaventRounded']">฿284,500</p>
-  <span class="text-[14px] text-[#059669] font-['DB_HeaventRounded']">↑ 12%</span>
+  <span class="text-[16px] text-[#059669] font-['DB_HeaventRounded']">↑ 12%</span>
 </div>
 ```
 
-## Components (60+ total — v0.8.0)
+## Components (60+ total — v0.8.2)
 
 **Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, **DateRangePicker**, **TimePicker**, **DateTimePicker**, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput, **RepeatableFieldList**, **RichTextEditor**
 
@@ -221,7 +221,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ```bash
 # React components (60+ components)
-npm install @uxuissk/design-system@0.8.1
+npm install @uxuissk/design-system@0.8.2
 
 # Shared tokens (optional — for CSS-in-JS, Svelte, etc.)
 npm install @uxuissk/design-tokens@0.1.1

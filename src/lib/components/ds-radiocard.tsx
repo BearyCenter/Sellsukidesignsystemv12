@@ -55,7 +55,7 @@ const descStyle: React.CSSProperties = {
 
 const badgeStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-button)",
 };
 

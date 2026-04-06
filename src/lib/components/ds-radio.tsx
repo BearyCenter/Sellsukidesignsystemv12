@@ -37,7 +37,7 @@ const sizeConfig: Record<RadioSize, { outer: string; inner: string; labelStyle: 
   lg: {
     outer: "w-6 h-6",
     inner: "w-2.5 h-2.5",
-    labelStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
     descStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
   },
 };

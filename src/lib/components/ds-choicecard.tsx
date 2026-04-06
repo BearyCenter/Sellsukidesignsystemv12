@@ -66,7 +66,7 @@ const descStyle: React.CSSProperties = {
 
 const badgeStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-button)",
 };
 
@@ -77,8 +77,8 @@ const sizeMap: Record<ChoiceCardSize, string> = {
 };
 
 const iconSizeMap: Record<ChoiceCardSize, string> = {
-  sm: "w-8 h-8 rounded-[var(--radius-sm)] text-sm",
-  md: "w-10 h-10 rounded-[var(--radius-md)] text-base",
+  sm: "w-8 h-8 rounded-[var(--radius-sm)]",
+  md: "w-10 h-10 rounded-[var(--radius-md)]",
   lg: "w-12 h-12 rounded-[var(--radius-md)] text-lg",
 };
 

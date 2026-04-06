@@ -58,7 +58,7 @@ const inputSizeConfig: Record<
 > = {
   sm: {
     wrapper: "h-9 px-2.5 gap-1.5",
-    textStyle: { fontFamily: "var(--font-caption)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-caption)" },
+    textStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
     icon: 14,
   },
   md: {
@@ -244,7 +244,7 @@ export const DSInput = forwardRef<HTMLInputElement, DSInputProps>(
 
         {/* Character count */}
         {showCount && maxLen && (
-          <div className="flex justify-end mt-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", color: charCount >= maxLen ? "var(--destructive)" : "var(--muted-foreground)" }}>
+          <div className="flex justify-end mt-1" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", color: charCount >= maxLen ? "var(--destructive)" : "var(--muted-foreground)" }}>
             {charCount} / {maxLen}
           </div>
         )}
@@ -347,7 +347,7 @@ export const DSTextarea = forwardRef<HTMLTextAreaElement, DSTextareaProps>(
           {showCharCount && (
             <div
               className="flex justify-end px-3 py-1.5 border-t border-border text-muted-foreground bg-muted/20"
-              style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" }}
+              style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" }}
             >
               {charCount}{maxLength ? ` / ${maxLength}` : ""} chars
             </div>

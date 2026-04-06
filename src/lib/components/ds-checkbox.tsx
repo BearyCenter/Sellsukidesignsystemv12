@@ -33,7 +33,7 @@ const sizeConfig: Record<CheckboxSize, { box: string; icon: number; labelStyle: 
   lg: {
     box: "w-6 h-6",
     icon: 14,
-    labelStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-label)" },
+    labelStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
     descStyle: { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" },
   },
 };

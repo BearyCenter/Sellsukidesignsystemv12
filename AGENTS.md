@@ -7,7 +7,7 @@ Visual identity: Professional, clean, trustworthy, light, airy, functional.
 
 ## Required Setup (do this FIRST before any component code)
 ```bash
-npm install @uxuissk/design-system@0.8.1
+npm install @uxuissk/design-system@0.8.2
 npm install @uxuissk/design-tokens@0.1.1  # optional
 ```
 
@@ -40,9 +40,9 @@ Always use CSS variable tokens. Never hardcode px values.
 | `var(--text-p)` | 20px | 400 | Body / paragraph |
 | `var(--text-label)` | 18px | 400 | Form labels, UI labels |
 | `var(--text-button)` | 18px | 600 | Buttons, badges, tabs |
-| `var(--text-caption)` | 14px | 400 | Captions, hints, fine print |
+| `var(--text-caption)` | 16px | 400 | UI chrome, hints, fine print |
 
-**Minimum font size: 14px (`var(--text-caption)`) — never use anything smaller.**
+**Minimum font size: 16px (`var(--text-caption)`) for UI chrome — use `var(--text-label)` (18px) for all data/content text.**
 
 ## Color Tokens
 ```css
@@ -60,7 +60,7 @@ Use CSS vars only — never hardcode hex values directly.
 - Page padding: `24px` desktop / `16px` mobile
 - Card/form field gap: `16px`
 - Section gap: `32px`
-- Border radius: `8px` (radius-md)
+- Border radius: `6px` — `var(--radius-md)` for inputs/cells, `var(--radius-lg)` for cards/panels/dropdowns (both = 6px)
 
 ## AppShell Pattern (preferred full-page layout)
 ```tsx

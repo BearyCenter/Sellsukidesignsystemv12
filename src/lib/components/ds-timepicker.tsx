@@ -139,7 +139,7 @@ function ScrollColumn({
         <ChevronDown size={14} />
       </button>
 
-      <span className="text-muted-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-caption)" }}>
+      <span className="text-muted-foreground" style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)" }}>
         {label}
       </span>
     </div>
@@ -365,7 +365,7 @@ export function DateTimePicker({
 
   const captionStyle: React.CSSProperties = {
     fontFamily: "var(--font-label)",
-    fontSize: "var(--text-caption)",
+    fontSize: "var(--text-label)",
     fontWeight: "var(--weight-label)",
   };
 

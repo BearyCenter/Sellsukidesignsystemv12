@@ -162,7 +162,7 @@ const labelStyle: React.CSSProperties = {
 
 const captionStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-label)",
 };
 
@@ -173,7 +173,7 @@ const btnLabelStyle: React.CSSProperties = {
 };
 
 const sizeMap: Record<DateRangePickerSize, string> = {
-  sm: "h-8 px-3 text-sm",
+  sm: "h-8 px-3",
   md: "h-10 px-3.5",
   lg: "h-11 px-4",
 };

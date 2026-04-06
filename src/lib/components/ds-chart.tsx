@@ -121,7 +121,7 @@ function getColor(series: ChartSeries, idx: number): string {
 
 const labelStyle: React.CSSProperties = {
   fontFamily: "var(--font-label)",
-  fontSize: "var(--text-caption)",
+  fontSize: "var(--text-label)",
   fontWeight: "var(--weight-label)",
 };
 
@@ -745,7 +745,7 @@ export function DonutChart({
                   x={cx} y={cy + 12}
                   textAnchor="middle"
                   fill="var(--muted-foreground)"
-                  style={{ ...labelStyle, fontSize: "12px" }}
+                  style={{ ...labelStyle, fontSize: "var(--text-caption)" }}
                 >
                   {hoveredItem ? hoveredItem.label : centerLabel}
                 </text>

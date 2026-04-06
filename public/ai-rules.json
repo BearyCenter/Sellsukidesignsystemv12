@@ -1,11 +1,11 @@
 {
   "name": "Sellsuki Design System",
-  "version": "0.8.1",
-  "updated": "2026-04-03",
+  "version": "0.8.2",
+  "updated": "2026-04-06",
   "url": "https://sellsukidesignsystemv12.vercel.app/ai-rules.json",
   "storybook": "https://sellsukidesignsystemv12.vercel.app",
   "packages": {
-    "react": "@uxuissk/design-system@0.8.1",
+    "react": "@uxuissk/design-system@0.8.2",
     "tokens": "@uxuissk/design-tokens@0.1.1",
     "svelte": "@uxuissk/design-system-svelte (scaffold)"
   },
@@ -42,7 +42,7 @@
       "body": { "token": "--text-p", "size": "20px", "weight": "400", "tailwind": "text-[20px]" },
       "label": { "token": "--text-label", "size": "18px", "weight": "400", "tailwind": "text-[18px]" },
       "button": { "token": "--text-button", "size": "18px", "weight": "600", "tailwind": "text-[18px] font-semibold" },
-      "caption": { "token": "--text-caption", "size": "14px", "weight": "400", "tailwind": "text-[14px]" }
+      "caption": { "token": "--text-caption", "size": "16px", "weight": "400", "tailwind": "text-[16px]" }
     }
   },
   "spacing": {
@@ -105,7 +105,7 @@
     "badge-success": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#d1fae5] text-[#065f46] font-['DB_HeaventRounded']",
     "badge-warning": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#fef3c7] text-[#92400e] font-['DB_HeaventRounded']",
     "badge-danger": "px-2 py-0.5 text-[18px] font-semibold rounded-full bg-[#ffe4e6] text-[#9f1239] font-['DB_HeaventRounded']",
-    "table-header": "px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[14px] font-semibold uppercase text-left font-['DB_HeaventRounded']",
+    "table-header": "px-4 py-3 bg-[#f9fafb] text-[#6b7280] text-[16px] font-semibold uppercase text-left font-['DB_HeaventRounded']",
     "table-cell": "px-4 py-3 text-[20px] text-[#1f2937] font-['DB_HeaventRounded']",
     "sidebar-item": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] text-[#6b7280] hover:bg-[#f0f9ff] hover:text-[#32a9ff] font-['DB_HeaventRounded']",
     "sidebar-item-active": "flex items-center gap-3 px-4 py-2.5 rounded-lg text-[18px] bg-[#f0f9ff] text-[#32a9ff] font-medium font-['DB_HeaventRounded']"
