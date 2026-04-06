@@ -7,7 +7,7 @@ Visual identity: Professional, clean, trustworthy, light, airy, functional.
 
 ## Required Setup (do this FIRST before any component code)
 ```bash
-npm install @uxuissk/design-system@0.7.2
+npm install @uxuissk/design-system@0.8.0
 npm install @uxuissk/design-tokens@0.1.1  # optional
 ```
 

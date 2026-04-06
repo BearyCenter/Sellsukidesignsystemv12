@@ -74,7 +74,7 @@ export const changelogVersions: ChangelogVersion[] = [
     version: "1.5.0",
     date: "April 4, 2026",
     summary: "Radius standardization across all 60+ components, DSButton SVG+text stacking fix, DateRangePicker UX improvements, 8 new showcase pages, and vibe accuracy improvements in ai-rules.md.",
-    tags: ["preview", "fixed", "improved"],
+    tags: ["new", "fixed", "improved"],
     features: [
       { icon: <Paintbrush size={16} />, title: "Radius Standardization (--radius-md everywhere)", description: "Replaced all --radius-lg (16px) usages with --radius-md (6px) across 47 files — inputs, dropdowns, calendars, panels, and popovers now consistently use the 6px system radius. Token semantic hierarchy preserved." },
       { icon: <MousePointerClick size={16} />, title: "DSButton SVG + Text Fix", description: "Fixed icon+text stacking vertically inside buttons due to Tailwind preflight setting SVG to display:block. Children span now wraps with inline-flex items-center gap-2, ensuring icon and text align in one row automatically." },
