@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import pkg from "../../../package.json";
 import { createPortal } from "react-dom";
 import {
   Activity,
@@ -584,7 +585,7 @@ export function MCPTrackerPage() {
         </span>
         <Sep />
         <span style={{ ...f.numSm, color: c.textSec }}>
-          Package: <code style={{ color: c.text, fontFamily: "monospace" }}>@uxuissk/design-system@0.7.1</code>
+          Package: <code style={{ color: c.text, fontFamily: "monospace" }}>@uxuissk/design-system@{pkg.version}</code>
         </span>
         <Sep />
         <span style={{ ...f.numSm, color: c.textSec }}>
