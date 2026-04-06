@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import {
   Calendar as CalendarIcon,
   ChevronLeft,
@@ -214,13 +215,47 @@ export function DatePicker({
   const [hours, setHours] = useState(() => (value ? value.getHours() : 0));
   const [minutes, setMinutes] = useState(() => (value ? value.getMinutes() : 0));
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [panelPos, setPanelPos] = useState<{ top: number; left: number } | null>(null);
 
   const cfg = sizeConfig[size];
 
-  // Close on outside click
+  // Calculate portal panel position relative to trigger (escapes overflow/transform containers)
+  useEffect(() => {
+    if (!open || !triggerRef.current) return;
+    const updatePos = () => {
+      const rect = triggerRef.current!.getBoundingClientRect();
+      const panelWidth = mode === "range" ? 560 : 300;
+      const estimatedHeight = showTime ? 390 : 360;
+      // Flip left if panel would overflow right edge
+      const left =
+        rect.left + panelWidth > window.innerWidth
+          ? Math.max(8, window.innerWidth - panelWidth - 8)
+          : rect.left;
+      // Flip up if panel would overflow bottom edge
+      const top =
+        rect.bottom + 6 + estimatedHeight > window.innerHeight
+          ? rect.top - estimatedHeight - 2
+          : rect.bottom + 6;
+      setPanelPos({ top, left });
+    };
+    updatePos();
+    window.addEventListener("scroll", updatePos, true);
+    window.addEventListener("resize", updatePos);
+    return () => {
+      window.removeEventListener("scroll", updatePos, true);
+      window.removeEventListener("resize", updatePos);
+    };
+  }, [open, mode, showTime]);
+
+  // Close on outside click — check both trigger wrapper and portal panel
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const inContainer = containerRef.current?.contains(target) ?? false;
+      const inPanel = panelRef.current?.contains(target) ?? false;
+      if (!inContainer && !inPanel) {
         setOpen(false);
         setView("days");
       }
@@ -366,6 +401,7 @@ export function DatePicker({
 
       {/* Trigger */}
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => !disabled && setOpen(!open)}
         disabled={disabled}
@@ -400,11 +436,18 @@ export function DatePicker({
         </p>
       )}
 
-      {/* Dropdown calendar */}
-      {open && (
+      {/* Dropdown calendar — rendered via portal to escape Modal overflow/transform stacking contexts */}
+      {open && panelPos && createPortal(
         <div
-          className="absolute z-50 mt-1.5 bg-popover border border-border rounded-[var(--radius-md)] shadow-elevation-sm overflow-hidden"
-          style={{ minWidth: mode === "range" ? "560px" : "300px" }}
+          ref={panelRef}
+          className="bg-popover border border-border rounded-[var(--radius-md)] shadow-elevation-sm overflow-hidden"
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            top: panelPos.top,
+            left: panelPos.left,
+            minWidth: mode === "range" ? "560px" : "300px",
+          }}
         >
           {/* Calendar Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-card">
@@ -642,7 +685,8 @@ export function DatePicker({
               </button>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

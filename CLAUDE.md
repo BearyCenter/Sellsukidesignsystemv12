@@ -18,7 +18,7 @@ import "@uxuissk/design-system/styles.css";
 import { DSButton, DSInput, Card, ... } from "@uxuissk/design-system";
 ```
 
-Install: `npm install @uxuissk/design-system@0.8.2`
+Install: `npm install @uxuissk/design-system@0.8.3`
 Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS tokens)
 
 ## Visual Identity Cheat Sheet
@@ -165,7 +165,7 @@ This project has an MCP server at `mcp-server/` with tools:
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| `@uxuissk/design-system` | 0.8.2 | React components (60+) |
+| `@uxuissk/design-system` | 0.8.3 | React components (60+) |
 | `@uxuissk/design-tokens` | 0.1.1 | Shared CSS + JS tokens |
 | `@uxuissk/design-system-svelte` | scaffold | Svelte components (from CCS) |
 

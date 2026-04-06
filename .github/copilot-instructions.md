@@ -6,7 +6,7 @@ Visual identity: Professional, clean, trustworthy, light, airy, functional.
 
 ## Required Setup
 ```bash
-npm install @uxuissk/design-system@0.8.2
+npm install @uxuissk/design-system@0.8.3
 ```
 ```tsx
 // FIRST LINE in main.tsx/App.tsx — required for fonts and tokens
