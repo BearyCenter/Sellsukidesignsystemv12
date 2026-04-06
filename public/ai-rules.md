@@ -14,7 +14,7 @@
 - **NEVER use Inter or any other font**
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
-- Install: `npm install @uxuissk/design-system@0.8.3`
+- Install: `npm install @uxuissk/design-system@0.8.4`
 - Tokens (optional): `npm install @uxuissk/design-tokens@0.1.1`
 - CSS: `import "@uxuissk/design-system/styles.css"` (always first)
 - Import: `import { AppShell, DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
@@ -140,6 +140,23 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 </button>
 ```
 
+### Page Header
+```html
+<!-- bg-white (not bg-[#f9fafb]) — page header must be white, page background is gray-50 -->
+<div class="bg-white border-b border-[#e5e7eb] px-6 pt-5 pb-4">
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h3 class="text-[28px] font-bold text-[#1f2937] font-['DB_HeaventRounded']">Page Title</h3>
+      <p class="mt-0.5 text-[20px] text-[#6b7280] font-['DB_HeaventRounded']">Subtitle text</p>
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0 pt-0.5">
+      <button class="h-9 px-4 border border-[#e5e7eb] rounded-[6px] text-[18px] font-semibold text-[#1f2937] font-['DB_HeaventRounded']">Secondary</button>
+      <button class="h-9 px-4 bg-[#32a9ff] rounded-[6px] text-[18px] font-semibold text-white font-['DB_HeaventRounded']">Primary</button>
+    </div>
+  </div>
+</div>
+```
+
 ### Card
 ```html
 <div class="bg-white rounded-[6px] border border-[#e5e7eb] p-4">
@@ -185,7 +202,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 </div>
 ```
 
-## Components (60+ total — v0.8.3)
+## Components (60+ total — v0.8.4)
 
 **Data Entry**: DSButton, IconButton, ButtonGroup, DSInput, DSTextarea, DSCheckbox, CheckboxGroup, DSRadio, RadioGroup, Switch, Dropdown, DatePicker, **DateRangePicker**, **TimePicker**, **DateTimePicker**, SearchField, ColorPicker, FileUpload, TagInput, Rating, TransferList, NumberInput, OTPInput, **RepeatableFieldList**, **RichTextEditor**
 
@@ -221,7 +238,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ```bash
 # React components (60+ components)
-npm install @uxuissk/design-system@0.8.3
+npm install @uxuissk/design-system@0.8.4
 
 # Shared tokens (optional — for CSS-in-JS, Svelte, etc.)
 npm install @uxuissk/design-tokens@0.1.1

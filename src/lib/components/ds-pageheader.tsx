@@ -55,7 +55,7 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div
-      className={`bg-background border-b border-border ${sticky ? "sticky top-0 z-10" : ""} ${className}`}
+      className={`bg-card border-b border-border ${sticky ? "sticky top-0 z-10" : ""} ${className}`}
     >
       {/* Main row: breadcrumb + title/subtitle + actions */}
       <div className="px-6 pt-5 pb-4">
