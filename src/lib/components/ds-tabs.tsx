@@ -29,7 +29,7 @@ const sizeStyles: Record<TabSize, React.CSSProperties> = {
   lg: { fontFamily: "var(--font-label)", fontSize: "var(--text-h4)",   fontWeight: "var(--weight-p)",     padding: "10px 20px" },
 };
 
-export function Tabs({ tabs, variant = "default", size = "md", defaultTab, activeTab: controlled, onChange, fullWidth = false, className = "" }: TabsProps) {
+export function Tabs({ tabs = [], variant = "default", size = "md", defaultTab, activeTab: controlled, onChange, fullWidth = false, className = "" }: TabsProps) {
   const [internalActive, setInternalActive] = useState(defaultTab ?? tabs[0]?.id ?? "");
   const active = controlled ?? internalActive;
   const tabsRef = useRef<HTMLDivElement>(null);

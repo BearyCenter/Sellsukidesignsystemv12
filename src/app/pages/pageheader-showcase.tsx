@@ -57,7 +57,7 @@ export function PageHeaderShowcase() {
 
       <Section title="With Tabs" description="Tab navigation anchored to the page header bottom edge." code={`<PageHeader
   title="Orders"
-  tabs={<Tabs items={[...]} />}
+  tabs={<Tabs tabs={[...]} />}
 />`}>
         <DemoBox className="!p-0 overflow-hidden">
           <PageHeader
@@ -66,13 +66,13 @@ export function PageHeaderShowcase() {
             actions={<DSButton>Create Order</DSButton>}
             tabs={
               <Tabs
-                items={[
-                  { value: "all", label: "All Orders" },
-                  { value: "pending", label: "Pending" },
-                  { value: "shipped", label: "Shipped" },
-                  { value: "completed", label: "Completed" },
+                tabs={[
+                  { id: "all", label: "All Orders" },
+                  { id: "pending", label: "Pending" },
+                  { id: "shipped", label: "Shipped" },
+                  { id: "completed", label: "Completed" },
                 ]}
-                value="all"
+                activeTab="all"
                 onChange={() => {}}
               />
             }
