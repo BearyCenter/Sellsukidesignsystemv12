@@ -1,11 +1,11 @@
 {
   "name": "Sellsuki Design System",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "updated": "2026-04-03",
   "url": "https://sellsukidesignsystemv12.vercel.app/ai-rules.json",
   "storybook": "https://sellsukidesignsystemv12.vercel.app",
   "packages": {
-    "react": "@uxuissk/design-system@0.8.0",
+    "react": "@uxuissk/design-system@0.8.1",
     "tokens": "@uxuissk/design-tokens@0.1.1",
     "svelte": "@uxuissk/design-system-svelte (scaffold)"
   },

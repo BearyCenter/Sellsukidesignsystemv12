@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Calendar, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -314,7 +315,9 @@ export function DateRangePicker({
   const [leftMonth, setLeftMonth] = useState(today.getMonth());
   const [leftYear, setLeftYear] = useState(today.getFullYear());
   const [selecting, setSelecting] = useState<"from" | "to">("from");
+  const [panelPos, setPanelPos] = useState<{ top: number; left: number; width: number }>({ top: 0, left: 0, width: 0 });
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const range = value ?? internalRange;
 
@@ -329,6 +332,22 @@ export function DateRangePicker({
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  // Compute fixed position from trigger element (escapes overflow:hidden / overflow-y:auto containers)
+  useEffect(() => {
+    if (!open || !triggerRef.current) return;
+    const updatePos = () => {
+      const rect = triggerRef.current!.getBoundingClientRect();
+      setPanelPos({ top: rect.bottom + 4, left: rect.left, width: rect.width });
+    };
+    updatePos();
+    window.addEventListener("scroll", updatePos, true);
+    window.addEventListener("resize", updatePos);
+    return () => {
+      window.removeEventListener("scroll", updatePos, true);
+      window.removeEventListener("resize", updatePos);
+    };
+  }, [open]);
 
   function handlePreset(preset: DateRangePresetOption) {
     if (preset.value === "custom") {
@@ -379,6 +398,7 @@ export function DateRangePicker({
     <div ref={ref} className={`relative inline-block ${className}`}>
       {/* Trigger */}
       <button
+        ref={triggerRef}
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setOpen(!open)}
@@ -407,11 +427,11 @@ export function DateRangePicker({
         )}
       </button>
 
-      {/* Dropdown panel */}
-      {open && (
+      {/* Dropdown panel — portal to document.body to escape overflow:auto containers (AppShell main) */}
+      {open && createPortal(
         <div
-          className="absolute top-full mt-1 z-50 bg-card border border-border rounded-[var(--radius-md)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] flex overflow-y-auto"
-          style={{ minWidth: "620px", maxHeight: "calc(100vh - 120px)" }}
+          className="fixed z-[9999] bg-card border border-border rounded-[var(--radius-md)] shadow-[0_4px_24px_0_rgba(0,0,0,0.1)] flex overflow-y-auto"
+          style={{ top: panelPos.top, left: panelPos.left, minWidth: "620px", maxHeight: "calc(100vh - 120px)" }}
         >
           {/* Presets sidebar */}
           <div className="w-36 border-r border-border py-2 flex flex-col gap-0.5 flex-shrink-0">
@@ -474,7 +494,7 @@ export function DateRangePicker({
             />
           </div>
         </div>
-      )}
+      , document.body)}
     </div>
   );
 }

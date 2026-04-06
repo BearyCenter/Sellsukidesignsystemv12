@@ -545,7 +545,10 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     return (
       <div ref={ref} className={`relative w-full ${className}`} id={id}>
         {label && (
-          <label className="block mb-1.5 text-foreground">
+          <label
+            className="block mb-1.5 text-foreground"
+            style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" }}
+          >
             {label}
             {required && <span className="text-destructive ml-0.5">*</span>}
           </label>
@@ -572,7 +575,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
         >
           {loading ? <Loader2 size={sc.icon} className="animate-spin text-muted-foreground" /> : null}
 
-          <span className={`flex-1 text-left truncate ${!hasValue ? "text-muted-foreground" : "text-foreground"}`}>
+          <span className={`flex-1 text-left min-w-0 ${multiple ? "" : "truncate"} ${!hasValue ? "text-muted-foreground" : "text-foreground"}`}>
             {hasValue ? (multiple ? renderTags() : selectedLabels[0]) : placeholder}
           </span>
 

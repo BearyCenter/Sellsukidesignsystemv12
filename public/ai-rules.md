@@ -14,7 +14,7 @@
 - **NEVER use Inter or any other font**
 
 **Full mode** (Claude Code, Cursor, Bolt.new, Lovable, Firebase Studio):
-- Install: `npm install @uxuissk/design-system@0.8.0`
+- Install: `npm install @uxuissk/design-system@0.8.1`
 - Tokens (optional): `npm install @uxuissk/design-tokens@0.1.1`
 - CSS: `import "@uxuissk/design-system/styles.css"` (always first)
 - Import: `import { AppShell, DSButton, DSInput, Card, AdvancedDataTable, ... } from "@uxuissk/design-system"`
@@ -221,7 +221,7 @@ Sizes: `sm` 32px / `md` 36px (default) / `lg` 40px / `xl` 44px
 
 ```bash
 # React components (60+ components)
-npm install @uxuissk/design-system@0.8.0
+npm install @uxuissk/design-system@0.8.1
 
 # Shared tokens (optional — for CSS-in-JS, Svelte, etc.)
 npm install @uxuissk/design-tokens@0.1.1
