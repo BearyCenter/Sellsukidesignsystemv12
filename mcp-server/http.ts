@@ -30,6 +30,19 @@ app.get("/health", (_req: Request, res: Response) => {
   });
 });
 
+// Remote log — local stdio clients POST here so Render (which has GITHUB_TOKEN) writes to Gist
+app.post("/log", async (req: Request, res: Response) => {
+  try {
+    const { logRequest } = await import("./logger.js");
+    const { tool, params, duration, status } = req.body ?? {};
+    if (!tool) { res.status(400).json({ ok: false, error: "missing tool" }); return; }
+    await logRequest({ tool, params: params ?? "", duration: duration ?? 0, status: status ?? "success" });
+    res.json({ ok: true });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e) });
+  }
+});
+
 // Test — manually log one request entry to verify full Gist pipeline
 app.get("/test-log", async (_req: Request, res: Response) => {
   try {
