@@ -68,8 +68,8 @@ async function readGist(): Promise<LogFile> {
   }
 }
 
-async function writeGist(data: LogFile): Promise<void> {
-  await fetch(GIST_API, {
+async function writeGist(data: LogFile): Promise<{ ok: boolean; status: number; body?: string }> {
+  const res = await fetch(GIST_API, {
     method: "PATCH",
     headers: {
       Authorization:  `Bearer ${GIST_TOKEN}`,
@@ -80,6 +80,13 @@ async function writeGist(data: LogFile): Promise<void> {
       files: { [GIST_FILE]: { content: JSON.stringify(data, null, 2) } },
     }),
   });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    process.stderr.write(`[Logger] Gist write FAILED — HTTP ${res.status}: ${body.slice(0, 200)}\n`);
+    return { ok: false, status: res.status, body };
+  }
+  return { ok: true, status: res.status };
 }
 
 // ─── Local fallback helpers ────────────────────────────────────────────────────
@@ -100,6 +107,66 @@ function writeLocal(data: LogFile): void {
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
+
+/**
+ * Test Gist connectivity and token validity. Used by /debug/gist endpoint.
+ */
+export async function checkGistStatus(): Promise<{
+  configured: boolean;
+  gistId: string;
+  tokenPresent: boolean;
+  readOk?: boolean;
+  writeOk?: boolean;
+  writeStatus?: number;
+  writeError?: string;
+  requestCount?: number;
+  lastEntry?: string;
+}> {
+  if (!USE_GIST) {
+    return {
+      configured: false,
+      gistId: GIST_ID || "(not set)",
+      tokenPresent: Boolean(GIST_TOKEN),
+    };
+  }
+
+  // Test read
+  let readOk = false;
+  let requestCount = 0;
+  let lastEntry = "";
+  try {
+    const data = await readGist();
+    readOk = true;
+    requestCount = data.requests.length;
+    lastEntry = data.requests[0]?.ts ?? "(none)";
+  } catch { /* */ }
+
+  // Test write (write same data back — no-op content change)
+  let writeOk = false;
+  let writeStatus = 0;
+  let writeError = "";
+  try {
+    const data = await readGist();
+    const result = await writeGist({ ...data, updated: new Date().toISOString() });
+    writeOk = result.ok;
+    writeStatus = result.status;
+    if (!result.ok) writeError = result.body ?? "";
+  } catch (e) {
+    writeError = String(e);
+  }
+
+  return {
+    configured: true,
+    gistId: GIST_ID,
+    tokenPresent: true,
+    readOk,
+    writeOk,
+    writeStatus,
+    writeError: writeError.slice(0, 200),
+    requestCount,
+    lastEntry,
+  };
+}
 
 /**
  * Record a single MCP tool call (fire-and-forget, never throws).

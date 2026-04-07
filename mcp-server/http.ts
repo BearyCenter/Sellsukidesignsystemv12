@@ -4,6 +4,7 @@ import type { Request, Response } from "express";
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
 import { createServer } from "./server.js";
+import { checkGistStatus } from "./logger.js";
 
 // ─── HTTP + SSE Mode (for Figma Connector / remote clients) ────────────────
 
@@ -27,6 +28,16 @@ app.get("/health", (_req: Request, res: Response) => {
     version: "1.0.0",
     transports: Object.keys(transports).length,
   });
+});
+
+// Debug — Gist connectivity test (tells you if token is valid and logging works)
+app.get("/debug/gist", async (_req: Request, res: Response) => {
+  try {
+    const status = await checkGistStatus();
+    res.json({ ok: status.writeOk ?? false, ...status });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e) });
+  }
 });
 
 // SSE endpoint — client connects here to establish stream
