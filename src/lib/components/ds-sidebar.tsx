@@ -101,6 +101,7 @@ export function Sidebar({
   showCollapseToggle = true,
   version,
   versionDate,
+  width,
   className = "",
 }: SidebarProps) {
   const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
@@ -114,13 +115,19 @@ export function Sidebar({
     });
   };
 
+  // Width uses shell CSS tokens as canonical source of truth.
+  // `width` prop overrides only when explicitly provided (e.g. custom product spec).
+  const expandedW = width ?? "var(--shell-sidebar-width, 240px)";
+  const collapsedW = "var(--shell-sidebar-collapsed, 64px)";
+  const currentW = collapsed ? collapsedW : expandedW;
+
   return (
     <div
-      className={`bg-sidebar border-r border-sidebar-border flex flex-col flex-shrink-0 ${className}`}
+      className={`bg-sidebar border-r border-sidebar-border flex flex-col flex-shrink-0 h-full ${className}`}
       style={{
-        width: collapsed ? "64px" : "256px",
-        minWidth: collapsed ? "64px" : "256px",
-        transition: "width 0.25s cubic-bezier(0.4,0,0.2,1), min-width 0.25s cubic-bezier(0.4,0,0.2,1)",
+        width: currentW,
+        minWidth: currentW,
+        transition: "width var(--shell-sidebar-transition, 250ms cubic-bezier(0.4,0,0.2,1)), min-width var(--shell-sidebar-transition, 250ms cubic-bezier(0.4,0,0.2,1))",
         overflow: "visible",
       }}
     >

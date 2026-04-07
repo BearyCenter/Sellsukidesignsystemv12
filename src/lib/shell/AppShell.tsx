@@ -214,8 +214,9 @@ function InnerAppShell({
       </div>
 
       {/* ── Desktop Sidebar — fixed left, below navbar ───────────────────────── */}
+      {/* aside is a layout-only container — visual styling (bg, border) is owned by the Sidebar component */}
       <aside
-        className="hidden md:flex flex-col fixed left-0 bottom-0 overflow-y-auto bg-card border-r border-border"
+        className="hidden md:flex flex-col fixed left-0 bottom-0 overflow-hidden"
         style={{
           top: "var(--shell-navbar-height, 56px)",
           width: sidebarW,
