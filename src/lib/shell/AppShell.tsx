@@ -174,115 +174,128 @@ function InnerAppShell({
     />
   );
 
+  const sidebarW = sidebarCollapsed
+    ? "var(--shell-sidebar-collapsed, 64px)"
+    : "var(--shell-sidebar-width, 240px)";
+
   return (
     <div
-      className={`min-h-screen bg-[var(--background)] flex flex-col ${className}`}
+      className={`min-h-screen bg-[var(--background)] ${className}`}
       data-product={product?.product}
     >
-      {/* ── TopNavbar ─────────────────────────────────────────────────────────── */}
-      <TopNavbar
-        brand={
-          product
-            ? { name: product.brand.name, logo: product.brand.logo as string | undefined }
-            : { name: "Sellsuki" }
-        }
-        breadcrumbs={breadcrumbs.map((b) => ({ label: b.label, href: b.href }))}
-        user={user ? { name: user.name, avatar: user.avatar } : undefined}
-        showSearch={showSearch}
-        onSearchClick={onSearchClick}
-        notificationCount={notificationCount}
-        onNotificationClick={onNotificationClick}
-        onUserClick={onUserClick}
-        workspaceSwitcher={product?.brand?.workspaceSwitcher}
-        onSidebarToggle={() => {
-          // On mobile: toggle mobile drawer
-          // On desktop: toggle collapse
-          if (window.innerWidth < 768) {
-            setMobileOpen((v) => !v);
-          } else {
-            setSidebarCollapsed((v) => !v);
+      {/* ── TopNavbar — fixed at top, full width ──────────────────────────────── */}
+      <div
+        className="fixed top-0 left-0 right-0"
+        style={{ zIndex: "var(--z-shell-navbar, 100)" }}
+      >
+        <TopNavbar
+          brand={
+            product
+              ? { name: product.brand.name, logo: product.brand.logo as string | undefined }
+              : { name: "Sellsuki" }
           }
-        }}
-        onMobileMenuClick={() => setMobileOpen((v) => !v)}
-      />
-
-      {/* ── Body ────────────────────────────────────────────────────────────── */}
-      <div className="flex flex-1 overflow-hidden">
-
-        {/* ── Desktop Sidebar ──────────────────────────────────────────────── */}
-        <div
-          className="hidden md:flex flex-shrink-0 sticky top-[56px] h-[calc(100vh-56px)] overflow-y-auto"
-          style={{
-            width: sidebarCollapsed ? "var(--shell-sidebar-collapsed, 64px)" : "var(--shell-sidebar-width, 240px)",
-            transition: "width var(--duration-sidebar, 250ms) var(--easing-default, cubic-bezier(0.4,0,0.2,1))",
+          breadcrumbs={breadcrumbs.map((b) => ({ label: b.label, href: b.href }))}
+          user={user ? { name: user.name, avatar: user.avatar } : undefined}
+          showSearch={showSearch}
+          onSearchClick={onSearchClick}
+          notificationCount={notificationCount}
+          onNotificationClick={onNotificationClick}
+          onUserClick={onUserClick}
+          workspaceSwitcher={product?.brand?.workspaceSwitcher}
+          onSidebarToggle={() => {
+            if (window.innerWidth < 768) {
+              setMobileOpen((v) => !v);
+            } else {
+              setSidebarCollapsed((v) => !v);
+            }
           }}
-        >
-          {navLoading ? (
-            <div className="p-4 w-full">
-              <SkeletonList rows={6} />
-            </div>
-          ) : navError ? (
-            <div className="p-3">
-              <Alert variant="error">
-                <span style={{ fontSize: "var(--text-label)" }}>Nav load failed</span>
-              </Alert>
-              <button
-                type="button"
-                className="mt-2 text-primary cursor-pointer hover:underline"
-                style={{ fontSize: "var(--text-label)" }}
-                onClick={refreshNav}
-              >
-                Retry
-              </button>
-            </div>
-          ) : (
-            sidebarNode
-          )}
-        </div>
-
-        {/* ── Mobile Overlay + Drawer ──────────────────────────────────────── */}
-        {mobileOpen && (
-          <>
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 z-[var(--z-shell-overlay,80)] bg-black/40 md:hidden"
-              onClick={() => setMobileOpen(false)}
-            />
-            {/* Drawer */}
-            <div
-              className="fixed left-0 top-[56px] bottom-0 z-[var(--z-shell-sidebar,90)] w-[240px] bg-card shadow-lg md:hidden overflow-y-auto"
-              style={{ transition: "transform var(--duration-sidebar, 250ms) var(--easing-default)" }}
-            >
-              {navLoading ? (
-                <div className="p-4"><SkeletonList rows={6} /></div>
-              ) : (
-                <Sidebar
-                  brand={product ? { name: product.brand.name } : { name: "Sellsuki" }}
-                  groups={adaptedGroups}
-                  activeItem={activeItemId}
-                  onNavigate={handleNavigate}
-                  collapsed={false}
-                  showCollapseToggle={false}
-                  version={version}
-                  versionDate={versionDate}
-                />
-              )}
-            </div>
-          </>
-        )}
-
-        {/* ── Content Frame ────────────────────────────────────────────────── */}
-        <main
-          className={`flex-1 min-w-0 overflow-y-auto ${contentPadding ? "" : "p-0"}`}
-          style={{ maxWidth: product?.shell?.contentMaxWidth }}
-        >
-          <AppShellErrorBoundary>
-            {children}
-          </AppShellErrorBoundary>
-        </main>
+          onMobileMenuClick={() => setMobileOpen((v) => !v)}
+        />
       </div>
 
-      {/* ── ToastContainer (always present in shell) ────────────────────────── */}
+      {/* ── Desktop Sidebar — fixed left, below navbar ───────────────────────── */}
+      <aside
+        className="hidden md:flex flex-col fixed left-0 bottom-0 overflow-y-auto bg-card border-r border-border"
+        style={{
+          top: "var(--shell-navbar-height, 56px)",
+          width: sidebarW,
+          zIndex: "var(--z-shell-sidebar, 90)",
+          transition: `width var(--shell-sidebar-transition, 250ms cubic-bezier(0.4,0,0.2,1))`,
+        }}
+      >
+        {navLoading ? (
+          <div className="p-4 w-full">
+            <SkeletonList rows={6} />
+          </div>
+        ) : navError ? (
+          <div className="p-3">
+            <Alert variant="error">
+              <span style={{ fontSize: "var(--text-label)" }}>Nav load failed</span>
+            </Alert>
+            <button
+              type="button"
+              className="mt-2 text-primary cursor-pointer hover:underline"
+              style={{ fontSize: "var(--text-label)" }}
+              onClick={refreshNav}
+            >
+              Retry
+            </button>
+          </div>
+        ) : (
+          sidebarNode
+        )}
+      </aside>
+
+      {/* ── Mobile Overlay + Drawer ──────────────────────────────────────────── */}
+      {mobileOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 md:hidden"
+            style={{ zIndex: "var(--z-shell-overlay, 80)" }}
+            onClick={() => setMobileOpen(false)}
+          />
+          <div
+            className="fixed left-0 bottom-0 bg-card shadow-lg md:hidden overflow-y-auto"
+            style={{
+              top: "var(--shell-navbar-height, 56px)",
+              width: "var(--shell-sidebar-width, 240px)",
+              zIndex: "var(--z-shell-sidebar, 90)",
+            }}
+          >
+            {navLoading ? (
+              <div className="p-4"><SkeletonList rows={6} /></div>
+            ) : (
+              <Sidebar
+                brand={product ? { name: product.brand.name } : { name: "Sellsuki" }}
+                groups={adaptedGroups}
+                activeItem={activeItemId}
+                onNavigate={handleNavigate}
+                collapsed={false}
+                showCollapseToggle={false}
+                version={version}
+                versionDate={versionDate}
+              />
+            )}
+          </div>
+        </>
+      )}
+
+      {/* ── Content Frame — offset from fixed navbar + sidebar ───────────────── */}
+      <main
+        className={`min-h-screen ${contentPadding ? "" : "p-0"}`}
+        style={{
+          paddingTop: "var(--shell-navbar-height, 56px)",
+          marginLeft: sidebarW,
+          transition: `margin-left var(--shell-sidebar-transition, 250ms cubic-bezier(0.4,0,0.2,1))`,
+          maxWidth: product?.shell?.contentMaxWidth,
+        }}
+      >
+        <AppShellErrorBoundary>
+          {children}
+        </AppShellErrorBoundary>
+      </main>
+
+      {/* ── ToastContainer ──────────────────────────────────────────────────── */}
       <ToastContainer />
     </div>
   );
