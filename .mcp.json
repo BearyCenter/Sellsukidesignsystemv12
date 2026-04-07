@@ -2,7 +2,11 @@
   "mcpServers": {
     "sellsuki-design-system": {
       "command": "node",
-      "args": ["mcp-server/dist/index.js"]
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "GIST_ID": "1f93c4696db118e8013a589169435b42",
+        "MCP_SOURCE": "claude"
+      }
     }
   }
 }

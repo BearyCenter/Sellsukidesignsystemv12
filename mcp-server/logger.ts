@@ -61,20 +61,11 @@ type LogFile = {
 };
 
 // ─── Source detection ─────────────────────────────────────────────────────────
+// Each tool sets MCP_SOURCE in its config env — this is the only reliable way.
+// Render SSE clients that don't pass source will show "mcp".
 
 function detectSource(): string {
-  const env = process.env;
-  // Codex CLI sets CODEX_* vars
-  if (env.CODEX_SANDBOX !== undefined || env.CODEX_DISABLE_SERVER !== undefined || env.CODEX_VERSION !== undefined) return "codex";
-  // Claude Code
-  if (env.CLAUDE_CODE_ENTRYPOINT !== undefined || env.ANTHROPIC_API_KEY !== undefined) return "claude";
-  // Cursor
-  if (env.CURSOR_TRACE_ID !== undefined || env.CURSOR_EDITOR !== undefined) return "cursor";
-  // VSCode Copilot
-  if (env.VSCODE_PID !== undefined) return "copilot";
-  // Render SSE server (USE_GIST = true)
-  if (USE_GIST) return "mcp-sse";
-  return "mcp";
+  return process.env.MCP_SOURCE ?? (USE_GIST ? "mcp" : "mcp");
 }
 
 // ─── Gist helpers ─────────────────────────────────────────────────────────────
