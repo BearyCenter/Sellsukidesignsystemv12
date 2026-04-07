@@ -65,6 +65,13 @@ const fontLabelBold: React.CSSProperties = {
   fontWeight: "var(--weight-button)",
 };
 
+/** Brand name — always H4 (24px / weight-h4) per DS spec */
+const brandNameStyle: React.CSSProperties = {
+  fontFamily: "var(--font-h4)",
+  fontSize: "var(--text-h4)",
+  fontWeight: "var(--weight-h4)",
+};
+
 const fontLabel: React.CSSProperties = {
   fontFamily: "var(--font-p)",
   fontSize: "var(--text-p)",
@@ -153,7 +160,7 @@ export function Sidebar({
             </div>
           )}
           {!collapsed && (
-            <span className="text-sidebar-foreground truncate" style={fontLabelBold}>
+            <span className="text-sidebar-foreground truncate" style={brandNameStyle}>
               {brand.name}
             </span>
           )}
