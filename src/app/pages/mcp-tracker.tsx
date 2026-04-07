@@ -86,17 +86,20 @@ type LogFile = {
 
 // ─── Fetch helpers ────────────────────────────────────────────────────────────
 
-const LOG_URL = "/mcp-log.json";
-const POLL_MS = 5000;  // refresh every 5 s
+// Gist = production source; local fallback for dev
+const GIST_RAW = "https://gist.githubusercontent.com/BearyCenter/1f93c4696db118e8013a589169435b42/raw/mcp-log.json";
+const LOCAL_URL = "/mcp-log.json";
+const POLL_MS = 10_000;  // refresh every 10 s
 
 async function fetchLog(): Promise<LogFile | null> {
-  try {
-    const res = await fetch(`${LOG_URL}?t=${Date.now()}`);
-    if (!res.ok) return null;
-    return (await res.json()) as LogFile;
-  } catch {
-    return null;
+  // Try Gist first (production data), fall back to local (dev)
+  for (const url of [GIST_RAW, LOCAL_URL]) {
+    try {
+      const res = await fetch(`${url}?t=${Date.now()}`);
+      if (res.ok) return (await res.json()) as LogFile;
+    } catch { /* try next */ }
   }
+  return null;
 }
 
 // ─── Derived stats ────────────────────────────────────────────────────────────

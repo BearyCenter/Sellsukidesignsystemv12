@@ -11,5 +11,9 @@ services:
         value: 3100
       - key: NODE_ENV
         value: production
+      - key: GIST_ID
+        value: 1f93c4696db118e8013a589169435b42
+      - key: GITHUB_TOKEN
+        sync: false   # set manually in Render dashboard (secret)
     rootDir: mcp-server
     healthCheckPath: /health

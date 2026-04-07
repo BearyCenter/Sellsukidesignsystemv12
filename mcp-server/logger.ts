@@ -1,38 +1,52 @@
 /**
  * Sellsuki MCP Server — Request Logger
  *
- * Writes each tool invocation to public/mcp-log.json so the
- * MCP Tracker page in the design system showcase can read real data.
+ * Writes each tool invocation to a GitHub Gist so the MCP Tracker page
+ * can read real production data from any deployment environment.
  *
- * Safe for stdio mode: only writes to the log file, never touches stdout.
+ * Env vars required (set in Render / Vercel dashboard):
+ *   GIST_ID      — GitHub Gist ID  (1f93c4696db118e8013a589169435b42)
+ *   GITHUB_TOKEN — Personal Access Token with `gist` scope
+ *
+ * Falls back to local public/mcp-log.json when env vars are absent (dev mode).
+ * Safe for stdio mode: never touches stdout.
  */
 
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
-// ─── Resolve log file path ────────────────────────────────────────────────────
+// ─── Config ───────────────────────────────────────────────────────────────────
+
+const GIST_ID    = process.env.GIST_ID    ?? "";
+const GIST_TOKEN = process.env.GITHUB_TOKEN ?? "";
+const GIST_FILE  = "mcp-log.json";
+const GIST_API   = `https://api.github.com/gists/${GIST_ID}`;
+const GIST_RAW   = `https://gist.githubusercontent.com/BearyCenter/${GIST_ID}/raw/${GIST_FILE}`;
+
+const USE_GIST   = Boolean(GIST_ID && GIST_TOKEN);
+
+// ─── Local fallback path ───────────────────────────────────────────────────────
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = dirname(__filename);
 
-// Works for both: tsx (source) and dist/ (compiled)
 const projectRoot = __dirname.endsWith("dist")
-  ? join(__dirname, "../../")   // mcp-server/dist → project root
-  : join(__dirname, "../");     // mcp-server/      → project root
+  ? join(__dirname, "../../")
+  : join(__dirname, "../");
 
-const LOG_FILE  = join(projectRoot, "public", "mcp-log.json");
-const MAX_ROWS  = 200;   // keep last N requests in the file
+const LOG_FILE = join(projectRoot, "public", "mcp-log.json");
+const MAX_ROWS = 200;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type RequestLog = {
   id:       string;
   tool:     string;
-  params:   string;   // serialised (short)
-  duration: number;   // ms
+  params:   string;
+  duration: number;
   status:   "success" | "error";
-  ts:       string;   // ISO 8601
+  ts:       string;  // ISO 8601
 };
 
 type LogFile = {
@@ -40,53 +54,82 @@ type LogFile = {
   updated:  string;
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Gist helpers ─────────────────────────────────────────────────────────────
 
-function readLog(): LogFile {
+async function readGist(): Promise<LogFile> {
+  try {
+    const res = await fetch(`${GIST_RAW}?t=${Date.now()}`, {
+      headers: { "Cache-Control": "no-cache" },
+    });
+    if (!res.ok) return { requests: [], updated: new Date().toISOString() };
+    return (await res.json()) as LogFile;
+  } catch {
+    return { requests: [], updated: new Date().toISOString() };
+  }
+}
+
+async function writeGist(data: LogFile): Promise<void> {
+  await fetch(GIST_API, {
+    method: "PATCH",
+    headers: {
+      Authorization:  `Bearer ${GIST_TOKEN}`,
+      "Content-Type": "application/json",
+      "User-Agent":   "SellsukiDS-MCP",
+    },
+    body: JSON.stringify({
+      files: { [GIST_FILE]: { content: JSON.stringify(data, null, 2) } },
+    }),
+  });
+}
+
+// ─── Local fallback helpers ────────────────────────────────────────────────────
+
+function readLocal(): LogFile {
   try {
     if (existsSync(LOG_FILE)) {
       return JSON.parse(readFileSync(LOG_FILE, "utf-8")) as LogFile;
     }
-  } catch {
-    // corrupted file – start fresh
-  }
+  } catch { /* corrupted – start fresh */ }
   return { requests: [], updated: new Date().toISOString() };
 }
 
-function ensurePublicDir() {
+function writeLocal(data: LogFile): void {
   const dir = join(projectRoot, "public");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+  writeFileSync(LOG_FILE, JSON.stringify(data, null, 2), "utf-8");
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 /**
- * Record a single MCP tool call.
- * Called from server.ts after each tool handler resolves/rejects.
+ * Record a single MCP tool call (fire-and-forget, never throws).
  */
-export function logRequest(entry: Omit<RequestLog, "id" | "ts">): void {
+export async function logRequest(entry: Omit<RequestLog, "id" | "ts">): Promise<void> {
   try {
-    ensurePublicDir();
-    const data = readLog();
-
     const record: RequestLog = {
       id:  Math.random().toString(36).slice(2, 8).toUpperCase(),
       ts:  new Date().toISOString(),
       ...entry,
     };
 
-    // Prepend newest first, cap at MAX_ROWS
-    data.requests = [record, ...data.requests].slice(0, MAX_ROWS);
-    data.updated  = record.ts;
-
-    writeFileSync(LOG_FILE, JSON.stringify(data, null, 2), "utf-8");
+    if (USE_GIST) {
+      const data = await readGist();
+      data.requests = [record, ...data.requests].slice(0, MAX_ROWS);
+      data.updated  = record.ts;
+      await writeGist(data);
+    } else {
+      const data = readLocal();
+      data.requests = [record, ...data.requests].slice(0, MAX_ROWS);
+      data.updated  = record.ts;
+      writeLocal(data);
+    }
   } catch {
     // Never throw — logging must not break tool execution
   }
 }
 
 /**
- * Convenience: wrap an async tool handler, measure duration, and log result.
+ * Wrap an async tool handler, measure duration, and log result.
  *
  * Usage in server.ts:
  *   withLog("get_component", { name }, () => handler({ name }))
@@ -97,7 +140,6 @@ export async function withLog<T>(
   fn: () => Promise<T>
 ): Promise<T> {
   const start = Date.now();
-  // Build short param string (max 80 chars)
   const paramStr = Object.entries(params)
     .map(([k, v]) => `${k}="${String(v)}"`)
     .join(", ")
@@ -105,20 +147,10 @@ export async function withLog<T>(
 
   try {
     const result = await fn();
-    logRequest({
-      tool,
-      params:   paramStr,
-      duration: Date.now() - start,
-      status:   "success",
-    });
+    void logRequest({ tool, params: paramStr, duration: Date.now() - start, status: "success" });
     return result;
   } catch (err) {
-    logRequest({
-      tool,
-      params:   paramStr,
-      duration: Date.now() - start,
-      status:   "error",
-    });
+    void logRequest({ tool, params: paramStr, duration: Date.now() - start, status: "error" });
     throw err;
   }
 }
