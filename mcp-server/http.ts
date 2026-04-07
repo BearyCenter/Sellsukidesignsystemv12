@@ -7,7 +7,14 @@ import { createServer } from "./server.js";
 
 // ─── HTTP + SSE Mode (for Figma Connector / remote clients) ────────────────
 
-const app = createMcpExpressApp();
+const app = createMcpExpressApp({
+  // Allow Render domain + localhost for health checks
+  allowedHosts: [
+    "sellsukidesignsystem.onrender.com",
+    "localhost",
+    "127.0.0.1",
+  ],
+});
 
 // Store active SSE transports by session ID
 const transports: Record<string, SSEServerTransport> = {};
