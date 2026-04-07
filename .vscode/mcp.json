@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "sellsuki-design-system": {
+      "type": "sse",
+      "url": "https://sellsukidesignsystem.onrender.com/sse"
+    }
+  }
+}
