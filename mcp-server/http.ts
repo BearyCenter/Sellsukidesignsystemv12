@@ -30,6 +30,17 @@ app.get("/health", (_req: Request, res: Response) => {
   });
 });
 
+// Test — manually log one request entry to verify full Gist pipeline
+app.get("/test-log", async (_req: Request, res: Response) => {
+  try {
+    const { logRequest } = await import("./logger.js");
+    await logRequest({ tool: "test_ping", params: "source=browser", duration: 0, status: "success" });
+    res.json({ ok: true, message: "Test entry logged — check /debug/gist for updated requestCount" });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: String(e) });
+  }
+});
+
 // Debug — Gist connectivity test (tells you if token is valid and logging works)
 app.get("/debug/gist", async (_req: Request, res: Response) => {
   try {
