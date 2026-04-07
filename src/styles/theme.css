@@ -459,7 +459,7 @@
 
   /* ── AppShell layout tokens ── */
   --shell-navbar-height:        56px;
-  --shell-sidebar-width:        240px;
+  --shell-sidebar-width:        200px;   /* default; range 200–320px via Sidebar width prop */
   --shell-sidebar-collapsed:    64px;
   --shell-sidebar-transition:   250ms cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -689,4 +689,62 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MULTI-PRODUCT THEME OVERRIDES
+   Applied via [data-product] attribute on AppShell root element.
+   Each product overrides only the brand-primary tokens — everything else
+   inherits from the Sellsuki (default) token values above.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Patona — Aerospace Orange ── */
+/* Primary: Aerospace Orange/500 = #EC5E2A  |  Hover: Aerospace Orange/600 = #C95024 */
+[data-product="patona"] {
+  --Colors--Text--text-brand-primary:         rgba(236, 94, 42, 1);
+  --Colors--Background--bg-brand-primary:     rgba(253, 241, 235, 1);
+  --Colors--Button--Solid--button-solid-bg:       rgba(236, 94, 42, 1);
+  --Colors--Button--Solid--button-solid-bg_hover: rgba(201, 80, 36, 1);
+  --Colors--Button--Solid--button-solid-border:   rgba(236, 94, 42, 1);
+  --Colors--Button--brand-secondary:          rgba(255, 255, 255, 1);
+  --primary:                                  rgba(236, 94, 42, 1);
+  --primary-foreground:                       rgba(255, 255, 255, 1);
+  --ring:                                     rgba(201, 80, 36, 1);
+  --sidebar-primary:                          rgba(236, 94, 42, 1);
+  --sidebar-primary-foreground:               rgba(236, 94, 42, 1);
+  --sidebar-accent:                           rgba(253, 241, 235, 1);
+  --sidebar-accent-foreground:                rgba(236, 94, 42, 1);
+}
+
+/* ── Akita — Cobalt Blue ── */
+/* Primary: Cobalt Blue/500 ≈ #1769E2  |  Hover: Cobalt Blue/600 ≈ #1256BE */
+[data-product="akita"] {
+  --Colors--Text--text-brand-primary:         rgba(23, 105, 226, 1);
+  --Colors--Background--bg-brand-primary:     rgba(230, 241, 255, 1);
+  --Colors--Button--Solid--button-solid-bg:       rgba(23, 105, 226, 1);
+  --Colors--Button--Solid--button-solid-bg_hover: rgba(14, 82, 190, 1);
+  --Colors--Button--Solid--button-solid-border:   rgba(23, 105, 226, 1);
+  --Colors--Button--brand-secondary:          rgba(23, 105, 226, 1);
+  --primary:                                  rgba(23, 105, 226, 1);
+  --primary-foreground:                       rgba(255, 255, 255, 1);
+  --ring:                                     rgba(14, 82, 190, 1);
+  --sidebar-primary:                          rgba(23, 105, 226, 1);
+  --sidebar-primary-foreground:               rgba(23, 105, 226, 1);
+  --sidebar-accent:                           rgba(230, 241, 255, 1);
+  --sidebar-accent-foreground:                rgba(23, 105, 226, 1);
+}
+
+/* ── Oc2plus — Sky/500 (same as Sellsuki default, no primary override needed) ── */
+/* Only brand-secondary differs */
+[data-product="oc2plus"] {
+  --Colors--Button--brand-secondary:          rgba(255, 255, 255, 1);
+}
+
+/* ── SellsukiPay — Sky/500 (same as Sellsuki default) ── */
+/* Inherits all Sellsuki tokens — no override needed */
+
+/* ── Shipmunk — Sky/500 + Cyan secondary ── */
+/* Inherits Sky/500 primary, cyan secondary accent */
+[data-product="shipmunk"] {
+  --Colors--Button--brand-secondary:          rgba(6, 197, 249, 1); /* #06C5F9 cyan */
 }

@@ -60,18 +60,34 @@ export interface AppShellProps {
   notificationCount?: number;
   /** Notification click handler */
   onNotificationClick?: () => void;
+  /** App/product switcher click handler — shows grid icon in TopNavbar */
+  onAppSwitcherClick?: () => void;
   /** User click handler (profile menu, logout) */
   onUserClick?: () => void;
   /** Search click handler */
   onSearchClick?: () => void;
-  /** Show search in TopNavbar */
+  /**
+   * Search display mode for TopNavbar.
+   * - "bar"  — full search bar
+   * - "icon" — icon button only
+   * - "none" — hidden (default)
+   * @deprecated showSearch — use searchMode="bar" instead
+   */
+  searchMode?: "bar" | "icon" | "none";
+  /**
+   * @deprecated Use searchMode="bar" instead
+   */
   showSearch?: boolean;
+  /** Page title / system name shown in TopNavbar after logo. Default: hidden */
+  title?: string;
   /** App version string */
   version?: string;
   /** App version date */
   versionDate?: string;
   /** Whether content area has padding (default: true) */
   contentPadding?: boolean;
+  /** Utility items rendered at sidebar footer (e.g. Help, Settings) */
+  utilityItems?: SidebarItem[];
   /** Children — feature page content */
   children: React.ReactNode;
   /** Additional class name on root element */
@@ -103,12 +119,16 @@ function InnerAppShell({
   onNavigate,
   notificationCount,
   onNotificationClick,
+  onAppSwitcherClick,
   onUserClick,
   onSearchClick,
-  showSearch = false,
+  searchMode: searchModeProp,
+  showSearch,
+  title,
   version,
   versionDate,
   contentPadding = true,
+  utilityItems,
   children,
   className = "",
 }: InnerShellProps) {
@@ -128,6 +148,9 @@ function InnerAppShell({
     !(product?.shell?.sidebarDefaultOpen ?? true)
   );
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Backward compat: showSearch=true → "bar"
+  const searchMode = searchModeProp ?? (showSearch ? "bar" : "none");
 
   // Close mobile drawer on resize to desktop
   useEffect(() => {
@@ -156,7 +179,11 @@ function InnerAppShell({
     <Sidebar
       brand={
         product
-          ? { name: product.brand.name }
+          ? {
+              name: product.brand.name,
+              logo: typeof product.brand.logo === "string" ? product.brand.logo : undefined,
+              logoFull: product.brand.logoFull,
+            }
           : { name: "Sellsuki" }
       }
       groups={
@@ -168,7 +195,11 @@ function InnerAppShell({
       onNavigate={handleNavigate}
       collapsed={sidebarCollapsed}
       onCollapsedChange={setSidebarCollapsed}
-      showCollapseToggle={product?.shell?.sidebarCollapsible ?? true}
+      // Collapse toggle in sidebar footer is hidden by default when TopNavbar has onSidebarToggle
+      // (hamburger in TopNavbar controls collapse). Set sidebarCollapsible=true in shell prefs
+      // AND omit onSidebarToggle to show the in-sidebar toggle.
+      showCollapseToggle={false}
+      utilityItems={utilityItems}
       version={version}
       versionDate={versionDate}
     />
@@ -176,7 +207,7 @@ function InnerAppShell({
 
   const sidebarW = sidebarCollapsed
     ? "var(--shell-sidebar-collapsed, 64px)"
-    : "var(--shell-sidebar-width, 240px)";
+    : "var(--shell-sidebar-width, 200px)";
 
   return (
     <div
@@ -191,15 +222,25 @@ function InnerAppShell({
         <TopNavbar
           brand={
             product
-              ? { name: product.brand.name, logo: product.brand.logo as string | undefined }
+              ? {
+                  name: product.brand.name,
+                  logo: typeof product.brand.logo === "string" ? product.brand.logo : undefined,
+                  logoFull: product.brand.logoFull ?? (
+                    product.brand.logo && typeof product.brand.logo !== "string"
+                      ? product.brand.logo
+                      : undefined
+                  ),
+                }
               : { name: "Sellsuki" }
           }
+          title={title}
           breadcrumbs={breadcrumbs.map((b) => ({ label: b.label, href: b.href }))}
           user={user ? { name: user.name, avatar: user.avatar } : undefined}
-          showSearch={showSearch}
+          searchMode={searchMode}
           onSearchClick={onSearchClick}
           notificationCount={notificationCount}
           onNotificationClick={onNotificationClick}
+          onAppSwitcherClick={onAppSwitcherClick}
           onUserClick={onUserClick}
           workspaceSwitcher={product?.brand?.workspaceSwitcher}
           onSidebarToggle={() => {
@@ -259,7 +300,7 @@ function InnerAppShell({
             className="fixed left-0 bottom-0 bg-card shadow-lg md:hidden overflow-y-auto"
             style={{
               top: "var(--shell-navbar-height, 56px)",
-              width: "var(--shell-sidebar-width, 240px)",
+              width: "var(--shell-sidebar-width, 200px)",
               zIndex: "var(--z-shell-sidebar, 90)",
             }}
           >
@@ -273,6 +314,7 @@ function InnerAppShell({
                 onNavigate={handleNavigate}
                 collapsed={false}
                 showCollapseToggle={false}
+                utilityItems={utilityItems}
                 version={version}
                 versionDate={versionDate}
               />
@@ -355,8 +397,8 @@ export function AppShellSkeleton() {
         </div>
       </div>
       <div className="flex flex-1">
-        {/* Sidebar skeleton */}
-        <div className="w-60 border-r border-border p-4 space-y-3 hidden md:block">
+        {/* Sidebar skeleton — w-[200px] matches --shell-sidebar-width default */}
+        <div className="w-[200px] border-r border-border p-4 space-y-3 hidden md:block">
           <div className="w-full h-8 rounded-[var(--radius-md)] bg-muted/40 animate-pulse" />
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="w-full h-7 rounded-[var(--radius-md)] bg-muted/30 animate-pulse" />

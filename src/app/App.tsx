@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Tooltip } from "../lib/components/ds-tooltip";
 import {
   ChevronRight,
@@ -57,6 +57,8 @@ import {
   Layers,
 } from "lucide-react";
 import SSKIcon from "../imports/Icon";
+import SellsukiIcon from "../imports/SellsukiIcon";
+import SellsukiFull from "../imports/SellsukiFull";
 import { I18nProvider, useI18n } from "./i18n";
 import { HeaderSearch, type SearchableItem } from "./components/header-search";
 
@@ -411,6 +413,31 @@ function AppInner() {
   const [activePage, setActivePage] = useState<PageId>("getting-started");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(200);
+  const isResizing = useRef(false);
+
+  const startResize = useCallback((e: React.MouseEvent) => {
+    if (sidebarCollapsed) return;
+    e.preventDefault();
+    isResizing.current = true;
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!isResizing.current) return;
+      const newW = Math.min(320, Math.max(200, ev.clientX));
+      setSidebarWidth(newW);
+    };
+    const onMouseUp = () => {
+      isResizing.current = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }, [sidebarCollapsed]);
   const sidebarGroups = buildSidebarGroups(t);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
@@ -452,7 +479,7 @@ function AppInner() {
   const ActivePageComponent = PAGE_MAP[activePage];
 
   return (
-    <div className={`min-h-screen bg-background flex ${darkMode ? "dark" : ""}`}>
+    <div className={`h-screen overflow-hidden bg-background flex ${darkMode ? "dark" : ""}`}>
       {/* ─── Mobile overlay ──────────────────────────── */}
       {sidebarOpen && (
         <div
@@ -463,24 +490,22 @@ function AppInner() {
 
       {/* ─── Sidebar ─────────────────────────────────── */}
       <aside
-        className={`fixed top-0 left-0 h-screen bg-sidebar border-r border-sidebar-border z-50 flex flex-col transition-all duration-200
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:sticky lg:top-0 lg:z-30`}
-        style={{ width: sidebarCollapsed ? "64px" : "256px", borderRight: "1px solid var(--sidebar-border)" }}
+        className={`fixed top-0 left-0 h-screen bg-sidebar border-r border-sidebar-border z-50 flex flex-col flex-shrink-0 transition-all duration-200
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:relative lg:translate-x-0 lg:z-30`}
+        style={{ width: sidebarCollapsed ? "64px" : `${sidebarWidth}px`, borderRight: "1px solid var(--sidebar-border)" }}
       >
         {/* Logo */}
         <div className={`${sidebarCollapsed ? "px-2" : "px-4"} border-b border-sidebar-border flex items-center`} style={{ height: "56px" }}>
           <div className="flex items-center justify-between w-full">
             <div className={`flex items-center ${sidebarCollapsed ? "justify-center w-full" : "gap-2.5"}`}>
-              <div className="w-8 h-8 flex-shrink-0 rounded-[var(--radius-md)] overflow-hidden">
-                <SSKIcon />
-              </div>
-              {!sidebarCollapsed && (
-                <span
-                  className="text-sidebar-foreground truncate"
-                  style={{ fontFamily: "var(--font-h4)", fontSize: "var(--text-caption)", fontWeight: "var(--weight-h4)", letterSpacing: "-0.01em" }}
-                >
-                  Sellsuki 2.0
-                </span>
+              {sidebarCollapsed ? (
+                <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+                  <SellsukiIcon size={40} />
+                </div>
+              ) : (
+                <div className="flex-shrink-0 flex items-center" style={{ height: "40px" }}>
+                  <SellsukiFull height={40} />
+                </div>
               )}
             </div>
             <button
@@ -606,10 +631,25 @@ function AppInner() {
             </div>
           )}
         </div>
+
+        {/* ── Resize handle — drag right edge to resize (min 200 / max 320) ── */}
+        {!sidebarCollapsed && (
+          <div
+            onMouseDown={startResize}
+            className="hidden lg:flex absolute top-0 right-0 h-full items-center justify-center group"
+            style={{ width: "8px", cursor: "col-resize", zIndex: 40 }}
+            title="Drag to resize sidebar"
+          >
+            <div
+              className="h-12 rounded-full transition-all duration-150 group-hover:opacity-100 opacity-0"
+              style={{ width: "3px", background: "var(--primary)", borderRadius: "99px" }}
+            />
+          </div>
+        )}
       </aside>
 
       {/* ─── Main Content ────────────────────────────── */}
-      <div className="flex-1 min-w-0 flex flex-col app-content-area">
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden app-content-area">
         {/* Desktop Top Bar — burger toggle + breadcrumb + search + actions */}
         <header className="hidden lg:flex items-center sticky top-0 z-30 bg-card/80 backdrop-blur-sm border-b border-border" style={{ height: "56px" }}>
           <div className="px-4 flex items-center gap-3 w-full">
@@ -687,8 +727,8 @@ function AppInner() {
             >
               <Menu size={16} />
             </button>
-            <div className="w-8 h-8 flex-shrink-0 rounded-[var(--radius-sm)] overflow-hidden">
-              <SSKIcon />
+            <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center">
+              <SellsukiIcon size={40} />
             </div>
             {/* Page title on mobile */}
             <span
@@ -718,7 +758,7 @@ function AppInner() {
           </div>
         </header>
 
-        <main key={activePage} className="flex-1 max-w-5xl mx-auto w-full px-6 py-8 page-enter">
+        <main key={activePage} className="flex-1 overflow-y-auto max-w-[1440px] mx-auto w-full px-6 py-8 page-enter">
           <ActivePageComponent />
         </main>
       </div>

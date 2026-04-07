@@ -617,8 +617,8 @@
 }
 
 [data-product="patona"] {
-  --primary: var(--Base_Color--Orange--500);
-  --primary-hover: var(--Base_Color--Orange--600);
+  --primary: rgba(236, 94, 42, 1);        /* Aerospace Orange 500 #EC5E2A */
+  --primary-hover: rgba(201, 80, 36, 1);  /* Aerospace Orange 600 #C95024 */
   --primary-foreground: rgba(255, 255, 255, 1);
   --product-name: "Patona";
 }

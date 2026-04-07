@@ -132,8 +132,20 @@ export interface ProductBrandConfig {
   brand: {
     /** Brand/product name shown in sidebar header and nav title */
     name: string;
-    /** Logo component or image URL */
+    /**
+     * Icon-only logo (40×40px SVG/ReactNode or image URL string).
+     * Used in collapsed sidebar state.
+     * Falls back to name initial when not provided.
+     */
     logo?: React.ReactNode;
+    /**
+     * Icon+Name logo (variable width × 40px height SVG/ReactNode).
+     * Used in expanded sidebar and TopNavbar.
+     * When provided, the brand name text is NOT rendered separately
+     * (it is baked into the SVG).
+     * Falls back to `logo` + name text when not provided.
+     */
+    logoFull?: React.ReactNode;
     /** CSS theme class or data-product value — used for token overrides */
     theme?: string;
     /** Optional workspace/shop switcher rendered after brand logo in TopNavbar */
@@ -190,12 +202,23 @@ export interface BreadcrumbEntry {
 
 /**
  * Sellsuki brand config — Sky-500 primary, DB HeaventRounded font.
- * Use this as the default for Sellsuki Admin product.
+ *
+ * To add logos, provide SVG components:
+ * ```tsx
+ * import SellsukiIcon from "@/assets/logos/sellsuki-icon.svg?react";
+ * import SellsukiFull from "@/assets/logos/sellsuki-full.svg?react";
+ *
+ * const config = {
+ *   ...sellsukiBrandConfig,
+ *   brand: { ...sellsukiBrandConfig.brand, logo: <SellsukiIcon />, logoFull: <SellsukiFull /> },
+ * };
+ * ```
  */
 export const sellsukiBrandConfig: ProductBrandConfig = {
   product: "sellsuki",
   brand: {
     name: "Sellsuki",
+    // logo / logoFull: inject SVG components in your product repo
     theme: "sellsuki",
   },
   shell: {
@@ -205,13 +228,14 @@ export const sellsukiBrandConfig: ProductBrandConfig = {
 };
 
 /**
- * Patona brand config — Orange-500 primary.
- * Logo and workspaceSwitcher should be provided by the Patona product repo.
+ * Patona brand config — Aerospace Orange primary (#EC5E2A).
+ * logo / logoFull: inject from product repo (Brand=patona SVG files).
  */
 export const patonaBrandConfig: ProductBrandConfig = {
   product: "patona",
   brand: {
     name: "Patona",
+    // logo / logoFull: inject SVG components in your product repo
     theme: "patona",
   },
   shell: {
@@ -236,23 +260,72 @@ export const sukispaceBrandConfig: ProductBrandConfig = {
 };
 
 /**
- * Shipmunk brand config — placeholder, theme TBD.
+ * Shipmunk brand config — Sky-500 primary + Cyan secondary.
+ * NOTE: Shipmunk only has an icon+name SVG (no icon-only variant).
+ * Set `logoFull` to the icon+name SVG; collapsed sidebar will clip to icon area.
+ * logo / logoFull: inject from product repo (Brand=shipmunk SVG files).
  */
 export const shipmunkBrandConfig: ProductBrandConfig = {
   product: "shipmunk",
   brand: {
     name: "Shipmunk",
+    // logoFull only (no icon-only SVG for Shipmunk)
+    // logo / logoFull: inject SVG components in your product repo
     theme: "shipmunk",
+  },
+  shell: {
+    sidebarCollapsible: true,
+    sidebarDefaultOpen: true,
   },
 };
 
 /**
- * Akita brand config — placeholder, theme TBD.
+ * Akita brand config — Cobalt Blue primary (#1769E2).
+ * logo / logoFull: inject from product repo (Brand=akita SVG files).
  */
 export const akitaBrandConfig: ProductBrandConfig = {
   product: "akita",
   brand: {
     name: "Akita",
+    // logo / logoFull: inject SVG components in your product repo
     theme: "akita",
+  },
+  shell: {
+    sidebarCollapsible: true,
+    sidebarDefaultOpen: true,
+  },
+};
+
+/**
+ * Oc2plus brand config — Sky-500 primary (same as Sellsuki default).
+ * logo / logoFull: inject from product repo (Brand=oc2plus SVG files).
+ */
+export const oc2plusBrandConfig: ProductBrandConfig = {
+  product: "oc2plus",
+  brand: {
+    name: "Oc2plus",
+    // logo / logoFull: inject SVG components in your product repo
+    theme: "oc2plus",
+  },
+  shell: {
+    sidebarCollapsible: true,
+    sidebarDefaultOpen: true,
+  },
+};
+
+/**
+ * SellsukiPay brand config — Sky-500 primary (same as Sellsuki default).
+ * logo / logoFull: inject from product repo (Brand=sellsukipay SVG files).
+ */
+export const sellsukiPayBrandConfig: ProductBrandConfig = {
+  product: "sellsukipay",
+  brand: {
+    name: "SellsukiPay",
+    // logo / logoFull: inject SVG components in your product repo
+    theme: "sellsukipay",
+  },
+  shell: {
+    sidebarCollapsible: true,
+    sidebarDefaultOpen: true,
   },
 };

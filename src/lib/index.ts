@@ -273,4 +273,6 @@ export {
   sukispaceBrandConfig,
   shipmunkBrandConfig,
   akitaBrandConfig,
+  oc2plusBrandConfig,
+  sellsukiPayBrandConfig,
 } from "./types/shell";

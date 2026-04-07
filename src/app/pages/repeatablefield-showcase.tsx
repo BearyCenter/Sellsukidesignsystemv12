@@ -133,7 +133,7 @@ export function RepeatableFieldShowcase() {
   value={variants}
   onChange={setVariants}
   defaultRow={{ size: "", color: "", price: "0", stock: "0", sku: "" }}
-  addLabel="+ เพิ่ม variant"
+  addLabel="เพิ่ม variant"
   sortable
   minRows={1}
   maxRows={20}
@@ -145,7 +145,7 @@ export function RepeatableFieldShowcase() {
             value={variants}
             onChange={setVariants}
             defaultRow={{ size: "", color: "", price: "0", stock: "0", sku: "" }}
-            addLabel="+ เพิ่ม variant"
+            addLabel="เพิ่ม variant"
             sortable
             minRows={1}
             maxRows={20}
@@ -167,7 +167,7 @@ export function RepeatableFieldShowcase() {
   value={addresses}
   onChange={setAddresses}
   defaultRow={{ name: "", phone: "", address: "" }}
-  addLabel="+ เพิ่มที่อยู่"
+  addLabel="เพิ่มที่อยู่"
   maxRows={5}
 />`}
       >
@@ -177,7 +177,7 @@ export function RepeatableFieldShowcase() {
             value={addresses}
             onChange={setAddresses}
             defaultRow={{ name: "", phone: "", address: "" }}
-            addLabel="+ เพิ่มที่อยู่"
+            addLabel="เพิ่มที่อยู่"
             maxRows={5}
           />
         </DemoBox>
