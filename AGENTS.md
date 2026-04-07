@@ -1,6 +1,11 @@
 # Sellsuki Design System — OpenAI Codex / Agents Rules
 # Full spec: https://sellsukidesignsystemv12.vercel.app/ai-rules.md
 
+## MCP Server (use this for component info, tokens, and code generation)
+- SSE URL: `https://sellsukidesignsystem.onrender.com/sse`
+- Tools: `get_component`, `list_components`, `get_design_tokens`, `get_color_palette`, `get_brand_rules`, `get_quick_start`, `generate_page_layout`, `suggest_components`, `get_page_pattern`, `get_feature_template`
+- Config: `.codex/config.toml` in this project (auto-loaded)
+
 ## Project
 Sellsuki is an **e-commerce management platform for Thai merchants**.
 Visual identity: Professional, clean, trustworthy, light, airy, functional.

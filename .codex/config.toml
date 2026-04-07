@@ -1,0 +1,7 @@
+# Sellsuki Design System — Codex MCP Config
+# Codex อ่านไฟล์นี้อัตโนมัติเมื่อเปิด project นี้
+
+[[mcp_servers]]
+name    = "sellsuki-design-system"
+transport = "sse"
+url     = "https://sellsukidesignsystem.onrender.com/sse"
