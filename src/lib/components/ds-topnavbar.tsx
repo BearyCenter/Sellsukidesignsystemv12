@@ -69,6 +69,13 @@ const btnStyle: React.CSSProperties = {
   fontWeight: "var(--weight-button)",
 };
 
+/** Product / page title — always H4 (24px / weight-h4) per DS spec */
+const titleStyle: React.CSSProperties = {
+  fontFamily: "var(--font-h4)",
+  fontSize: "var(--text-h4)",
+  fontWeight: "var(--weight-h4)",
+};
+
 // ─── TopNavbar ───────────────────────────────────────────────────────────────
 
 export function TopNavbar({
@@ -156,9 +163,9 @@ export function TopNavbar({
         </div>
       )}
 
-      {/* Page title */}
+      {/* Page title — H4 24px */}
       {title && (
-        <span className="text-foreground hidden sm:block truncate" style={btnStyle}>
+        <span className="text-foreground hidden sm:block truncate" style={titleStyle}>
           {title}
         </span>
       )}
