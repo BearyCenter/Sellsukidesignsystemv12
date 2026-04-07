@@ -76,8 +76,33 @@ type RequestLog = {
   params:   string;
   duration: number;
   status:   "success" | "error";
-  ts:       string;  // ISO 8601
+  ts:       string;
+  source?:  string;
 };
+
+const AI_META: Record<string, { label: string; icon: string; color: string; bg: string }> = {
+  codex:   { label: "Codex",   icon: "✦", color: "#16a34a", bg: "#f0fdf4" },
+  claude:  { label: "Claude",  icon: "◆", color: "#7c3aed", bg: "#f5f3ff" },
+  cursor:  { label: "Cursor",  icon: "⬡", color: "#0ea5e9", bg: "#f0f9ff" },
+  copilot: { label: "Copilot", icon: "◎", color: "#f97316", bg: "#fff7ed" },
+  "mcp-sse": { label: "MCP",   icon: "⬡", color: "#6b7280", bg: "#f9fafb" },
+  mcp:     { label: "MCP",     icon: "⬡", color: "#6b7280", bg: "#f9fafb" },
+};
+
+function AIBadge({ source }: { source?: string }) {
+  const key = source?.toLowerCase() ?? "mcp";
+  const meta = AI_META[key] ?? { label: source ?? "MCP", icon: "⬡", color: "#6b7280", bg: "#f9fafb" };
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full font-mono whitespace-nowrap"
+      style={{ fontSize: "11px", fontWeight: 600, color: meta.color, background: meta.bg, letterSpacing: "0.01em" }}
+      title={meta.label}
+    >
+      <span style={{ fontSize: "10px" }}>{meta.icon}</span>
+      {meta.label}
+    </span>
+  );
+}
 
 type LogFile = {
   requests: RequestLog[];
@@ -281,7 +306,7 @@ export function MCPTrackerPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-8">
 
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
       <div className="flex items-start justify-between">
@@ -491,11 +516,11 @@ export function MCPTrackerPage() {
                 <p style={{ ...f.label, color: c.placeholder }}>Waiting for MCP tool calls…</p>
               </div>
             ) : (
-              <div className="overflow-auto" style={{ maxHeight: 420 }}>
+              <div className="overflow-auto" style={{ maxHeight: 520 }}>
                 <table className="w-full">
                   <thead>
                     <tr style={{ borderBottom: `1px solid ${c.border}` }}>
-                      {["Date / Time", "ID", "Tool", "Params", "Duration", "Status"].map((h) => (
+                      {["AI", "Date / Time", "ID", "Tool", "Params", "Duration", "Status"].map((h) => (
                         <th
                           key={h}
                           className="text-left px-3 py-2 sticky top-0"
@@ -517,6 +542,9 @@ export function MCPTrackerPage() {
                           className="hover:bg-[#f9fafb] transition-colors"
                           style={{ borderBottom: i < log.length - 1 ? `1px solid ${c.border}` : "none" }}
                         >
+                          <td className="px-3 py-2 whitespace-nowrap">
+                            <AIBadge source={req.source} />
+                          </td>
                           <td className="px-3 py-2 font-mono whitespace-nowrap" style={{ ...f.numSm, color: c.placeholder, fontSize: "var(--text-caption)" }}>
                             {timeStr}
                           </td>

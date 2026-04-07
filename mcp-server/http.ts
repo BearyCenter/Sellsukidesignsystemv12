@@ -34,9 +34,9 @@ app.get("/health", (_req: Request, res: Response) => {
 app.post("/log", async (req: Request, res: Response) => {
   try {
     const { logRequest } = await import("./logger.js");
-    const { tool, params, duration, status } = req.body ?? {};
+    const { tool, params, duration, status, source } = req.body ?? {};
     if (!tool) { res.status(400).json({ ok: false, error: "missing tool" }); return; }
-    await logRequest({ tool, params: params ?? "", duration: duration ?? 0, status: status ?? "success" });
+    await logRequest({ tool, params: params ?? "", duration: duration ?? 0, status: status ?? "success", source: source ?? "mcp" });
     res.json({ ok: true });
   } catch (e) {
     res.status(500).json({ ok: false, error: String(e) });

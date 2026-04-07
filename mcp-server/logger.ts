@@ -52,12 +52,30 @@ export type RequestLog = {
   duration: number;
   status:   "success" | "error";
   ts:       string;  // ISO 8601
+  source?:  string;  // "claude" | "codex" | "cursor" | "mcp" | etc.
 };
 
 type LogFile = {
   requests: RequestLog[];
   updated:  string;
 };
+
+// ─── Source detection ─────────────────────────────────────────────────────────
+
+function detectSource(): string {
+  const env = process.env;
+  // Codex CLI sets CODEX_* vars
+  if (env.CODEX_SANDBOX !== undefined || env.CODEX_DISABLE_SERVER !== undefined || env.CODEX_VERSION !== undefined) return "codex";
+  // Claude Code
+  if (env.CLAUDE_CODE_ENTRYPOINT !== undefined || env.ANTHROPIC_API_KEY !== undefined) return "claude";
+  // Cursor
+  if (env.CURSOR_TRACE_ID !== undefined || env.CURSOR_EDITOR !== undefined) return "cursor";
+  // VSCode Copilot
+  if (env.VSCODE_PID !== undefined) return "copilot";
+  // Render SSE server (USE_GIST = true)
+  if (USE_GIST) return "mcp-sse";
+  return "mcp";
+}
 
 // ─── Gist helpers ─────────────────────────────────────────────────────────────
 
@@ -179,8 +197,9 @@ export async function checkGistStatus(): Promise<{
 export async function logRequest(entry: Omit<RequestLog, "id" | "ts">): Promise<void> {
   try {
     const record: RequestLog = {
-      id:  Math.random().toString(36).slice(2, 8).toUpperCase(),
-      ts:  new Date().toISOString(),
+      id:     Math.random().toString(36).slice(2, 8).toUpperCase(),
+      ts:     new Date().toISOString(),
+      source: detectSource(),
       ...entry,
     };
 
@@ -195,7 +214,7 @@ export async function logRequest(entry: Omit<RequestLog, "id" | "ts">): Promise<
       await fetch(REMOTE_LOG, {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ tool: record.tool, params: record.params, duration: record.duration, status: record.status }),
+        body:    JSON.stringify({ tool: record.tool, params: record.params, duration: record.duration, status: record.status, source: record.source }),
       }).catch(() => { /* fire-and-forget */ });
     } else {
       // Fallback — write to local file (dev mode, no network)
