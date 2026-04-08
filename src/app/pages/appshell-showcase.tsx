@@ -408,11 +408,11 @@ const myBrand: ProductBrandConfig = {
         description="แสดง skeleton ของ AppShell ระหว่างที่ session กำลังโหลด"
         code={`if (sessionLoading) return <AppShellSkeleton />;`}
       >
-        <DemoBox className="!p-0 overflow-hidden rounded-[var(--radius-md)]" style={{ height: 320 }}>
-          <div style={{ transform: "scale(0.6)", transformOrigin: "top left", width: "167%", height: "167%", pointerEvents: "none" }}>
+        <div className="rounded-[var(--radius-md)] border border-border bg-card overflow-hidden" style={{ height: 160 }}>
+          <div style={{ transform: "scale(0.6)", transformOrigin: "top left", width: "167%", height: "267px", pointerEvents: "none" }}>
             <AppShellSkeleton key={skeletonKey} />
           </div>
-        </DemoBox>
+        </div>
         <div className="flex justify-center mt-3">
           <DSButton variant="outline" size="sm" onClick={() => setSkeletonKey((k) => k + 1)}>
             Replay Skeleton

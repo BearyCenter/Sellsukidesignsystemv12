@@ -1,6 +1,6 @@
 import React from "react";
 import { MoreHorizontal, Heart, Share2, ArrowRight, User, Settings } from "lucide-react";
-import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel } from "./_showcase-factory";
+import { PageHeader, Section, DemoBox, DemoCard, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
 import { Card, CardHeader, CardBody, CardFooter } from "../../lib/components/ds-card";
 import { DSButton, IconButton } from "../../lib/components/ds-button";
 
