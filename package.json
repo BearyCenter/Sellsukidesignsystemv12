@@ -1,6 +1,6 @@
 {
   "name": "@uxuissk/design-system",
-  "version": "0.8.13",
+  "version": "0.8.14",
   "private": false,
   "type": "module",
   "workspaces": [

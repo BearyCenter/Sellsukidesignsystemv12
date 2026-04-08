@@ -503,8 +503,18 @@ function AppInner() {
                   <SellsukiIcon size={40} />
                 </div>
               ) : (
-                <div className="flex-shrink-0 flex items-center" style={{ height: "40px" }}>
+                <div className="flex items-center gap-1.5" style={{ height: "40px" }}>
                   <SellsukiFull height={40} />
+                  <span
+                    className="px-1.5 rounded-[var(--radius-sm)] flex-shrink-0"
+                    style={{
+                      fontFamily: "var(--font-button)", fontSize: "12px", fontWeight: 700, lineHeight: "20px",
+                      background: "rgba(50, 169, 255, 0.13)",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    2.0
+                  </span>
                 </div>
               )}
             </div>
@@ -558,8 +568,12 @@ function AppInner() {
                       )}
                       {!sidebarCollapsed && item.badge && (
                         <span
-                          className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)] bg-primary text-primary-foreground"
-                          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)", lineHeight: "1" }}
+                          className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)]"
+                          style={{
+                            fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: "var(--weight-button)", lineHeight: "1",
+                            background: "rgba(50, 169, 255, 0.13)",
+                            color: "var(--primary)",
+                          }}
                         >
                           {item.badge}
                         </span>
