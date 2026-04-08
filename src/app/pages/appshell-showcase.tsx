@@ -304,8 +304,8 @@ export function AppShellShowcase() {
               style={{
                 ...btnStyle,
                 borderColor: activeProduct === p.id ? p.color : "var(--border)",
-                background: activeProduct === p.id ? `${p.color}18` : "transparent",
-                color: activeProduct === p.id ? p.color : "var(--text-secondary)",
+                background: activeProduct === p.id ? `${p.color}18` : "var(--muted)",
+                color: activeProduct === p.id ? p.color : "var(--foreground)",
                 fontWeight: activeProduct === p.id ? 700 : 400,
               }}
             >
