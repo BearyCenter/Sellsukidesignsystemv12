@@ -156,7 +156,7 @@ export function TopNavbar({
 
       {/* Brand — logoFull (icon+name SVG 40px height) or icon-only (40×40) */}
       {brand && brandLogo && (
-        <div className="flex items-center flex-shrink-0">
+        <div className="flex items-center flex-shrink-0 text-foreground">
           {typeof brandLogo === "string" ? (
             <img
               src={brandLogo}
