@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Sidebar } from "./ds-sidebar";
 import { TopNavbar } from "./ds-topnavbar";
 import { Home, Package, ShoppingCart, Settings, Users, BarChart3 } from "lucide-react";
+import SellsukiFull from "../../imports/SellsukiFull";
+
+const sellsukiBrand = { name: "Sellsuki", logoFull: <SellsukiFull height={40} /> };
 
 const meta: Meta<typeof Sidebar> = {
   title: "Components/Sidebar",
@@ -39,7 +42,7 @@ export const Default: Story = {
   render: () => (
     <div style={{ height: 500 }}>
       <Sidebar
-        brand={{ name: "Sellsuki" }}
+        brand={sellsukiBrand}
         groups={groups}
         activeItem="home"
         onNavigate={() => {}}
@@ -52,7 +55,7 @@ export const Collapsed: Story = {
   render: () => (
     <div style={{ height: 500 }}>
       <Sidebar
-        brand={{ name: "Sellsuki" }}
+        brand={sellsukiBrand}
         groups={groups}
         activeItem="home"
         collapsed
@@ -69,7 +72,7 @@ export const Collapsible: Story = {
     return (
       <div style={{ height: 500 }}>
         <Sidebar
-          brand={{ name: "Sellsuki" }}
+          brand={sellsukiBrand}
           groups={groups}
           activeItem={active}
           onNavigate={(item) => setActive(item.id)}
@@ -90,14 +93,13 @@ export const ControlledFromNavbar: Story = {
     return (
       <div style={{ border: "1px solid var(--border)", borderRadius: 8, overflow: "hidden", height: 480 }}>
         <TopNavbar
-          brand={{ name: "Sellsuki" }}
+          brand={sellsukiBrand}
           breadcrumbs={[{ label: "Dashboard" }]}
           user={{ name: "John Doe" }}
           onSidebarToggle={() => setCollapsed((c) => !c)}
         />
         <div style={{ display: "flex", height: "calc(100% - 72px)" }}>
           <Sidebar
-            brand={{ name: "Sellsuki" }}
             groups={groups}
             activeItem={active}
             onNavigate={(item) => setActive(item.id)}

@@ -14,11 +14,11 @@ interface AlertProps {
   className?: string;
 }
 
-const alertStyles: Record<AlertVariant, { bg: string; border: string; text: string; icon: React.ReactNode }> = {
-  info: { bg: "bg-primary/5", border: "border-primary/30", text: "text-primary", icon: <Info size={18} /> },
-  success: { bg: "bg-chart-2/5", border: "border-chart-2/30", text: "text-chart-2", icon: <CheckCircle2 size={18} /> },
-  warning: { bg: "bg-chart-5/5", border: "border-chart-5/30", text: "text-chart-5", icon: <AlertTriangle size={18} /> },
-  error: { bg: "bg-destructive/5", border: "border-destructive/30", text: "text-destructive", icon: <XCircle size={18} /> },
+const alertStyles: Record<AlertVariant, { tint: string; border: string; text: string; icon: React.ReactNode }> = {
+  info:    { tint: "bg-primary/10",     border: "border-primary/40",     text: "text-primary",     icon: <Info size={18} /> },
+  success: { tint: "bg-chart-2/10",     border: "border-chart-2/40",     text: "text-chart-2",     icon: <CheckCircle2 size={18} /> },
+  warning: { tint: "bg-chart-5/10",     border: "border-chart-5/40",     text: "text-chart-5",     icon: <AlertTriangle size={18} /> },
+  error:   { tint: "bg-destructive/10", border: "border-destructive/40", text: "text-destructive", icon: <XCircle size={18} /> },
 };
 
 export function Alert({ variant = "info", title, children, dismissible = false, onDismiss, action, icon, className = "" }: AlertProps) {
@@ -33,9 +33,14 @@ export function Alert({ variant = "info", title, children, dismissible = false, 
   };
 
   return (
-    <div className={`flex gap-3 p-4 rounded-[var(--radius)] border ${s.bg} ${s.border} ${className}`} role="alert">
-      <span className={`flex-shrink-0 mt-0.5 ${s.text}`}>{icon ?? s.icon}</span>
-      <div className="flex-1 min-w-0">
+    <div
+      className={`relative flex gap-3 p-4 rounded-[var(--radius)] border bg-card/90 backdrop-blur-sm ${s.border} ${className}`}
+      role="alert"
+    >
+      {/* Colored tint overlay — gives variant identity while keeping bg opaque */}
+      <div className={`absolute inset-0 rounded-[var(--radius)] pointer-events-none ${s.tint}`} />
+      <span className={`relative flex-shrink-0 mt-0.5 ${s.text}`}>{icon ?? s.icon}</span>
+      <div className="relative flex-1 min-w-0">
         {title && (
           <span className={`block ${s.text}`} style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" }}>
             {title}
@@ -47,7 +52,7 @@ export function Alert({ variant = "info", title, children, dismissible = false, 
         {action && <div className="mt-2">{action}</div>}
       </div>
       {dismissible && (
-        <button onClick={handleDismiss} className="flex-shrink-0 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" aria-label="Dismiss">
+        <button onClick={handleDismiss} className="relative flex-shrink-0 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" aria-label="Dismiss">
           <X size={16} />
         </button>
       )}

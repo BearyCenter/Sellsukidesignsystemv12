@@ -177,15 +177,6 @@ function InnerAppShell({
 
   const sidebarNode = (
     <Sidebar
-      brand={
-        product
-          ? {
-              name: product.brand.name,
-              logo: typeof product.brand.logo === "string" ? product.brand.logo : undefined,
-              logoFull: product.brand.logoFull,
-            }
-          : { name: "Sellsuki" }
-      }
       groups={
         navLoading
           ? [{ label: "Loading", items: [] }]
@@ -308,7 +299,6 @@ function InnerAppShell({
               <div className="p-4"><SkeletonList rows={6} /></div>
             ) : (
               <Sidebar
-                brand={product ? { name: product.brand.name } : { name: "Sellsuki" }}
                 groups={adaptedGroups}
                 activeItem={activeItemId}
                 onNavigate={handleNavigate}

@@ -22,7 +22,7 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  default: "bg-primary text-primary-foreground",
+  default: "bg-primary/15 text-primary",
   secondary: "bg-secondary/15 text-secondary",
   outline:
     "bg-transparent border border-border text-foreground",
@@ -69,7 +69,7 @@ const sizeStyles: Record<
 };
 
 const dotColors: Record<BadgeVariant, string> = {
-  default: "bg-primary-foreground",
+  default: "bg-primary",
   secondary: "bg-secondary",
   outline: "bg-foreground",
   destructive: "bg-destructive",

@@ -508,7 +508,7 @@ function AppInner() {
                   <span
                     className="px-1.5 rounded-[var(--radius-sm)] flex-shrink-0"
                     style={{
-                      fontFamily: "var(--font-button)", fontSize: "12px", fontWeight: 700, lineHeight: "20px",
+                      fontFamily: "var(--font-button)", fontSize: "18px", fontWeight: 700, lineHeight: "20px",
                       background: "rgba(50, 169, 255, 0.13)",
                       color: "var(--primary)",
                     }}

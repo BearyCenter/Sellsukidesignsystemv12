@@ -1,6 +1,6 @@
 # Hardcode Log
 
-> Auto-generated on 2026-04-07 by `node scripts/check-hardcodes.mjs`  
+> Auto-generated on 2026-04-08 by `node scripts/check-hardcodes.mjs`  
 > Review these entries and create DS tokens or mark as accepted exceptions.
 
 ## ✅ Design Exception — ยืนยันแล้ว ไม่ต้องสร้าง token

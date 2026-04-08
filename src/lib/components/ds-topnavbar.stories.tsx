@@ -3,6 +3,9 @@ import { useState } from "react";
 import { TopNavbar } from "./ds-topnavbar";
 import { Sidebar } from "./ds-sidebar";
 import { Home, Package, ShoppingCart, Users, Settings } from "lucide-react";
+import SellsukiFull from "../../imports/SellsukiFull";
+
+const sellsukiBrand = { name: "Sellsuki", logoFull: <SellsukiFull height={40} /> };
 
 const meta: Meta<typeof TopNavbar> = {
   title: "Components/TopNavbar",
@@ -19,7 +22,7 @@ type Story = StoryObj<typeof TopNavbar>;
 
 export const Default: Story = {
   args: {
-    brand: { name: "Sellsuki" },
+    brand: sellsukiBrand,
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: "Products" },
@@ -40,7 +43,7 @@ export const Minimal: Story = {
 
 export const WithSidebarToggle: Story = {
   args: {
-    brand: { name: "Sellsuki" },
+    brand: sellsukiBrand,
     breadcrumbs: [{ label: "Dashboard" }, { label: "Orders" }],
     user: { name: "Watcharapong C." },
     showSearch: true,
@@ -80,7 +83,6 @@ export const WithCollapsibleSidebar: Story = {
         />
         <div style={{ display: "flex", height: "calc(100% - 72px)" }}>
           <Sidebar
-            brand={{ name: "Sellsuki" }}
             groups={groups}
             activeItem={active}
             onNavigate={(item) => setActive(item.id)}

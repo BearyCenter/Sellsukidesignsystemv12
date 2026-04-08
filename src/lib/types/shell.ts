@@ -10,7 +10,9 @@
  * Stage 2 of GOAL-DS-90-PERCENT.md
  */
 
-import type React from "react";
+import React from "react";
+import SellsukiFull from "../../imports/SellsukiFull";
+import PatonaFull from "../../imports/PatonaFull";
 
 /* ─── Navigation Types ───────────────────────────────────────────────────────── */
 
@@ -218,7 +220,7 @@ export const sellsukiBrandConfig: ProductBrandConfig = {
   product: "sellsuki",
   brand: {
     name: "Sellsuki",
-    // logo / logoFull: inject SVG components in your product repo
+    logoFull: React.createElement(SellsukiFull, { height: 40 }),
     theme: "sellsuki",
   },
   shell: {
@@ -235,7 +237,7 @@ export const patonaBrandConfig: ProductBrandConfig = {
   product: "patona",
   brand: {
     name: "Patona",
-    // logo / logoFull: inject SVG components in your product repo
+    logoFull: React.createElement(PatonaFull, { height: 40 }),
     theme: "patona",
   },
   shell: {

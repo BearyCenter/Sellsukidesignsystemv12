@@ -13,7 +13,9 @@ export function TagShowcase() {
       <Section title="Color Variants" description="Six semantic color variants for different categories." code={`<SskTag color="primary">Primary</SskTag>\n<SskTag color="success">Active</SskTag>`}>
         <DemoBox>
           <div className="flex flex-wrap gap-2">
-            {Object.keys(colorMap).map((c) => <Tag key={c} color={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</Tag>)}
+            {(["default", "primary", "success", "warning", "destructive", "info"] as const).map((c) => (
+              <Tag key={c} color={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</Tag>
+            ))}
           </div>
         </DemoBox>
       </Section>
