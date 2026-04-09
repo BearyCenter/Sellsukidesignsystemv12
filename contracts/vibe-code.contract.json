@@ -1,0 +1,258 @@
+{
+  "$schema": "../contracts/schema/contract.schema.json",
+  "contract_id": "sellsuki.vibecode.rules",
+  "version": "2.0.0",
+  "status": "approved",
+  "type": "coding-rules",
+  "owner": {
+    "team": "design-system",
+    "contact": "uxui-team"
+  },
+  "last_updated": "2026-04-09",
+  "breaking_change": false,
+  "summary": "AI/vibe coding, MCP scaffolding, and prompt generation rules for Sellsuki DS 2.0 compliance",
+  "scope": ["all-products", "ai-generation", "mcp-scaffold", "vibe-coding", "rapid-prototype"],
+
+  "golden_rule": {
+    "statement": "AI must generate according to design system rules. AI must NOT define design system rules from its own output.",
+    "enforcement": "mandatory"
+  },
+
+  "default_shell": {
+    "when_prompt_unspecified": "canonical AppShell 2.0",
+    "components": [
+      "AppShell",
+      "GlobalTopNav (ecosystem brand, workspace, user menu)",
+      "ProductSidebar (product navigation only)",
+      "FeaturePageScaffold"
+    ],
+    "brand": "Sellsuki ecosystem",
+    "theme": "light",
+    "font": "DB HeaventRounded"
+  },
+
+  "required_prompt_context": {
+    "minimum_fields": [
+      "product_name",
+      "page_type (dashboard | list | detail | settings | form | report)",
+      "shell = canonical AppShell 2.0",
+      "brand = Sellsuki ecosystem",
+      "product_identity = secondary",
+      "theme = light",
+      "components = DS only unless explicitly approved"
+    ],
+    "approved_prompt_snippet": "Use Sellsuki Design System 2.0 canonical AppShell. Topnav owns ecosystem brand and workspace/account context. Left sidebar owns product navigation only. Use DS components and semantic tokens only. Default to light theme, DB HeaventRounded, Sky-based primary actions, Gray-based structure. Do not invent a new shell."
+  },
+
+  "rules": {
+    "required": [
+      "Import @uxuissk/design-system/styles.css before all other styles",
+      "Use DS components — never create custom buttons, inputs, modals, navbars, sidebars",
+      "Use semantic color tokens — never hardcode hex values",
+      "Use DB HeaventRounded (var(--font-label)) for ALL text",
+      "Default to canonical AppShell 2.0 when shell is not specified",
+      "Handle loading (Skeleton/Spinner), empty (EmptyState), and error (Alert) states on all pages",
+      "Support dark mode via CSS variables",
+      "Include primary action button in PageHeader — max 1 per view"
+    ],
+    "forbidden": [
+      "Creating custom shell layout not based on canonical rules",
+      "Placing primary Sellsuki brand in sidebar as default",
+      "Using sidebar as ecosystem brand bar",
+      "Copying legacy shell as baseline without flagging as legacy",
+      "Hardcoding colors, fonts, border-radius, or spacing values",
+      "Using more than 1 primary button per view",
+      "Skipping loading/empty/error states",
+      "Using Inter or any non-DB-HeaventRounded font for UI text",
+      "Inventing new brand placement patterns",
+      "Using colors outside Sky/Gray/Rose/Emerald/Amber/Orange palette"
+    ],
+    "defaults": {
+      "shell": "canonical AppShell 2.0",
+      "sidebar_position": "left",
+      "brand_placement": "topnav",
+      "theme": "light",
+      "font": "DB HeaventRounded",
+      "primary_color": "Sky-500 #32a9ff",
+      "button_variant": "primary",
+      "button_size": "md"
+    }
+  },
+
+  "component_rules": {
+    "always_use_ds_for": [
+      "buttons (DSButton)",
+      "inputs (DSInput, DSTextarea, DSCheckbox, DSRadio, Switch)",
+      "modals (Modal, Drawer, ConfirmDialog)",
+      "tables (DSTable, AdvancedDataTable)",
+      "navigation (TopNavbar, Sidebar, Breadcrumb, Tabs)",
+      "feedback (Alert, Notification, toast)",
+      "shell (AppShell, AppShellProvider)"
+    ],
+    "never_create_custom": [
+      "navigation bars",
+      "sidebar components",
+      "form inputs",
+      "modal/dialog boxes",
+      "toast/notification systems",
+      "table components"
+    ]
+  },
+
+  "page_type_rules": {
+    "dashboard": {
+      "required_regions": ["page-header", "kpi-cards", "summary-sections"],
+      "required_components": ["PageHeader", "StatCard", "ScaffoldKPIRow"]
+    },
+    "list": {
+      "required_regions": ["page-header", "filter-search-row", "table", "pagination"],
+      "required_components": ["PageHeader", "FilterBar", "DSTable", "Pagination", "EmptyState"],
+      "required_states": ["loading", "empty", "error"]
+    },
+    "detail": {
+      "required_regions": ["breadcrumb", "title-action-row", "detail-cards"],
+      "required_components": ["Breadcrumb", "PageHeader", "Card"]
+    },
+    "settings": {
+      "required_regions": ["section-cards", "form-fields"],
+      "required_components": ["Card", "DSInput", "DSButton", "Alert"]
+    }
+  },
+
+  "tokens": {
+    "required_import": "@uxuissk/design-system/styles.css",
+    "typography": {
+      "font_family": "DB HeaventRounded — var(--font-label)",
+      "h1": "48px — var(--text-h1)",
+      "h2": "40px — var(--text-h2)",
+      "h3": "28px — var(--text-h3)",
+      "h4": "24px — var(--text-h4)",
+      "body": "20px — var(--text-p)",
+      "label": "18px — var(--text-label)",
+      "button": "18px — var(--text-button) weight 600",
+      "caption": "16px — var(--text-caption) — minimum size"
+    },
+    "spacing": {
+      "page_padding_desktop": "24px",
+      "page_padding_mobile": "16px",
+      "card_gap": "16px",
+      "form_field_gap": "16px",
+      "section_gap": "32px"
+    },
+    "colors": {
+      "primary": "Sky-500 #32a9ff — var(--primary)",
+      "primary_hover": "Sky-600 #1b8bf5",
+      "text_primary": "Gray-800 #1f2937",
+      "text_secondary": "Gray-500 #6b7280",
+      "border": "Gray-200 #e5e7eb",
+      "success": "Emerald-600 #059669",
+      "warning": "Amber-600 #d97706",
+      "danger": "Rose-600 #e11d48"
+    },
+    "radius": {
+      "default": "6px",
+      "inputs_cells": "var(--radius-md) — 6px",
+      "cards_panels": "var(--radius-lg) — 6px"
+    },
+    "shadow": {
+      "default": "0px 1px 2px 0px #0000000d",
+      "note": "Minimal — prefer borders over heavy shadows"
+    }
+  },
+
+  "button_rules": {
+    "variants": ["primary", "secondary", "outline", "ghost", "destructive", "link"],
+    "sizes": {
+      "sm": "32px",
+      "md": "36px — default",
+      "lg": "40px",
+      "xl": "44px"
+    },
+    "max_primary_per_view": 1
+  },
+
+  "escalation_rules": {
+    "if_existing_shell_does_not_match_canonical": "Flag as legacy or exception — do not copy as baseline. Default back to canonical shell unless explicitly told otherwise.",
+    "if_prompt_is_ambiguous": "Default to canonical AppShell 2.0 — never invent a new shell.",
+    "if_ds_component_missing": "Create DS-based wrapper — never create product-level custom shell."
+  },
+
+  "governance_by_role": {
+    "ai_mcp_vibe_coding": [
+      "Treat canonical shell as baseline",
+      "Never invent brand placement",
+      "Never use sidebar-logo-led shell as default",
+      "Default to canonical shell when prompt is unclear"
+    ],
+    "po_dev": [
+      "Must brief shell rule — not just feature description",
+      "Cannot interpret shell from AI output without design review",
+      "Must use DS shell components only"
+    ],
+    "uxui": [
+      "Must provide shell rules as structured markdown or MCP-readable format",
+      "Must have canonical example ready",
+      "Must have forbidden patterns clearly stated"
+    ],
+    "mcp_generator_authors": [
+      "Generator template must embed shell rules in starter",
+      "Cannot scaffold starting from product-local custom shell",
+      "Cannot set brand placement with two standards without explicit flag"
+    ]
+  },
+
+  "ai_behavior": {
+    "default_when_unspecified": "Canonical AppShell 2.0 with Sellsuki ecosystem brand in topnav, product navigation in left sidebar, light theme",
+    "must_do": [
+      "Import @uxuissk/design-system/styles.css first",
+      "Use DS components — never create custom equivalents",
+      "Place Sellsuki brand in topnav",
+      "Keep product menu on left sidebar",
+      "Use sidebar for product modules only",
+      "Keep workspace and user menu in topnav",
+      "Use consistent page padding and section spacing",
+      "Handle all page states: loading, empty, error"
+    ],
+    "must_not_do": [
+      "Invent new shell layout",
+      "Place full logo ownership in sidebar as default",
+      "Create custom navigation when DS already has TopNavbar and Sidebar",
+      "Hardcode colors, fonts, border-radius, or spacing",
+      "Copy legacy/exception shell as canonical baseline",
+      "Skip loading, empty, or error states"
+    ],
+    "escalate_when": "Existing product shell does not match canonical — flag as legacy/exception and report before generating"
+  },
+
+  "compliance_checklist": [
+    "Using canonical shell (AppShell 2.0)",
+    "Topnav holds primary Sellsuki brand",
+    "Sidebar holds product navigation menu",
+    "DS components used for all UI — no custom equivalents",
+    "DS semantic tokens used — no hardcoded values",
+    "Light theme by default",
+    "DB HeaventRounded font for all text",
+    "Max 1 primary button per view",
+    "Loading, empty, error states present on all list/detail pages",
+    "No shell invention without governance approval"
+  ],
+
+  "mcp_resources": [
+    {
+      "uri": "sellsuki://contracts/vibe-code",
+      "description": "Read full vibe coding and AI scaffold rules"
+    },
+    {
+      "uri": "sellsuki://contracts/vibe-code/defaults",
+      "description": "Default values AI should use when prompt is unspecified"
+    },
+    {
+      "uri": "sellsuki://contracts/vibe-code/prompt-snippet",
+      "description": "Approved prompt snippet to prepend to AI generation prompts"
+    },
+    {
+      "uri": "sellsuki://contracts/vibe-code/tokens",
+      "description": "Required design tokens and import rules"
+    }
+  ]
+}

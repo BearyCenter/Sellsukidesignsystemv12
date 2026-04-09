@@ -1,10 +1,37 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
 import { components, componentCategories } from "./data/components.js";
 import { colorPalette, typography, spacing, borderRadius, semanticColors, elevation, darkMode } from "./data/tokens.js";
 import { brandIdentity, doRules, dontRules, layoutPatterns, buttonSystem, quickStartTemplate, resources } from "./data/brand-rules.js";
 import { withLog } from "./logger.js";
+
+// ─── Contract loader helpers ─────────────────────────────────────────────────
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// __dirname = mcp-server/dist → go up twice to reach repo root → contracts/
+const contractsRoot = join(__dirname, "../..", "contracts");
+
+function loadContract(filePath: string): Record<string, unknown> {
+  try {
+    const abs = join(contractsRoot, filePath);
+    return JSON.parse(readFileSync(abs, "utf-8"));
+  } catch {
+    return { error: `Contract not found: ${filePath}` };
+  }
+}
+
+function loadContractRegistry(): Record<string, unknown> {
+  return loadContract("meta/index.json");
+}
+
+function loadChangelog(): Record<string, unknown> {
+  return loadContract("meta/changelog.json");
+}
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -847,6 +874,149 @@ export default function ListPage() {
           "DON'T:",
           ...dontRules.map(r => `  ✗ ${r}`),
         ].join("\n"),
+      }],
+    })
+  );
+
+  // ─── Tool: get_contract ──────────────────────────────────────────────────────
+
+  server.tool(
+    "get_contract",
+    "Get a Sellsuki governance contract by ID. Returns the full machine-readable contract including rules, forbidden patterns, AI behavior, and compliance checklist.",
+    {
+      contract_id: z.enum([
+        "sellsuki.appshell.canonical",
+        "sellsuki.brand.structure",
+        "sellsuki.vibecode.rules",
+      ]).describe("Contract identifier to retrieve"),
+      section: z.enum(["all", "rules", "ai_behavior", "compliance_checklist", "tokens", "shell", "brand"]).optional().describe("Return only a specific section (default: all)"),
+    },
+    async ({ contract_id, section }) => withLog("get_contract", { contract_id, section }, async () => {
+      const fileMap: Record<string, string> = {
+        "sellsuki.appshell.canonical": "appshell.contract.json",
+        "sellsuki.brand.structure": "brand-structure.contract.json",
+        "sellsuki.vibecode.rules": "vibe-code.contract.json",
+      };
+
+      const contract = loadContract(fileMap[contract_id]);
+      if ("error" in contract) {
+        return { content: [{ type: "text", text: `Error: ${contract.error}` }] };
+      }
+
+      const payload = (section && section !== "all")
+        ? { contract_id: contract.contract_id, version: contract.version, [section]: (contract as Record<string, unknown>)[section] }
+        : contract;
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(payload, null, 2),
+        }],
+      };
+    })
+  );
+
+  // ─── Tool: list_contracts ─────────────────────────────────────────────────────
+
+  server.tool(
+    "list_contracts",
+    "List all approved Sellsuki governance contracts from the contract registry",
+    {},
+    async () => withLog("list_contracts", {}, async () => {
+      const registry = loadContractRegistry() as {
+        contracts?: Array<{ contract_id: string; type: string; status: string; summary: string; latest_approved_version: string; mcp_uri: string }>;
+      };
+      const contracts = registry.contracts ?? [];
+
+      let text = "# Sellsuki MCP Contracts\n\n";
+      text += "Machine-readable governance contracts for AppShell, brand structure, and AI/vibe coding.\n\n";
+      for (const c of contracts) {
+        text += `## ${c.contract_id} v${c.latest_approved_version}\n`;
+        text += `- **Type:** ${c.type}\n`;
+        text += `- **Status:** ${c.status}\n`;
+        text += `- **Summary:** ${c.summary}\n`;
+        text += `- **MCP URI:** \`${c.mcp_uri}\`\n\n`;
+      }
+
+      return { content: [{ type: "text", text }] };
+    })
+  );
+
+  // ─── Tool: get_contract_changelog ────────────────────────────────────────────
+
+  server.tool(
+    "get_contract_changelog",
+    "Get the Sellsuki contract changelog — tracks all contract versions, changes, and migration impact",
+    {},
+    async () => withLog("get_contract_changelog", {}, async () => {
+      const changelog = loadChangelog();
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify(changelog, null, 2),
+        }],
+      };
+    })
+  );
+
+  // ─── Resources: sellsuki://contracts/* ───────────────────────────────────────
+
+  server.resource(
+    "contract-appshell",
+    "sellsuki://contracts/appshell",
+    async () => ({
+      contents: [{
+        uri: "sellsuki://contracts/appshell",
+        mimeType: "application/json",
+        text: JSON.stringify(loadContract("appshell.contract.json"), null, 2),
+      }],
+    })
+  );
+
+  server.resource(
+    "contract-brand-structure",
+    "sellsuki://contracts/brand-structure",
+    async () => ({
+      contents: [{
+        uri: "sellsuki://contracts/brand-structure",
+        mimeType: "application/json",
+        text: JSON.stringify(loadContract("brand-structure.contract.json"), null, 2),
+      }],
+    })
+  );
+
+  server.resource(
+    "contract-vibe-code",
+    "sellsuki://contracts/vibe-code",
+    async () => ({
+      contents: [{
+        uri: "sellsuki://contracts/vibe-code",
+        mimeType: "application/json",
+        text: JSON.stringify(loadContract("vibe-code.contract.json"), null, 2),
+      }],
+    })
+  );
+
+  server.resource(
+    "contract-changelog",
+    "sellsuki://contracts/changelog",
+    async () => ({
+      contents: [{
+        uri: "sellsuki://contracts/changelog",
+        mimeType: "application/json",
+        text: JSON.stringify(loadChangelog(), null, 2),
+      }],
+    })
+  );
+
+  server.resource(
+    "contract-registry",
+    "sellsuki://contracts/registry",
+    async () => ({
+      contents: [{
+        uri: "sellsuki://contracts/registry",
+        mimeType: "application/json",
+        text: JSON.stringify(loadContractRegistry(), null, 2),
       }],
     })
   );

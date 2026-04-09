@@ -1,0 +1,143 @@
+{
+  "$schema": "../contracts/schema/contract.schema.json",
+  "contract_id": "sellsuki.brand.structure",
+  "version": "2.0.0",
+  "status": "approved",
+  "type": "brand",
+  "owner": {
+    "team": "design-system",
+    "contact": "uxui-team"
+  },
+  "last_updated": "2026-04-09",
+  "breaking_change": false,
+  "summary": "Brand hierarchy and placement rules for all Sellsuki ecosystem products",
+  "scope": ["all-products", "new-products", "redesign"],
+
+  "brand": {
+    "primary_owner": "Sellsuki",
+    "primary_placement": "topnav — ecosystem brand layer",
+    "secondary_owner": "Product (e.g. Shipmunk, Patona, ChatCommerce, Sukispace)",
+    "secondary_placement": "sidebar-context-block, page-level-identifiers"
+  },
+
+  "hierarchy": {
+    "level_1": {
+      "name": "Ecosystem Brand",
+      "owner": "Sellsuki",
+      "placement": "topnav",
+      "role": "top-of-page ecosystem signature shared across all products",
+      "required": true
+    },
+    "level_2": {
+      "name": "Product Brand",
+      "owner": "Individual products (Shipmunk, Patona, etc.)",
+      "placement": "sidebar-header, page-context",
+      "role": "product identity — secondary to ecosystem, clearly differentiated but not competing",
+      "required": false,
+      "note": "Product identity can be shown but must be visually secondary to Sellsuki"
+    }
+  },
+
+  "placement_rules": {
+    "topnav": {
+      "must_contain": ["sellsuki-ecosystem-brand"],
+      "may_contain": ["workspace-switcher", "user-menu", "breadcrumbs", "search", "notifications"],
+      "must_not_contain": ["product-logo-as-primary-brand"]
+    },
+    "sidebar": {
+      "may_contain": ["product-icon", "product-name", "product-tag", "workspace-context-text"],
+      "must_not_contain": ["sellsuki-primary-ecosystem-logo", "global-account-controls"]
+    },
+    "page_level": {
+      "may_contain": ["product-identity-markers", "page-specific-branding"],
+      "must_not_contain": ["competing-ecosystem-brand-placement"]
+    }
+  },
+
+  "visual_direction": {
+    "mood": ["light", "airy", "functional", "thai-first", "professional-yet-approachable"],
+    "design_traits": {
+      "typeface": "DB HeaventRounded (primary for all text)",
+      "primary_action_color": "Sky-500 (#32a9ff)",
+      "structural_neutral": "Gray palette",
+      "style": "flat-with-border over heavy-shadow",
+      "spacing": "clear-spacing-grid"
+    },
+    "semantic_colors_only": true
+  },
+
+  "rules": {
+    "required": [
+      "Sellsuki is the ecosystem brand — placed in topnav",
+      "Topnav is always the ecosystem brand layer",
+      "Sidebar is always the product navigation layer",
+      "Product identity is secondary layer — cannot override ecosystem"
+    ],
+    "forbidden": [
+      "Primary brand placed in sidebar as default",
+      "Topnav used as page title bar only (stripped of brand meaning)",
+      "Each product having different shell brand signature without governance",
+      "Product brand visually competing with Sellsuki brand"
+    ],
+    "defaults": {
+      "brand_layer": "topnav",
+      "product_layer": "sidebar",
+      "theme": "light",
+      "ecosystem": "Sellsuki"
+    }
+  },
+
+  "tokens": {
+    "required_import": "@uxuissk/design-system/styles.css",
+    "font": "DB HeaventRounded (var(--font-label))",
+    "primary_color": "Sky-500 #32a9ff (var(--primary))",
+    "forbidden": [
+      "hardcoded-hex-values",
+      "non-semantic-color-references",
+      "Inter-font-for-ui-text"
+    ]
+  },
+
+  "ai_behavior": {
+    "default_when_unspecified": "Sellsuki is ecosystem brand in topnav; product identity is secondary in sidebar",
+    "must_do": [
+      "Place Sellsuki brand/logo in topnav",
+      "Treat product brand as secondary to Sellsuki",
+      "Use semantic color tokens — Sky for primary, Gray for structure",
+      "Use DB HeaventRounded for all text elements"
+    ],
+    "must_not_do": [
+      "Place primary ecosystem logo in sidebar as default",
+      "Give each product a unique shell brand signature without governance",
+      "Hardcode brand colors — always use design tokens",
+      "Invent new brand placement patterns"
+    ],
+    "escalate_when": "Existing product uses sidebar-led brand — flag as legacy, do not copy"
+  },
+
+  "compliance_checklist": [
+    "Sellsuki ecosystem brand is visible in topnav",
+    "Sidebar does not hold primary Sellsuki logo",
+    "Product brand identity is secondary and clearly differentiated",
+    "DB HeaventRounded is used for all text",
+    "Semantic color tokens used — no hardcoded hex",
+    "Light theme by default unless overridden",
+    "Brand hierarchy is clear at first glance",
+    "Shell structure is consistent with canonical AppShell 2.0"
+  ],
+
+  "mcp_resources": [
+    {
+      "uri": "sellsuki://contracts/brand-structure",
+      "description": "Read brand hierarchy and placement contract"
+    },
+    {
+      "uri": "sellsuki://contracts/brand-structure/hierarchy",
+      "description": "Brand layer hierarchy only"
+    },
+    {
+      "uri": "sellsuki://contracts/brand-structure/tokens",
+      "description": "Design token requirements for brand compliance"
+    }
+  ]
+}

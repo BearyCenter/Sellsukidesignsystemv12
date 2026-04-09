@@ -1,0 +1,53 @@
+{
+  "changelog_version": "1.0.0",
+  "description": "Sellsuki MCP Contract Design changelog — tracks all contract versions, changes, and their impact",
+  "entries": [
+    {
+      "date": "2026-04-09",
+      "version": "2.0.0",
+      "breaking_change": false,
+      "type": "initial-release",
+      "contracts_affected": [
+        "sellsuki.appshell.canonical",
+        "sellsuki.brand.structure",
+        "sellsuki.vibecode.rules"
+      ],
+      "summary": "First enterprise canonical release — all 3 governance docs converted to machine-readable contracts",
+      "changes": [
+        "Created sellsuki.appshell.canonical@2.0.0 — canonical topnav-led shell contract",
+        "Created sellsuki.brand.structure@2.0.0 — brand hierarchy and placement contract",
+        "Created sellsuki.vibecode.rules@2.0.0 — AI/vibe coding compliance rules contract",
+        "Created contract JSON schema at contracts/schema/contract.schema.json",
+        "Created contract registry at contracts/meta/index.json"
+      ],
+      "source_docs": [
+        "docs/sellsuki-appshell-governance-spec.md",
+        "docs/sellsuki-canonical-appshell-2.0.md",
+        "docs/sellsuki-vibe-code-brand-structure-rules.md"
+      ],
+      "impact": "All new products and redesigns must use canonical AppShell 2.0. AI scaffolding must read these contracts.",
+      "migration_required": false,
+      "author": "design-system-team"
+    }
+  ],
+
+  "versioning_guide": {
+    "major": "Shell/hierarchy/brand ownership changes — may require product migration",
+    "minor": "New defaults or fields added — backwards compatible",
+    "patch": "Clarification or metadata only — no behavior change"
+  },
+
+  "entry_schema": {
+    "date": "ISO 8601 date",
+    "version": "semver string",
+    "breaking_change": "boolean",
+    "type": "initial-release | feature | fix | deprecation | breaking",
+    "contracts_affected": "array of contract_id strings",
+    "summary": "one-line description",
+    "changes": "array of change description strings",
+    "source_docs": "array of source documentation file paths",
+    "impact": "description of impact on products and teams",
+    "migration_required": "boolean",
+    "author": "team or person responsible"
+  }
+}

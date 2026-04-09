@@ -1,0 +1,206 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "sellsuki://contracts/schema/contract",
+  "title": "Sellsuki MCP Contract",
+  "description": "Schema for Sellsuki Design System machine-readable governance contracts. Used by MCP servers, AI scaffolding, and generator toolchains.",
+  "type": "object",
+  "required": ["contract_id", "version", "status", "type", "owner", "last_updated"],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "description": "Unique dot-notation identifier for this contract",
+      "pattern": "^sellsuki\\.[a-z0-9]+\\.[a-z0-9]+$",
+      "examples": ["sellsuki.appshell.canonical", "sellsuki.brand.structure", "sellsuki.vibecode.rules"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version string. Major = shell/brand ownership changes. Minor = new defaults/fields. Patch = clarification/metadata only.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["2.0.0", "2.1.0", "3.0.0"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["approved", "draft", "deprecated", "experimental"],
+      "description": "Approval status. Only 'approved' contracts are enforced in production."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["shell", "brand", "coding-rules", "exception-policy"],
+      "description": "Contract category — determines how MCP server routes and applies it."
+    },
+    "owner": {
+      "type": "object",
+      "required": ["team"],
+      "properties": {
+        "team": {
+          "type": "string",
+          "description": "Owning team (e.g. 'design-system', 'uxui')"
+        },
+        "contact": {
+          "type": "string",
+          "description": "Contact email or Slack channel"
+        }
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date of last update"
+    },
+    "breaking_change": {
+      "type": "boolean",
+      "description": "True if this version contains breaking changes from the previous version"
+    },
+    "summary": {
+      "type": "string",
+      "description": "One-line human-readable summary of what this contract governs"
+    },
+    "scope": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Which product types this contract applies to",
+      "examples": [["all-products"], ["new-products"], ["redesign"]]
+    },
+    "rules": {
+      "type": "object",
+      "description": "Core governance rules — structure varies by contract type",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Rules that MUST be followed"
+        },
+        "forbidden": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Patterns that MUST NOT be used"
+        },
+        "defaults": {
+          "type": "object",
+          "description": "Default values AI/scaffold should use when not explicitly specified"
+        }
+      }
+    },
+    "shell": {
+      "type": "object",
+      "description": "Shell layout governance (used by shell-type contracts)",
+      "properties": {
+        "variant": {
+          "type": "string",
+          "enum": ["canonical", "exception"],
+          "description": "Shell variant — canonical is the default, exception requires approval"
+        },
+        "topnav": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string" },
+            "owns": { "type": "array", "items": { "type": "string" } },
+            "height_desktop_px": { "type": "integer" },
+            "forbidden": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "sidebar": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string" },
+            "owns": { "type": "array", "items": { "type": "string" } },
+            "forbidden": { "type": "array", "items": { "type": "string" } },
+            "width_desktop_px": { "type": "integer" },
+            "collapsed_width_px": { "type": "integer" }
+          }
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["topnav-led", "sidebar-led"],
+          "description": "Which layer leads brand ownership"
+        }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "description": "Brand hierarchy governance (used by brand-type contracts)",
+      "properties": {
+        "primary_owner": { "type": "string" },
+        "primary_placement": { "type": "string" },
+        "secondary_owner": { "type": "string" },
+        "secondary_placement": { "type": "string" }
+      }
+    },
+    "components": {
+      "type": "object",
+      "description": "Component usage governance",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that MUST be present"
+        },
+        "forbidden_custom": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Areas where custom components are forbidden — use DS equivalents"
+        }
+      }
+    },
+    "tokens": {
+      "type": "object",
+      "description": "Design token governance",
+      "properties": {
+        "required_import": { "type": "string" },
+        "font": { "type": "string" },
+        "primary_color": { "type": "string" },
+        "forbidden": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "exceptions": {
+      "type": "object",
+      "description": "Exception policy for this contract",
+      "properties": {
+        "allowed_when": { "type": "array", "items": { "type": "string" } },
+        "requires": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What must be present for exception to be valid"
+        }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "description": "Migration guidance for existing products",
+      "properties": {
+        "strategy": { "type": "string" },
+        "flag_legacy_as": { "type": "string" },
+        "trigger_on": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "ai_behavior": {
+      "type": "object",
+      "description": "Instructions for AI/MCP scaffolding tools when generating code",
+      "properties": {
+        "default_when_unspecified": { "type": "string" },
+        "must_do": { "type": "array", "items": { "type": "string" } },
+        "must_not_do": { "type": "array", "items": { "type": "string" } },
+        "escalate_when": { "type": "string" }
+      }
+    },
+    "compliance_checklist": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Human-readable compliance checklist items"
+    },
+    "mcp_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uri": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      },
+      "description": "MCP resource URIs that expose this contract"
+    }
+  }
+}

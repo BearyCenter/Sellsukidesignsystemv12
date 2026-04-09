@@ -1,0 +1,256 @@
+{
+  "$schema": "../contracts/schema/contract.schema.json",
+  "contract_id": "sellsuki.appshell.canonical",
+  "version": "2.0.0",
+  "status": "approved",
+  "type": "shell",
+  "owner": {
+    "team": "design-system",
+    "contact": "uxui-team"
+  },
+  "last_updated": "2026-04-09",
+  "breaking_change": false,
+  "summary": "Canonical AppShell 2.0 — topnav-led shell with left product sidebar for all Sellsuki products",
+  "scope": ["all-products", "new-products", "redesign", "refactor"],
+
+  "shell": {
+    "variant": "canonical",
+    "layout": "topnav-led",
+    "topnav": {
+      "role": "ecosystem-context-surface",
+      "owns": [
+        "sellsuki-ecosystem-brand",
+        "workspace-switcher",
+        "user-account-menu",
+        "breadcrumbs",
+        "global-search",
+        "notifications",
+        "cross-product-shortcuts"
+      ],
+      "height_desktop_px": 64,
+      "forbidden": [
+        "use-as-page-title-bar-only",
+        "leave-empty-without-brand-meaning"
+      ]
+    },
+    "sidebar": {
+      "role": "product-navigation-surface",
+      "owns": [
+        "product-modules",
+        "section-hierarchy",
+        "route-navigation",
+        "active-state",
+        "product-context-block"
+      ],
+      "allowed_optional": [
+        "product-icon",
+        "product-name",
+        "product-tag-context-text"
+      ],
+      "forbidden": [
+        "primary-sellsuki-ecosystem-brand",
+        "global-account-ownership",
+        "cross-product-brand-navigation"
+      ],
+      "width_desktop_px": 256,
+      "collapsed_width_px": 64
+    }
+  },
+
+  "brand": {
+    "primary_owner": "Sellsuki",
+    "primary_placement": "topnav",
+    "secondary_owner": "product (e.g. Shipmunk, Patona, ChatCommerce)",
+    "secondary_placement": "sidebar-context-block, page-level-identifiers"
+  },
+
+  "components": {
+    "required": [
+      "AppShell",
+      "GlobalTopNav",
+      "ProductSidebar",
+      "AppContent",
+      "WorkspaceSwitcher",
+      "UserMenu",
+      "BreadcrumbRegion",
+      "PageContainer",
+      "PageHeader"
+    ],
+    "forbidden_custom": [
+      "top-navigation-bar",
+      "side-navigation-bar",
+      "account-menu",
+      "workspace-switcher"
+    ]
+  },
+
+  "tokens": {
+    "required_import": "@uxuissk/design-system/styles.css",
+    "font": "DB HeaventRounded (var(--font-label))",
+    "primary_color": "Sky-500 #32a9ff",
+    "forbidden": [
+      "hardcoded-hex-colors",
+      "hardcoded-font-sizes",
+      "custom-radius-values",
+      "heavy-box-shadows"
+    ]
+  },
+
+  "layout": {
+    "desktop": {
+      "topnav_height_px": 64,
+      "sidebar_width_px": 256,
+      "sidebar_collapsed_width_px": 64,
+      "page_padding_px": 24,
+      "section_gap_px": 32,
+      "card_gap_px": 16
+    },
+    "mobile": {
+      "topnav": "remains-global",
+      "sidebar": "becomes-drawer",
+      "page_padding_px": 16,
+      "note": "No shell variant switch on mobile — same canonical structure"
+    }
+  },
+
+  "page_patterns": {
+    "dashboard": {
+      "regions": ["page-header", "kpi-cards", "section-cards"],
+      "components": ["PageHeader", "StatCard", "ScaffoldKPIRow", "Card"]
+    },
+    "list": {
+      "regions": ["page-header", "filters", "table", "pagination", "empty-state"],
+      "components": ["PageHeader", "FilterBar", "DSTable", "Pagination", "EmptyState"]
+    },
+    "detail": {
+      "regions": ["breadcrumb", "page-header", "detail-cards", "action-panel"],
+      "components": ["Breadcrumb", "PageHeader", "Card"]
+    },
+    "settings": {
+      "regions": ["section-title", "form-cards", "feedback-states"],
+      "components": ["Card", "FormField", "DSInput", "DSButton", "Alert"]
+    }
+  },
+
+  "approved_shell_variants": [
+    {
+      "name": "canonical",
+      "description": "Default for all products — full-width topnav, left sidebar, topnav owns brand, sidebar owns task navigation",
+      "requires_approval": false
+    },
+    {
+      "name": "exception",
+      "description": "For approved special cases only",
+      "requires_approval": true,
+      "valid_use_cases": [
+        "internal-tool-specific-team",
+        "embedded-console",
+        "partner-white-label",
+        "migration-state-with-deadline"
+      ],
+      "exception_requirements": [
+        "named-owner-must-approve",
+        "clear-product-or-technical-constraint",
+        "timeline-for-re-evaluation"
+      ]
+    }
+  ],
+
+  "rules": {
+    "required": [
+      "Menu/sidebar is always on the left",
+      "Primary brand (Sellsuki) is always in topnav",
+      "Sidebar is product navigation, not ecosystem brand bar",
+      "Product identity can be shown in sidebar but must be secondary to Sellsuki",
+      "All new products start from this canonical shell"
+    ],
+    "forbidden": [
+      "Sidebar holding primary Sellsuki logo as default",
+      "Topnav reduced to page-title-bar only",
+      "Shell that moves account/workspace/search differently per product",
+      "AI-generated custom shell not based on canonical rules",
+      "Starting new product from sidebar-logo-led shell"
+    ],
+    "defaults": {
+      "shell_variant": "canonical",
+      "sidebar_position": "left",
+      "brand_placement": "topnav",
+      "theme": "light",
+      "font": "DB HeaventRounded"
+    }
+  },
+
+  "exceptions": {
+    "allowed_when": [
+      "internal-tool-for-specific-team",
+      "embedded-console",
+      "partner-or-white-label",
+      "migration-period-with-deadline"
+    ],
+    "requires": [
+      "explicit-shell-type-declaration",
+      "documented-reason",
+      "named-owner",
+      "sunset-or-review-plan"
+    ]
+  },
+
+  "migration": {
+    "strategy": "incremental",
+    "flag_legacy_as": "legacy-shell or exception-shell",
+    "trigger_on": [
+      "redesign",
+      "refactor touching shell",
+      "new feature work on shell layer"
+    ],
+    "note": "Do not rewrite all at once. Migrate when design/tech work touches the shell."
+  },
+
+  "ai_behavior": {
+    "default_when_unspecified": "Use canonical AppShell 2.0 — global topnav, left product sidebar, light theme, Sellsuki brand hierarchy",
+    "must_do": [
+      "Place Sellsuki brand in topnav",
+      "Keep product menu on left sidebar",
+      "Use sidebar for product modules only",
+      "Keep workspace and user menu in topnav",
+      "Use consistent page padding and section spacing",
+      "Default to light theme",
+      "Use DS components only",
+      "Use semantic color tokens only"
+    ],
+    "must_not_do": [
+      "Invent new shell layout",
+      "Put full logo ownership in sidebar as default",
+      "Create custom top bar or side nav when DS already has them",
+      "Hardcode colors, fonts, border-radius, or spacing",
+      "Copy legacy shell as baseline without flagging it"
+    ],
+    "escalate_when": "Existing product shell does not match canonical — flag as legacy/exception, do not copy as baseline"
+  },
+
+  "compliance_checklist": [
+    "topnav is the ecosystem brand layer",
+    "sidebar is the task navigation layer",
+    "brand hierarchy is clear (Sellsuki primary, product secondary)",
+    "responsive behavior is consistent (sidebar becomes drawer on mobile)",
+    "workspace/account placement is consistent across products",
+    "shell uses DS 2.0 tokens: spacing, elevation, radius, font",
+    "no product-specific shell invention without governance approval",
+    "loading, empty, and error states are handled on all pages"
+  ],
+
+  "mcp_resources": [
+    {
+      "uri": "sellsuki://contracts/appshell",
+      "description": "Read canonical AppShell 2.0 contract"
+    },
+    {
+      "uri": "sellsuki://contracts/appshell/shell",
+      "description": "Shell layout rules only"
+    },
+    {
+      "uri": "sellsuki://contracts/appshell/ai-behavior",
+      "description": "AI scaffolding behavior rules for AppShell"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "../../contracts/schema/contract.schema.json",
+  "registry_version": "1.0.0",
+  "last_updated": "2026-04-09",
+  "description": "Sellsuki MCP Contract Registry — index of all approved machine-readable contracts. MCP servers read from this file to resolve contract_id → latest approved version.",
+
+  "contracts": [
+    {
+      "contract_id": "sellsuki.appshell.canonical",
+      "type": "shell",
+      "latest_approved_version": "2.0.0",
+      "status": "approved",
+      "file": "../appshell.contract.json",
+      "mcp_uri": "sellsuki://contracts/appshell",
+      "summary": "Canonical AppShell 2.0 — topnav-led shell with left product sidebar",
+      "last_updated": "2026-04-09"
+    },
+    {
+      "contract_id": "sellsuki.brand.structure",
+      "type": "brand",
+      "latest_approved_version": "2.0.0",
+      "status": "approved",
+      "file": "../brand-structure.contract.json",
+      "mcp_uri": "sellsuki://contracts/brand-structure",
+      "summary": "Brand hierarchy — Sellsuki in topnav, product identity secondary in sidebar",
+      "last_updated": "2026-04-09"
+    },
+    {
+      "contract_id": "sellsuki.vibecode.rules",
+      "type": "coding-rules",
+      "latest_approved_version": "2.0.0",
+      "status": "approved",
+      "file": "../vibe-code.contract.json",
+      "mcp_uri": "sellsuki://contracts/vibe-code",
+      "summary": "AI/vibe coding rules — DS 2.0 compliance for generation, scaffold, and prompts",
+      "last_updated": "2026-04-09"
+    }
+  ],
+
+  "mcp_resource_map": {
+    "sellsuki://contracts/appshell": "sellsuki.appshell.canonical@2.0.0",
+    "sellsuki://contracts/brand-structure": "sellsuki.brand.structure@2.0.0",
+    "sellsuki://contracts/vibe-code": "sellsuki.vibecode.rules@2.0.0",
+    "sellsuki://contracts/changelog": "meta/changelog.json"
+  },
+
+  "versioning_policy": {
+    "major": "Shell/hierarchy/brand ownership changes — teams may need to migrate",
+    "minor": "New defaults, new fields, new guidance added — backwards compatible",
+    "patch": "Clarification, typo fix, metadata only — no behavior change"
+  },
+
+  "governance": {
+    "schema_file": "../schema/contract.schema.json",
+    "change_process": "Update policy docs → update contract JSON → bump version → update registry → update changelog",
+    "approval_required_for": ["status=approved", "breaking_change=true", "major version bump"]
+  }
+}
