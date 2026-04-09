@@ -6,6 +6,13 @@
 - Tools: `get_component`, `list_components`, `get_design_tokens`, `get_color_palette`, `get_brand_rules`, `get_quick_start`, `generate_page_layout`, `suggest_components`, `get_page_pattern`, `get_feature_template`
 - Config: `.codex/config.toml` in this project (auto-loaded)
 
+## ⚠️ MCP Server Build Rules — DO NOT VIOLATE
+- **NEVER run `npm run build` inside `mcp-server/`** unless explicitly instructed
+- `mcp-server/dist/` is gitignored — rebuilding locally breaks MCP for all agents silently
+- Local dev uses `npx tsx mcp-server/index.ts` (TypeScript direct) — dist is NOT used locally
+- `dist/` is built by Render CI only (on push to main)
+- If you must modify `mcp-server/server.ts`: edit the `.ts` file, commit, push — let Render build it
+
 ## Project
 Sellsuki is an **e-commerce management platform for Thai merchants**.
 Visual identity: Professional, clean, trustworthy, light, airy, functional.
