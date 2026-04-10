@@ -334,10 +334,10 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
 
 function buildSidebarGroups21(t: (key: string) => string): SidebarGroup[] {
   const base = buildSidebarGroups(t);
-  // Inject DS 2.1 Roadmap page at top of foundation group
+  // Inject DS 3.0 Roadmap page at top of foundation group
   return [
     {
-      label: "DS 2.1",
+      label: "DS 3.0",
       items: [
         { id: "ds21-roadmap", label: "Upgrade Roadmap", icon: <Layers size={16} />, badge: "Plan" },
       ],
@@ -423,7 +423,7 @@ export default function App() {
   const [dsMode, setDsMode] = useState<DsMode | null>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("ssk-ds-mode");
-      if (saved === "2.0" || saved === "2.1") return saved;
+      if (saved === "2.0" || saved === "3.0") return saved;
     }
     return null;
   });
@@ -485,7 +485,7 @@ interface AppInnerProps {
 
 function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode }: AppInnerProps) {
   const { t, lang, toggleLang } = useI18n();
-  const defaultPage: PageId = dsMode === "2.1" ? "ds21-roadmap" : "getting-started";
+  const defaultPage: PageId = dsMode === "3.0" ? "ds21-roadmap" : "getting-started";
   const [activePage, setActivePage] = useState<PageId>(defaultPage);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -516,7 +516,7 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   }, [sidebarCollapsed]);
-  const sidebarGroups = dsMode === "2.1" ? buildSidebarGroups21(t) : buildSidebarGroups(t);
+  const sidebarGroups = dsMode === "3.0" ? buildSidebarGroups21(t) : buildSidebarGroups(t);
 
   // Build searchable items from sidebar groups
   const searchItems: SearchableItem[] = sidebarGroups.flatMap((group) =>
@@ -571,8 +571,8 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
                     className="px-1.5 rounded-[var(--radius-sm)] flex-shrink-0"
                     style={{
                       fontFamily: "var(--font-button)", fontSize: "18px", fontWeight: 700, lineHeight: "20px",
-                      background: dsMode === "2.1" ? "rgba(236, 94, 42, 0.13)" : "rgba(50, 169, 255, 0.13)",
-                      color: dsMode === "2.1" ? "#EC5E2A" : "var(--primary)",
+                      background: dsMode === "3.0" ? "rgba(236, 94, 42, 0.13)" : "rgba(50, 169, 255, 0.13)",
+                      color: dsMode === "3.0" ? "#EC5E2A" : "var(--primary)",
                     }}
                   >
                     {dsMode}
@@ -671,8 +671,8 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
                 className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)] flex-shrink-0"
                 style={{
                   fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: 700, lineHeight: 1,
-                  background: dsMode === "2.1" ? "rgba(236,94,42,0.13)" : "rgba(50,169,255,0.13)",
-                  color: dsMode === "2.1" ? "#EC5E2A" : "var(--primary)",
+                  background: dsMode === "3.0" ? "rgba(236,94,42,0.13)" : "rgba(50,169,255,0.13)",
+                  color: dsMode === "3.0" ? "#EC5E2A" : "var(--primary)",
                 }}
               >
                 {dsMode}

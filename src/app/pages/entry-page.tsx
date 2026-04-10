@@ -15,7 +15,7 @@ import {
   Cpu,
 } from "lucide-react";
 
-export type DsMode = "2.0" | "2.1";
+export type DsMode = "2.0" | "3.0";
 
 interface EntryPageProps {
   onSelectMode: (mode: DsMode) => void;
@@ -88,7 +88,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
 
   const features21: FeatureRow[] = [
     { icon: <Globe size={18} />, text: "Web Components · Lit · Framework-agnostic" },
-    { icon: <Boxes size={18} />, text: "DS 1.0 Architecture → DS 2.1 Quality" },
+    { icon: <Boxes size={18} />, text: "DS 1.0 Architecture → DS 3.0 Quality" },
     { icon: <Puzzle size={18} />, text: "React, Vue, Angular, Vanilla JS ใช้ได้" },
     { icon: <Cpu size={18} />, text: "Storybook 8 · Vite 6 · Token Bridge" },
     { icon: <Zap size={18} />, text: "UX/UI-driven — Token push โดยไม่รอ Dev" },
@@ -120,9 +120,9 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
 
   const card21Style: React.CSSProperties = {
     ...cardBase,
-    borderColor: hovering === "2.1" ? accent21 : "var(--border)",
-    boxShadow: hovering === "2.1" ? `0 0 0 3px ${accent21}22, 0 8px 32px ${accent21}18` : "0 1px 3px #0000000d",
-    transform: hovering === "2.1" ? "translateY(-2px)" : "none",
+    borderColor: hovering === "3.0" ? accent21 : "var(--border)",
+    boxShadow: hovering === "3.0" ? `0 0 0 3px ${accent21}22, 0 8px 32px ${accent21}18` : "0 1px 3px #0000000d",
+    transform: hovering === "3.0" ? "translateY(-2px)" : "none",
   };
 
   return (
@@ -330,16 +330,16 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
           <div style={{ width: "1px", flex: 1, background: "var(--border)" }} />
         </div>
 
-        {/* ── DS 2.1 ── */}
+        {/* ── DS 3.0 ── */}
         <div
           style={card21Style}
-          onClick={() => onSelectMode("2.1")}
-          onMouseEnter={() => setHovering("2.1")}
+          onClick={() => onSelectMode("3.0")}
+          onMouseEnter={() => setHovering("3.0")}
           onMouseLeave={() => setHovering(null)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => e.key === "Enter" && onSelectMode("2.1")}
-          aria-label="Enter Design System 2.1"
+          onKeyDown={(e) => e.key === "Enter" && onSelectMode("3.0")}
+          aria-label="Enter Design System 3.0"
         >
           {/* Glow accent top bar */}
           <div
@@ -351,7 +351,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
               height: "3px",
               background: `linear-gradient(90deg, ${accent21}88, ${accent21})`,
               borderRadius: "16px 16px 0 0",
-              opacity: hovering === "2.1" ? 1 : 0.5,
+              opacity: hovering === "3.0" ? 1 : 0.5,
               transition: "opacity 0.2s",
             }}
           />
@@ -384,7 +384,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
                 lineHeight: 1,
               }}
             >
-              2.1
+              3.0
             </span>
           </div>
 
@@ -428,8 +428,8 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
               padding: "12px 20px",
               borderRadius: "var(--radius-md)",
               border: "none",
-              background: hovering === "2.1" ? accent21 : `${accent21}14`,
-              color: hovering === "2.1" ? "#fff" : accent21,
+              background: hovering === "3.0" ? accent21 : `${accent21}14`,
+              color: hovering === "3.0" ? "#fff" : accent21,
               fontFamily: "var(--font-label)",
               fontSize: "var(--text-p)",
               fontWeight: 600,
@@ -440,9 +440,9 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
               gap: "8px",
               transition: "background 0.15s, color 0.15s",
             }}
-            onClick={() => onSelectMode("2.1")}
+            onClick={() => onSelectMode("3.0")}
           >
-            เข้าสู่ DS 2.1
+            เข้าสู่ DS 3.0
             <ArrowRight size={18} />
           </button>
         </div>

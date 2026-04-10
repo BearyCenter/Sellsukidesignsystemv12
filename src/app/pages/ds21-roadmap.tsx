@@ -57,7 +57,7 @@ const PHASES: Phase[] = [
       { id: "p1-4", text: "FilterBar port → Lit (multi-filter, search, date range)", owner: "dev", effort: "M", status: "pending" },
       { id: "p1-5", text: "PageHeader port → Lit", owner: "dev", effort: "S", status: "pending" },
       { id: "p1-6", text: "เขียน Storybook stories สำหรับ component ใหม่ทุกตัว", owner: "both", effort: "M", status: "pending" },
-      { id: "p1-7", text: "อัปเดต DS 2.1 Preview site ใน DS 2.0 showcase", owner: "dev", effort: "S", status: "pending" },
+      { id: "p1-7", text: "อัปเดต DS 3.0 Preview site ใน DS 2.0 showcase", owner: "dev", effort: "S", status: "pending" },
     ],
   },
   {
@@ -94,16 +94,16 @@ const PHASES: Phase[] = [
   {
     id: "phase-4",
     title: "Phase 4",
-    subtitle: "Publish DS 2.1 + Deprecate DS 1.0",
+    subtitle: "Publish DS 3.0 + Deprecate DS 1.0",
     status: "pending",
     duration: "~1 สัปดาห์",
     tasks: [
-      { id: "p4-1", text: "เปลี่ยน package name @sellsuki-org/sellsuki-components → @uxuissk/design-system@2.1.0", owner: "dev", effort: "S", status: "pending" },
+      { id: "p4-1", text: "เปลี่ยน package name @sellsuki-org/sellsuki-components → @uxuissk/design-system-core@3.0.0", owner: "dev", effort: "S", status: "pending" },
       { id: "p4-2", text: "เพิ่ม deprecated warning ให้ ssk-* element names", owner: "dev", effort: "XS", status: "pending" },
       { id: "p4-3", text: "สร้าง Migration Guide 1.0 → 2.1 (token mapping, API diff)", owner: "both", effort: "M", status: "pending" },
-      { id: "p4-4", text: "Deploy DS 2.1 Storybook ไปยัง Vercel", owner: "dev", effort: "S", status: "pending" },
+      { id: "p4-4", text: "Deploy DS 3.0 Storybook ไปยัง Vercel", owner: "dev", effort: "S", status: "pending" },
       { id: "p4-5", text: "ประกาศ deprecation @sellsuki-org/sellsuki-components", owner: "both", effort: "XS", status: "pending" },
-      { id: "p4-6", text: "Update CLAUDE.md + AGENTS.md ให้ตรงกับ DS 2.1 rules", owner: "uxui", effort: "S", status: "pending" },
+      { id: "p4-6", text: "Update CLAUDE.md + AGENTS.md ให้ตรงกับ DS 3.0 rules", owner: "uxui", effort: "S", status: "pending" },
     ],
   },
 ];
@@ -254,7 +254,7 @@ export function Ds21RoadmapPage() {
             fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: 700,
             border: `1px solid ${ACCENT_21}30`,
           }}>
-            DS 2.1 Upgrade
+            DS 3.0 Upgrade
           </span>
           <span style={{
             padding: "3px 12px", borderRadius: "99px",
@@ -269,7 +269,7 @@ export function Ds21RoadmapPage() {
           Upgrade Roadmap
         </h2>
         <p style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-p)", color: "var(--muted-foreground)", margin: 0, maxWidth: "600px" }}>
-          จาก DS 1.0 Architecture (Web Components · Lit) → DS 2.1 คุณภาพ DS 2.0 — Framework-agnostic, UX/UI-driven, ทุก product ใช้ได้โดยไม่ต้องเขียนใหม่
+          จาก DS 1.0 Architecture (Web Components · Lit) → DS 3.0 คุณภาพ DS 2.0 — Framework-agnostic, UX/UI-driven, ทุก product ใช้ได้โดยไม่ต้องเขียนใหม่
         </p>
       </div>
 
@@ -341,7 +341,7 @@ export function Ds21RoadmapPage() {
           <ul style={{ margin: 0, padding: "0 0 0 20px", display: "flex", flexDirection: "column", gap: "4px" }}>
             {[
               "Product ที่ใช้ framework ไม่ใช่ React → ต้องประเมิน migration timeline แยก",
-              "I18n system ใน DS 1.0 ไม่มีใน DS 2.1 → product ที่ใช้ต้องหา solution เอง (react-i18next หรือ i18next)",
+              "I18n system ใน DS 1.0 ไม่มีใน DS 3.0 → product ที่ใช้ต้องหา solution เอง (react-i18next หรือ i18next)",
               "Lit knowledge ในทีม — ต้องการ Dev ที่รู้ Lit อย่างน้อย 1 คน",
               "React 18 (ก่อน 19) มี Web Component event friction — ใช้ wrapper utility",
             ].map((r, i) => (
@@ -366,7 +366,7 @@ export function Ds21RoadmapPage() {
           <Layers size={18} style={{ color: ACCENT_21, flexShrink: 0, marginTop: "2px" }} />
           <p style={{ ...P, fontSize: "var(--text-label)", lineHeight: 1.7 }}>
             <strong style={{ color: "var(--foreground)" }}>DS 2.0 (React)</strong> ยังคงใช้งานได้ต่อในฐานะ Visual Reference + Prototype playground
-            — DS 2.1 Preview site ใช้ DS 2.0 showcase เป็น host โดย Web Components ทำงานได้ใน React
+            — DS 3.0 Preview site ใช้ DS 2.0 showcase เป็น host โดย Web Components ทำงานได้ใน React
             ผ่านการ embed ปกติ ไม่ต้องสร้าง preview site ใหม่
           </p>
         </div>

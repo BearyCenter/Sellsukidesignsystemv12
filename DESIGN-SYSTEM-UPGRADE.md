@@ -1,5 +1,5 @@
-# Sellsuki Design System — Upgrade Spec v2.1
-> **AI-readable task spec** — อ่านไฟล์นี้ก่อนทำงานทุกครั้ง สถานะงาน, context ครบในที่เดียว
+# Sellsuki Design System — Upgrade Spec v3.0
+> **AI-readable task spec** — อ่านไฟล์นี้ก่อนทำงานทุกครั้ง สถานะงาน, context, decisions ครบในที่เดียว
 
 ---
 
@@ -7,15 +7,19 @@
 
 | Field | Value |
 |-------|-------|
-| **Document version** | 1.0 |
+| **Document version** | 2.0 |
 | **Created** | 2025-04-10 |
+| **Updated** | 2026-04-10 |
 | **Owner** | UX/UI Lead + Tech Lead |
-| **Status** | 🟡 Planning — รอ kickoff |
-| **Target** | DS 2.1 เป็น single source of truth ทุก product |
-| **Preview** | https://sellsukidesignsystemv12-2bee.vercel.app (DS 2.0 + DS 2.1 entry) |
-| **Storybook** | https://sellsukidesignsystemv12.vercel.app |
-| **DS 1.0 Source** | `C:\Users\Aoftimuz\Documents\GitLab\sellsuki-components-main` |
-| **DS 2.0/2.1 Source** | `C:\Users\Aoftimuz\Documents\GitHub\SellsukiComponent\Sellsukidesignsystemv12` |
+| **Status** | 🟡 Pre-kickoff — ปิด blockers แล้วเริ่ม Phase 0 ได้เลย |
+| **Target** | DS 3.0 เป็น single source of truth ทุก product (Web Components) |
+| **DS 1.0 Source (origin)** | `https://gitlab.sellsuki.com/sellsuki/share/sellsuki-components.git` |
+| **DS 3.0 Repo (target)** | `https://github.com/BearyCenter/SellsukiDesignsystem3.0` |
+| **DS 2.0 Repo (React ref)** | `https://github.com/BearyCenter/Sellsukidesignsystemv12` |
+| **DS 2.0 Preview** | https://sellsukidesignsystemv12-2bee.vercel.app |
+| **DS 2.0 Storybook** | https://sellsukidesignsystemv12.vercel.app |
+| **DS 2.0 npm** | `@uxuissk/design-system@0.8.x` |
+| **DS 3.0 npm (decided)** | `@uxuissk/design-system-core` |
 
 ---
 
@@ -28,48 +32,148 @@
 | DS 1.0 (Web Components) กับ DS 2.0 (React) ขนานกัน | 2 design languages = visual drift ข้าม product |
 | DS 1.0 มี font size overrides ที่ผิด | ขนาดต่ำกว่า 18px minimum ในหลายจุด |
 | Token naming ต่างกัน | `--ssk-colors-sky-500` vs `--primary` |
-| Product teams ไม่สามารถ migrate ไป DS 2.0 ได้ง่าย | DS 2.0 = React-only, non-React products block |
+| Product teams ไม่สามารถ migrate ไป DS 2.0 ได้ | DS 2.0 = React-only, non-React products block |
 | UX/UI ต้องรอ Dev เพื่อ push visual change | ไม่มี token-first workflow |
 
-### ทำไมเลือก DS 2.1 (DS 1.0-base)
+### ทำไมเลือก DS 3.0 (DS 1.0-base)
 
 ```
 DS 1.0 (Web Components/Lit)     ← Architecture คง
      + DS 2.0 Design Language   ← Token values, visual rules
      + DS 2.0 Components        ← Port ตัวที่ขาดเป็น Lit
-     ─────────────────────────────────────────
-     = DS 2.1  (Web Components + 2.0 quality)
+     ─────────────────────────────────────────────────
+     = DS 3.0  (Web Components + DS 2.0 quality)
+     = @uxuissk/design-system-core
 ```
 
-| | Strategy A: DS 2.0 (React only) | Strategy B: DS 2.1 (1.0-base) ✅ |
+| | Strategy A: DS 2.0 (React only) | Strategy B: DS 3.0 (1.0-base) ✅ |
 |---|---|---|
 | Product ที่ใช้อยู่ | ต้องเขียนใหม่ทั้งหมด | อัปเดต package เท่านั้น |
 | Framework dependency | React เท่านั้น | Vue, Angular, React, Vanilla — ทุกอย่าง |
-| UX/UI คุมโดยไม่รอ Dev | ❌ น้อยมาก | ✅ CSS token = UX/UI territory |
+| UX/UI คุมโดยไม่รอ Dev | ❌ | ✅ CSS token = UX/UI territory |
 | Migration risk | 🔴 สูง | 🟢 ต่ำ |
 | Time to visual consistency | 3-6+ เดือน | 2-4 สัปดาห์ |
 
 ---
 
-## 2. Architecture Decision
+## 2. Architecture Decision Records (ADRs)
 
-### DS 2.1 Technical Stack
+### ADR-001 — Package Naming Strategy ✅ Decided
 
 ```
-Package:     @uxuissk/design-system@2.1.0
+DS 2.0 (React):          @uxuissk/design-system       (คง — ไม่แตะ)
+DS 3.0 (Web Components): @uxuissk/design-system-core  (ใหม่)
+```
+
+**ทำไมไม่ใช่ `@sskds/design-system`:**
+- ต้องการ npm org `sskds` ซึ่งยังไม่ได้สร้าง
+- ถ้า publish ไปก่อนแล้ว rename ทีหลัง = consumers ทุกคนต้อง update `package.json` + imports ทั้ง codebase
+- `@uxuissk` org มีอยู่แล้ว → ใช้ได้ทันที
+- `@sskds` account — จอง npm org ได้เลยเพื่อ reserve ชื่อ แต่ publish จริงค่อยย้ายทีหลัง (เพิ่มงาน ~2-4 สัปดาห์)
+
+**Rename ทีหลังได้ไหม:** ได้ แต่ต้อง:
+1. publish `@sskds/design-system-core` เป็น version ใหม่
+2. deprecated `@uxuissk/design-system-core` พร้อม message ชี้ไปที่ชื่อใหม่
+3. ทุก product team update `package.json` + `import` statements
+4. timeline ~2-4 สัปดาห์ ขึ้นกับจำนวน consumers
+
+---
+
+### ADR-002 — Repository Structure ✅ Decided
+
+```
+DS 3.0 lives at: https://github.com/BearyCenter/SellsukiDesignsystem3.0
+Origin source:   https://gitlab.sellsuki.com/sellsuki/share/sellsuki-components.git
+```
+
+**วิธีตั้ง repo (ไม่ใช่ fork — เพราะ cross-platform GitLab→GitHub):**
+
+```bash
+# Dev team ทำครั้งเดียว
+git clone https://gitlab.sellsuki.com/sellsuki/share/sellsuki-components.git sellsuki-ds3
+cd sellsuki-ds3
+
+# เก็บ GitLab เป็น read-only reference
+git remote rename origin gitlab-origin
+
+# เพิ่ม GitHub เป็น source of truth ใหม่
+git remote add origin https://github.com/BearyCenter/SellsukiDesignsystem3.0.git
+
+# Mirror ทุก branch + tag ไป GitHub
+git push origin --mirror
+
+# ตั้งแต่นี้ทำงานบน GitHub เท่านั้น
+```
+
+**ทำไมไม่ใช้ GitHub Fork:**
+- GitHub fork ทำได้เฉพาะ GitHub→GitHub
+- GitLab internal (`gitlab.sellsuki.com`) → GitHub ต้องใช้ mirror/clone approach
+- GitLab เก็บไว้เป็น archive อ่านได้ แต่ไม่ push ต่อ
+
+---
+
+### ADR-003 — Custom Element Namespace ✅ Decided
+
+```
+DS 1.0: ssk-button, ssk-input, ...   (keep as alias — backward compat)
+DS 3.0: ds-button, ds-input, ...     (new canonical name)
+```
+
+**Guard pattern (ทุก element ต้องมี):**
+```typescript
+// src/elements/ds-button.ts
+@customElement('ds-button')
+export class DsButton extends LitElement { ... }
+
+// Backward compat alias — ไม่ crash ถ้า DS 1.0 โหลดอยู่แล้ว
+if (!customElements.get('ssk-button')) {
+  customElements.define('ssk-button', DsButton);
+}
+```
+
+---
+
+### ADR-004 — Font Loading Strategy
+
+```
+DS 1.0 ปัจจุบัน: base64 embedded ใน fonts.css (1.4MB) — blocking render
+DS 3.0 target:   self-hosted woff2 + font-display: swap
+```
+
+```css
+/* DS 3.0 fonts.css */
+@font-face {
+  font-family: "DB HeaventRounded";
+  src: url('/fonts/db-heavent-rounded.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+}
+/* ... weight variants */
+```
+
+**ผลที่ได้:** First Contentful Paint เร็วขึ้น ~1-3s บน slow network
+
+---
+
+## 3. DS 3.0 Technical Stack
+
+```
+Package:     @uxuissk/design-system-core@3.0.0
+Repo:        https://github.com/BearyCenter/SellsukiDesignsystem3.0
 Framework:   Web Components via Lit 3.x
 Build:       Vite 6
 Storybook:   8.x (@storybook/web-components-vite)
-Token:       CSS Custom Properties (backward compat bridge included)
+Token:       CSS Custom Properties + Token Bridge (backward compat)
 Brands:      7 (sellsuki, patona, shipmunk, akita, oc2plus, sellsukiPay, sukispace)
+CI/CD:       GitHub Actions → Vercel (Storybook) + npm publish
 ```
 
 ### Token Bridge (backward compat)
 
 ```css
-/* DS 2.1 theme.css — ทั้ง DS 2.0 names และ DS 1.0 aliases ใช้ได้พร้อมกัน */
+/* DS 3.0 theme.css */
 :root {
-  /* DS 2.0 Standard Names (new) */
+  /* DS 3.0 Standard Names (canonical) */
   --primary:    #32a9ff;
   --background: #F9FAFB;
   --card:       #ffffff;
@@ -88,315 +192,340 @@ Brands:      7 (sellsuki, patona, shipmunk, akita, oc2plus, sellsukiPay, sukispa
 }
 ```
 
-### Font Size Rules (MANDATORY ทุก component)
+### Font Size Rules (MANDATORY)
 
 | Minimum | Token | Usage |
 |---------|-------|-------|
 | 20px | `var(--text-p)` | Data, table cell, sidebar nav, stat card |
 | 18px | `var(--text-label)` | UI labels, badges, tooltips, buttons |
-| ❌ 16px | ~~`var(--text-caption)`~~ | ห้ามใช้ใน DS 2.1 — deprecated as minimum |
+| ❌ 16px | ~~`var(--text-caption)`~~ | ห้ามใช้เป็น minimum — deprecated |
 
-### Background Token Rules
+### Shadow DOM CSS Rule
 
-```css
-/* ✅ ถูกต้อง */
-var(--background)  → #F9FAFB  page/content body (ALL brands)
-var(--card)        → #ffffff   card/panel/sidebar
-var(--muted)       → #F3F4F6  table header, subtle divider
+```typescript
+// ✅ ถูกต้อง — CSS vars inherited ผ่าน shadow boundary
+static styles = css`
+  :host { color: var(--primary); font-family: var(--font-label); }
+`;
 
-/* ❌ ห้าม */
-background: "#FFF7F0"          /* hardcoded brand color */
-background: "var(--bg-page)"   /* deprecated alias */
+// ❌ ห้าม — class selectors ไม่ข้าม shadow DOM
+static styles = css`
+  .btn-primary { background: var(--primary); }  /* ไม่ทำงานใน shadow DOM */
+`;
 ```
 
 ---
 
-## 3. Preview Site Strategy
-
-### Option C (เลือกแล้ว): DS 2.0 Preview เป็น Host ของ DS 2.1
+## 4. Preview Site Strategy (Option C)
 
 ```
 https://sellsukidesignsystemv12-2bee.vercel.app
 │
-├── Entry Page (ใหม่) ── เลือก version ก่อนเข้า
-│   ├── DS 2.0  →  React showcase (current)
-│   └── DS 2.1  →  Web Components showcase (clone + ported)
+├── Entry Page — เลือก version ก่อนเข้า
+│   ├── DS 2.0  (sky blue)  → React showcase + MCP tools
+│   └── DS 3.0  (orange)    → Web Components showcase + Roadmap
 ```
 
-**Files ที่สร้างแล้ว:**
+**Files ที่สร้างแล้ว (DS 2.0 repo):**
 - `src/app/pages/entry-page.tsx` — Entry split-screen selector
-- `src/app/pages/ds21-roadmap.tsx` — DS 2.1 upgrade roadmap page
-- `src/app/App.tsx` — modified รองรับ dsMode state + entry gate
-
-**DS 2.1 mode ใน App:**
-- Version badge เปลี่ยนเป็น `2.1` สีม่วง (`#7c3aed`)
-- Sidebar มี "DS 2.1" group ด้านบน → "Upgrade Roadmap" page
-- "เปลี่ยน version" button ใน sidebar footer
-- Default page = ds21-roadmap (แทน getting-started)
+- `src/app/pages/ds21-roadmap.tsx` — DS 3.0 upgrade roadmap page
+- `src/app/App.tsx` — dsMode state, entry gate, version badge
 
 ---
 
-## 4. Component Gap Analysis
+## 5. Component Gap Analysis
 
-### DS 1.0 มี → DS 2.1 ต้อง Port
+### DS 1.0 มี → DS 3.0 ต้อง Port
 
 | Component | DS 1.0 | Priority | Effort | Assigned |
 |-----------|--------|----------|--------|----------|
-| **ImageCropper** | `ssk-image-cropper` (Croppie.js) | 🔴 HIGH | M | Dev |
+| **ImageCropper** | `ssk-image-cropper` | 🔴 HIGH | M | Dev |
 | **PhoneCountryInput** | `ssk-addon-phone-country` | 🔴 HIGH | S | Dev |
-| **AdvancedDataTable** | `ssk-dynamic-table` → DS 2.0 version | 🔴 HIGH | L | Dev |
-| **FilterBar** | — (DS 2.0 only) | 🔴 HIGH | M | Dev |
-| **Charts** | — (DS 2.0 only) | 🟡 MEDIUM | L | Dev |
-| **CodeBlock** | `ssk-code-block` (PrismJS → Shiki) | 🟡 MEDIUM | S | Dev |
-| **CountryIcon** | `ssk-country-icon` (iso-3166-1) | 🟡 MEDIUM | XS | Dev |
+| **AdvancedDataTable** | `ssk-dynamic-table` → DS 2.0 level | 🔴 HIGH | L | Dev |
+| **FilterBar** | DS 2.0 only | 🔴 HIGH | M | Dev |
+| **Charts** | DS 2.0 only | 🟡 MEDIUM | L | Dev |
+| **CodeBlock** | `ssk-code-block` → Shiki | 🟡 MEDIUM | S | Dev |
+| **CountryIcon** | `ssk-country-icon` | 🟡 MEDIUM | XS | Dev |
 | **WidgetGrid** | `ssk-widget-grid` (GridStack) | 🟡 MEDIUM | L | Dev |
-| **AppShell equivalent** | — (DS 2.0 only) | 🟡 MEDIUM | L | Dev |
-
-### DS 2.1 มีครบแล้ว (ไม่ต้อง port)
-
-Web Component ทุกตัวที่มีใน DS 1.0: Button, Input, Modal, Table, Sidebar, Dropdown, DatePicker, Pagination, Timeline, Card, Badge, Tag, Avatar, Accordion, Drawer, Tooltip, Popover, Stepper, Tabs, Toast, ProgressBar, Skeleton, Rating, FileUpload, ColorPicker, OTPInput, TagInput, Toggle/Switch, Checkbox, Radio, Breadcrumb, Tree, TransferList, ImagePreview, Statistic, Menu, TopNavbar
+| **AppShell** | DS 2.0 only | 🟡 MEDIUM | L | Dev |
 
 ---
 
-## 5. Phased Roadmap
+## 6. Phased Roadmap
+
+### 🔴 Pre-kickoff Blockers (ต้องทำก่อน Phase 0)
+
+| # | Task | Owner | Effort | Status |
+|---|------|-------|--------|--------|
+| B1 | สร้าง repo DS 3.0 ที่ GitHub + mirror จาก GitLab | Dev | S | ⬜ pending |
+| B2 | เพิ่ม customElements guard ทุก element (ds-* + ssk-* alias) | Dev | S | ⬜ pending |
+| B3 | Audit Shadow DOM CSS — เปลี่ยน class-based → `:host`-based | Dev | M | ⬜ pending |
+| B4 | ตั้ง GitHub Actions CI (lint → type-check → build → storybook) | Dev | S | ⬜ pending |
+| B5 | สร้าง branching strategy + PR template + CONTRIBUTING.md | Tech Lead | XS | ⬜ pending |
+
+---
 
 ### Phase 0 — Visual Parity + Infra Upgrade (~3 สัปดาห์)
 
-**Goal:** ทุก product ที่ใช้ DS 1.0 อยู่ → หน้าตา visual match DS 2.0 โดยไม่ต้อง migrate โค้ด
+**Goal:** ทุก product ที่ใช้ DS 1.0 → visual match DS 2.0 โดยไม่ต้อง migrate โค้ด
 
 | # | Task | Owner | Effort | Status |
 |---|------|-------|--------|--------|
 | 0.1 | Audit token values ทั้งหมดใน DS 1.0 (`--ssk-*`) | UX/UI | S | ⬜ pending |
-| 0.2 | Map DS 1.0 tokens → DS 2.0 tokens | UX/UI | S | ⬜ pending |
-| 0.3 | อัปเดต token values ให้ตรงกับ DS 2.0 visual identity | UX/UI | M | ⬜ pending |
+| 0.2 | Map DS 1.0 tokens → DS 3.0 standard names | UX/UI | S | ⬜ pending |
+| 0.3 | อัปเดต token values → DS 2.0 visual identity | UX/UI | M | ⬜ pending |
 | 0.4 | สร้าง Token Bridge CSS (backward compat aliases) | Dev | S | ⬜ pending |
 | 0.5 | Fix font size overrides (min 18px/20px rule) | UX/UI | S | ⬜ pending |
-| 0.6 | เพิ่ม brand configs ใหม่ (Shipmunk, Akita, SellsukiPay, Sukispace) | Both | M | ⬜ pending |
-| 0.7 | Upgrade Storybook 7 → 8 (`@storybook/web-components-vite`) | Dev | S | ⬜ pending |
-| 0.8 | Upgrade Vite 4 → 6 + update build pipeline | Dev | S | ⬜ pending |
-| 0.9 | Migrate story format CSF2 → CSF3 (89 story files) | Dev | M | ⬜ pending |
-| 0.10 | Smoke test ทุก component ใน Storybook 8 | Both | M | ⬜ pending |
+| 0.6 | แก้ font bundle 1.4MB → woff2 self-hosted + font-display:swap | Dev | S | ⬜ pending |
+| 0.7 | เพิ่ม brand configs ใหม่ (Shipmunk, Akita, SellsukiPay, Sukispace) | Both | M | ⬜ pending |
+| 0.8 | Upgrade Storybook 7 → 8 (`@storybook/web-components-vite`) | Dev | S | ⬜ pending |
+| 0.9 | Upgrade Vite 4 → 6 + update build config | Dev | S | ⬜ pending |
+| 0.10 | Migrate story format CSF2 → CSF3 (89 story files + codemod) | Dev | M | ⬜ pending |
+| 0.11 | Smoke test ทุก component ใน Storybook 8 | Both | M | ⬜ pending |
+| 0.12 | Deploy DS 3.0 Storybook → Vercel (new project) | Dev | S | ⬜ pending |
 
-**UX/UI สามารถทำ 0.1–0.5 ได้ทันที โดยไม่รอ Dev**
+**UX/UI เริ่ม 0.1–0.5 ได้ทันที โดยไม่รอ Dev**
 
 ---
 
 ### Phase 1 — Port Missing Components → Lit (~4 สัปดาห์)
 
-**Goal:** Component ที่ DS 1.0 ขาดหรือ DS 2.0 ดีกว่า → port เป็น Lit Web Component
-
 | # | Task | Owner | Effort | Status |
 |---|------|-------|--------|--------|
-| 1.1 | ImageCropper → Lit wrapper (react-easy-crop pattern แต่เป็น Lit) | Dev | M | ⬜ pending |
-| 1.2 | PhoneCountryInput → ssk-addon-phone-country ปรับปรุง | Dev | S | ⬜ pending |
-| 1.3 | AdvancedDataTable → Lit (server-side pagination, bulk actions, frozen cols) | Dev | L | ⬜ pending |
-| 1.4 | FilterBar → Lit (multi-filter, search, date range) | Dev | M | ⬜ pending |
+| 1.1 | ImageCropper → Lit wrapper | Dev | M | ⬜ pending |
+| 1.2 | PhoneCountryInput → ds-addon-phone-country | Dev | S | ⬜ pending |
+| 1.3 | AdvancedDataTable → Lit (server-side, bulk actions, frozen cols) | Dev | L | ⬜ pending |
+| 1.4 | FilterBar → Lit | Dev | M | ⬜ pending |
 | 1.5 | PageHeader → Lit | Dev | S | ⬜ pending |
-| 1.6 | เขียน Storybook stories ทุก component ใหม่ | Both | M | ⬜ pending |
-| 1.7 | อัปเดต DS 2.1 section ใน Preview site | Dev | S | ⬜ pending |
+| 1.6 | Stories ทุก component ใหม่ (Default + Variants + States) | Both | M | ⬜ pending |
+| 1.7 | อัปเดต DS 3.0 section ใน Preview site | Dev | S | ⬜ pending |
 
 ---
 
 ### Phase 2 — Component Quality Upgrade (~3 สัปดาห์)
 
-**Goal:** Component ที่มีอยู่แล้วใน DS 1.0 แต่ DS 2.0 version ดีกว่า
-
 | # | Task | Owner | Effort | Status |
 |---|------|-------|--------|--------|
-| 2.1 | Dropdown → multi-select, search, custom render (from DS 2.0) | Dev | M | ⬜ pending |
+| 2.1 | Dropdown → multi-select, search, custom render | Dev | M | ⬜ pending |
 | 2.2 | DatePicker → range mode, keyboard nav | Dev | M | ⬜ pending |
 | 2.3 | DynamicTable → sort, selection, bulk action | Dev | M | ⬜ pending |
-| 2.4 | Sidebar → SidebarAccountSwitcher, collapse animation | Dev | S | ⬜ pending |
-| 2.5 | Charts → Lit Web Component (Line/Bar/Donut, zero-dep SVG) | Dev | L | ⬜ pending |
-| 2.6 | CodeBlock → Shiki (แทน PrismJS) | Dev | S | ⬜ pending |
+| 2.4 | Sidebar → account switcher, collapse animation | Dev | S | ⬜ pending |
+| 2.5 | Charts → Lit SVG (Line/Bar/Donut, zero-dep) | Dev | L | ⬜ pending |
+| 2.6 | CodeBlock → Shiki | Dev | S | ⬜ pending |
 | 2.7 | CountryIcon → ISO 3166 + SVG flags | Dev | XS | ⬜ pending |
 | 2.8 | UX/UI visual review ทุก component ที่ upgrade | UX/UI | M | ⬜ pending |
 
 ---
 
-### Phase 3 — AppShell Equivalent + WidgetGrid (~3 สัปดาห์)
-
-**Goal:** Full product shell สำหรับ Web Components
+### Phase 3 — AppShell + WidgetGrid (~3 สัปดาห์)
 
 | # | Task | Owner | Effort | Status |
 |---|------|-------|--------|--------|
 | 3.1 | AppShell → CSS slot-based (Navbar + Sidebar + Content) | Dev | L | ⬜ pending |
 | 3.2 | FeaturePageScaffold → Lit layout component | Dev | M | ⬜ pending |
-| 3.3 | WidgetGrid → evaluate use case จริง → GridStack Lit wrapper (optional) | Dev | L | ⬜ pending |
+| 3.3 | WidgetGrid → evaluate + GridStack Lit wrapper (optional) | Dev | L | ⬜ pending |
 | 3.4 | ScaffoldKPIRow, StatCard upgrades | Dev | S | ⬜ pending |
 | 3.5 | Full page layout test ทุก 7 brands | UX/UI | M | ⬜ pending |
 
 ---
 
-### Phase 4 — Publish DS 2.1 + Deprecate DS 1.0 (~1 สัปดาห์)
-
-**Goal:** DS 2.1 เป็น official package, DS 1.0 เข้า archive
+### Phase 4 — Publish DS 3.0 + Deprecate DS 1.0 (~1 สัปดาห์)
 
 | # | Task | Owner | Effort | Status |
 |---|------|-------|--------|--------|
-| 4.1 | Bump version → `@uxuissk/design-system@2.1.0` | Dev | S | ⬜ pending |
-| 4.2 | Deprecated warning สำหรับ `ssk-*` element names | Dev | XS | ⬜ pending |
-| 4.3 | Migration Guide: DS 1.0 → DS 2.1 (token mapping, API diff table) | Both | M | ⬜ pending |
-| 4.4 | Deploy DS 2.1 Storybook → Vercel | Dev | S | ⬜ pending |
-| 4.5 | Archive `@sellsuki-org/sellsuki-components` | Both | XS | ⬜ pending |
-| 4.6 | Update CLAUDE.md + AGENTS.md → DS 2.1 rules | UX/UI | S | ⬜ pending |
+| 4.1 | npm publish `@uxuissk/design-system-core@3.0.0` | Dev | S | ⬜ pending |
+| 4.2 | Deprecated warning สำหรับ `ssk-*` aliases | Dev | XS | ⬜ pending |
+| 4.3 | Migration Guide: DS 1.0 → DS 3.0 (token map + API diff) | Both | M | ⬜ pending |
+| 4.4 | Archive `@sellsuki-org/sellsuki-components` on npm | Dev | XS | ⬜ pending |
+| 4.5 | ประกาศ internal announcement ให้ทุก product team | Both | XS | ⬜ pending |
+| 4.6 | Update CLAUDE.md + AGENTS.md → DS 3.0 rules | UX/UI | S | ⬜ pending |
+| 4.7 | Update entry-page.tsx ใน DS 2.0 → link DS 3.0 Storybook จริง | Dev | XS | ⬜ pending |
 
 ---
 
-## 6. Risk Register
+## 7. Risk Register (Updated)
 
 | # | Risk | Severity | Mitigation |
 |---|------|----------|------------|
-| R1 | Product ที่ไม่ใช่ React → ยังใช้งาน DS 1.0 ระหว่าง transition | 🟡 MEDIUM | DS 1.0 maintenance mode ยังรับ bug fix → transition เป็น DS 2.1 |
-| R2 | Product ที่ใช้ I18n system ของ DS 1.0 | 🟡 MEDIUM | ต้องหา solution ใหม่ (i18next/react-i18next) — งานเพิ่ม 1-2 สัปดาห์ |
-| R3 | Lit knowledge ในทีมต่ำ | 🟡 MEDIUM | ต้องการ Dev ที่รู้ Lit ≥ 1 คน (part-time ช่วงแรก) |
-| R4 | React 18 (ก่อน 19) Web Component event friction | 🟡 MEDIUM | Wrapper utility / event retransmit layer |
-| R5 | ImageCropper dependency (Croppie.js) ไม่ใช่ Lit-native | 🟢 LOW | ใช้ native canvas crop API แทน หรือ wrap เป็น Lit |
-| R6 | WidgetGrid (GridStack) heavy bundle | 🟢 LOW | Evaluate use case จริงก่อน implement — อาจไม่จำเป็น |
-| R7 | Font size DS 1.0 overrides ติดมาใน port | 🟢 LOW | Apply DS 2.1 token rules ตั้งแต่ต้น (Phase 0) |
+| R1 | Product ที่ไม่ใช่ React → อยู่บน DS 1.0 ระหว่าง transition | 🟡 MEDIUM | DS 1.0 maintenance mode ยังรับ bug fix |
+| R2 | Product ที่ใช้ I18n ของ DS 1.0 | 🟡 MEDIUM | หา solution ใหม่ (i18next) — งานเพิ่ม ~2 สัปดาห์ |
+| R3 | Lit knowledge ในทีมต่ำ | 🟡 MEDIUM | Dev ≥ 1 คนที่รู้ Lit + internal workshop |
+| R4 | React 18 Web Component event friction | 🟡 MEDIUM | Event retransmit utility wrapper |
+| R5 | Shadow DOM CSS isolation — class-based styles ไม่ทำงาน | 🟡 MEDIUM | B3 audit ก่อน Phase 0 |
+| R6 | CSF2→CSF3 migration 89 files อาจใช้เวลามากกว่าคาด | 🟡 MEDIUM | ใช้ Storybook codemod + manual review |
+| R7 | Font bundle 1.4MB blocking render | 🟡 MEDIUM | Phase 0 task 0.6 |
+| R8 | Package rename ในอนาคต (@sskds) เพิ่ม migration effort | 🟢 LOW | Register npm org ไว้ก่อน แม้ไม่ publish ทันที |
+| R9 | WidgetGrid GridStack bundle size (~80KB) | 🟢 LOW | Lazy load + evaluate use case ก่อน |
 
 ---
 
-## 7. Definition of Done (DoD)
+## 8. Definition of Done
 
-### ระดับ Component
+### Component Level
 - [ ] Visual match DS 2.0 reference (screenshot compare)
-- [ ] ใช้ token จาก DS 2.1 theme — ไม่ hardcode hex/px
-- [ ] Font size ≥ 18px ทุก element (`var(--text-label)` minimum)
-- [ ] Data/content ≥ 20px (`var(--text-p)` minimum)
+- [ ] ใช้ token จาก DS 3.0 theme — ไม่ hardcode hex/px
+- [ ] Font size ≥ 18px (`var(--text-label)`) ทุก element
+- [ ] Data/content ≥ 20px (`var(--text-p)`)
+- [ ] CSS ใช้ `:host` + CSS vars เท่านั้น — ไม่มี class-based global styles
+- [ ] customElements guard ครบ (ds-* + ssk-* alias)
 - [ ] Storybook story ครบ (Default + Variants + States)
 - [ ] Dark mode ทำงานได้
-- [ ] Keyboard accessible (focus, ARIA)
-- [ ] TypeScript types export ครบ
+- [ ] Keyboard accessible (focus order, ARIA)
+- [ ] TypeScript types export ครบ ไม่มี `any`
 
-### ระดับ Phase
-- [ ] ทุก task ใน phase = ✅ completed
+### Phase Level
+- [ ] ทุก task ใน phase = ✅
 - [ ] UX/UI Lead review ผ่าน
 - [ ] Tech Lead review ผ่าน
-- [ ] Smoke test Storybook — ไม่มี component พัง
-- [ ] Visual regression test ผ่าน (screenshot diff)
+- [ ] CI pass: lint + type-check + build + storybook
+- [ ] Visual regression test ผ่าน
 
-### ระดับ DS 2.1 Release
-- [ ] ทุก Phase 0-4 = completed
+### DS 3.0 Release
+- [ ] Phase 0–4 completed
 - [ ] Migration Guide เสร็จ
-- [ ] npm package publish สำเร็จ
-- [ ] Preview site + Storybook deploy ครบ
+- [ ] npm publish `@uxuissk/design-system-core@3.0.0` สำเร็จ
+- [ ] DS 3.0 Storybook live บน Vercel
 - [ ] CLAUDE.md + AGENTS.md updated
 
 ---
 
-## 8. Quality Grade Criteria
+## 9. Quality Grade Criteria
 
 | Grade | Criteria |
 |-------|---------|
-| **A** | ทุก component มี story + visual match DS 2.0 + dark mode + a11y + token-only |
-| **B** | story ครบ, visual match ≥ 90%, dark mode ทำงาน, token-only |
-| **C** | story มี แต่บางตัวขาด variant, visual drift เล็กน้อย |
+| **A** | story ครบ + visual match DS 2.0 + dark mode + a11y + token-only + shadow DOM correct |
+| **B** | story ครบ, visual ≥ 90%, dark mode ทำงาน, token-only |
+| **C** | story มี แต่ขาด variant, visual drift เล็กน้อย |
 | **D** | story ขาด, hardcoded values, font size ต่ำกว่า minimum |
-| **F** | ไม่ผ่าน smoke test, component พัง |
+| **F** | ไม่ผ่าน CI, component พัง, ไม่มี guard |
 
-**Target:** Grade A สำหรับทุก component ที่ port ใน Phase 1-2, Grade B minimum สำหรับ Phase 0 upgrade
-
----
-
-## 9. Files Modified / Created (Session 2025-04-10)
-
-| File | Action | Description |
-|------|--------|-------------|
-| `src/app/pages/entry-page.tsx` | ✅ Created | Entry split-screen: DS 2.0 \| DS 2.1 selector |
-| `src/app/pages/ds21-roadmap.tsx` | ✅ Created | DS 2.1 upgrade roadmap page with phase cards |
-| `src/app/App.tsx` | ✅ Modified | dsMode state, entry gate, version badge, sidebar 2.1 group |
-| `CLAUDE.md` | ✅ Modified | Background token standard, font size +2px rules, vibe override |
-| `AGENTS.md` | ✅ Modified | Same as CLAUDE.md + security rules |
-| `src/app/pages/appshell-showcase.tsx` | ✅ Modified | 6 brand tabs, logo size fix, lighter button bg |
-| `src/app/pages/_showcase-factory.tsx` | ✅ Modified | Shared style constants → 20px minimum |
-| `DESIGN-SYSTEM-UPGRADE.md` | ✅ Created | This file — master spec |
+**Target:** Grade A ทุก component Phase 1-2 / Grade B minimum Phase 0
 
 ---
 
-## 10. AI Context for Next Session
+## 10. CI/CD Pipeline (GitHub Actions)
 
-> **ถ้า AI อ่านไฟล์นี้ใน session ถัดไป:** สถานะงานอยู่ที่ Planning — Preview site entry page สร้างแล้ว, DS 2.1 roadmap page สร้างแล้ว, รอ user confirm framework ของ product แต่ละตัวก่อน kickoff Phase 0
-
-**Next action ที่รอ:**
-1. User ยืนยัน framework ของ product (React? Vue? Vanilla?) ก่อนเริ่ม Phase 0
-2. Assign Dev ที่รู้ Lit มาดูแล Phase 0.4 (Token Bridge) + Phase 1+
-3. UX/UI เริ่ม Phase 0.1-0.5 ได้ทันที (token audit + value update) ไม่รอ Dev
-
-**Files to read ก่อนทำงานต่อ:**
-- `CLAUDE.md` — DS 2.0 rules (จะ update เป็น DS 2.1 rules ใน Phase 4.6)
-- `src/app/pages/ds21-roadmap.tsx` — task list ล่าสุด
-- `C:\Users\Aoftimuz\Documents\GitLab\sellsuki-components-main\src\contexts\theme\` — token values DS 1.0 ที่ต้องอัปเดต
+```yaml
+# .github/workflows/ci.yml (DS 3.0 repo)
+name: CI
+on: [push, pull_request]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - run: npm run build-storybook
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm publish --access public
+        env: { NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} }
+```
 
 ---
 
-## 11. Tech Lead Audit Checklist
+## 11. Branching Strategy
 
-> สำหรับ Tech Lead review ก่อน kickoff และหลังแต่ละ Phase
+```
+main          ← production-ready เสมอ, auto-deploy Storybook
+feat/phase-0  ← Phase 0 work (token + infra)
+feat/phase-1  ← Phase 1 port (ImageCropper, AdvancedTable ฯลฯ)
+feat/phase-N  ← แต่ละ Phase แยก branch
 
-### Architecture Review
-- [ ] Web Components (Lit) เหมาะกับ use case ทุก product ที่รองรับ?
-- [ ] Token Bridge strategy ไม่ทำให้ CSS specificity ซ้อน?
-- [ ] React 18 Web Component event handling — มี plan รองรับ?
-- [ ] Bundle size ของ DS 2.1 vs DS 1.0 acceptable?
-- [ ] Build pipeline (Vite 6 + Storybook 8) stable พอสำหรับ production?
+PR rules:
+- ≤ 400 lines per PR
+- ต้อง CI pass ก่อน merge
+- ต้องการ 1 reviewer (Tech Lead หรือ UX/UI Lead)
+- squash merge เสมอ
+```
 
-### Code Quality
-- [ ] Lit component pattern consistent — ไม่มี anti-pattern?
-- [ ] TypeScript types export ครบ, ไม่มี `any`?
-- [ ] No circular imports ใน barrel export?
-- [ ] CSS isolation ถูกต้อง (shadow DOM vs global)?
-- [ ] Event naming convention consistent กับ DS 1.0?
+---
 
-### Risk Mitigation
-- [ ] I18n gap documented + plan ให้ product teams?
-- [ ] Deprecated warning strategy approved?
-- [ ] Migration Guide draft reviewed?
-- [ ] Rollback plan มีถ้า DS 2.1 มีปัญหา?
+## 12. Files Modified / Created
 
-### Release Readiness
-- [ ] npm publish flow tested (prepublishOnly script)?
-- [ ] Vercel build ทั้ง Preview + Storybook ผ่าน?
-- [ ] package.json exports correct?
-- [ ] Version bump strategy (semver) agreed?
+| File | Repo | Action | Description |
+|------|------|--------|-------------|
+| `src/app/pages/entry-page.tsx` | DS 2.0 | ✅ Created | Entry: DS 2.0 \| DS 3.0 selector |
+| `src/app/pages/ds21-roadmap.tsx` | DS 2.0 | ✅ Created | DS 3.0 upgrade roadmap page |
+| `src/app/App.tsx` | DS 2.0 | ✅ Modified | dsMode state, entry gate, version badge |
+| `CLAUDE.md` | DS 2.0 | ✅ Modified | Background token standard, font +2px rules |
+| `AGENTS.md` | DS 2.0 | ✅ Modified | Same + security rules |
+| `DESIGN-SYSTEM-UPGRADE.md` | DS 2.0 | ✅ This file | Master spec |
+
+---
+
+## 13. AI Context for Next Session
+
+> **ถ้า AI อ่านไฟล์นี้ใน session ถัดไป:**
+> - DS 2.1 เปลี่ยนชื่อเป็น **DS 3.0** แล้ว
+> - Package name ตัดสินใจแล้ว: **`@uxuissk/design-system-core`**
+> - DS 3.0 repo: **`https://github.com/BearyCenter/SellsukiDesignsystem3.0`**
+> - DS 1.0 origin: **`https://gitlab.sellsuki.com/sellsuki/share/sellsuki-components.git`**
+> - Pre-kickoff blockers B1-B5 ยังไม่เสร็จ — ต้องทำก่อน Phase 0
+
+**Files to read ก่อนทำงาน DS 3.0:**
+- `DESIGN-SYSTEM-UPGRADE.md` (this file)
+- DS 3.0 repo: `https://github.com/BearyCenter/SellsukiDesignsystem3.0`
+- DS 1.0 source (reference): `https://gitlab.sellsuki.com/sellsuki/share/sellsuki-components.git`
+
+---
+
+## 14. Tech Lead Audit Checklist
+
+### Pre-kickoff (บล็อก Phase 0)
+- [ ] GitHub repo DS 3.0 สร้างแล้ว + mirror จาก GitLab สำเร็จ?
+- [ ] customElements guard ทุก element (ds-* + ssk-* alias)?
+- [ ] Shadow DOM CSS audit เสร็จ — `:host`-based เท่านั้น?
+- [ ] GitHub Actions CI ทำงานแล้ว?
+- [ ] PR template + branching strategy ตกลงกัน?
+
+### Architecture
+- [ ] Token Bridge ไม่ทำให้ CSS specificity ซ้อน?
+- [ ] React 18 event handling plan มี?
+- [ ] Bundle size DS 3.0 acceptable (เทียบ DS 1.0)?
+- [ ] Font loading เปลี่ยนเป็น woff2 แล้ว?
+
+### Release
+- [ ] npm publish flow tested (prepublishOnly)?
+- [ ] Vercel DS 3.0 Storybook deploy ผ่าน?
+- [ ] Semver strategy ชัดเจน (3.0.0 → patch/minor)?
 
 **Sign-off:** Tech Lead _____________ Date _________
 
 ---
 
-## 12. UX/UI Lead Audit Checklist
-
-> สำหรับ UX/UI Lead review ก่อน kickoff และหลัง visual update ทุก Phase
+## 15. UX/UI Lead Audit Checklist
 
 ### Visual Identity
-- [ ] ทุก component ใช้ DB HeaventRounded (`var(--font-label)`) — ไม่มี Inter?
-- [ ] Primary color = Sky-500 `#32a9ff` — consistent ทุก component?
-- [ ] Font size minimum 18px UI / 20px data — ไม่มีตัวที่ต่ำกว่า?
-- [ ] Background token = `var(--background)` `#F9FAFB` — ไม่มี hardcoded?
-- [ ] Border radius = `--radius-md` 6px inputs / `--radius-lg` 6px cards?
+- [ ] DB HeaventRounded ทุก component — ไม่มี Inter?
+- [ ] Primary = `#32a9ff` consistent?
+- [ ] Font min 18px UI / 20px data — ไม่มีต่ำกว่า?
+- [ ] `var(--background)` `#F9FAFB` ทุก brand?
+- [ ] border-radius `--radius-md` 6px?
 
 ### Token Compliance
-- [ ] ไม่มี hardcoded hex ใน component CSS?
-- [ ] ไม่มี hardcoded px font size (ใช้ `var(--text-*)` เท่านั้น)?
-- [ ] Token Bridge backward compat ไม่ทำให้ visual เปลี่ยน?
-- [ ] Dark mode ทุก component ใช้ CSS token ถูกต้อง?
+- [ ] ไม่มี hardcoded hex ใน component?
+- [ ] Token Bridge backward compat ไม่เปลี่ยน visual?
+- [ ] Dark mode token ถูกต้อง?
 
 ### Brand Consistency
-- [ ] ทุก 7 brand ผ่าน visual review (Sellsuki, Patona, Shipmunk, Akita, OC2+, SellsukiPay, Sukispace)?
-- [ ] Brand color ใช้ผ่าน `[data-product]` scope เท่านั้น — ไม่ leak?
-- [ ] Sidebar ไม่มี brand/logo context (per confirmed rule)?
+- [ ] 7 brands ผ่าน visual review?
+- [ ] `[data-product]` scope เท่านั้น — ไม่ leak?
+- [ ] Sidebar ไม่มี brand/logo context?
 
 ### UX Quality
-- [ ] Loading state ทุก component?
-- [ ] Empty state ทุก data component?
-- [ ] Error state ทุก form component?
-- [ ] Responsive breakpoints (mobile 16px padding / desktop 24px)?
-- [ ] Max 1 primary button per view — ไม่มี view ที่ผิด rule?
-
-### Vibe Code Output Quality
-- [ ] Test vibe coding ด้วย DS 2.1 components — ผล accurate ≥ 90%?
-- [ ] Entry page visual ตรงกับ brand direction?
-- [ ] DS 2.1 Roadmap page readable + informative?
+- [ ] Loading / Empty / Error state ทุก component?
+- [ ] Responsive (16px mobile / 24px desktop)?
+- [ ] Max 1 primary button per view?
 
 **Sign-off:** UX/UI Lead _____________ Date _________
 
