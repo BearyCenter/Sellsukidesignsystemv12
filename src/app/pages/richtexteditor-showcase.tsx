@@ -55,7 +55,7 @@ export function RichTextEditorShowcase() {
             toolbar={["history", "format", "list", "align", "block", "link"]}
             fullscreen
           />
-          <div className="mt-3 text-muted-foreground text-sm" style={fontLabel}>
+          <div className="mt-3 text-muted-foreground" style={fontLabel}>
             HTML output: {html.length} characters
           </div>
         </DemoBox>

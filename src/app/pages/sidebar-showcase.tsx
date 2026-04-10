@@ -198,7 +198,7 @@ export function SidebarShowcase() {
             <div className="flex-1 p-6 overflow-auto" style={{ background: "#FFF7F0" }}>
               <div className="text-foreground font-bold mb-1" style={fontLabelBold}>Patona Content</div>
               <div className="text-muted-foreground" style={fontLabel}>Active: <strong>{active3}</strong></div>
-              <div className="mt-3 px-3 py-2 rounded-[var(--radius-md)] border text-sm" style={{ borderColor: "#EC5E2A", color: "#EC5E2A", fontFamily: "var(--font-label)", fontSize: "var(--text-caption)" }}>
+              <div className="mt-3 px-3 py-2 rounded-[var(--radius-md)] border" style={{ borderColor: "#EC5E2A", color: "#EC5E2A", fontFamily: "var(--font-label)", fontSize: "var(--text-label)" }}>
                 Primary color: #EC5E2A via [data-product="patona"]
               </div>
             </div>

@@ -5,11 +5,13 @@ import { useI18n } from "../i18n";
 // ─── Shared styles (CSS variables only) ───────────────────────────────────────
 
 export const fontBody: React.CSSProperties = { fontFamily: "var(--font-p)", fontSize: "var(--text-p)", fontWeight: "var(--weight-p)" };
-export const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-label)" };
+// data/content minimum: var(--text-p) = 20px
+export const fontLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" };
+// section heading UI label — 18px OK (UI chrome minimum)
 export const fontLabelBold: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: "var(--weight-button)" };
-export const smallLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
-export const btnStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" };
-export const mono: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" };
+export const smallLabel: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" };
+export const btnStyle: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-p)", fontWeight: "var(--weight-button)" };
+export const mono: React.CSSProperties = { fontFamily: "var(--font-label)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" };
 
 // ─── Collapsible Code Block ───────────────────────────────────────────────────
 

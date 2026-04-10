@@ -49,12 +49,49 @@ Always use CSS variable tokens. Never hardcode px values.
 | `var(--text-h2)` | 40px | 400 | Page section title |
 | `var(--text-h3)` | 28px | 700 | Card/modal header |
 | `var(--text-h4)` | 24px | 500 | Sub-section header |
-| `var(--text-p)` | 20px | 400 | Body / paragraph |
-| `var(--text-label)` | 18px | 400 | Form labels, UI labels |
+| `var(--text-p)` | 20px | 400 | Body / paragraph **and card/panel section titles** (e.g. "Shipments ล่าสุด") |
+| `var(--text-label)` | 18px | 400 | Form labels, UI labels, descriptions, table subtitles |
 | `var(--text-button)` | 18px | 600 | Buttons, badges, tabs |
 | `var(--text-caption)` | 16px | 400 | UI chrome, hints, fine print |
 
-**Minimum font size: 16px (`var(--text-caption)`) for UI chrome — use `var(--text-label)` (18px) for all data/content text.**
+**Absolute minimum font size: 18px (`var(--text-label)`) for any UI element — use `var(--text-p)` (20px) for all data/content text.**
+
+## ⚠️ Vibe Code Typography Override — MANDATORY
+
+**Root cause:** Tailwind `text-sm` (14px) is not equal to `var(--text-caption)` (16px). When Tailwind utilities and DS tokens coexist in the same file, font sizes render inconsistently across components.
+
+### Rule: Force-replace ALL Tailwind font classes in vibe-coded files
+
+| Situation | Required action |
+|-----------|----------------|
+| New vibe code (no existing CSS) | Use DS tokens only from the start |
+| Vibe code with Tailwind/hardcoded CSS | **Remove every** `text-xs/sm/base/lg/xl/2xl`, hardcoded `font-size: Xpx`, and replace with DS tokens |
+
+### Tailwind → DS Token replacement map — minimum 18px, data minimum 20px
+
+| Remove | Replace with | Final size |
+|--------|-------------|------------|
+| `text-xs`, `text-[10-12px]` | `var(--text-label)` | **18px** |
+| `text-sm`, `text-[13-15px]` | `var(--text-label)` | **18px** |
+| `text-base`, `text-[16-17px]` | `var(--text-label)` | **18px** |
+| `text-lg`, `text-[18-19px]` | `var(--text-label)` | 18px |
+| `text-xl`, `text-[20-22px]` | `var(--text-p)` | 20px |
+| `text-2xl`, `text-[24px]` | `var(--text-h4)` | 24px |
+| `text-3xl`, `text-[28px]` | `var(--text-h3)` | 28px |
+
+### Element defaults (when auditing vibe-coded components)
+
+| Element | Required token | Size |
+|---------|---------------|------|
+| Card/panel section title | `var(--text-p)` | 20px |
+| Card/panel description | `var(--text-p)` | **20px** |
+| Table header | `var(--text-p)` | **20px** |
+| Table cell | `var(--text-p)` | **20px** |
+| Sidebar nav item | `var(--text-p)` | **20px** |
+| Stat card label | `var(--text-p)` | **20px** |
+| Stat card value | `var(--text-h3)` or `var(--text-h4)` | 28–24px |
+| Badge / tag | `var(--text-label)` | **18px** |
+| Tooltip / helper | `var(--text-label)` | **18px** |
 
 ## Color Tokens
 ```css
@@ -101,6 +138,42 @@ import {
 ```
 
 FeaturePageScaffold layout types: `"list" | "detail" | "settings" | "wizard" | "dashboard" | "form" | "report"`
+
+## Background Token Standard — MANDATORY
+
+| Surface | Token | Value |
+|---------|-------|-------|
+| Page / content body | `var(--background)` | `#F9FAFB` Gray-50 |
+| Card / panel / sidebar | `var(--card)` | `#FFFFFF` white |
+| Muted section bg | `var(--muted)` | `#F3F4F6` Gray-100 |
+
+### Rules
+
+- `var(--background)` is the single source of truth for page/content body — same value for ALL brands
+- Brand theming (`[data-product]`) only overrides `--primary`, `--sidebar-accent`, button tokens — **never `--background`**
+- **NEVER** hardcode page background: no `#f9fafb`, `#f3f4f6`, brand-tinted colors (e.g. `#FFF7F0`), `var(--bg-page)`, or `var(--bg-surface)` on content areas
+- **NEVER** set `background` / `bg-*` on `<main>` or page root wrappers inside AppShell — inherit from AppShell's `bg-[var(--background)]`
+- `var(--bg-page)` and `var(--bg-surface)` are deprecated aliases — replace with `var(--background)` and `var(--card)`
+
+### Correct pattern
+
+```tsx
+// ✅ AppShell handles background — do nothing in page content
+<AppShell product={sellsukiBrandConfig} ...>
+  <FeaturePageScaffold layout="list" ...>
+    {/* NO bg class on this wrapper */}
+    <div className="space-y-4">
+      {/* Cards use bg-card (white) — contrast against body Gray-50 */}
+      <Card className="bg-card border border-border"> ... </Card>
+    </div>
+  </FeaturePageScaffold>
+</AppShell>
+
+// ❌ WRONG — never do this
+<main style={{ background: "#FFF7F0" }}>   {/* brand-tinted hardcode */}
+<main style={{ background: "var(--bg-page, #f3f4f6)" }}>  {/* deprecated token + wrong shade */}
+<div className="bg-white">  {/* overrides Gray-50 body */}
+```
 
 ## Button Rules
 | Variant | Use |

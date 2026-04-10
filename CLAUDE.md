@@ -38,8 +38,8 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 | H2 | `40px` `var(--text-h2)` | Page section titles |
 | H3 | `28px` `var(--text-h3)` | Card/modal headers |
 | H4 | `24px` `var(--text-h4)` | Sub-section headers |
-| Body (P) | `20px` `var(--text-p)` | Default body/paragraph text |
-| Label | `18px` `var(--text-label)` | Form labels, UI labels, helper text |
+| Body (P) / Section title | `20px` `var(--text-p)` | Body text **and** card/panel section titles (e.g. "Shipments ล่าสุด") |
+| Label | `18px` `var(--text-label)` | Form labels, UI labels, descriptions, table subtitles |
 | Button | `18px` `var(--text-button)` | Buttons, tabs — weight 600 |
 | Badge (sm/md) | `16px` `var(--text-caption)` | Badges — weight 400, never semibold |
 | Badge (lg) | `18px` `var(--text-label)` | Large badges — weight 400, never semibold |
@@ -81,6 +81,20 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 - Default: `variant="primary" size="md"`
 - **Max 1 primary button per view** — rest use secondary/outline/ghost
 
+## Background Token Standard
+
+| Surface | Token | Value | Usage |
+|---------|-------|-------|-------|
+| Page / content body | `var(--background)` | `#F9FAFB` Gray-50 | AppShell content area, page root |
+| Card / panel / sidebar | `var(--card)` / `bg-card` | `#FFFFFF` | White elevated surface |
+| Muted section | `var(--muted)` | `#F3F4F6` Gray-100 | Table header bg, subtle dividers |
+
+**Rules:**
+- `var(--background)` is the **only** token for page/content body — applies to ALL brands via `[data-product]` inheritance
+- No brand overrides `--background` — brand theming only changes `--primary`, `--sidebar-accent`, and button tokens
+- Never hardcode `#f3f4f6`, `#f9fafb`, or any tinted brand color as page background
+- Never set `background` on content wrappers, `<main>`, or page roots inside AppShell — let it inherit from AppShell's `bg-[var(--background)]`
+
 ## DO
 
 1. Always import CSS first: `import "@uxuissk/design-system/styles.css"`
@@ -103,7 +117,50 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 7. Don't use `<h1>` for page titles in docs/showcase — use `<h2>` (40px) instead
 8. Don't hardcode font sizes — always use `var(--text-h1)` through `var(--text-button)` tokens
 9. Don't wrap AppShell children in `max-w-*` containers — `<main>` fills `flex-1`, content width is managed by the shell
-10. Don't use `var(--text-caption)` for data/content text — use `var(--text-label)` (18px minimum for data)
+10. Don't use `var(--text-caption)` or `var(--text-label)` for data/content text — **minimum for data is `var(--text-p)` (20px)**
+11. Don't use `var(--text-caption)` (16px) for any UI element — **absolute minimum is `var(--text-label)` (18px)**
+12. **Don't mix Tailwind text-* utilities with DS token classes** — Tailwind `text-sm/xs/base/lg` renders at different sizes than DS tokens even with the same label; mixing causes inconsistent display
+13. **Don't set background on content wrappers inside AppShell** — never use `bg-white`, `bg-gray-*`, `var(--bg-page)`, or any hardcoded color on `<main>` or page root; let `var(--background)` inherit from AppShell
+14. **Don't use `var(--bg-page)` or `var(--bg-surface)`** — deprecated aliases; use `var(--background)` and `var(--card)` respectively
+
+## ⚠️ Vibe Code Typography Override (MANDATORY)
+
+This rule applies whenever you receive vibe-coded UI that already has design CSS attached.
+
+**The problem:** Tailwind `text-sm` (14px) ≠ `var(--text-caption)` (16px). When Tailwind utility classes coexist with DS token classes, font sizes render inconsistently across components.
+
+**The rule:**
+
+| Situation | Action |
+|-----------|--------|
+| New vibe code (no existing CSS) | Use DS tokens from the start — `var(--text-p)`, `var(--text-label)`, etc. |
+| Vibe code with existing Tailwind/CSS | **Force-replace ALL font classes** — remove every `text-sm`, `text-xs`, `text-base`, `text-lg`, `text-xl`, `text-2xl`, hardcoded `font-size: Xpx`, and replace with correct DS token |
+
+**Replacement map (Tailwind → DS token) — minimum 18px, data minimum 20px:**
+
+| Remove | Replace with | Size |
+|--------|-------------|------|
+| `text-xs`, `text-[10px]`–`text-[12px]` | `var(--text-label)` | **18px** |
+| `text-sm`, `text-[13px]`–`text-[15px]` | `var(--text-label)` | **18px** |
+| `text-base`, `text-[16px]`, `text-[17px]` | `var(--text-label)` | **18px** |
+| `text-lg`, `text-[18px]`, `text-[19px]` | `var(--text-label)` | 18px |
+| `text-xl`, `text-[20px]`–`text-[22px]` | `var(--text-p)` | 20px |
+| `text-2xl`, `text-[24px]` | `var(--text-h4)` | 24px |
+| `text-3xl`, `text-[28px]` | `var(--text-h3)` | 28px |
+
+**Element-level defaults (when no specific size is set):**
+
+| Element | Token | Size |
+|---------|-------|------|
+| Card/panel section title (e.g. "Shipments ล่าสุด") | `var(--text-p)` | 20px |
+| Card/panel description/subtitle | `var(--text-p)` | **20px** |
+| Table header | `var(--text-p)` | **20px** |
+| Table cell data | `var(--text-p)` | **20px** |
+| Sidebar nav item | `var(--text-p)` | **20px** |
+| Stat card label | `var(--text-p)` | **20px** |
+| Stat card value | `var(--text-h3)` or `var(--text-h4)` | 28–24px |
+| Badge / tag | `var(--text-label)` | **18px** |
+| Tooltip / helper text | `var(--text-label)` | **18px** |
 
 ## Layout Pattern — AppShell (preferred)
 

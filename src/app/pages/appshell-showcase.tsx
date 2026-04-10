@@ -2,36 +2,42 @@ import React, { useState } from "react";
 import {
   Layers, ShoppingCart, Package, BarChart3, Settings, Users, Plus,
   Briefcase, Building2, HelpCircle, FileText, Boxes,
+  Truck, MapPin, Clock, Calendar, Globe, RefreshCw, CreditCard, QrCode, Wallet, UserCheck,
 } from "lucide-react";
 import { PageHeader, Section, DemoBox, APITable, fontLabel, fontLabelBold, smallLabel, btnStyle } from "./_showcase-factory";
 import { AppShellSkeleton } from "../../lib/shell/AppShell";
 import { FeaturePageScaffold, ScaffoldKPIRow, ScaffoldSection } from "../../lib/shell/FeaturePageScaffold";
-import { sellsukiBrandConfig, patonaBrandConfig } from "../../lib/types/shell";
+import {
+  sellsukiBrandConfig, patonaBrandConfig, shipmunkBrandConfig,
+  akitaBrandConfig, oc2plusBrandConfig, sellsukiPayBrandConfig,
+} from "../../lib/types/shell";
 import { DSButton } from "../../lib/components/ds-button";
 import { Badge } from "../../lib/components/ds-badge";
 import { TopNavbar } from "../../lib/components/ds-topnavbar";
 import { Sidebar } from "../../lib/components/ds-sidebar";
-import SellsukiFull from "../../imports/SellsukiFull";
 import SellsukiIcon from "../../imports/SellsukiIcon";
 import PatonaIcon from "../../imports/PatonaIcon";
-import PatonaFull from "../../imports/PatonaFull";
+import ShipmunkIcon from "../../imports/ShipmunkIcon";
+import AkitaIcon from "../../imports/AkitaIcon";
+import Oc2plusIcon from "../../imports/Oc2plusIcon";
+import SellsukiPayIcon from "../../imports/SellsukiPayIcon";
 
-// ─── Nav groups for demo ──────────────────────────────────────────────────────
+// ─── Nav groups per brand ─────────────────────────────────────────────────────
 
 const SSK_GROUPS = [
   {
     label: "ร้านค้า",
     items: [
-      { id: "orders", label: "ออเดอร์", icon: <ShoppingCart size={18} />, badge: "12" as string | number },
-      { id: "products", label: "สินค้า", icon: <Package size={18} /> },
-      { id: "customers", label: "ลูกค้า", icon: <Users size={18} /> },
+      { id: "orders",    label: "ออเดอร์",   icon: <ShoppingCart size={18} />, badge: "12" as string | number },
+      { id: "products",  label: "สินค้า",    icon: <Package size={18} /> },
+      { id: "customers", label: "ลูกค้า",    icon: <Users size={18} /> },
     ],
   },
   {
     label: "วิเคราะห์",
     items: [
-      { id: "analytics", label: "ภาพรวม", icon: <BarChart3 size={18} /> },
-      { id: "inventory", label: "สต็อก", icon: <Boxes size={18} /> },
+      { id: "analytics", label: "ภาพรวม",   icon: <BarChart3 size={18} /> },
+      { id: "inventory", label: "สต็อก",    icon: <Boxes size={18} /> },
     ],
   },
 ];
@@ -40,169 +46,382 @@ const PATONA_GROUPS = [
   {
     label: "งาน",
     items: [
-      { id: "jobs", label: "งานทั้งหมด", icon: <Briefcase size={18} />, badge: "3" as string | number },
+      { id: "jobs",     label: "งานทั้งหมด", icon: <Briefcase size={18} />, badge: "3" as string | number },
       { id: "partners", label: "พาร์ทเนอร์", icon: <Building2 size={18} /> },
     ],
   },
   {
     label: "วิเคราะห์",
     items: [
-      { id: "reports", label: "รายงาน", icon: <BarChart3 size={18} /> },
-      { id: "documents", label: "เอกสาร", icon: <FileText size={18} /> },
+      { id: "reports",   label: "รายงาน",   icon: <BarChart3 size={18} /> },
+      { id: "documents", label: "เอกสาร",   icon: <FileText size={18} /> },
+    ],
+  },
+];
+
+const SHIPMUNK_GROUPS = [
+  {
+    label: "จัดส่ง",
+    items: [
+      { id: "shipments", label: "พัสดุทั้งหมด", icon: <Truck size={18} />, badge: "8" as string | number },
+      { id: "tracking",  label: "ติดตามพัสดุ",  icon: <MapPin size={18} /> },
+      { id: "couriers",  label: "ขนส่ง",        icon: <Package size={18} /> },
+    ],
+  },
+  {
+    label: "รายงาน",
+    items: [
+      { id: "ship-stat", label: "สถิติการส่ง",  icon: <BarChart3 size={18} /> },
+      { id: "ship-cost", label: "ค่าใช้จ่าย",   icon: <FileText size={18} /> },
+    ],
+  },
+];
+
+const AKITA_GROUPS = [
+  {
+    label: "HR",
+    items: [
+      { id: "employees",  label: "พนักงาน",   icon: <Users size={18} />, badge: "48" as string | number },
+      { id: "attendance", label: "เข้างาน",   icon: <Clock size={18} /> },
+      { id: "leaves",     label: "ลาหยุด",    icon: <Calendar size={18} /> },
+    ],
+  },
+  {
+    label: "การเงิน",
+    items: [
+      { id: "payroll",  label: "เงินเดือน",   icon: <Wallet size={18} /> },
+      { id: "hr-report",label: "รายงาน HR",   icon: <BarChart3 size={18} /> },
+    ],
+  },
+];
+
+const OC2PLUS_GROUPS = [
+  {
+    label: "ช่องทางขาย",
+    items: [
+      { id: "channels",  label: "ทุกช่องทาง",   icon: <Globe size={18} />, badge: "3" as string | number },
+      { id: "listings",  label: "สินค้า listing", icon: <Package size={18} /> },
+      { id: "oc2-sync",  label: "ซิงค์",         icon: <RefreshCw size={18} /> },
+    ],
+  },
+  {
+    label: "วิเคราะห์",
+    items: [
+      { id: "oc2-orders", label: "ออเดอร์รวม",  icon: <ShoppingCart size={18} /> },
+      { id: "oc2-report", label: "รายงาน",       icon: <BarChart3 size={18} /> },
+    ],
+  },
+];
+
+const SELLSUKIPAY_GROUPS = [
+  {
+    label: "ชำระเงิน",
+    items: [
+      { id: "pay-overview", label: "ภาพรวม",       icon: <CreditCard size={18} />, badge: "5" as string | number },
+      { id: "pay-txn",      label: "รายการชำระ",    icon: <FileText size={18} /> },
+      { id: "pay-qr",       label: "QR Payment",    icon: <QrCode size={18} /> },
+    ],
+  },
+  {
+    label: "การเงิน",
+    items: [
+      { id: "pay-payout",  label: "ยอดโอน",        icon: <Wallet size={18} /> },
+      { id: "pay-history", label: "ประวัติ",         icon: <BarChart3 size={18} /> },
     ],
   },
 ];
 
 const UTILITY_ITEMS = [
-  { id: "help", label: "ช่วยเหลือ", icon: <HelpCircle size={18} /> },
+  { id: "help",      label: "ช่วยเหลือ",  icon: <HelpCircle size={18} /> },
   { id: "settings2", label: "ตั้งค่าระบบ", icon: <Settings size={18} /> },
 ];
 
-// ─── Content mocks ────────────────────────────────────────────────────────────
+// ─── Content pages per brand ──────────────────────────────────────────────────
 
+const H4 = { fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: 700 } as React.CSSProperties;
+const H3VAL = { fontFamily: "var(--font-label)", fontSize: "var(--text-h3)", fontWeight: 700 } as React.CSSProperties;
+
+function KPIGrid({ cols = 3, items }: { cols?: number; items: { label: string; value: string; color: string }[] }) {
+  return (
+    <div className={`grid grid-cols-${cols} gap-3`}>
+      {items.map((s) => (
+        <div key={s.label} className="p-3 rounded-[var(--radius-md)] bg-card border border-border">
+          <div style={smallLabel} className="text-muted-foreground">{s.label}</div>
+          <div style={{ ...H3VAL, color: s.color }}>{s.value}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function TableMock({ headers, rows, primaryCol = 0 }: { headers: string[]; rows: string[][]; primaryCol?: number }) {
+  return (
+    <div className="rounded-[var(--radius-md)] bg-card border border-border overflow-hidden">
+      <div className="px-4 py-2.5 bg-muted/30 border-b border-border flex gap-4">
+        {headers.map((h) => <div key={h} style={smallLabel} className="text-muted-foreground flex-1">{h}</div>)}
+      </div>
+      {rows.map((row, i) => (
+        <div key={i} className="px-4 py-2.5 border-b border-border last:border-0 flex gap-4 items-center hover:bg-muted/20 transition-colors">
+          {row.map((cell, j) => (
+            <div key={j} style={fontLabel} className={`flex-1 ${j === primaryCol ? "text-primary font-medium" : "text-foreground"}`}>{cell}</div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PageTop({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <div className="flex items-center justify-between">
+      <div>
+        <div style={H4} className="text-foreground">{title}</div>
+        <div style={smallLabel} className="text-muted-foreground">{subtitle}</div>
+      </div>
+      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-md)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>
+        <Plus size={14} /><span>สร้างใหม่</span>
+      </div>
+    </div>
+  );
+}
+
+// Sellsuki — e-commerce order management
 function OrdersPage() {
   return (
     <div className="p-5 space-y-4">
-      {/* Page header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: 700 }} className="text-foreground">ออเดอร์</div>
-          <div style={smallLabel} className="text-muted-foreground">จัดการออเดอร์ทั้งหมด</div>
-        </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-md)] bg-primary text-primary-foreground cursor-pointer" style={btnStyle}>
-          <Plus size={14} /><span>สร้างออเดอร์</span>
-        </div>
-      </div>
-      {/* KPIs */}
-      <div className="grid grid-cols-3 gap-3">
-        {[
-          { label: "ออเดอร์วันนี้", value: "284", color: "var(--chart-1)" },
-          { label: "รอดำเนินการ", value: "47", color: "var(--chart-5)" },
-          { label: "รายได้รวม", value: "฿284K", color: "var(--chart-2)" },
-        ].map((s) => (
-          <div key={s.label} className="p-3 rounded-[var(--radius-md)] bg-card border border-border">
-            <div style={smallLabel} className="text-muted-foreground">{s.label}</div>
-            <div style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h3)", fontWeight: 700, color: s.color }}>{s.value}</div>
-          </div>
-        ))}
-      </div>
-      {/* Table mock */}
-      <div className="rounded-[var(--radius-md)] bg-card border border-border overflow-hidden">
-        <div className="px-4 py-2.5 bg-muted/30 border-b border-border flex gap-4">
-          {["#", "ลูกค้า", "สินค้า", "สถานะ"].map((h) => (
-            <div key={h} style={smallLabel} className="text-muted-foreground flex-1">{h}</div>
-          ))}
-        </div>
-        {[
-          ["#1001", "กัญญา ม.", "สินค้า A x2", "ชำระแล้ว"],
-          ["#1002", "สมชาย ว.", "สินค้า B x1", "รอจัดส่ง"],
+      <PageTop title="ออเดอร์" subtitle="จัดการออเดอร์ทั้งหมด" />
+      <KPIGrid cols={3} items={[
+        { label: "ออเดอร์วันนี้", value: "284",   color: "var(--chart-1)" },
+        { label: "รอดำเนินการ",   value: "47",    color: "var(--chart-5)" },
+        { label: "รายได้รวม",     value: "฿284K", color: "var(--chart-2)" },
+      ]} />
+      <TableMock
+        headers={["#", "ลูกค้า", "สินค้า", "สถานะ"]}
+        rows={[
+          ["#1001", "กัญญา ม.",    "สินค้า A x2", "ชำระแล้ว"],
+          ["#1002", "สมชาย ว.",    "สินค้า B x1", "รอจัดส่ง"],
           ["#1003", "พรทิพย์ ส.", "สินค้า C x5", "กำลังส่ง"],
-        ].map((row, i) => (
-          <div key={i} className="px-4 py-2.5 border-b border-border last:border-0 flex gap-4 items-center hover:bg-muted/20 transition-colors">
-            {row.map((cell, j) => (
-              <div key={j} style={fontLabel} className={`flex-1 ${j === 0 ? "text-primary font-medium" : "text-foreground"}`}>{cell}</div>
-            ))}
-          </div>
-        ))}
-      </div>
+        ]}
+      />
     </div>
   );
 }
 
+// Patona — freelance job & partner management
 function JobsPage() {
   return (
     <div className="p-5 space-y-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <div style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h4)", fontWeight: 700 }} className="text-foreground">งานทั้งหมด</div>
-          <div style={smallLabel} className="text-muted-foreground">จัดการงานและ timeline</div>
-        </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-md)] cursor-pointer" style={{ ...btnStyle, background: "#EC5E2A", color: "white" }}>
-          <Plus size={14} /><span>สร้างงาน</span>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        {[
-          { label: "งานทั้งหมด", value: "142", color: "#EC5E2A" },
-          { label: "กำลังดำเนินการ", value: "23", color: "#F07A52" },
-        ].map((s) => (
-          <div key={s.label} className="p-3 rounded-[var(--radius-md)] bg-card border border-border">
-            <div style={smallLabel} className="text-muted-foreground">{s.label}</div>
-            <div style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-h3)", fontWeight: 700, color: s.color }}>{s.value}</div>
-          </div>
-        ))}
-      </div>
-      <div className="rounded-[var(--radius-md)] bg-card border border-border overflow-hidden">
-        {[
+      <PageTop title="งานทั้งหมด" subtitle="จัดการงานและ timeline" />
+      <KPIGrid cols={2} items={[
+        { label: "งานทั้งหมด",    value: "142", color: "var(--primary)" },
+        { label: "กำลังดำเนินการ", value: "23",  color: "var(--primary)" },
+      ]} />
+      <TableMock
+        headers={["งาน", "พาร์ทเนอร์", "สถานะ"]}
+        rows={[
           ["งาน A-001", "พาร์ทเนอร์ Alpha", "กำลังดำเนินการ"],
-          ["งาน A-002", "พาร์ทเนอร์ Beta", "รอดำเนินการ"],
+          ["งาน A-002", "พาร์ทเนอร์ Beta",  "รอดำเนินการ"],
           ["งาน A-003", "พาร์ทเนอร์ Gamma", "เสร็จแล้ว"],
-        ].map((row, i) => (
-          <div key={i} className="px-4 py-3 border-b border-border last:border-0 flex gap-4 items-center hover:bg-muted/20 transition-colors">
-            <div style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)", fontWeight: 600, color: "#EC5E2A" }} className="flex-1">{row[0]}</div>
-            <div style={fontLabel} className="flex-1 text-foreground">{row[1]}</div>
-            <div style={smallLabel} className="text-muted-foreground">{row[2]}</div>
-          </div>
-        ))}
-      </div>
+        ]}
+      />
     </div>
   );
 }
 
-// ─── MiniShell — scaled live AppShell preview ────────────────────────────────
-
-type ProductId = "sellsuki" | "patona";
-
-interface MiniShellProps {
-  product: ProductId;
+// Shipmunk — logistics & parcel tracking
+function ShipmentsPage() {
+  return (
+    <div className="p-5 space-y-4">
+      <PageTop title="พัสดุทั้งหมด" subtitle="ติดตามสถานะและจัดการการจัดส่ง" />
+      <KPIGrid cols={2} items={[
+        { label: "พัสดุวันนี้",  value: "847", color: "var(--primary)" },
+        { label: "กำลังส่ง",    value: "312", color: "var(--chart-1)" },
+        { label: "จัดส่งแล้ว", value: "535", color: "var(--chart-2)" },
+        { label: "รอรับสินค้า", value: "28",  color: "var(--chart-5)" },
+      ]} />
+      <TableMock
+        headers={["เลขพัสดุ", "ลูกค้า", "ขนส่ง", "สถานะ"]}
+        rows={[
+          ["SHIP-8801", "กัญญา ม.",   "KERRY",  "กำลังส่ง"],
+          ["SHIP-8802", "สมชาย ว.",   "FLASH",  "รับแล้ว"],
+          ["SHIP-8803", "พรทิพย์ ส.", "J&T",    "รอรับ"],
+        ]}
+      />
+    </div>
+  );
 }
 
+// Akita — HR & employee management
+function EmployeesPage() {
+  return (
+    <div className="p-5 space-y-4">
+      <PageTop title="พนักงาน" subtitle="จัดการทีมและตรวจสอบการเข้างาน" />
+      <KPIGrid cols={2} items={[
+        { label: "พนักงานทั้งหมด", value: "48", color: "var(--primary)" },
+        { label: "เข้างานวันนี้",  value: "42", color: "var(--chart-2)" },
+        { label: "ลาวันนี้",       value: "3",  color: "var(--chart-5)" },
+        { label: "ทำ OT",          value: "8",  color: "var(--chart-1)" },
+      ]} />
+      <TableMock
+        headers={["ชื่อ", "ตำแหน่ง", "สถานะวันนี้"]}
+        rows={[
+          ["สมชาย ก.",   "Developer",    "เข้างานแล้ว"],
+          ["กัญญา ม.",   "Designer",     "Work from home"],
+          ["พรทิพย์ ส.", "Product Lead", "ลาป่วย"],
+        ]}
+      />
+    </div>
+  );
+}
+
+// OC2 Plus — omnichannel & marketplace management
+function ChannelsPage() {
+  return (
+    <div className="p-5 space-y-4">
+      <PageTop title="ช่องทางขาย" subtitle="บริหาร listing และซิงค์ออเดอร์ทุกแพลตฟอร์ม" />
+      <KPIGrid cols={2} items={[
+        { label: "ช่องทาง active", value: "5",     color: "var(--primary)" },
+        { label: "ออเดอร์รวม",    value: "1,240", color: "var(--chart-1)" },
+        { label: "สินค้า active",  value: "890",   color: "var(--chart-2)" },
+        { label: "ซิงค์ล้มเหลว", value: "3",     color: "var(--chart-5)" },
+      ]} />
+      <TableMock
+        headers={["แพลตฟอร์ม", "ออเดอร์", "สถานะ"]}
+        rows={[
+          ["Shopee",       "480", "ซิงค์แล้ว"],
+          ["Lazada",       "310", "ซิงค์แล้ว"],
+          ["TikTok Shop",  "290", "ซิงค์แล้ว"],
+          ["Line Shopping","160", "รอซิงค์"],
+        ]}
+      />
+    </div>
+  );
+}
+
+// SellsukiPay — payment & settlement dashboard
+function PaymentsPage() {
+  return (
+    <div className="p-5 space-y-4">
+      <PageTop title="ภาพรวมการชำระเงิน" subtitle="ติดตามยอดรับและสถานะการโอน" />
+      <KPIGrid cols={2} items={[
+        { label: "ยอดรับวันนี้", value: "฿128K", color: "var(--primary)" },
+        { label: "รอโอน",        value: "฿45K",  color: "var(--chart-5)" },
+        { label: "โอนแล้ว",      value: "฿83K",  color: "var(--chart-2)" },
+        { label: "รายการสำเร็จ", value: "234",   color: "var(--chart-1)" },
+      ]} />
+      <TableMock
+        headers={["Ref", "ลูกค้า", "จำนวน", "สถานะ"]}
+        rows={[
+          ["PAY-5501", "กัญญา ม.",   "฿4,500", "สำเร็จ"],
+          ["PAY-5502", "สมชาย ว.",   "฿1,200", "รอโอน"],
+          ["PAY-5503", "พรทิพย์ ส.", "฿8,900", "สำเร็จ"],
+        ]}
+      />
+    </div>
+  );
+}
+
+// ─── Brand meta map ───────────────────────────────────────────────────────────
+
+type ProductId = "sellsuki" | "patona" | "shipmunk" | "akita" | "oc2plus" | "sellsukipay";
+
+const BRAND_META: Record<ProductId, {
+  color: string;
+  groups: typeof SSK_GROUPS;
+  defaultActive: string;
+  notificationCount: number;
+  userName: string;
+  ContentPage: React.ComponentType;
+  labelMap: Record<string, string>;
+}> = {
+  sellsuki: {
+    color: "#32A9FF",
+    groups: SSK_GROUPS,
+    defaultActive: "orders",
+    notificationCount: 5,
+    userName: "ณัฐกร สิริ",
+    ContentPage: OrdersPage,
+    labelMap: { orders: "ออเดอร์", products: "สินค้า", customers: "ลูกค้า", analytics: "ภาพรวม", inventory: "สต็อก" },
+  },
+  patona: {
+    color: "#EC5E2A",
+    groups: PATONA_GROUPS,
+    defaultActive: "jobs",
+    notificationCount: 3,
+    userName: "ทีม Patona",
+    ContentPage: JobsPage,
+    labelMap: { jobs: "งาน", partners: "พาร์ทเนอร์", reports: "รายงาน", documents: "เอกสาร" },
+  },
+  shipmunk: {
+    color: "#06C5F9",
+    groups: SHIPMUNK_GROUPS,
+    defaultActive: "shipments",
+    notificationCount: 8,
+    userName: "ทีม Shipmunk",
+    ContentPage: ShipmentsPage,
+    labelMap: { shipments: "พัสดุทั้งหมด", tracking: "ติดตาม", couriers: "ขนส่ง", "ship-stat": "สถิติ", "ship-cost": "ค่าใช้จ่าย" },
+  },
+  akita: {
+    color: "#1769E2",
+    groups: AKITA_GROUPS,
+    defaultActive: "employees",
+    notificationCount: 2,
+    userName: "HR Team",
+    ContentPage: EmployeesPage,
+    labelMap: { employees: "พนักงาน", attendance: "เข้างาน", leaves: "ลาหยุด", payroll: "เงินเดือน", "hr-report": "รายงาน" },
+  },
+  oc2plus: {
+    color: "#32A9FF",
+    groups: OC2PLUS_GROUPS,
+    defaultActive: "channels",
+    notificationCount: 3,
+    userName: "OC2 Admin",
+    ContentPage: ChannelsPage,
+    labelMap: { channels: "ช่องทาง", listings: "สินค้า", "oc2-sync": "ซิงค์", "oc2-orders": "ออเดอร์", "oc2-report": "รายงาน" },
+  },
+  sellsukipay: {
+    color: "#32A9FF",
+    groups: SELLSUKIPAY_GROUPS,
+    defaultActive: "pay-overview",
+    notificationCount: 5,
+    userName: "Finance Team",
+    ContentPage: PaymentsPage,
+    labelMap: { "pay-overview": "ภาพรวม", "pay-txn": "รายการ", "pay-qr": "QR", "pay-payout": "โอน", "pay-history": "ประวัติ" },
+  },
+};
+
+// ─── MiniShell — live AppShell preview ───────────────────────────────────────
+
+interface MiniShellProps { product: ProductId; }
+
 function MiniShell({ product }: MiniShellProps) {
-  const isSsk = product === "sellsuki";
-  const [activeItem, setActiveItem] = useState(isSsk ? "orders" : "jobs");
+  const meta = BRAND_META[product];
+  const config = { sellsuki: sellsukiBrandConfig, patona: patonaBrandConfig, shipmunk: shipmunkBrandConfig, akita: akitaBrandConfig, oc2plus: oc2plusBrandConfig, sellsukipay: sellsukiPayBrandConfig }[product];
+
+  const [activeItem, setActiveItem] = useState(meta.defaultActive);
   const [collapsed, setCollapsed] = useState(false);
 
-  // TopNavbar shows full logo (icon + name). Sidebar has no brand logo — nav groups only.
-  const navbarBrand = isSsk
-    ? { name: "Sellsuki", logoFull: <SellsukiFull height={40} /> }
-    : { name: "Patona", logoFull: <PatonaFull height={40} /> };
-
-  const groups = isSsk ? SSK_GROUPS : PATONA_GROUPS;
-  const bgPage = isSsk ? "var(--bg-page, #f3f4f6)" : "#FFF7F0";
-  const notificationCount = isSsk ? 5 : 3;
-  const userName = isSsk ? "ณัฐกร สิริ" : "ทีม Patona";
-  const activeLabelMap: Record<string, string> = {
-    orders: "ออเดอร์", products: "สินค้า", customers: "ลูกค้า",
-    analytics: "ภาพรวม", inventory: "สต็อก",
-    jobs: "งาน", partners: "พาร์ทเนอร์", reports: "รายงาน", documents: "เอกสาร",
-  };
-  const breadcrumbLabel = activeLabelMap[activeItem] ?? activeItem;
+  const navbarBrand = { name: config.brand.name, logoFull: config.brand.logoFull, logo: config.brand.logo };
+  const breadcrumbLabel = meta.labelMap[activeItem] ?? activeItem;
+  const { ContentPage } = meta;
 
   return (
-    <div
-      data-product={product}
-      className="flex flex-col h-full bg-background"
-      style={{ fontFamily: "var(--font-label)" }}
-    >
-      {/* TopNavbar — icon-only brand (full logo lives in sidebar header) */}
+    <div data-product={product} className="flex flex-col h-full bg-background" style={{ fontFamily: "var(--font-label)" }}>
       <div className="flex-shrink-0">
         <TopNavbar
           brand={navbarBrand}
           breadcrumbs={[{ label: "หน้าหลัก" }, { label: breadcrumbLabel }]}
           searchMode="bar"
-          notificationCount={notificationCount}
-          user={{ name: userName }}
+          notificationCount={meta.notificationCount}
+          user={{ name: meta.userName }}
           onSidebarToggle={() => setCollapsed((v) => !v)}
           onNotificationClick={() => {}}
           onUserClick={() => {}}
         />
       </div>
-
-      {/* Body */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar — no brand logo, nav groups only */}
         <Sidebar
-          groups={groups}
+          groups={meta.groups}
           activeItem={activeItem}
           onNavigate={(item) => setActiveItem(item.id)}
           collapsed={collapsed}
@@ -210,13 +429,9 @@ function MiniShell({ product }: MiniShellProps) {
           utilityItems={UTILITY_ITEMS}
           version="v0.8.4"
         />
-
-        {/* Content area */}
-        <main className="flex-1 overflow-auto" style={{ background: bgPage }}>
-          {isSsk
-            ? <OrdersPage />
-            : <JobsPage />
-          }
+        {/* background inherits from [data-product] bg-background — no override needed */}
+        <main className="flex-1 overflow-auto">
+          <ContentPage />
         </main>
       </div>
     </div>
@@ -288,32 +503,35 @@ export function AppShellShowcase() {
 
       {/* ── LIVE PREVIEW ──────────────────────────────────────────────────── */}
       <Section
-        title="Live Shell Preview — Sellsuki & Patona"
-        description="AppShell จริง — TopNavbar + Sidebar + content | คลิก hamburger เพื่อ collapse sidebar | คลิก nav item เพื่อเปลี่ยนหน้า"
+        title="Live Shell Preview — ทุก Product"
+        description="AppShell จริงของแต่ละ brand — TopNavbar + Sidebar + content ที่แตกต่างตาม service | คลิก hamburger เพื่อ collapse | คลิก nav item เพื่อเปลี่ยนหน้า"
       >
         {/* Product switcher */}
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4">
           {([
-            { id: "sellsuki" as ProductId, label: "Sellsuki", color: "var(--primary)" },
-            { id: "patona" as ProductId, label: "Patona", color: "#EC5E2A" },
-          ]).map((p) => (
+            { id: "sellsuki"    as ProductId, label: "Sellsuki",    color: "#32A9FF", icon: <SellsukiIcon size={16} /> },
+            { id: "patona"      as ProductId, label: "Patona",      color: "#EC5E2A", icon: <PatonaIcon size={16} /> },
+            { id: "shipmunk"    as ProductId, label: "Shipmunk",    color: "#06C5F9", icon: <ShipmunkIcon height={16} /> },
+            { id: "akita"       as ProductId, label: "Akita",       color: "#1769E2", icon: <AkitaIcon height={16} /> },
+            { id: "oc2plus"     as ProductId, label: "OC2 Plus",    color: "#32A9FF", icon: <Oc2plusIcon height={16} /> },
+            { id: "sellsukipay" as ProductId, label: "SellsukiPay", color: "#32A9FF", icon: <SellsukiPayIcon height={16} /> },
+          ]).map(({ id, label, color, icon }) => (
             <button
-              key={p.id}
-              onClick={() => setActiveProduct(p.id)}
-              className={`px-4 py-2 rounded-[var(--radius-md)] border transition-colors cursor-pointer flex items-center gap-2`}
+              key={id}
+              onClick={() => setActiveProduct(id)}
+              className="px-3 py-1.5 rounded-[var(--radius-md)] border transition-colors cursor-pointer flex items-center gap-2"
               style={{
                 ...btnStyle,
-                borderColor: activeProduct === p.id ? p.color : "var(--border)",
-                background: activeProduct === p.id ? `${p.color}18` : "var(--muted)",
-                color: activeProduct === p.id ? p.color : "var(--foreground)",
-                fontWeight: activeProduct === p.id ? 700 : 400,
+                borderColor: activeProduct === id ? color : "var(--border)",
+                background:  activeProduct === id ? `${color}0e` : "var(--background)",
+                color:       activeProduct === id ? color : "var(--muted-foreground)",
+                fontWeight:  activeProduct === id ? 700 : 400,
               }}
             >
-              <div
-                className="w-4 h-4 rounded-sm flex-shrink-0"
-                style={{ background: p.color }}
-              />
-              {p.label}
+              <span style={{ display: "inline-flex", width: 16, height: 16, alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden" }}>
+                {icon}
+              </span>
+              {label}
             </button>
           ))}
         </div>

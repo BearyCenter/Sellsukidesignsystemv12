@@ -77,12 +77,12 @@ export function ChartShowcase() {
             <span style={fontLabel}>Smooth curves</span>
             <button
               onClick={() => setLineSmooth((v) => !v)}
-              className="px-3 py-1 rounded-full text-sm cursor-pointer"
+              className="px-3 py-1 rounded-full cursor-pointer"
               style={{
                 background: lineSmooth ? "var(--primary)" : "var(--muted)",
                 color: lineSmooth ? "#fff" : "var(--foreground)",
                 fontFamily: "var(--font-label)",
-                fontSize: "var(--text-button)",
+                fontSize: "var(--text-label)",
               }}
             >
               {lineSmooth ? "ON" : "OFF"}

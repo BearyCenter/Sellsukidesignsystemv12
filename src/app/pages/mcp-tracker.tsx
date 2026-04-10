@@ -46,12 +46,12 @@ const fontButton = "'DB HeaventRounded', 'Noto Sans Thai', sans-serif";
 
 const f = {
   h3:    { fontFamily: fontBody,   fontSize: "var(--text-h4)",      fontWeight: 700 } as React.CSSProperties,
-  h4:    { fontFamily: fontBody,   fontSize: "var(--text-label)",   fontWeight: 600 } as React.CSSProperties,
-  label: { fontFamily: fontBody,   fontSize: "var(--text-caption)", fontWeight: 400 } as React.CSSProperties,
-  num:   { fontFamily: fontButton, fontSize: "var(--text-label)",   fontWeight: 400 } as React.CSSProperties,
-  numSm: { fontFamily: fontButton, fontSize: "var(--text-caption)", fontWeight: 400 } as React.CSSProperties,
+  h4:    { fontFamily: fontBody,   fontSize: "var(--text-p)",       fontWeight: 600 } as React.CSSProperties,
+  label: { fontFamily: fontBody,   fontSize: "var(--text-label)",   fontWeight: 400 } as React.CSSProperties,
+  num:   { fontFamily: fontButton, fontSize: "var(--text-p)",       fontWeight: 400 } as React.CSSProperties,
+  numSm: { fontFamily: fontButton, fontSize: "var(--text-label)",   fontWeight: 400 } as React.CSSProperties,
   numLg: { fontFamily: fontButton, fontSize: "var(--text-h3)",      fontWeight: 700 } as React.CSSProperties,
-  btn:   { fontFamily: fontButton, fontSize: "var(--text-caption)", fontWeight: 600 } as React.CSSProperties,
+  btn:   { fontFamily: fontButton, fontSize: "var(--text-label)", fontWeight: 600 } as React.CSSProperties,
 };
 
 // ─── Tool metadata (colours / icons) for display only ────────────────────────

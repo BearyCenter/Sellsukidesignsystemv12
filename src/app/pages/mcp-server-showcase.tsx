@@ -159,7 +159,7 @@ function CapabilityCard({ icon, title, desc, items }: { icon: React.ReactNode; t
           <span
             key={item}
             className="px-2 py-0.5 rounded-[var(--radius-sm)] bg-muted text-muted-foreground"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
           >
             {item}
           </span>
@@ -188,13 +188,13 @@ function ToolParamRow({
           onChange={(e) => onChange({ ...param, name: e.target.value })}
           placeholder="name"
           className="px-3 py-1.5 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
         />
         <select
           value={param.type}
           onChange={(e) => onChange({ ...param, type: e.target.value })}
           className="px-3 py-1.5 rounded-[var(--radius)] border border-border bg-input-background text-foreground cursor-pointer"
-          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
         >
           <option value="string">string</option>
           <option value="number">number</option>
@@ -207,7 +207,7 @@ function ToolParamRow({
           onChange={(e) => onChange({ ...param, description: e.target.value })}
           placeholder="description"
           className="px-3 py-1.5 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+          style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
         />
       </div>
       <label className="flex items-center gap-1.5 pt-2 flex-shrink-0 cursor-pointer select-none">
@@ -289,7 +289,7 @@ function ToolCard({
                 onChange={(e) => onChange({ ...tool, name: e.target.value })}
                 placeholder="e.g. get_weather"
                 className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
               />
             </div>
             <div className="space-y-1">
@@ -299,7 +299,7 @@ function ToolCard({
                 onChange={(e) => onChange({ ...tool, description: e.target.value })}
                 placeholder="e.g. Get current weather for a location"
                 className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
               />
             </div>
           </div>
@@ -369,7 +369,7 @@ function ResourceCard({
             onChange={(e) => onChange({ ...resource, name: e.target.value })}
             placeholder="e.g. user_data"
             className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
           />
         </div>
         <div className="space-y-1">
@@ -379,7 +379,7 @@ function ResourceCard({
             onChange={(e) => onChange({ ...resource, uri: e.target.value })}
             placeholder="e.g. data://users/{id}"
             className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
           />
         </div>
         <div className="space-y-1">
@@ -389,7 +389,7 @@ function ResourceCard({
             onChange={(e) => onChange({ ...resource, description: e.target.value })}
             placeholder="Describe this resource"
             className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
           />
         </div>
         <div className="space-y-1">
@@ -398,7 +398,7 @@ function ResourceCard({
             value={resource.mimeType}
             onChange={(e) => onChange({ ...resource, mimeType: e.target.value })}
             className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground cursor-pointer"
-            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+            style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
           >
             <option value="application/json">application/json</option>
             <option value="text/plain">text/plain</option>
@@ -555,7 +555,7 @@ function CodePreview({ code, title }: { code: string; title: string }) {
       >
         <div className="flex items-center gap-2">
           <Terminal size={13} style={{ color: "var(--code-func)" }} />
-          <span style={{ color: "var(--code-text)", fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}>
+          <span style={{ color: "var(--code-text)", fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-button)" }}>
             {title}
           </span>
         </div>
@@ -566,7 +566,7 @@ function CodePreview({ code, title }: { code: string; title: string }) {
             borderRadius: "var(--radius-full)",
             color: copied ? "var(--code-string)" : "var(--code-line-number)",
             fontFamily: "var(--font-button)",
-            fontSize: "var(--text-button)",
+            fontSize: "var(--text-p)",
             fontWeight: "var(--weight-button)",
             background: "var(--code-surface)",
             border: "1px solid var(--code-border)",
@@ -580,7 +580,7 @@ function CodePreview({ code, title }: { code: string; title: string }) {
         className="p-4 overflow-x-auto"
         style={{
           fontFamily: "var(--font-button)",
-          fontSize: "var(--text-button)",
+          fontSize: "var(--text-p)",
           fontWeight: "var(--weight-label)",
           lineHeight: "1.7",
           color: "var(--code-text)",
@@ -829,7 +829,7 @@ import { colors, typography, spacing } from "@uxuissk/design-tokens";`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-primary hover:underline break-all"
-                              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}
+                              style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)" }}
                             >
                               {link.url}
                             </a>
@@ -896,7 +896,7 @@ https://sellsukidesignsystemv12-zsj5.vercel.app/api/mcp
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline break-all"
-                        style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)" }}
+                        style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)" }}
                       >
                         {link.url}
                       </a>
@@ -1067,7 +1067,7 @@ Use only Tailwind CSS for styling (no npm imports). Then build:
                     value={serverName}
                     onChange={(e) => setServerName(e.target.value)}
                     className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-                    style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+                    style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
                   />
                 </div>
                 <div className="space-y-1">
@@ -1076,7 +1076,7 @@ Use only Tailwind CSS for styling (no npm imports). Then build:
                     value={serverDesc}
                     onChange={(e) => setServerDesc(e.target.value)}
                     className="w-full px-3 py-2 rounded-[var(--radius)] border border-border bg-input-background text-foreground"
-                    style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-label)" }}
+                    style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-p)", fontWeight: "var(--weight-label)" }}
                   />
                 </div>
               </div>
