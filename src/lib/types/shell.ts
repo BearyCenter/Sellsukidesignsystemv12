@@ -12,7 +12,17 @@
 
 import React from "react";
 import SellsukiFull from "../../imports/SellsukiFull";
+import SellsukiIcon from "../../imports/SellsukiIcon";
 import PatonaFull from "../../imports/PatonaFull";
+import PatonaIcon from "../../imports/PatonaIcon";
+import ShipmunkFull from "../../imports/ShipmunkFull";
+import ShipmunkIcon from "../../imports/ShipmunkIcon";
+import AkitaFull from "../../imports/AkitaFull";
+import AkitaIcon from "../../imports/AkitaIcon";
+import Oc2plusFull from "../../imports/Oc2plusFull";
+import Oc2plusIcon from "../../imports/Oc2plusIcon";
+import SellsukiPayFull from "../../imports/SellsukiPayFull";
+import SellsukiPayIcon from "../../imports/SellsukiPayIcon";
 
 /* ─── Navigation Types ───────────────────────────────────────────────────────── */
 
@@ -220,6 +230,7 @@ export const sellsukiBrandConfig: ProductBrandConfig = {
   product: "sellsuki",
   brand: {
     name: "Sellsuki",
+    logo: React.createElement(SellsukiIcon, { size: 40 }),
     logoFull: React.createElement(SellsukiFull, { height: 40 }),
     theme: "sellsuki",
   },
@@ -237,6 +248,7 @@ export const patonaBrandConfig: ProductBrandConfig = {
   product: "patona",
   brand: {
     name: "Patona",
+    logo: React.createElement(PatonaIcon, { size: 40 }),
     logoFull: React.createElement(PatonaFull, { height: 40 }),
     theme: "patona",
   },
@@ -271,8 +283,8 @@ export const shipmunkBrandConfig: ProductBrandConfig = {
   product: "shipmunk",
   brand: {
     name: "Shipmunk",
-    // logoFull only (no icon-only SVG for Shipmunk)
-    // logo / logoFull: inject SVG components in your product repo
+    logo: React.createElement(ShipmunkIcon, { height: 40 }),
+    logoFull: React.createElement(ShipmunkFull, { height: 40 }),
     theme: "shipmunk",
   },
   shell: {
@@ -289,7 +301,8 @@ export const akitaBrandConfig: ProductBrandConfig = {
   product: "akita",
   brand: {
     name: "Akita",
-    // logo / logoFull: inject SVG components in your product repo
+    logo: React.createElement(AkitaIcon, { height: 40 }),
+    logoFull: React.createElement(AkitaFull, { height: 40 }),
     theme: "akita",
   },
   shell: {
@@ -305,8 +318,9 @@ export const akitaBrandConfig: ProductBrandConfig = {
 export const oc2plusBrandConfig: ProductBrandConfig = {
   product: "oc2plus",
   brand: {
-    name: "Oc2plus",
-    // logo / logoFull: inject SVG components in your product repo
+    name: "OC2 Plus",
+    logo: React.createElement(Oc2plusIcon, { height: 40 }),
+    logoFull: React.createElement(Oc2plusFull, { height: 40 }),
     theme: "oc2plus",
   },
   shell: {
@@ -323,7 +337,8 @@ export const sellsukiPayBrandConfig: ProductBrandConfig = {
   product: "sellsukipay",
   brand: {
     name: "SellsukiPay",
-    // logo / logoFull: inject SVG components in your product repo
+    logo: React.createElement(SellsukiPayIcon, { height: 40 }),
+    logoFull: React.createElement(SellsukiPayFull, { height: 40 }),
     theme: "sellsukipay",
   },
   shell: {
