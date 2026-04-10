@@ -356,28 +356,25 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
             }}
           />
 
-          {/* Upgrade badge top-right */}
-          <div
-            style={{
-              position: "absolute",
-              top: "14px",
-              right: "14px",
-              padding: "3px 10px",
-              borderRadius: "99px",
-              background: `${accent21}18`,
-              border: `1px solid ${accent21}40`,
-              fontFamily: "var(--font-label)",
-              fontSize: "var(--text-label)",
-              fontWeight: 700,
-              color: accent21,
-            }}
-          >
-            Upgrade
-          </div>
-
-          {/* Version badge */}
+          {/* Version badge row */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            {pill(accent21, "Design System")}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              {pill(accent21, "Design System")}
+              <span
+                style={{
+                  padding: "3px 10px",
+                  borderRadius: "99px",
+                  background: `${accent21}18`,
+                  border: `1px solid ${accent21}40`,
+                  fontFamily: "var(--font-label)",
+                  fontSize: "var(--text-label)",
+                  fontWeight: 700,
+                  color: accent21,
+                }}
+              >
+                Upgrade
+              </span>
+            </div>
             <span
               style={{
                 fontFamily: "var(--font-label)",
