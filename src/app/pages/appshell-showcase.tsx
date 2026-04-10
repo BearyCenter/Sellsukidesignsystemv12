@@ -585,7 +585,7 @@ const myBrand: ProductBrandConfig = {
               <div className="font-semibold text-foreground" style={fontLabelBold}>sellsukiBrandConfig</div>
               <div className="text-muted-foreground truncate" style={smallLabel}>Primary: sky-blue #32A9FF</div>
             </div>
-            <Badge variant="primary">Active</Badge>
+            <Badge variant="default">Active</Badge>
           </div>
           {/* Patona */}
           <div className="p-4 rounded-[var(--radius-md)] border border-border bg-card flex items-center gap-4">
@@ -707,7 +707,7 @@ const myBrand: ProductBrandConfig = {
                 <Badge variant="secondary">เดือนนี้</Badge>
               </div>
             }
-            chart={
+            charts={
               <div className="h-40 flex items-center justify-center bg-muted/20 rounded-[var(--radius-md)] border border-dashed border-border text-muted-foreground" style={fontLabel}>
                 [LineChart / AreaChart]
               </div>

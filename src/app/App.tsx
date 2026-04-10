@@ -55,6 +55,7 @@ import {
   Activity,
   Clock,
   Layers,
+  ArrowLeft,
 } from "lucide-react";
 import SSKIcon from "../imports/Icon";
 import SellsukiIcon from "../imports/SellsukiIcon";
@@ -131,6 +132,8 @@ import { RepeatableFieldShowcase } from "./pages/repeatablefield-showcase";
 import { RichTextEditorShowcase } from "./pages/richtexteditor-showcase";
 import { ImageGalleryShowcase } from "./pages/imagegallery-showcase";
 import { AppShellShowcase } from "./pages/appshell-showcase";
+import { Ds21RoadmapPage } from "./pages/ds21-roadmap";
+import { EntryPage, type DsMode } from "./pages/entry-page";
 
 // ─── Sidebar Navigation Types ─────────────────────────────────────────────────
 
@@ -199,7 +202,8 @@ type PageId =
   | "repeatablefield"
   | "richtexteditor"
   | "imagegallery"
-  | "appshell";
+  | "appshell"
+  | "ds21-roadmap";
 
 interface SidebarItem {
   id: PageId;
@@ -328,6 +332,20 @@ function buildSidebarGroups(t: (key: string) => string): SidebarGroup[] {
   ];
 }
 
+function buildSidebarGroups21(t: (key: string) => string): SidebarGroup[] {
+  const base = buildSidebarGroups(t);
+  // Inject DS 2.1 Roadmap page at top of foundation group
+  return [
+    {
+      label: "DS 2.1",
+      items: [
+        { id: "ds21-roadmap", label: "Upgrade Roadmap", icon: <Layers size={16} />, badge: "Plan" },
+      ],
+    },
+    ...base,
+  ];
+}
+
 // ─── Page Map ─────────────────────────────────────────────────────────────────
 
 const PAGE_MAP: Record<PageId, React.ComponentType> = {
@@ -396,25 +414,85 @@ const PAGE_MAP: Record<PageId, React.ComponentType> = {
   richtexteditor: RichTextEditorShowcase,
   imagegallery: ImageGalleryShowcase,
   appshell: AppShellShowcase,
+  "ds21-roadmap": Ds21RoadmapPage,
 };
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [dsMode, setDsMode] = useState<DsMode | null>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("ssk-ds-mode");
+      if (saved === "2.0" || saved === "2.1") return saved;
+    }
+    return null;
+  });
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("ssk-dark-mode");
+      if (saved !== null) return saved === "true";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return false;
+  });
+
+  const handleSelectMode = (mode: DsMode) => {
+    localStorage.setItem("ssk-ds-mode", mode);
+    setDsMode(mode);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      localStorage.setItem("ssk-dark-mode", String(next));
+      return next;
+    });
+  };
+
+  if (!dsMode) {
+    return (
+      <div className={darkMode ? "dark" : ""}>
+        <EntryPage
+          onSelectMode={handleSelectMode}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
+      </div>
+    );
+  }
+
   return (
     <I18nProvider>
-      <AppInner />
+      <AppInner
+        dsMode={dsMode}
+        onExitMode={() => {
+          localStorage.removeItem("ssk-ds-mode");
+          setDsMode(null);
+        }}
+        externalDarkMode={darkMode}
+        externalToggleDarkMode={toggleDarkMode}
+      />
     </I18nProvider>
   );
 }
 
-function AppInner() {
+interface AppInnerProps {
+  dsMode: DsMode;
+  onExitMode: () => void;
+  externalDarkMode: boolean;
+  externalToggleDarkMode: () => void;
+}
+
+function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode }: AppInnerProps) {
   const { t, lang, toggleLang } = useI18n();
-  const [activePage, setActivePage] = useState<PageId>("getting-started");
+  const defaultPage: PageId = dsMode === "2.1" ? "ds21-roadmap" : "getting-started";
+  const [activePage, setActivePage] = useState<PageId>(defaultPage);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(200);
   const isResizing = useRef(false);
+  const darkMode = externalDarkMode;
+  const toggleDarkMode = externalToggleDarkMode;
 
   const startResize = useCallback((e: React.MouseEvent) => {
     if (sidebarCollapsed) return;
@@ -438,23 +516,7 @@ function AppInner() {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
   }, [sidebarCollapsed]);
-  const sidebarGroups = buildSidebarGroups(t);
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("ssk-dark-mode");
-      if (saved !== null) return saved === "true";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return false;
-  });
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const next = !prev;
-      localStorage.setItem("ssk-dark-mode", String(next));
-      return next;
-    });
-  };
+  const sidebarGroups = dsMode === "2.1" ? buildSidebarGroups21(t) : buildSidebarGroups(t);
 
   // Build searchable items from sidebar groups
   const searchItems: SearchableItem[] = sidebarGroups.flatMap((group) =>
@@ -509,11 +571,11 @@ function AppInner() {
                     className="px-1.5 rounded-[var(--radius-sm)] flex-shrink-0"
                     style={{
                       fontFamily: "var(--font-button)", fontSize: "18px", fontWeight: 700, lineHeight: "20px",
-                      background: "rgba(50, 169, 255, 0.13)",
-                      color: "var(--primary)",
+                      background: dsMode === "2.1" ? "rgba(124, 58, 237, 0.13)" : "rgba(50, 169, 255, 0.13)",
+                      color: dsMode === "2.1" ? "#7c3aed" : "var(--primary)",
                     }}
                   >
-                    2.0
+                    {dsMode}
                   </span>
                 </div>
               )}
@@ -595,6 +657,28 @@ function AppInner() {
 
         {/* Sidebar Footer — clean, no collapse button */}
         <div className={`${sidebarCollapsed ? "px-1.5" : "px-3"} py-3 border-t border-sidebar-border`}>
+          {/* Back to entry selector */}
+          {!sidebarCollapsed && (
+            <button
+              onClick={onExitMode}
+              className="w-full flex items-center gap-2 px-2 py-1.5 rounded-[var(--radius-md)] text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors cursor-pointer mb-2"
+              style={{ fontFamily: "var(--font-label)", fontSize: "var(--text-label)" }}
+              title="กลับไปเลือก version"
+            >
+              <ArrowLeft size={14} className="flex-shrink-0" />
+              <span className="truncate">เปลี่ยน version</span>
+              <span
+                className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)] flex-shrink-0"
+                style={{
+                  fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: 700, lineHeight: 1,
+                  background: dsMode === "2.1" ? "rgba(124,58,237,0.13)" : "rgba(50,169,255,0.13)",
+                  color: dsMode === "2.1" ? "#7c3aed" : "var(--primary)",
+                }}
+              >
+                {dsMode}
+              </span>
+            </button>
+          )}
           {!sidebarCollapsed ? (
             <div className="flex items-center justify-between px-1">
               <span
