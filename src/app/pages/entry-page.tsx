@@ -1,6 +1,5 @@
 import { useState } from "react";
 import SellsukiFull from "../../imports/SellsukiFull";
-import SellsukiIcon from "../../imports/SellsukiIcon";
 import {
   ArrowRight,
   Zap,
@@ -76,7 +75,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
   const [hovering, setHovering] = useState<DsMode | null>(null);
 
   const accent20 = "#32a9ff";
-  const accent21 = "#7c3aed";
+  const accent21 = "#EC5E2A";
 
   const features20: FeatureRow[] = [
     { icon: <Package size={18} />, text: "React · Vite 6 · TypeScript" },
@@ -166,7 +165,6 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
       {/* Header */}
       <div style={{ textAlign: "center", marginBottom: "48px", display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "4px" }}>
-          <SellsukiIcon size={40} />
           <SellsukiFull height={36} />
         </div>
         <h1
@@ -463,7 +461,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
           textAlign: "center",
         }}
       >
-        Sellsuki Design System · UX/UI Team · 2025
+        Sellsuki Design System · UX/UI Team · 2026
       </p>
     </div>
   );

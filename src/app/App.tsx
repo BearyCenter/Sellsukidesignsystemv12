@@ -571,8 +571,8 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
                     className="px-1.5 rounded-[var(--radius-sm)] flex-shrink-0"
                     style={{
                       fontFamily: "var(--font-button)", fontSize: "18px", fontWeight: 700, lineHeight: "20px",
-                      background: dsMode === "2.1" ? "rgba(124, 58, 237, 0.13)" : "rgba(50, 169, 255, 0.13)",
-                      color: dsMode === "2.1" ? "#7c3aed" : "var(--primary)",
+                      background: dsMode === "2.1" ? "rgba(236, 94, 42, 0.13)" : "rgba(50, 169, 255, 0.13)",
+                      color: dsMode === "2.1" ? "#EC5E2A" : "var(--primary)",
                     }}
                   >
                     {dsMode}
@@ -671,8 +671,8 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
                 className="ml-auto px-1.5 py-0.5 rounded-[var(--radius-sm)] flex-shrink-0"
                 style={{
                   fontFamily: "var(--font-button)", fontSize: "var(--text-badge)", fontWeight: 700, lineHeight: 1,
-                  background: dsMode === "2.1" ? "rgba(124,58,237,0.13)" : "rgba(50,169,255,0.13)",
-                  color: dsMode === "2.1" ? "#7c3aed" : "var(--primary)",
+                  background: dsMode === "2.1" ? "rgba(236,94,42,0.13)" : "rgba(50,169,255,0.13)",
+                  color: dsMode === "2.1" ? "#EC5E2A" : "var(--primary)",
                 }}
               >
                 {dsMode}

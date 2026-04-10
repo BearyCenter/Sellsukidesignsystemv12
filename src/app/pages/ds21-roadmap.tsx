@@ -110,7 +110,7 @@ const PHASES: Phase[] = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-const ACCENT_21 = "#7c3aed";
+const ACCENT_21 = "#EC5E2A";
 const ACCENT_20 = "#32a9ff";
 
 const statusConfig: Record<PhaseStatus, { icon: React.ReactNode; label: string; color: string }> = {
