@@ -425,12 +425,12 @@
   --weight-p: 400;
 
   /* Label - Form labels, helper text, UI labels */
-  --text-label: 18px;
+  --text-label: 20px;
   --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-label: 400;
 
   /* Caption - Small captions, breadcrumbs, pagination */
-  --text-caption: 16px;
+  --text-caption: 18px;
   --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-caption: 400;
   

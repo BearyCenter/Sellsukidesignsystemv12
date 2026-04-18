@@ -431,12 +431,12 @@
   --weight-p: 400;
 
   /* Label - Form labels, helper text, captions */
-  --text-label: 18px;
+  --text-label: 20px;
   --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-label: 400;
 
   /* Caption - Fine print, UI chrome (minimum size in system) */
-  --text-caption: 16px;
+  --text-caption: 18px;
   --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
   --weight-caption: 400;
 
@@ -660,12 +660,12 @@
 [data-density="compact"] {
   --text-h1: 28px;
   --text-h2: 24px;
-  --text-h3: 20px;
-  --text-h4: 16px;
-  --text-p: 14px;
-  --text-label: 14px;
-  --text-caption: 14px;
-  --text-button: 14px;
+  --text-h3: 22px;
+  --text-h4: 20px;
+  --text-p: 20px;
+  --text-label: 20px;
+  --text-caption: 18px;
+  --text-button: 18px;
 
   /* Sync Tailwind aliases */
   --text-2xl: var(--text-h1);

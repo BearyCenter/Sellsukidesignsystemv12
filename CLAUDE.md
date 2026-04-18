@@ -39,11 +39,11 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 | H3 | `28px` `var(--text-h3)` | Card/modal headers |
 | H4 | `24px` `var(--text-h4)` | Sub-section headers |
 | Body (P) / Section title | `20px` `var(--text-p)` | Body text **and** card/panel section titles (e.g. "Shipments ล่าสุด") |
-| Label | `18px` `var(--text-label)` | Form labels, UI labels, descriptions, table subtitles |
+| Label | `20px` `var(--text-label)` | Form labels, UI labels, descriptions, table subtitles, badge lg |
 | Button | `18px` `var(--text-button)` | Buttons, tabs — weight 600 |
-| Badge (sm/md) | `16px` `var(--text-caption)` | Badges — weight 400, never semibold |
-| Badge (lg) | `18px` `var(--text-label)` | Large badges — weight 400, never semibold |
-| Caption | `16px` `var(--text-caption)` | UI chrome, hints, fine print (minimum size) |
+| Badge (sm/md) | `18px` `var(--text-caption)` | Badges — weight 400, never semibold |
+| Badge (lg) | `20px` `var(--text-label)` | Large badges — weight 400, never semibold |
+| Caption | `18px` `var(--text-caption)` | Helper text, hint, fine print (minimum size) |
 | Radius | `6px` | `--radius-md` for inputs/cells, `--radius-lg` for cards/panels/dropdowns — both = 6px |
 | Shadow | `0px 1px 2px 0px #0000000d` | Minimal, prefer borders |
 
@@ -118,7 +118,7 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 8. Don't hardcode font sizes — always use `var(--text-h1)` through `var(--text-button)` tokens
 9. Don't wrap AppShell children in `max-w-*` containers — `<main>` fills `flex-1`, content width is managed by the shell
 10. Don't use `var(--text-caption)` or `var(--text-label)` for data/content text — **minimum for data is `var(--text-p)` (20px)**
-11. Don't use `var(--text-caption)` (16px) for any UI element — **absolute minimum is `var(--text-label)` (18px)**
+11. Don't use font sizes below `var(--text-caption)` (18px) — **absolute minimum for any UI element is 18px**
 12. **Don't mix Tailwind text-* utilities with DS token classes** — Tailwind `text-sm/xs/base/lg` renders at different sizes than DS tokens even with the same label; mixing causes inconsistent display
 13. **Don't set background on content wrappers inside AppShell** — never use `bg-white`, `bg-gray-*`, `var(--bg-page)`, or any hardcoded color on `<main>` or page root; let `var(--background)` inherit from AppShell
 14. **Don't use `var(--bg-page)` or `var(--bg-surface)`** — deprecated aliases; use `var(--background)` and `var(--card)` respectively
@@ -127,7 +127,7 @@ Tokens: `npm install @uxuissk/design-tokens@0.1.1` (optional — shared CSS+JS t
 
 This rule applies whenever you receive vibe-coded UI that already has design CSS attached.
 
-**The problem:** Tailwind `text-sm` (14px) ≠ `var(--text-caption)` (16px). When Tailwind utility classes coexist with DS token classes, font sizes render inconsistently across components.
+**The problem:** Tailwind `text-sm` (14px) ≠ `var(--text-caption)` (18px). When Tailwind utility classes coexist with DS token classes, font sizes render inconsistently across components.
 
 **The rule:**
 
@@ -140,10 +140,10 @@ This rule applies whenever you receive vibe-coded UI that already has design CSS
 
 | Remove | Replace with | Size |
 |--------|-------------|------|
-| `text-xs`, `text-[10px]`–`text-[12px]` | `var(--text-label)` | **18px** |
-| `text-sm`, `text-[13px]`–`text-[15px]` | `var(--text-label)` | **18px** |
-| `text-base`, `text-[16px]`, `text-[17px]` | `var(--text-label)` | **18px** |
-| `text-lg`, `text-[18px]`, `text-[19px]` | `var(--text-label)` | 18px |
+| `text-xs`, `text-[10px]`–`text-[12px]` | `var(--text-caption)` | **18px** |
+| `text-sm`, `text-[13px]`–`text-[15px]` | `var(--text-caption)` | **18px** |
+| `text-base`, `text-[16px]`, `text-[17px]` | `var(--text-caption)` | **18px** |
+| `text-lg`, `text-[18px]`, `text-[19px]` | `var(--text-caption)` | 18px |
 | `text-xl`, `text-[20px]`–`text-[22px]` | `var(--text-p)` | 20px |
 | `text-2xl`, `text-[24px]` | `var(--text-h4)` | 24px |
 | `text-3xl`, `text-[28px]` | `var(--text-h3)` | 28px |
@@ -159,8 +159,8 @@ This rule applies whenever you receive vibe-coded UI that already has design CSS
 | Sidebar nav item | `var(--text-p)` | **20px** |
 | Stat card label | `var(--text-p)` | **20px** |
 | Stat card value | `var(--text-h3)` or `var(--text-h4)` | 28–24px |
-| Badge / tag | `var(--text-label)` | **18px** |
-| Tooltip / helper text | `var(--text-label)` | **18px** |
+| Badge / tag | `var(--text-caption)` | **18px** |
+| Tooltip / helper text | `var(--text-caption)` | **18px** |
 
 ## Layout Pattern — AppShell (preferred)
 
