@@ -1,11 +1,8 @@
 {
   "name": "@uxuissk/design-system",
-  "version": "0.8.15",
+  "version": "0.8.16",
   "private": false,
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "main": "./dist/sellsuki-ds.umd.cjs",
   "module": "./dist/sellsuki-ds.js",
   "types": "./dist/types/index.d.ts",
@@ -19,11 +16,7 @@
     "./styles.css": "./dist/sellsuki-ds.css"
   },
   "files": [
-    "dist/sellsuki-ds.js",
-    "dist/sellsuki-ds.umd.cjs",
-    "dist/sellsuki-ds.css",
-    "dist/fonts",
-    "dist/types",
+    "dist",
     "README.md"
   ],
   "sideEffects": [
@@ -32,8 +25,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "clean": "node --input-type=module -e \"import{rmSync}from'fs';try{rmSync('dist',{recursive:true,force:true})}catch{}\"",
-    "build:lib": "npm run clean && npm run lint:svelte-css && vite build --config vite.lib.config.ts && node scripts/inject-font-face.mjs && npm run hardcode:log",
+    "build:lib": "npm run lint:svelte-css && vite build --config vite.lib.config.ts && npm run hardcode:log",
     "lint:svelte-css": "stylelint 'src/lib/svelte/**/*.svelte' --allow-empty-input",
     "hardcode:log": "node scripts/check-hardcodes.mjs",
     "storybook": "storybook dev -p 6006",
@@ -117,8 +109,7 @@
     "typescript": "^5.5.0",
     "vaul": "1.1.2",
     "vite": "6.3.5",
-    "vite-plugin-dts": "^4.0.0",
-    "vite-plugin-static-copy": "^4.0.0"
+    "vite-plugin-dts": "^4.0.0"
   },
   "pnpm": {
     "overrides": {

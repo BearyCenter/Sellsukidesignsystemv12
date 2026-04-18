@@ -153,7 +153,7 @@
 	.size-lg .radio-label { font-size: var(--text-input-lg); }
 
 	.radio-description {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--muted-foreground, #6b7280);
 		line-height: 1.4;
 	}

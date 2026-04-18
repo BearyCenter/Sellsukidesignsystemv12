@@ -124,7 +124,7 @@
 	}
 
 	/* Sizes */
-	.size-sm { font-size: var(--text-caption, 12px); }
+	.size-sm { font-size: var(--text-caption, 18px); }
 	.size-md { font-size: var(--text-sm, 13px); }
 	.size-lg { font-size: var(--text-p, 14px); }
 

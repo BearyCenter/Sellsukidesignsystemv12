@@ -77,7 +77,7 @@
 		max-width: 320px;
 		line-height: 1.5;
 	}
-	.size-sm .empty-description { font-size: var(--text-caption, 12px); }
+	.size-sm .empty-description { font-size: var(--text-caption, 18px); }
 	.size-md .empty-description { font-size: var(--text-sm, 13px); }
 	.size-lg .empty-description { font-size: var(--text-p, 14px); }
 

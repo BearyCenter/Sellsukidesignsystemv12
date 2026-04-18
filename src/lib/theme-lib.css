@@ -407,42 +407,42 @@
 
   /* H1 - Main page titles, hero sections, and primary page headers */
   --text-h1: 48px;
-  --font-h1: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-h1: 'DB HeaventRounded', sans-serif;
   --weight-h1: 400;
 
   /* H2 - Major section headings within a page */
   --text-h2: 40px;
-  --font-h2: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-h2: 'DB HeaventRounded', sans-serif;
   --weight-h2: 400;
 
   /* H3 - Sub-section headings, modal titles, card headers */
   --text-h3: 28px;
-  --font-h3: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-h3: 'DB HeaventRounded', sans-serif;
   --weight-h3: 700;
 
   /* H4 - Smaller headings, form section titles, card subtitles */
   --text-h4: 24px;
-  --font-h4: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-h4: 'DB HeaventRounded', sans-serif;
   --weight-h4: 500;
 
   /* P - Default body text for all content */
   --text-p: 20px;
-  --font-p: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-p: 'DB HeaventRounded', sans-serif;
   --weight-p: 400;
 
-  /* Label - Form labels, helper text, captions */
+  /* Label - Form labels, UI labels, badge lg */
   --text-label: 20px;
-  --font-label: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-label: 'DB HeaventRounded', sans-serif;
   --weight-label: 400;
 
-  /* Caption - Fine print, UI chrome (minimum size in system) */
+  /* Caption - Helper text, hint, fine print (minimum size) */
   --text-caption: 18px;
-  --font-caption: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-caption: 'DB HeaventRounded', sans-serif;
   --weight-caption: 400;
 
   /* Button - Button text across all button types */
   --text-button: 18px;
-  --font-button: 'DB HeaventRounded', 'Noto Sans Thai', sans-serif;
+  --font-button: 'DB HeaventRounded', sans-serif;
   --weight-button: 600;
 
   /* Base text sizes for Tailwind compatibility */
@@ -515,6 +515,19 @@
   --elevation-sm: 0px 1px 3px 0px rgba(0, 0, 0, 0.4);
 }
 
+/*
+ * Form element font reset — browser UA stylesheet sets font: system-ui on
+ * input / button / select / textarea, preventing inheritance from :root.
+ * This ensures DB HeaventRounded applies to all vibe-coded UI automatically.
+ */
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-p);
+  font-size: var(--text-p);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -554,125 +567,4 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --shadow-elevation-sm: var(--elevation-sm);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Shell Layout Tokens — AppShell dimensions and spacing
-   Usage: consumed by AppShell component (Stage 6)
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-:root {
-  --shell-nav-height: 56px;
-  --shell-sidebar-width: 240px;
-  --shell-sidebar-collapsed: 64px;
-  --shell-content-padding: 24px;
-  --shell-content-padding-sm: 16px;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Z-Index Tokens — Stacking layer order
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-:root {
-  --z-base: 0;
-  --z-raised: 10;
-  --z-dropdown: 50;
-  --z-sticky: 60;
-  --z-shell-overlay: 80;
-  --z-shell-sidebar: 90;
-  --z-shell-nav: 100;
-  --z-modal: 200;
-  --z-toast: 300;
-  --z-tooltip: 400;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Motion Tokens — Animation duration and easing
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-:root {
-  --duration-instant: 0ms;
-  --duration-fast: 100ms;
-  --duration-normal: 200ms;
-  --duration-slow: 300ms;
-  --duration-sidebar: 250ms;
-  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --easing-in: cubic-bezier(0.4, 0, 1, 1);
-  --easing-out: cubic-bezier(0, 0, 0.2, 1);
-  --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Product Theme Tokens — Override per-product via data-product attribute
-   Usage: <div data-product="sellsuki"> or <body data-product="patona">
-   Each product overrides --primary and --primary-hover only.
-   All other tokens inherit from :root Sellsuki defaults.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-[data-product="sellsuki"] {
-  --primary: var(--Base_Color--Sky--500);
-  --primary-hover: var(--Base_Color--Sky--600);
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "Sellsuki";
-}
-
-[data-product="patona"] {
-  --primary: rgba(236, 94, 42, 1);        /* Aerospace Orange 500 #EC5E2A */
-  --primary-hover: rgba(201, 80, 36, 1);  /* Aerospace Orange 600 #C95024 */
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "Patona";
-}
-
-[data-product="sukispace"] {
-  --primary: var(--Base_Color--Sky--500);
-  --primary-hover: var(--Base_Color--Sky--600);
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "Sukispace";
-}
-
-[data-product="shipmunk"] {
-  --primary: var(--Base_Color--Sky--500);
-  --primary-hover: var(--Base_Color--Sky--600);
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "Shipmunk";
-}
-
-[data-product="akita"] {
-  --primary: var(--Base_Color--Sky--500);
-  --primary-hover: var(--Base_Color--Sky--600);
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "Akita";
-}
-
-[data-product="oc2plus"] {
-  --primary: var(--Base_Color--Sky--500);
-  --primary-hover: var(--Base_Color--Sky--600);
-  --primary-foreground: rgba(255, 255, 255, 1);
-  --product-name: "OC2Plus";
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   Compact Density Mode
-   Usage: <div data-density="compact"> or <body data-density="compact">
-   Purpose: Admin/internal tools (CCS) needing tighter typography
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-[data-density="compact"] {
-  --text-h1: 28px;
-  --text-h2: 24px;
-  --text-h3: 22px;
-  --text-h4: 20px;
-  --text-p: 20px;
-  --text-label: 20px;
-  --text-caption: 18px;
-  --text-button: 18px;
-
-  /* Sync Tailwind aliases */
-  --text-2xl: var(--text-h1);
-  --text-xl: var(--text-h2);
-  --text-lg: var(--text-h3);
-  --text-base: var(--text-p);
-  --text-sm: var(--text-caption);
-  --text-xs: var(--text-label);
-  --text-button-size: var(--text-button);
 }

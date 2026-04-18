@@ -236,7 +236,7 @@
 		font-weight: 500;
 	}
 	.dropzone-desc {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -260,7 +260,7 @@
 		border-color: var(--ssk-colors-neutral-400, #9ca3af);
 	}
 	.btn-desc {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -349,7 +349,7 @@
 		white-space: nowrap;
 	}
 	.file-size {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 	.file-remove {

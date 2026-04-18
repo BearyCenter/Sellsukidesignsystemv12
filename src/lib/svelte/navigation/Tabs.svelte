@@ -176,7 +176,7 @@
 	/* Sizes */
 	.size-sm .tab-item {
 		padding: var(--dss-space-4, 4px) var(--dss-space-12, 12px);
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 	}
 	.size-md .tab-item {
 		padding: var(--dss-space-8, 8px) var(--dss-space-16, 16px);

@@ -167,7 +167,7 @@
 
 	.dss-number-input-error {
 		display: block;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: #ef4444;
 		margin-top: var(--dss-space-4, 4px);
 	}

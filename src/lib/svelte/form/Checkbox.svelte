@@ -162,7 +162,7 @@
 	.size-lg .checkbox-label { font-size: var(--text-input-lg); }
 
 	.checkbox-description {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--muted-foreground, #6b7280);
 		line-height: 1.4;
 	}
@@ -170,7 +170,7 @@
 	/* Error */
 	.dss-checkbox-error {
 		margin: var(--dss-space-1, 4px) 0 0;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-danger-500, #ef4444);
 		font-family: var(--font-label);
 	}

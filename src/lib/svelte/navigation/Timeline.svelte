@@ -115,8 +115,8 @@
 	.size-sm .dss-timeline-dot { width: 10px; height: 10px; }
 	.size-sm .dss-timeline-content { padding: 0 0 var(--dss-space-16, 16px) var(--dss-space-12, 12px); }
 	.size-sm .dss-timeline-title { font-size: var(--text-sm, 13px); }
-	.size-sm .dss-timeline-time { font-size: var(--text-caption, 12px); }
-	.size-sm .dss-timeline-description { font-size: var(--text-caption, 12px); }
+	.size-sm .dss-timeline-time { font-size: var(--text-caption, 18px); }
+	.size-sm .dss-timeline-description { font-size: var(--text-caption, 18px); }
 
 	.size-md .dss-timeline-dot { width: 12px; height: 12px; }
 	.size-md .dss-timeline-content { padding: 0 0 var(--dss-space-24, 24px) var(--dss-space-16, 16px); }

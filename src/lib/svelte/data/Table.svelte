@@ -185,7 +185,7 @@
 	.size-sm th,
 	.size-sm td {
 		padding: var(--dss-space-2, 8px) var(--dss-space-4, 16px);
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		height: 36px;
 	}
 	.size-md th,

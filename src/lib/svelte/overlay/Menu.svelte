@@ -189,7 +189,7 @@
 	}
 
 	.menu-item-shortcut {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 	}
 
@@ -206,7 +206,7 @@
 
 	.menu-label {
 		padding: var(--dss-space-8, 8px) var(--dss-space-12, 12px) var(--dss-space-4, 4px);
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
