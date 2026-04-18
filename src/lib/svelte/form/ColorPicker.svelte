@@ -267,7 +267,7 @@
 		gap: 2px;
 	}
 	.format-label {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--muted-foreground, #6b7280);
 		font-family: monospace;
 	}

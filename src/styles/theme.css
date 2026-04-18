@@ -400,12 +400,12 @@
      ═══════════════════════════════════════════════════════════════════════════ */
 
   /* H1 - Main page titles, hero sections, and primary page headers */
-  --text-h1: 60px;
+  --text-h1: 48px;
   --font-h1: 'DB HeaventRounded', sans-serif;
   --weight-h1: 400;
-  
+
   /* H2 - Major section headings within a page */
-  --text-h2: 52px;
+  --text-h2: 40px;
   --font-h2: 'DB HeaventRounded', sans-serif;
   --weight-h2: 400;
   
@@ -420,23 +420,23 @@
   --weight-h4: 500;
   
   /* P - Default body text for all content */
-  --text-p: 24px;
+  --text-p: 20px;
   --font-p: 'DB HeaventRounded', sans-serif;
   --weight-p: 400;
-  
-  /* Label - Form labels, helper text, captions */
-  --text-label: 18px;
+
+  /* Label - Form labels, UI labels, badge lg */
+  --text-label: 20px;
   --font-label: 'DB HeaventRounded', sans-serif;
   --weight-label: 400;
-  
-  /* Caption - Navigation breadcrumb text, pagination text */
-  --text-caption: 20px;
+
+  /* Caption - Helper text, hint, fine print (minimum size) */
+  --text-caption: 18px;
   --font-caption: 'DB HeaventRounded', sans-serif;
   --weight-caption: 400;
   
   /* Button - Button text across all button types */
-  --text-button: 14px;
-  --font-button: 'Inter', sans-serif;
+  --text-button: 18px;
+  --font-button: 'DB HeaventRounded', sans-serif;
   --weight-button: 600;
   
   /* Base text sizes for Tailwind compatibility */
@@ -617,7 +617,9 @@
       line-height: 1.4;
     }
 
-    input {
+    input,
+    textarea,
+    select {
       font-family: var(--font-p);
       font-size: var(--text-p);
       font-weight: var(--weight-p);

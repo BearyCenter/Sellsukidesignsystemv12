@@ -240,7 +240,7 @@
 	.size-sm .page-btn {
 		min-width: 28px;
 		height: 28px;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 	}
 	.size-md .page-btn {
 		min-width: 32px;

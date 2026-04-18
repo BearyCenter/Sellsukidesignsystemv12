@@ -151,7 +151,7 @@
 		background: none;
 		border: none;
 		cursor: pointer;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--primary, #32a9ff);
 		font-family: inherit;
 		padding: 0;
@@ -224,7 +224,7 @@
 	}
 
 	.nc-item-time {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		margin-top: 4px;
 	}

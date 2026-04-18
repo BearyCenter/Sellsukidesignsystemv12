@@ -1,6 +1,6 @@
 {
   "name": "@uxuissk/design-system",
-  "version": "0.5.0",
+  "version": "0.8.16",
   "private": false,
   "type": "module",
   "main": "./dist/sellsuki-ds.umd.cjs",

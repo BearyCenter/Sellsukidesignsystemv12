@@ -169,7 +169,7 @@
 
 	.dss-otp-error {
 		margin: 0;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-danger-500, #ef4444);
 		line-height: 1.4;
 	}

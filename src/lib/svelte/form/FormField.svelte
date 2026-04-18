@@ -85,7 +85,7 @@
 	/* Messages */
 	.dss-form-field-message {
 		margin: 0;
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		line-height: 1.4;
 	}
 	.state-error {

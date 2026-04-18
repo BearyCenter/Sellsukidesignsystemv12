@@ -173,7 +173,7 @@
 	}
 
 	.dss-stepper-description {
-		font-size: var(--text-caption, 12px);
+		font-size: var(--text-caption, 18px);
 		color: var(--ssk-colors-text-400, #9ca3af);
 		margin-top: 2px;
 	}
