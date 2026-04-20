@@ -115,6 +115,7 @@ type LogFile = {
 const GIST_RAW = "https://gist.githubusercontent.com/BearyCenter/1f93c4696db118e8013a589169435b42/raw/mcp-log.json";
 const LOCAL_URL = "/mcp-log.json";
 const POLL_MS = 10_000;  // refresh every 10 s
+const NPM_PKG  = "@uxuissk/design-system";
 
 async function fetchLog(): Promise<LogFile | null> {
   // Try Gist first (production data), fall back to local (dev)
@@ -125,6 +126,20 @@ async function fetchLog(): Promise<LogFile | null> {
     } catch { /* try next */ }
   }
   return null;
+}
+
+async function fetchNpmStats(): Promise<{ weekly: number; monthly: number } | null> {
+  try {
+    const [wRes, mRes] = await Promise.all([
+      fetch(`https://api.npmjs.org/downloads/point/last-week/${NPM_PKG}`),
+      fetch(`https://api.npmjs.org/downloads/point/last-month/${NPM_PKG}`),
+    ]);
+    if (!wRes.ok || !mRes.ok) return null;
+    const [w, m] = await Promise.all([wRes.json(), mRes.json()]);
+    return { weekly: w.downloads as number, monthly: m.downloads as number };
+  } catch {
+    return null;
+  }
 }
 
 // ─── Derived stats ────────────────────────────────────────────────────────────
@@ -164,6 +179,7 @@ export function MCPTrackerPage() {
   const [dataSource,   setDataSource]  = useState<"real" | "empty" | "loading">("loading");
   const [reportCopied, setReportCopied] = useState(false);
   const [showReport,   setShowReport]   = useState(false);
+  const [npmStats,     setNpmStats]    = useState<{ weekly: number; monthly: number } | null>(null);
 
   // Export date range — default: today
   const todayStr = new Date().toISOString().slice(0, 10);
@@ -183,6 +199,11 @@ export function MCPTrackerPage() {
 
   // Initial load
   useEffect(() => { load(); }, [load]);
+
+  // npm stats — load once on mount (npm API has no auth, cache is fine)
+  useEffect(() => {
+    fetchNpmStats().then((s) => { if (s) setNpmStats(s); });
+  }, []);
 
   // Polling
   useEffect(() => {
@@ -204,6 +225,9 @@ export function MCPTrackerPage() {
   const handleCopyReport = useCallback(() => {
     const { totalToday, avgMs, successPct, toolCounts } = deriveStats(filteredLog);
     const topTools = Object.entries(toolCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const npmLines = npmStats
+      ? ["", "npm Downloads:", `  Last 7 days  : ${npmStats.weekly.toLocaleString()}`, `  Last 30 days : ${npmStats.monthly.toLocaleString()}`]
+      : [];
     const text = [
       "# Sellsuki DS — MCP Feature Report",
       `Generated  : ${new Date().toLocaleString("en-GB")}`,
@@ -212,6 +236,7 @@ export function MCPTrackerPage() {
       `Total Requests : ${totalToday}`,
       `Avg Response   : ${avgMs}ms`,
       `Success Rate   : ${successPct}%`,
+      ...npmLines,
       "",
       "Top Tools:",
       ...topTools.map(([tool, count]) => `  ${tool}: ${count} calls`),
@@ -220,7 +245,7 @@ export function MCPTrackerPage() {
       setReportCopied(true);
       setTimeout(() => setReportCopied(false), 2000);
     });
-  }, [filteredLog, exportFrom, exportTo]);
+  }, [filteredLog, exportFrom, exportTo, npmStats]);
 
   const handleExportExcel = useCallback(() => {
     const rows = log.filter((r) => {
@@ -301,6 +326,15 @@ export function MCPTrackerPage() {
       sub:   errCount > 0 ? `${errCount} error${errCount > 1 ? "s" : ""}` : "No errors",
       color: errCount === 0 ? c.success : c.warning,
       bg:    errCount === 0 ? c.successBg : c.warningBg,
+      pulse: false,
+    },
+    {
+      label: "npm Downloads (7d)",
+      value: npmStats ? npmStats.weekly.toLocaleString() : "—",
+      icon:  <Download size={20} />,
+      sub:   npmStats ? `${npmStats.monthly.toLocaleString()} this month` : "Loading…",
+      color: "#8b5cf6",
+      bg:    "#f5f3ff",
       pulse: false,
     },
   ];
@@ -408,7 +442,7 @@ export function MCPTrackerPage() {
 
       {/* ── Stat Cards ───────────────────────────────────────────────────────── */}
       {dataSource !== "loading" && (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-5 gap-4">
           {statCards.map((s, i) => (
             <div
               key={i}
@@ -702,6 +736,22 @@ export function MCPTrackerPage() {
                         </div>
                       ))}
                     </div>
+                    {npmStats && (
+                      <div className="border-t pt-2" style={{ borderColor: c.border }}>
+                        <p style={{ ...f.numSm, color: c.textSec, marginBottom: 6 }}>npm Package Downloads</p>
+                        <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
+                          {[
+                            ["Last 7 days",  npmStats.weekly.toLocaleString()],
+                            ["Last 30 days", npmStats.monthly.toLocaleString()],
+                          ].map(([label, value]) => (
+                            <div key={label} className="flex items-center justify-between">
+                              <span style={{ ...f.numSm, color: c.textSec }}>{label}</span>
+                              <span style={{ ...f.num, color: "#8b5cf6" }}>{value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     {topTools.length > 0 && (
                       <>
                         <div className="border-t pt-2" style={{ borderColor: c.border }}>
