@@ -476,8 +476,8 @@
 	/* Empty */
 	.empty-cell { text-align: center; padding: var(--dss-space-24, 96px) var(--dss-space-4, 16px); }
 	.empty-content { display: flex; flex-direction: column; align-items: center; gap: var(--dss-space-2, 8px); }
-	.empty-title { color: var(--muted-foreground, #6b7280); font-size: var(--text-p, 14px); font-weight: 500; }
-	.empty-desc { color: var(--ssk-colors-text-400, #9ca3af); font-size: var(--text-sm, 13px); }
+	.empty-title { color: var(--muted-foreground, #6b7280); font-size: var(--text-p, 20px); font-weight: 500; }
+	.empty-desc { color: var(--muted-foreground, #9ca3af); font-size: var(--text-caption, 18px); }
 
 	/* Expanded row */
 	.expanded-row td {

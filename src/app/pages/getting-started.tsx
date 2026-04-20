@@ -437,6 +437,15 @@ export function GettingStartedPage() {
 import "@uxuissk/design-system/dist/style.css";`}
               title="Style Import"
             />
+            <div className="mt-3 p-3 rounded-[6px] border border-amber-200 bg-amber-50">
+              <span className="block font-semibold text-amber-700 mb-1" style={fontLabel}>⚠️ Tailwind CSS v3 users</span>
+              <span className="text-amber-700 block" style={fontLabel}>
+                Package นี้ build ด้วย Tailwind v4 — ถ้า project ของคุณใช้ Tailwind v3 อาจเจอ warning{" "}
+                <code className="bg-amber-100 px-1 rounded text-xs">@layer base without @tailwind base</code>
+                {" "}แก้ได้โดยเพิ่ม <code className="bg-amber-100 px-1 rounded text-xs">{'@layer base {}'}</code>{" "}
+                ใน CSS ไฟล์หลักของ project ก่อน import DS
+              </span>
+            </div>
           </Step>
 
           <Step number={4} title="ตั้งค่า ThemeProvider (จำเป็น)" isLast>

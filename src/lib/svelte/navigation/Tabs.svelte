@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let tabs: { id: string; label: string; icon?: string; disabled?: boolean; badge?: string }[] = [];
+	/** Each tab item. `icon` accepts any string (emoji, SVG string, or HTML entity). */
+	export let tabs: { id: string; label: string; icon?: string; content?: string; disabled?: boolean; badge?: string }[] = [];
 	export let variant: 'default' | 'outlined' | 'filled' = 'default';
 	export let size: 'sm' | 'md' | 'lg' = 'md';
 	export let activeTab: string | undefined = undefined;
@@ -159,7 +160,7 @@
 		border-radius: var(--radius-full, 9999px);
 		background: var(--border, #e5e7eb);
 		color: var(--ssk-colors-text-700, #374151);
-		font-size: var(--text-2xs);
+		font-size: var(--text-caption, 18px);
 		font-weight: 600;
 	}
 
@@ -180,11 +181,11 @@
 	}
 	.size-md .tab-item {
 		padding: var(--dss-space-8, 8px) var(--dss-space-16, 16px);
-		font-size: var(--text-sm, 13px);
+		font-size: var(--text-caption, 18px);
 	}
 	.size-lg .tab-item {
 		padding: var(--dss-space-12, 12px) var(--dss-space-20, 20px);
-		font-size: var(--text-p, 14px);
+		font-size: var(--text-p, 20px);
 	}
 
 	.tabs-content {
