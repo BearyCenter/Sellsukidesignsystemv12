@@ -333,12 +333,12 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
         {/* ── DS 3.0 ── */}
         <div
           style={card21Style}
-          onClick={() => onSelectMode("3.0")}
+          onClick={() => window.open("https://design-system-ssk-3.vercel.app/", "_blank")}
           onMouseEnter={() => setHovering("3.0")}
           onMouseLeave={() => setHovering(null)}
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => e.key === "Enter" && onSelectMode("3.0")}
+          onKeyDown={(e) => e.key === "Enter" && window.open("https://design-system-ssk-3.vercel.app/", "_blank")}
           aria-label="Enter Design System 3.0"
         >
           {/* Glow accent top bar */}
@@ -440,7 +440,7 @@ export function EntryPage({ onSelectMode, darkMode, toggleDarkMode }: EntryPageP
               gap: "8px",
               transition: "background 0.15s, color 0.15s",
             }}
-            onClick={() => onSelectMode("3.0")}
+            onClick={(e) => { e.stopPropagation(); window.open("https://design-system-ssk-3.vercel.app/", "_blank"); }}
           >
             เข้าสู่ DS 3.0
             <ArrowRight size={18} />
