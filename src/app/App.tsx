@@ -56,6 +56,7 @@ import {
   Clock,
   Layers,
   ArrowLeft,
+  ExternalLink,
 } from "lucide-react";
 import SSKIcon from "../imports/Icon";
 import SellsukiIcon from "../imports/SellsukiIcon";
@@ -792,6 +793,16 @@ function AppInner({ dsMode, onExitMode, externalDarkMode, externalToggleDarkMode
 
             {/* Right actions */}
             <div className="flex items-center gap-1 flex-shrink-0">
+              <a
+                href="https://design-system-ssk-3.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 h-8 rounded-[var(--radius-md)] bg-primary text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer flex-shrink-0"
+                style={{ fontFamily: "var(--font-button)", fontSize: "var(--text-button)", fontWeight: "var(--weight-button)" }}
+              >
+                DS 3.0
+                <ExternalLink size={13} />
+              </a>
               <div className="w-px h-5 bg-border mx-1" />
               <button
                 onClick={toggleLang}
